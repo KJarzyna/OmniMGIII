@@ -1,0 +1,15 @@
+#ifndef MODLIST_H
+#define MODLIST_H
+#include <QString>
+
+class C_ModList
+{
+public:
+    C_ModList();
+    
+    int ModID;
+    QString ModName;
+    QString ModType;
+};
+
+#endif // MODLIST_H

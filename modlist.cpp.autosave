@@ -1,0 +1,6 @@
+#include "modlist.h"
+
+C_ModList::C_ModList()
+{
+
+}
