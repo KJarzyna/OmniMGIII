@@ -316,3 +316,9 @@ void MainWindow::InitializeAmmoLeftList()
     ui->tableWidget_wpn_ammo->horizontalHeaderItem(1)->setText("Pozostało \n amunicji");
     ui->tableWidget_wpn_ammo->horizontalHeader()->setStretchLastSection(true);
 }
+
+void MainWindow::InitializePlayerList()
+{
+    for (int i=0; i<Players.size();i++)
+        ui->comboBox_select_player->addItem(Players.at(i).PlayerName);
+}

@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     InitializeOmnibladesList();
     InitializeOmnibladeModsList();
     InitializeAmmoLeftList();
+    InitializePlayerList();
 
     LoadPlayer(0);
 

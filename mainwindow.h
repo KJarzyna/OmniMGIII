@@ -120,6 +120,7 @@ private:
     void InitializeOmnibladesList();
     void InitializeOmnibladeModsList();
     void InitializeAmmoLeftList();
+    void InitializePlayerList();
 
     //SKILL RELATED
     void AddSkillToTable();
