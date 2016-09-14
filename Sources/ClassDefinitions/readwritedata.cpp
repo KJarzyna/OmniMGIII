@@ -1243,7 +1243,7 @@ bool ReadWriteData::WritePlayerWeaponsFromVectorToFile(QVector<C_PlayerWeapon> &
     {
 
         QTextStream out(&outputFile);
-        line = "PlayerID;WeaponID;ModID";
+        line = "PlayerID;WeaponID;ModID;AmmoLeft";
         out << line << endl;
 
         for (int i=0; i<vector.size();i++)
@@ -1254,6 +1254,8 @@ bool ReadWriteData::WritePlayerWeaponsFromVectorToFile(QVector<C_PlayerWeapon> &
             line.append(QString::number(vector.at(i).WeaponID));
             line.append(";");
             line.append(QString::number(vector.at(i).ModID));
+            line.append(";");
+            line.append(QString::number(vector.at(i).AmmoLeft));
             out << line << endl;
         }
 

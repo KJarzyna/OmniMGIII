@@ -97,6 +97,8 @@ private slots:
     void on_treeWidget_weapon_list_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_pushButton_add_activeEffect_clicked();
     void addActiveEffectsToWidgetList(QStringList list);
+    void on_tableWidget_wpn_ammo_cellChanged(int row, int column);
+
 
 private:
     Ui::MainWindow *ui;

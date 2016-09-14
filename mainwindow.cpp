@@ -158,12 +158,31 @@ void MainWindow::on_actionZapisz_triggered()
 {
     int playerID = 0;
     SaveGeneralTab(playerID);
-    SaveSkillsTab(playerID);
+    //SaveSkillsTab(playerID);
 
     ReadWriteData csv;
-    csv.WritePlayersFromVectorToFile(Players,"Data/players.csv");
-    csv.WritePlayerSkillFromVectorToFile(PlayerSkills, "Data/player_skills.csv");
-    csv.WritePlayerWeaponsFromVectorToFile(PlayerWeapons, "Data/player_weapons.csv");
+    if(!csv.WritePlayersFromVectorToFile(Players,"Data/players.csv"))
+        qDebug() << "Zapis players.csv nie powiódł się!";
+    if(!csv.WritePlayerSkillFromVectorToFile(PlayerSkills, "Data/player_skills.csv"))
+        qDebug() << "Zapis player_skills.csv nie powiódł się!";
+    if(!csv.WritePlayerWeaponsFromVectorToFile(PlayerWeapons, "Data/player_weapons.csv"))
+        qDebug() << "Zapis player_weapons.csv nie powiódł się!";
+    if(!csv.WritePlayerArmorsFromVectorToFile(PlayerArmors, "Data/player_armors.csv"))
+        qDebug() << "Zapis player_armors.csv nie powiódł się!";
+    if(!csv.WritePlayerArmorModsFromVectorToFile(PlayerArmorMods, "Data/player_armormods.csv"))
+        qDebug() << "Zapis player_armormods.csv nie powiódł się!";
+    if(!csv.WritePlayerGeneratorsFromVectorToFile(PlayerGenerators, "Data/player_generators.csv"))
+        qDebug() << "Zapis player_generators.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnikeysFromVectorToFile(PlayerOmnikeys, "Data/player_omnikeys.csv"))
+        qDebug() << "Zapis player_omnikeys.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnikeyModsFromVectorToFile(PlayerOmnikeyMods, "Data/player_omnikeymods.csv"))
+        qDebug() << "Zapis player_omnikeymods.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnibladesFromVectorToFile(PlayerOmniblades, "Data/player_omniblades.csv"))
+        qDebug() << "Zapis player_omniblades.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnibladeModsFromVectorToFile(PlayerOmnibladeMods, "Data/player_omniblademods.csv"))
+        qDebug() << "Zapis player_omniblademods.csv nie powiódł się!";
+    if(!csv.WritePlayerActiveEffectsFromVectorToFile(PlayerActiveEffects, "Data/player_activeeffects.csv"))
+        qDebug() << "Zapis player_activeeffects.csv nie powiódł się!";
 }
 
 void MainWindow::on_pushButton_weapon_add_clicked()
@@ -398,4 +417,26 @@ void MainWindow::on_pushButton_add_activeEffect_clicked()
     box->show();
 }
 
+
+
+void MainWindow::on_tableWidget_wpn_ammo_cellChanged(int row, int column)
+{
+    //Change AmmoLeft to new value in player_weapons vector
+    if(column == 1)
+    {
+        int playerID = 0;
+
+        QString newAmmoLeft = ui->tableWidget_wpn_ammo->item(row, column)->text();
+
+        QString affectedWeaponName = ui->tableWidget_wpn_ammo->item(row,0)->text();
+        int affectedWeaponID = GetWeaponIDFromWeaponName(affectedWeaponName);
+
+        for(int i=0;i<PlayerWeapons.size();i++)
+            if(PlayerWeapons.at(i).PlayerID == playerID && PlayerWeapons.at(i).WeaponID == affectedWeaponID)
+            {
+                PlayerWeapons[i].AmmoLeft = newAmmoLeft.toInt();
+            }
+    }
+
+}
 
