@@ -319,6 +319,15 @@ void MainWindow::InitializeAmmoLeftList()
 
 void MainWindow::InitializePlayerList()
 {
+    //Create and populate custom Model with Players Name and PlayersID, where PlayerID is hidden
+    PlayersModel = new QStandardItemModel(Players.size(),2,this);
     for (int i=0; i<Players.size();i++)
-        ui->comboBox_select_player->addItem(Players.at(i).PlayerName);
+    {
+        PlayersModel->setItem(i,0,new QStandardItem(Players.at(i).PlayerName));
+        PlayersModel->setItem(i,1,new QStandardItem(QString::number(Players.at(i).PlayerID)));
+    }
+    ui->comboBox_select_player->setModel(PlayersModel);
+
+    //for (int i=0; i<Players.size();i++)
+        //ui->comboBox_select_player->addItem(Players.at(i).PlayerName);
 }

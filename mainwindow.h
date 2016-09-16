@@ -72,6 +72,9 @@ public:
     QVector<C_PlayerActiveEffect> PlayerActiveEffects;
     QVector<C_ActiveEffect> ActiveEffect;
 
+    QStandardItemModel *PlayersModel;
+
+
 private slots:
     void on_pushButton_skill_add_clicked();
     void on_pushButton_skill_remove_clicked();
@@ -108,6 +111,7 @@ private:
     //GENERAL
     void ClearAllTabs();
     void ClearGeneralTab();
+    int GetActivePlayerID();
 
     //INITIALIZATION RELATED
     void InitializeWeaponTableSize();
@@ -137,6 +141,7 @@ private:
     void LoadPlayerSkillsIntoTable(int playerID);
     void CalculatePlayerMasteries(int playerID);
     void SetMasteriesToZero();
+    void SetSpecializationToDefault();
 
     //WEAPON RELATED
     void ClearWeaponTable();
@@ -183,6 +188,7 @@ private:
     void RemoveGeneratorFromTable();
     void RemoveGeneratorFromPlayer(int generatorID, int playerID);
     void LoadPlayerGeneratorIntoTable(int playerID);
+    void SetGeneratorChargesToZero();
 
     //OMNIKEYS RELATED
     void AddOmnikeyToPlayer(int omnikeyID, int playerID);

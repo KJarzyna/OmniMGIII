@@ -72,6 +72,11 @@ void MainWindow::SetMasteriesToZero()
     ui->lineEdit_skill_calcvalue_specialization->setText("0%");
 }
 
+void MainWindow::SetSpecializationToDefault()
+{
+    ui->comboBox_specialization->setCurrentIndex(0);
+}
+
 void MainWindow::CalculatePlayerMasteries(int playerID)
 {
     int PointsBattle = 0;

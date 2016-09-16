@@ -274,7 +274,7 @@ LoadPlayerEquipementTab(id);
 
 void MainWindow::LoadGeneratorCharges(int playerID)
 {
-    QString chargesLeft = "Ile?";
+    QString chargesLeft = "0";
     for(int i=0;i<PlayerGenerators.size();i++)
     {
         if(PlayerGenerators.at(i).PlayerID == playerID)

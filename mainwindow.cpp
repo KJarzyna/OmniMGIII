@@ -105,12 +105,14 @@ void MainWindow::ClearAllTabs()
 {
     ClearGeneralTab();
     ClearSkillTable();
+    SetSpecializationToDefault();
     SetMasteriesToZero();
     ClearWeaponTable();
     ClearAmmoTable();
     ClearArmorList();
     ClearArmorModList();
     ClearGeneratorTable();
+    SetGeneratorChargesToZero();
     SetOmnikeyToDefault();
     SetOmnikeyModToDefault();
     SetOmnibladeToDefault();
@@ -131,13 +133,20 @@ void MainWindow::ClearGeneralTab()
     ui->comboBox_player_type->setCurrentIndex(0);
 }
 
+int MainWindow::GetActivePlayerID()
+{
+    int currentRow = ui->comboBox_select_player->currentIndex();
+    int playerID = PlayersModel->item(currentRow,1)->text().toInt();
+    return playerID;
+}
+
 //SLOTS
 
 void MainWindow::on_pushButton_skill_add_clicked()
 {
     if(!ui->treeWidget_skill_list->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int skillID = GetSkillIDFromSkillNameAndLevel(ui->treeWidget_skill_list->currentItem()->text(0),ui->comboBox_skill_level->currentText());
         AddSkillToTable();
         AddSkillToPlayer(skillID, playerID);
@@ -149,7 +158,7 @@ void MainWindow::on_pushButton_skill_remove_clicked()
 {
     if(!ui->tableWidget_skills->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int skillID;
         QString skillName = ui->tableWidget_skills->item(ui->tableWidget_skills->currentRow(),0)->text();
         QString skillLevel = ui->tableWidget_skills->item(ui->tableWidget_skills->currentRow(),1)->text();
@@ -187,7 +196,7 @@ void MainWindow::on_comboBox_specialization_activated(const QString selectedItem
 
 void MainWindow::on_actionZapisz_triggered()
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     SaveGeneralTab(playerID);
     //SaveSkillsTab(playerID);
 
@@ -222,7 +231,7 @@ void MainWindow::on_pushButton_weapon_add_clicked()
 {
     if(!ui->treeWidget_weapon_list->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int weaponID = GetWeaponIDFromWeaponName(ui->treeWidget_weapon_list->currentItem()->text(0));
         AddWeaponToTable();
         AddWeaponToAmmoTable();
@@ -234,7 +243,7 @@ void MainWindow::on_pushButton_weapon_remove_clicked()
 {
     if(!ui->tableWidget_weapons->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int weaponID;
         QString weaponName = ui->tableWidget_weapons->item(ui->tableWidget_weapons->currentRow(),0)->text();
 
@@ -249,7 +258,7 @@ void MainWindow::on_pushButton_mod_add_clicked()
 {
     if(!ui->treeWidget_wpnmod_list->selectedItems().isEmpty() && !ui->tableWidget_weapons->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int selected_row = ui->tableWidget_weapons->currentRow();
         QString selected_weapon_name = ui->tableWidget_weapons->item(selected_row,0)->text();
         QString selected_mod_name = ui->treeWidget_wpnmod_list->currentItem()->text(0);
@@ -280,7 +289,7 @@ void MainWindow::on_pushButton_armor_add_clicked()
 {
     if(!ui->treeWidget_armor_list->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int armorID = GetArmorIDFromArmorName(ui->treeWidget_armor_list->currentItem()->text(0));
         if(!PlayerHasArmor(playerID, armorID))
         {
@@ -301,7 +310,7 @@ void MainWindow::on_pushButton_armor_remove_clicked()
 {
     if(!ui->listWidget_armors_list->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int armorID;
         QString armorName = ui->listWidget_armors_list->item(ui->listWidget_armors_list->currentRow())->text();
 
@@ -315,7 +324,7 @@ void MainWindow::on_pushButton_mod_armor_add_clicked()
 {
     if(ui->comboBox_mod_armor_name->currentText() != "Brak")
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int armorModID = GetArmorModIDFromArmorModName(ui->comboBox_mod_armor_name->currentText());
         if (ui->listWidget_armormods_list->count() >= 2)
         {
@@ -342,7 +351,7 @@ void MainWindow::on_pushButton_mod_armor_remove_clicked()
 {
     if(!ui->listWidget_armormods_list->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int armorModID;
         QString armorModName = ui->listWidget_armormods_list->item(ui->listWidget_armormods_list->currentRow())->text();
 
@@ -354,7 +363,7 @@ void MainWindow::on_pushButton_mod_armor_remove_clicked()
 
 void MainWindow::on_pushButton_generator_add_clicked()
 {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int generatorID = GetGeneratorIDFromGeneratorName(ui->comboBox_generator_name->currentText());
 
         if(ui->tableWidget_generators->rowCount()<1)
@@ -374,7 +383,7 @@ void MainWindow::on_pushButton_generator_remove_clicked()
 {
     if(!ui->tableWidget_generators->selectedItems().isEmpty())
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();;
         int generatorID;
         QString generatorName = ui->tableWidget_generators->item(ui->tableWidget_generators->currentRow(),0)->text();
 
@@ -386,7 +395,7 @@ void MainWindow::on_pushButton_generator_remove_clicked()
 
 void MainWindow::on_comboBox_omnikey_name_activated(const QString &arg1)
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     RemoveOmnikeyFromPlayer(playerID);
     int omnikeyID = GetOmnikeyIDFromOmnikeyName(arg1);
     AddOmnikeyToPlayer(omnikeyID, playerID);
@@ -394,7 +403,7 @@ void MainWindow::on_comboBox_omnikey_name_activated(const QString &arg1)
 
 void MainWindow::on_comboBox_omnikey_submod_name_activated(const QString &arg1)
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     RemoveOmnikeyModFromPlayer(playerID);
     int omnikeyID = GetOmnikeyModIDFromOmnikeyModName(arg1);
     AddOmnikeyModToPlayer(omnikeyID, playerID);
@@ -402,7 +411,7 @@ void MainWindow::on_comboBox_omnikey_submod_name_activated(const QString &arg1)
 
 void MainWindow::on_comboBox_omniblade_type_activated(const QString &arg1)
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     RemoveOmnibladeFromPlayer(playerID);
     int omnibladeID = GetOmnibladeIDFromOmnibladeName(arg1);
     AddOmnibladeToPlayer(omnibladeID, playerID);
@@ -410,7 +419,7 @@ void MainWindow::on_comboBox_omniblade_type_activated(const QString &arg1)
 
 void MainWindow::on_comboBox_omniblade_mod_name_activated(const QString &arg1)
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     RemoveOmnibladeModFromPlayer(playerID);
     int omnibladeID = GetOmnibladeModIDFromOmnibladeModName(arg1);
     AddOmnibladeModToPlayer(omnibladeID, playerID);
@@ -419,7 +428,7 @@ void MainWindow::on_comboBox_omniblade_mod_name_activated(const QString &arg1)
 
 void MainWindow::on_lineEdit_gen_charges_left_textEdited(const QString &arg1)
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     int charges = arg1.toInt();
     for(int i=0;i<PlayerGenerators.size();i++)
     {
@@ -430,7 +439,7 @@ void MainWindow::on_lineEdit_gen_charges_left_textEdited(const QString &arg1)
 
 void MainWindow::on_pushButton_reloadAll_clicked()
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     ReloadAll(playerID);
 }
 
@@ -441,7 +450,7 @@ void MainWindow::on_treeWidget_weapon_list_itemDoubleClicked(QTreeWidgetItem *it
 
 void MainWindow::on_pushButton_add_activeEffect_clicked()
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();;
     DialogBox_ActiveEffect *box = new DialogBox_ActiveEffect;
     box->setAttribute(Qt::WA_DeleteOnClose);
     box->AddEffectsToRightList(ActiveEffect);
@@ -455,7 +464,7 @@ void MainWindow::on_tableWidget_wpn_ammo_cellChanged(int row, int column)
     //Change AmmoLeft to new value in player_weapons vector
     if(column == 1)
     {
-        int playerID = 0;
+        int playerID = GetActivePlayerID();
 
         QString newAmmoLeft = ui->tableWidget_wpn_ammo->item(row, column)->text();
 
@@ -468,12 +477,15 @@ void MainWindow::on_tableWidget_wpn_ammo_cellChanged(int row, int column)
                 PlayerWeapons[i].AmmoLeft = newAmmoLeft.toInt();
             }
     }
-    qDebug() << "Hello";
+
 }
 
 
 void MainWindow::on_comboBox_select_player_activated(const QString &arg1)
 {
     ClearAllTabs();
+    int playerID = GetActivePlayerID();
+    LoadPlayer(playerID);
+
 }
 
