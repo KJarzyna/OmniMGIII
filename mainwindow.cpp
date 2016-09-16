@@ -101,6 +101,36 @@ QString MainWindow::GetActionCostFromCost(int cost)
         return "AD";
 }
 
+void MainWindow::ClearAllTabs()
+{
+    ClearGeneralTab();
+    ClearSkillTable();
+    SetMasteriesToZero();
+    ClearWeaponTable();
+    ClearAmmoTable();
+    ClearArmorList();
+    ClearArmorModList();
+    ClearGeneratorTable();
+    SetOmnikeyToDefault();
+    SetOmnikeyModToDefault();
+    SetOmnibladeToDefault();
+    SetOmnibladeModToDefault();
+
+}
+
+void MainWindow::ClearGeneralTab()
+{
+    ui->lineEdit_player_name->clear();
+    ui->lineEdit_player_class->clear();
+    ui->lineEdit_player_race->clear();
+    ui->lineEdit_armor_current->clear();
+    ui->lineEdit_armor_full->clear();
+    ui->lineEdit_shield_current->clear();
+    ui->lineEdit_shield_full->clear();
+    ui->listWidget_player_conditions->clear();
+    ui->comboBox_player_type->setCurrentIndex(0);
+}
+
 //SLOTS
 
 void MainWindow::on_pushButton_skill_add_clicked()
@@ -184,6 +214,8 @@ void MainWindow::on_actionZapisz_triggered()
         qDebug() << "Zapis player_omniblademods.csv nie powiódł się!";
     if(!csv.WritePlayerActiveEffectsFromVectorToFile(PlayerActiveEffects, "Data/player_activeeffects.csv"))
         qDebug() << "Zapis player_activeeffects.csv nie powiódł się!";
+
+    ui->statusBar->showMessage("Zapis zakończony!", 3000);
 }
 
 void MainWindow::on_pushButton_weapon_add_clicked()
@@ -418,8 +450,6 @@ void MainWindow::on_pushButton_add_activeEffect_clicked()
     box->show();
 }
 
-
-
 void MainWindow::on_tableWidget_wpn_ammo_cellChanged(int row, int column)
 {
     //Change AmmoLeft to new value in player_weapons vector
@@ -438,6 +468,12 @@ void MainWindow::on_tableWidget_wpn_ammo_cellChanged(int row, int column)
                 PlayerWeapons[i].AmmoLeft = newAmmoLeft.toInt();
             }
     }
+    qDebug() << "Hello";
+}
 
+
+void MainWindow::on_comboBox_select_player_activated(const QString &arg1)
+{
+    ClearAllTabs();
 }
 

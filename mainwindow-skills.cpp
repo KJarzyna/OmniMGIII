@@ -61,9 +61,15 @@ void MainWindow::RemoveSpecializationFromPlayer(int playerID)
 void MainWindow::ClearSkillTable()
 {
     while (ui->tableWidget_skills->rowCount() > 0)
-{
         ui->tableWidget_skills->removeRow(ui->tableWidget_skills->rowCount()-1);
-    }
+}
+
+void MainWindow::SetMasteriesToZero()
+{
+    ui->lineEdit_skill_calcvalue_biotyczne->setText("0%");
+    ui->lineEdit_skill_calcvalue_bojowe->setText("0%");
+    ui->lineEdit_skill_calcvalue_technologiczne->setText("0%");
+    ui->lineEdit_skill_calcvalue_specialization->setText("0%");
 }
 
 void MainWindow::CalculatePlayerMasteries(int playerID)

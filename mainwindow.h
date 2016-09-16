@@ -100,9 +100,14 @@ private slots:
     void on_tableWidget_wpn_ammo_cellChanged(int row, int column);
 
 
+    void on_comboBox_select_player_activated(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
-    //Ui::DialogBox_ActiveEffect *db_AE_ui;
+
+    //GENERAL
+    void ClearAllTabs();
+    void ClearGeneralTab();
 
     //INITIALIZATION RELATED
     void InitializeWeaponTableSize();
@@ -131,6 +136,7 @@ private:
     void ClearSkillTable();
     void LoadPlayerSkillsIntoTable(int playerID);
     void CalculatePlayerMasteries(int playerID);
+    void SetMasteriesToZero();
 
     //WEAPON RELATED
     void ClearWeaponTable();
@@ -182,21 +188,25 @@ private:
     void AddOmnikeyToPlayer(int omnikeyID, int playerID);
     void RemoveOmnikeyFromPlayer(int playerID);
     void LoadPlayerOmnikey(int playerID);
+    void SetOmnikeyToDefault();
 
     //OMNIKEY MOD RELATED
     void AddOmnikeyModToPlayer(int omnikeyModID, int playerID);
     void RemoveOmnikeyModFromPlayer(int playerID);
     void LoadPlayerOmnikeyMod(int playerID);
+    void SetOmnikeyModToDefault();
 
     //OMNIBLADE RELATED
     void AddOmnibladeToPlayer(int omnibladeID, int playerID);
     void RemoveOmnibladeFromPlayer(int playerID);
     void LoadPlayerOmniblade(int playerID);
+    void SetOmnibladeToDefault();
 
     //OMNIBLADE MOD RELATED
     void AddOmnibladeModToPlayer(int omnibladeModID, int playerID);
     void RemoveOmnibladeModFromPlayer(int playerID);
     void LoadPlayerOmnibladeMod(int playerID);
+    void SetOmnibladeModToDefault();
 
     //EFFECT RELATED
     void AddEffectToPlayer(int effectID, int playerID);

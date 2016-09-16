@@ -31,6 +31,11 @@ int MainWindow::GetOmnikeyIDFromOmnikeyName(QString Name)
     return ID;
 }
 
+void MainWindow::SetOmnikeyToDefault()
+{
+    ui->comboBox_omnikey_name->setCurrentIndex(0);
+}
+
 //ALL OMNIKEY SUBMOD RELATED FUNCTIONS
 
 void MainWindow::AddOmnikeyModToPlayer(int omnikeyModID, int playerID)
@@ -61,6 +66,10 @@ int MainWindow::GetOmnikeyModIDFromOmnikeyModName(QString Name)
     return ID;
 }
 
+void MainWindow::SetOmnikeyModToDefault()
+{
+    ui->comboBox_omnikey_submod_name->setCurrentIndex(0);
+}
 
 //ALL OMNIBLADE RELATED FUNCTIONS
 
@@ -92,6 +101,10 @@ int MainWindow::GetOmnibladeIDFromOmnibladeName(QString Name)
     return ID;
 }
 
+void MainWindow::SetOmnibladeToDefault()
+{
+    ui->comboBox_omniblade_type->setCurrentIndex(0);
+}
 
 //ALL OMNIBLADE MOD RELATED FUNCTIONS
 void MainWindow::AddOmnibladeModToPlayer(int omnibladeModID, int playerID)
@@ -122,3 +135,7 @@ int MainWindow::GetOmnibladeModIDFromOmnibladeModName(QString Name)
     return ID;
 }
 
+void MainWindow::SetOmnibladeModToDefault()
+{
+    ui->comboBox_omniblade_mod_name->setCurrentIndex(0);
+}

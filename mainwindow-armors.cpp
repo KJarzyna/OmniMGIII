@@ -162,3 +162,10 @@ bool MainWindow::PlayerHasArmorMod(int playerID, int armorModID)
     return false;
 }
 
+void MainWindow::ClearArmorModList()
+{
+    while (ui->listWidget_armormods_list->count() > 0)
+    {
+        ui->listWidget_armormods_list->clear();
+    }
+}

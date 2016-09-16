@@ -190,9 +190,7 @@ int MainWindow::GetWpnModIDFromWpnModName(QString modName)
 void MainWindow::ClearAmmoTable()
 {
     while (ui->tableWidget_wpn_ammo->rowCount() > 0)
-    {
         ui->tableWidget_wpn_ammo->removeRow(ui->tableWidget_wpn_ammo->rowCount()-1);
-    }
 }
 
 void MainWindow::AddWeaponToAmmoTable()
