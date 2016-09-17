@@ -193,6 +193,38 @@ void MainWindow::DeletePlayerFromModel(int playerID)
             PlayersModel->removeRow(i,QModelIndex());
 }
 
+void MainWindow::SaveAll()
+{
+    int playerID = GetActivePlayerID();;
+    SaveGeneralTab(playerID);
+
+    ReadWriteData csv;
+    if(!csv.WritePlayersFromVectorToFile(Players,"Data/players.csv"))
+        qDebug() << "Zapis players.csv nie powiódł się!";
+    if(!csv.WritePlayerSkillFromVectorToFile(PlayerSkills, "Data/player_skills.csv"))
+        qDebug() << "Zapis player_skills.csv nie powiódł się!";
+    if(!csv.WritePlayerWeaponsFromVectorToFile(PlayerWeapons, "Data/player_weapons.csv"))
+        qDebug() << "Zapis player_weapons.csv nie powiódł się!";
+    if(!csv.WritePlayerArmorsFromVectorToFile(PlayerArmors, "Data/player_armors.csv"))
+        qDebug() << "Zapis player_armors.csv nie powiódł się!";
+    if(!csv.WritePlayerArmorModsFromVectorToFile(PlayerArmorMods, "Data/player_armormods.csv"))
+        qDebug() << "Zapis player_armormods.csv nie powiódł się!";
+    if(!csv.WritePlayerGeneratorsFromVectorToFile(PlayerGenerators, "Data/player_generators.csv"))
+        qDebug() << "Zapis player_generators.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnikeysFromVectorToFile(PlayerOmnikeys, "Data/player_omnikeys.csv"))
+        qDebug() << "Zapis player_omnikeys.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnikeyModsFromVectorToFile(PlayerOmnikeyMods, "Data/player_omnikeymods.csv"))
+        qDebug() << "Zapis player_omnikeymods.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnibladesFromVectorToFile(PlayerOmniblades, "Data/player_omniblades.csv"))
+        qDebug() << "Zapis player_omniblades.csv nie powiódł się!";
+    if(!csv.WritePlayerOmnibladeModsFromVectorToFile(PlayerOmnibladeMods, "Data/player_omniblademods.csv"))
+        qDebug() << "Zapis player_omniblademods.csv nie powiódł się!";
+    if(!csv.WritePlayerActiveEffectsFromVectorToFile(PlayerActiveEffects, "Data/player_activeeffects.csv"))
+        qDebug() << "Zapis player_activeeffects.csv nie powiódł się!";
+
+    ui->statusBar->showMessage("Zapis zakończony!", 3000);
+}
+
 //SLOTS
 
 void MainWindow::on_pushButton_skill_add_clicked()
@@ -249,35 +281,7 @@ void MainWindow::on_comboBox_specialization_activated(const QString selectedItem
 
 void MainWindow::on_actionZapisz_triggered()
 {
-    int playerID = GetActivePlayerID();;
-    SaveGeneralTab(playerID);
-    //SaveSkillsTab(playerID);
-
-    ReadWriteData csv;
-    if(!csv.WritePlayersFromVectorToFile(Players,"Data/players.csv"))
-        qDebug() << "Zapis players.csv nie powiódł się!";
-    if(!csv.WritePlayerSkillFromVectorToFile(PlayerSkills, "Data/player_skills.csv"))
-        qDebug() << "Zapis player_skills.csv nie powiódł się!";
-    if(!csv.WritePlayerWeaponsFromVectorToFile(PlayerWeapons, "Data/player_weapons.csv"))
-        qDebug() << "Zapis player_weapons.csv nie powiódł się!";
-    if(!csv.WritePlayerArmorsFromVectorToFile(PlayerArmors, "Data/player_armors.csv"))
-        qDebug() << "Zapis player_armors.csv nie powiódł się!";
-    if(!csv.WritePlayerArmorModsFromVectorToFile(PlayerArmorMods, "Data/player_armormods.csv"))
-        qDebug() << "Zapis player_armormods.csv nie powiódł się!";
-    if(!csv.WritePlayerGeneratorsFromVectorToFile(PlayerGenerators, "Data/player_generators.csv"))
-        qDebug() << "Zapis player_generators.csv nie powiódł się!";
-    if(!csv.WritePlayerOmnikeysFromVectorToFile(PlayerOmnikeys, "Data/player_omnikeys.csv"))
-        qDebug() << "Zapis player_omnikeys.csv nie powiódł się!";
-    if(!csv.WritePlayerOmnikeyModsFromVectorToFile(PlayerOmnikeyMods, "Data/player_omnikeymods.csv"))
-        qDebug() << "Zapis player_omnikeymods.csv nie powiódł się!";
-    if(!csv.WritePlayerOmnibladesFromVectorToFile(PlayerOmniblades, "Data/player_omniblades.csv"))
-        qDebug() << "Zapis player_omniblades.csv nie powiódł się!";
-    if(!csv.WritePlayerOmnibladeModsFromVectorToFile(PlayerOmnibladeMods, "Data/player_omniblademods.csv"))
-        qDebug() << "Zapis player_omniblademods.csv nie powiódł się!";
-    if(!csv.WritePlayerActiveEffectsFromVectorToFile(PlayerActiveEffects, "Data/player_activeeffects.csv"))
-        qDebug() << "Zapis player_activeeffects.csv nie powiódł się!";
-
-    ui->statusBar->showMessage("Zapis zakończony!", 3000);
+    SaveAll();
 }
 
 void MainWindow::on_pushButton_weapon_add_clicked()
@@ -576,4 +580,29 @@ void MainWindow::on_pushButton_deletePlayer_clicked()
         ui->comboBox_select_player->setCurrentIndex(0);
         LoadPlayer(Players.at(0).PlayerID);
     }
+}
+
+void MainWindow::on_actionOmni_Kalkulator_triggered()
+{
+
+    dialogbox_save_module *box = new dialogbox_save_module;
+    box->setAttribute(Qt::WA_DeleteOnClose);
+    connect(box,SIGNAL(SaveSignal(bool)),this,SLOT(CalculatorModuleSlot(bool)));
+    box->show();
+}
+
+void MainWindow::CalculatorModuleSlot(bool savesignal)
+{
+    if(savesignal)
+    {
+        SaveAll();
+        OpenCalculatorModule();
+    }
+}
+
+void MainWindow::OpenCalculatorModule()
+{
+    calculator *calcModule = new calculator;
+    calcModule->setAttribute(Qt::WA_DeleteOnClose);
+    calcModule->show();
 }

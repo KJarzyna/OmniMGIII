@@ -718,7 +718,7 @@ QTableView QTableCornerButton::section {
             <set>Qt::AlignCenter</set>
            </property>
            <property name="readOnly">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -761,7 +761,7 @@ QTableView QTableCornerButton::section {
             <set>Qt::AlignCenter</set>
            </property>
            <property name="readOnly">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -2592,7 +2592,21 @@ color: orange;</string>
     </property>
     <addaction name="actionZapisz"/>
    </widget>
+   <widget class="QMenu" name="menuO_programie">
+    <property name="title">
+     <string>Pomoc</string>
+    </property>
+    <addaction name="actionO_programie"/>
+   </widget>
+   <widget class="QMenu" name="menuModu_y">
+    <property name="title">
+     <string>Moduły</string>
+    </property>
+    <addaction name="actionOmni_Kalkulator"/>
+   </widget>
    <addaction name="menuPlik"/>
+   <addaction name="menuModu_y"/>
+   <addaction name="menuO_programie"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -2609,6 +2623,16 @@ color: orange;</string>
    </property>
    <property name="toolTip">
     <string>Zapisz wszystko</string>
+   </property>
+  </action>
+  <action name="actionO_programie">
+   <property name="text">
+    <string>O programie...</string>
+   </property>
+  </action>
+  <action name="actionOmni_Kalkulator">
+   <property name="text">
+    <string>Omni-Kalkulator</string>
    </property>
   </action>
  </widget>

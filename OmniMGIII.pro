@@ -50,7 +50,9 @@ SOURCES += main.cpp\
     dialogbox_activeeffect.cpp \
     Sources/ClassDefinitions/activeeffect.cpp \
     Sources/ClassDefinitions/playeractiveeffect.cpp \
-    mainwindow-effects.cpp
+    mainwindow-effects.cpp \
+    dialogbox_save_module.cpp \
+    calculator.cpp
 
 HEADERS  += mainwindow.h \
     Headers/Armor/armor.h \
@@ -80,11 +82,15 @@ HEADERS  += mainwindow.h \
     Headers/Weapon/wpnmodlist.h \
     dialogbox_activeeffect.h \
     Headers/ActiveEffects/activeeffect.h \
-    Headers/Player/playeractiveeffect.h
+    Headers/Player/playeractiveeffect.h \
+    dialogbox_save_module.h \
+    calculator.h
 
 
 FORMS    += mainwindow.ui \
-    dialogbox_activeeffect.ui
+    dialogbox_activeeffect.ui \
+    dialogbox_save_module.ui \
+    calculator.ui
 
 RESOURCES += \
     resources.qrc

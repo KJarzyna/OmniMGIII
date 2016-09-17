@@ -33,6 +33,8 @@
 #include "Headers/Player/playeractiveeffect.h"
 
 #include "dialogbox_activeeffect.h"
+#include "dialogbox_save_module.h"
+#include "calculator.h"
 
 namespace Ui {
 class MainWindow;
@@ -74,7 +76,6 @@ public:
 
     QStandardItemModel *PlayersModel; //Column 1 for Name, column 2 (hidden) for ID
 
-
 private slots:
     void on_pushButton_skill_add_clicked();
     void on_pushButton_skill_remove_clicked();
@@ -101,15 +102,12 @@ private slots:
     void on_pushButton_add_activeEffect_clicked();
     void addActiveEffectsToWidgetList(QStringList list);
     void on_tableWidget_wpn_ammo_cellChanged(int row, int column);
-
-
     void on_comboBox_select_player_activated(const QString &arg1);
-
     void on_lineEdit_player_name_textEdited(const QString &arg1);
-
     void on_pushButton_addNewPlayer_clicked();
-
     void on_pushButton_deletePlayer_clicked();
+    void on_actionOmni_Kalkulator_triggered();
+    void CalculatorModuleSlot(bool savesignal);
 
 private:
     Ui::MainWindow *ui;
@@ -123,6 +121,7 @@ private:
     void AddNewPlayerToModel(QString playerName, int playerID);
     void DeletePlayerFromVector(int playerID);
     void DeletePlayerFromModel(int playerID);
+    void SaveAll();
 
     //INITIALIZATION RELATED
     void InitializeWeaponTableSize();
@@ -288,6 +287,8 @@ private:
     bool PlayerHasSkill(int playerID, QString skillName);
     bool PlayerHasArmor(int playerID, int armorID);
     bool PlayerHasArmorMod(int playerID, int armorModID);
+
+    void OpenCalculatorModule();
 
 };
 
