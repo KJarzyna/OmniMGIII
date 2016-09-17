@@ -140,6 +140,59 @@ int MainWindow::GetActivePlayerID()
     return playerID;
 }
 
+int MainWindow::FindLastUsedPlayerID()
+{
+    int lastID = -1;
+
+    for (int i=0; i<Players.size();i++)
+        if(Players.at(i).PlayerID > lastID)
+            lastID = Players.at(i).PlayerID;
+
+    return lastID;
+}
+
+void MainWindow::AddNewPlayerToVector(QString playerName, int playerID)
+{
+
+    C_Player newplayer;
+    newplayer.PlayerID = playerID;
+    newplayer.PlayerName = playerName;
+    newplayer.PlayerRace = "";
+    newplayer.PlayerType = "Gracz";
+    newplayer.PlayerClass = "";
+    newplayer.ArmorCurrent = 500;
+    newplayer.ArmorMax = 500;
+    newplayer.ShieldCurrent = 200;
+    newplayer.ShieldMax = 200;
+    newplayer.MasteryBattle = 30;
+    newplayer.MasteryBiotic = 30;
+    newplayer.MasteryTechno = 30;
+    newplayer.MasterySpec = 0;
+
+    Players.append(newplayer);
+}
+
+void MainWindow::AddNewPlayerToModel(QString playerName, int playerID)
+{
+    int newRow = PlayersModel->rowCount();
+    PlayersModel->setItem(newRow,0,new QStandardItem(playerName));
+    PlayersModel->setItem(newRow,1,new QStandardItem(QString::number(playerID)));
+}
+
+void MainWindow::DeletePlayerFromVector(int playerID)
+{
+    for (int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players.remove(i);
+}
+
+void MainWindow::DeletePlayerFromModel(int playerID)
+{
+    for (int i=0;i<PlayersModel->rowCount();i++)
+        if(PlayersModel->item(i,1)->text() == QString::number(playerID))
+            PlayersModel->removeRow(i,QModelIndex());
+}
+
 //SLOTS
 
 void MainWindow::on_pushButton_skill_add_clicked()
@@ -370,6 +423,7 @@ void MainWindow::on_pushButton_generator_add_clicked()
         {
             AddGeneratorToTable();
             AddGeneratorToPlayer(generatorID,playerID);
+            ui->lineEdit_gen_charges_left->setText(ui->tableWidget_generators->item(0,2)->text());
         }
         else
         {
@@ -486,6 +540,40 @@ void MainWindow::on_comboBox_select_player_activated(const QString &arg1)
     ClearAllTabs();
     int playerID = GetActivePlayerID();
     LoadPlayer(playerID);
+    ui->tabWidget->setCurrentIndex(0);
 
 }
 
+
+void MainWindow::on_lineEdit_player_name_textEdited(const QString &arg1)
+{
+    int currentRow = ui->comboBox_select_player->currentIndex();
+    PlayersModel->item(currentRow,0)->setText(arg1);
+
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].PlayerName = arg1;
+}
+
+void MainWindow::on_pushButton_addNewPlayer_clicked()
+{
+    int newID = FindLastUsedPlayerID() + 1;
+    AddNewPlayerToVector("Nowy gracz", newID);
+    AddNewPlayerToModel("Nowy gracz", newID);
+    ui->comboBox_select_player->setCurrentIndex(ui->comboBox_select_player->count()-1);
+    ClearAllTabs();
+    LoadPlayer(newID);
+}
+
+void MainWindow::on_pushButton_deletePlayer_clicked()
+{
+    int playerID = GetActivePlayerID();
+    if(ui->comboBox_select_player->count() > 1)
+    {
+        DeletePlayerFromVector(playerID);
+        DeletePlayerFromModel(playerID);
+        ui->comboBox_select_player->setCurrentIndex(0);
+        LoadPlayer(Players.at(0).PlayerID);
+    }
+}

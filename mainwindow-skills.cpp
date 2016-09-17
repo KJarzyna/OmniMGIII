@@ -32,7 +32,7 @@ void MainWindow::AddSkillToPlayer(int skillID, int playerID)
 
 void MainWindow::RemoveSkillFromTable()
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();
     int selected_row = ui->tableWidget_skills->currentRow();
 
     if(ui->tableWidget_skills->item(selected_row,0)->text() == Players.at(playerID).SpecializationSkill)

@@ -51,6 +51,11 @@ void MainWindow::AddGeneratorToPlayer(int generatorID, int playerID)
     C_PlayerGenerators generator;
     generator.PlayerID = playerID;
     generator.GeneratorID = generatorID;
+    generator.ChargesLeft = 0;
+    for(int i=0;i<Generators.size();i++)
+        if(Generators.at(i).GeneratorID == generatorID)
+            generator.ChargesLeft = Generators.at(i).Charges;
+
     PlayerGenerators.append(generator);
 }
 

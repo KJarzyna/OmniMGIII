@@ -72,7 +72,7 @@ public:
     QVector<C_PlayerActiveEffect> PlayerActiveEffects;
     QVector<C_ActiveEffect> ActiveEffect;
 
-    QStandardItemModel *PlayersModel;
+    QStandardItemModel *PlayersModel; //Column 1 for Name, column 2 (hidden) for ID
 
 
 private slots:
@@ -105,6 +105,12 @@ private slots:
 
     void on_comboBox_select_player_activated(const QString &arg1);
 
+    void on_lineEdit_player_name_textEdited(const QString &arg1);
+
+    void on_pushButton_addNewPlayer_clicked();
+
+    void on_pushButton_deletePlayer_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -112,6 +118,11 @@ private:
     void ClearAllTabs();
     void ClearGeneralTab();
     int GetActivePlayerID();
+    int FindLastUsedPlayerID();
+    void AddNewPlayerToVector(QString playerName, int playerID);
+    void AddNewPlayerToModel(QString playerName, int playerID);
+    void DeletePlayerFromVector(int playerID);
+    void DeletePlayerFromModel(int playerID);
 
     //INITIALIZATION RELATED
     void InitializeWeaponTableSize();

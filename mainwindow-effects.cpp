@@ -5,7 +5,7 @@
 
 void MainWindow::addActiveEffectsToWidgetList(QStringList list)
 {
-    int playerID = 0;
+    int playerID = GetActivePlayerID();
     ui->listWidget_player_conditions->clear();
     for(int i=0;i<list.size();i++)
         ui->listWidget_player_conditions->addItem(list.at(i));

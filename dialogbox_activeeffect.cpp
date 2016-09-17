@@ -84,7 +84,7 @@ QStringList DialogBox_ActiveEffect::ReturnSelectedEffectList()
         list.append(ui->listWidget_activeEffect_Left->item(i)->text());
     }
 
-    if(list.isEmpty()) list.append("Brak aktywnych efektów.");
+    //if(list.isEmpty()) list.append("Brak aktywnych efektów.");
 
     return list;
 }
