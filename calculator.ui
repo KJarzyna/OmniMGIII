@@ -540,6 +540,11 @@ border: black;
       <height>22</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
    </widget>
    <widget class="QLabel" name="label_select_player">
     <property name="geometry">
@@ -590,6 +595,11 @@ border: black;
       <height>22</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
    </widget>
    <widget class="QLabel" name="label_select_target">
     <property name="geometry">
@@ -619,6 +629,11 @@ border: black;
       <width>251</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QLabel" name="label_select_difficultylevel">
@@ -650,6 +665,36 @@ border: black;
       <height>22</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>Bardzo łatwy</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Łatwy</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Normalny</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Trudny</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bardzo trudny</string>
+     </property>
+    </item>
    </widget>
    <widget class="QTableWidget" name="tableWidget_AccMod">
     <property name="geometry">
@@ -804,6 +849,34 @@ background-color: #242424;
      <string>Usuń modyfikator</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_calculate">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>560</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>-1</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+     border: 2px solid black;
+     background-color: #ffa02f;
+	color: black;
+}</string>
+    </property>
+    <property name="text">
+     <string>Przelicz!</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QFrame" name="frame_right">
    <property name="geometry">
@@ -820,6 +893,51 @@ background-color: #242424;
    <property name="frameShadow">
     <enum>QFrame::Plain</enum>
    </property>
+   <widget class="QTextEdit" name="textEdit_turn_1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>331</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_copy">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>160</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Kopiuje do schowka tekst sformatowany na format Cytadeli</string>
+    </property>
+    <property name="text">
+     <string>Skopiuj do schowka</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_continue_calculations">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>190</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Kopiuje do schowka tekst sformatowany na format Cytadeli</string>
+    </property>
+    <property name="text">
+     <string>Kontynuuj przeliczanie</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QFrame" name="frame_left_2">
    <property name="geometry">
@@ -836,7 +954,7 @@ background-color: #242424;
    <property name="frameShadow">
     <enum>QFrame::Plain</enum>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -881,7 +999,7 @@ background-color: #242424;
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1032,6 +1150,48 @@ background-color: #242424;
       </layout>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="label_action_cost">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>200</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Koszt akcji:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_action_cost_2">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>220</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Brak</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
   </widget>
  </widget>

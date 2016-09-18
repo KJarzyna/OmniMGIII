@@ -29,6 +29,7 @@
 #include <Headers/Player/playeromniblademods.h>
 #include <Headers/ActiveEffects/activeeffect.h>
 #include <Headers/Player/playeractiveeffect.h>
+#include <calculator-actions.h>
 #include <QFile>
 #include <QDebug>
 
@@ -111,6 +112,10 @@ public:
     bool ReadPlayerActiveEffectsFromFileAndLoadToVector(QString filename, QVector<C_PlayerActiveEffect> &vector);
 
     bool WritePlayerActiveEffectsFromVectorToFile(QVector<C_PlayerActiveEffect> &vector, QString filename);
+
+    //ACTIONS
+
+    bool ReadActionsFromFileAndLoadToVector(QString filename, QVector<C_Actions> &vector);
 
     bool CreateFileBackup(QString filename);
 };

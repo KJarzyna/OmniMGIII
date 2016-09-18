@@ -1525,7 +1525,48 @@ bool ReadWriteData::WritePlayerActiveEffectsFromVectorToFile(QVector<C_PlayerAct
         return false;
     }
 }
+//READ ACTIONS
 
+bool ReadWriteData::ReadActionsFromFileAndLoadToVector(QString filename, QVector<C_Actions> & vector)
+{
+    vector.clear();
+    QFile inputFile(filename);
+    C_Actions action;
+
+    if (inputFile.exists() && inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList cells = line.split(';');
+
+            if (cells.size()>0)
+            {
+                action.ID = cells.at(0).toInt();
+                action.Name = cells.at(1);
+                action.Cost = cells.at(2).toInt();
+
+                vector.append(action);
+            }
+
+        }
+
+        if (!vector.isEmpty())
+            vector.removeFirst();
+        else
+            qDebug() << "File " << filename << " is empty!";
+
+        inputFile.close();
+        return true;
+    }
+    else
+    {
+        qDebug() <<  filename << ": Couldn't open file or file doesn't exist!";
+        return false;
+    }
+
+}
 
 //BACKUP
 bool ReadWriteData::CreateFileBackup(QString filename)

@@ -52,7 +52,10 @@ SOURCES += main.cpp\
     Sources/ClassDefinitions/playeractiveeffect.cpp \
     mainwindow-effects.cpp \
     dialogbox_save_module.cpp \
-    calculator.cpp
+    calculator.cpp \
+    calculator-actions.cpp \
+    dialogbox_difficultyreason.cpp \
+    dialogbox_action.cpp
 
 HEADERS  += mainwindow.h \
     Headers/Armor/armor.h \
@@ -84,13 +87,18 @@ HEADERS  += mainwindow.h \
     Headers/ActiveEffects/activeeffect.h \
     Headers/Player/playeractiveeffect.h \
     dialogbox_save_module.h \
-    calculator.h
+    calculator.h \
+    calculator-actions.h \
+    dialogbox_difficultyreason.h \
+    dialogbox_action.h
 
 
 FORMS    += mainwindow.ui \
     dialogbox_activeeffect.ui \
     dialogbox_save_module.ui \
-    calculator.ui
+    calculator.ui \
+    dialogbox_difficultyreason.ui \
+    dialogbox_action.ui
 
 RESOURCES += \
     resources.qrc
