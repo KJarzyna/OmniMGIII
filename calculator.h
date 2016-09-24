@@ -7,7 +7,7 @@
 #include <QSpinBox>
 #include "mainwindow.h"
 #include <QString>
-#include <calculator-actions.h>
+#include "Headers/Actions/actions.h"
 #include <dialogbox_difficultyreason.h>
 #include <dialogbox_action.h>
 
@@ -52,33 +52,37 @@ public:
     QStandardItemModel *comboboxTargetsModel;
     QStandardItemModel *comboboxActionModel;
 
-    QString difficulty_reason;
-
     int selectedPlayerID;
+    QString selectedPlayerName;
+
+    QString selectedActionName;
     int selectedActionItemID;
     QString selectedActionItemName;
+    QString selectedActionCostName;
 
-    QString playerFinal;
-    QString selectedActionFinal;
-    QString actionCostFinal;
-    QString targetFinal;
-    int successTresholdFinal;
+    int selectedTargetID;
+    QString selectedTargetName;
+
+    QString difficulty_level_name;
+    QString difficulty_reason;
+
+    int successTreshold;
 
 
 private slots:
+    void GetDifficultyReasonSlot(QString reason);
+    void GetSelectedActionItemSlot(int id, QString name);
+    void ActionDialogBoxClosed(bool db_closed);
+
     void on_pushButton_AccMod_add_clicked();
     void on_pushButton_AccMod_remove_clicked();
     void on_pushButton_DmgMod_add_clicked();
     void on_pushButton_DmgMod_add_2_clicked();
     void on_comboBox_select_player_activated(int index);
     void on_comboBox_select_difficultylevel_activated(const QString &arg1);
-
-    void GetDifficultyReasonSlot(QString reason);
-    void GetSelectedActionItemSlot(int id, QString name);
-
     void on_comboBox_select_action_activated(int index);
-
     void on_pushButton_calculate_clicked();
+    void on_comboBox_select_target_activated(int index);
 
 private:
     Ui::calculator *ui;
@@ -95,9 +99,19 @@ private:
     void AddPlayerToTargetModel(int playerID);
 
     //Player related
+    QString GetPlayerNameFromPlayerID(int playerID);
     void setPlayerStats(int playerID);
     void setPlayerActiveEffects(int playerID);
-    int PlayersArmorCostReduction(int playerID);
+    int GetPlayersArmorCostReduction(int playerID);
+    int GetPlayersArmorWpnAccModifier(int playerID);
+    int GetPlayersArmorSkillAccModifier(int playerID);
+    int GetPlayersArmorWpnDiffLevelModifier(int playerID);
+    int GetPlayersArmorSkillDiffLevelModifier(int playerID);
+    int GetPlayersArmorMeeleeDiffLevelModifier(int playerID);
+    int GetPlayerSkillMastery(int playerID, QString skillType);
+    QString GetPlayerSpecializationSkill(int playerID);
+    int GetPlayerEvasiveness(int playerID);
+
 
     //Actions related
     QStandardItemModel* GetItemModelBasedOnSelectedAction(int actionID);
@@ -108,30 +122,50 @@ private:
     QStandardItemModel* GetItemModelForGelUsage();
     QStandardItemModel* GetItemModelForSpecialAmmo();
 
-    void OpenAdditionalDialogBox(int actionID);
-    void SetActionCost();
+    void OpenAdditionalActionDialogBoxForActionID(int actionID);
+    void setSelectedActionCostName(QString actionType);
+    void setActionCostInStats(QString actionType);
+    void setSelectedActionName();
+    void setActionNameInStats(QString actionName);
+
+    int GetCurrentActionID();
+    int GetActionCostFromActionID(int ID);
+    int GetActionCostAfterCalculations(int actionID);
+    QString GetActionTypeFromActionCost(int cost);
+
+    //Difficulty related
+    void setDifficultyInStats(QString level, QString reason);
+    int GetDifficultyValueFromName(QString diff_name);
+    int GetDifficultyModifierFromValue(int val);
+    int GetFinalDifficultyValueForActionID(int actionID);
+
+    //
 
     bool ReadDataFromFiles();
 
-    QString GetPlayerNameFromPlayerID(int playerID);
-    QString GetEffectNameFromEffectID(int ID);
-    int GetCurrentActionID();
+    //Weapon related
     QString GetWeaponTypeFromWeaponID(int ID);
     QString GetWeaponNameFromWeaponID(int ID);
+    int GetWeaponAccFromWeaponID(int id);
+    int GetOmnibladeAccFromOmnibladeID(int id);
+
+    //GET
+    QString GetEffectNameFromEffectID(int ID);
     QString GetGeneratorNameFromGeneratorID(int ID);
+
+    //Skill related
     QString GetSkillNameFromSkillID(int ID);
     QString GetSkillTypeFromSkillID(int ID);
     QString GetSkillLevelFromSkillID(int ID);
     int GetSkillCostFromSkillID(int ID);
-    int GetActionCostFromActionID(int ID);
+
 
     //Calculations related
-    void setPlayerFinal();
-    void setActionFinal();
-    void setActionCostFinal();
-    void setTargetFinal();
-    void setSuccessTresholdFinal();
-    void ChangeActionCost(QString newCost);
+    void setSuccessTreshold(int treshold);
+    void CalculateSuccessTresholdForActionID(int actionID);
+    int GetSumOfAccModifiers();
+    int GetSumOfDmgModifiers();
+    int GetBaseSuccessTreshold(int actionID);
 };
 
 #endif // CALCULATOR_H

@@ -1,5 +1,9 @@
 #include "calculator.h"
 #include "ui_calculator.h"
+#include "calculator-actions.cpp"
+#include "calculator-weapons.cpp"
+#include "calculator-skills.cpp"
+#include "calculator-player.cpp"
 #include "QDebug"
 
 calculator::calculator(QWidget *parent) :
@@ -50,6 +54,7 @@ void calculator::InitializePlayersComboBox()
     }
     ui->comboBox_select_player->setModel(comboboxPlayersModel);
     selectedPlayerID = comboboxPlayersModel->item(0,1)->text().toInt();
+    selectedPlayerName = comboboxPlayersModel->item(0,0)->text();
 }
 
 void calculator::InitializeActionsComboBox()
@@ -74,6 +79,9 @@ void calculator::InitializeTargetsComboBox()
     }
     comboboxTargetsModel->removeRow(0,QModelIndex());
     ui->comboBox_select_target->setModel(comboboxTargetsModel);
+
+    selectedTargetID = comboboxTargetsModel->item(0,1)->text().toInt();
+    selectedTargetName = comboboxTargetsModel->item(0,0)->text();
 }
 
 void calculator::InitializePlayerStats()
@@ -111,63 +119,6 @@ bool calculator::ReadDataFromFiles()
     csv.ReadPlayerActiveEffectsFromFileAndLoadToVector("Data/player_activeeffects.csv", PlayerActiveEffects);
     csv.ReadActionsFromFileAndLoadToVector("Data/actions.csv", Actions);
     return true;
-}
-
-QString calculator::GetPlayerNameFromPlayerID(int playerID)
-{
-    QString playerName = "NoPlayerNameForThisID";
-
-    for (int i=0;i<Players.size();i++)
-        if(Players.at(i).PlayerID == playerID)
-            playerName = Players.at(i).PlayerName;
-    return playerName;
-}
-
-void calculator::RemovePlayerFromTargetModel(int playerID)
-{
-    for(int i=0;i<comboboxTargetsModel->rowCount();i++)
-        if(comboboxTargetsModel->item(i,1)->text().toInt() == playerID)
-            comboboxTargetsModel->removeRow(i,QModelIndex());
-}
-
-void calculator::AddPlayerToTargetModel(int playerID)
-{
-    comboboxTargetsModel->insertRows(comboboxTargetsModel->rowCount(),1,QModelIndex());
-    comboboxTargetsModel->setItem(comboboxTargetsModel->rowCount()-1,0,new QStandardItem(GetPlayerNameFromPlayerID(playerID)));
-    comboboxTargetsModel->setItem(comboboxTargetsModel->rowCount()-1,1,new QStandardItem(QString::number(playerID)));
-}
-
-void calculator::setPlayerStats(int playerID)
-{
-    for(int i=0;i<Players.size();i++)
-        if(Players.at(i).PlayerID == playerID)
-        {
-            ui->label_current_armor->setText(QString::number(Players.at(i).ArmorCurrent));
-            ui->label_max_armor->setText(QString::number(Players.at(i).ArmorMax));
-            ui->label_current_shield->setText(QString::number(Players.at(i).ShieldCurrent));
-            ui->label_max_shield->setText(QString::number(Players.at(i).ShieldMax));
-        }
-}
-
-void calculator::setPlayerActiveEffects(int playerID)
-{
-    ui->listWidget_player_conditions->clear();
-    for(int i=0;i<PlayerActiveEffects.size();i++)
-        if(PlayerActiveEffects.at(i).PlayerID == playerID)
-            ui->listWidget_player_conditions->addItem(GetEffectNameFromEffectID(PlayerActiveEffects.at(i).EffectID));
-}
-
-void calculator::OpenAdditionalDialogBox(int actionID)
-{
-    int currentActionID = actionID;
-    dialogbox_action *box = new dialogbox_action();
-    box->setAttribute(Qt::WA_DeleteOnClose);
-    box->InitializeActionType(ui->comboBox_select_action->currentText());
-
-    QStandardItemModel *model = GetItemModelBasedOnSelectedAction(currentActionID);
-    box->InitializeActionItemModel(model);
-    box->show();
-    connect(box,SIGNAL(SelectedActionItem(int,QString)),this,SLOT(GetSelectedActionItemSlot(int,QString)));
 }
 
 QString calculator::GetEffectNameFromEffectID(int ID)
@@ -452,33 +403,6 @@ QStandardItemModel* calculator::GetItemModelForSpecialAmmo()
         }
 }
 
-
-int calculator::GetCurrentActionID()
-{
-    int currentRow = ui->comboBox_select_action->currentIndex();
-    int actionID = comboboxActionModel->item(currentRow,1)->text().toInt();
-    return actionID;
-}
-
-QString calculator::GetWeaponTypeFromWeaponID(int ID)
-{
-    QString WeaponType = "Unknown Weapon ID!";
-    for(int i=0;i<Weapons.size();i++)
-        if(Weapons.at(i).WeaponID == ID)
-            WeaponType = Weapons.at(i).WeaponType;
-    return WeaponType;
-
-}
-
-QString calculator::GetWeaponNameFromWeaponID(int ID)
-{
-    QString name = "Unknown Weapon ID!";
-    for(int i=0;i<Weapons.size();i++)
-        if(Weapons.at(i).WeaponID == ID)
-            name = Weapons.at(i).WeaponName;
-    return name;
-}
-
 QString calculator::GetGeneratorNameFromGeneratorID(int ID)
 {
     QString name = "Unknown Generator ID!";
@@ -488,141 +412,154 @@ QString calculator::GetGeneratorNameFromGeneratorID(int ID)
     return name;
 }
 
-QString calculator::GetSkillNameFromSkillID(int ID)
+void calculator::setDifficultyInStats(QString level, QString reason)
 {
-    QString name = "Unknown Skill ID!";
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            name = Skills.at(i).SkillName;
-    return name;
+    QString difficulty_full = level + " [" + reason + "]";
+    ui->label_difficulty_2->setText(difficulty_full);
 }
 
-QString calculator::GetSkillTypeFromSkillID(int ID)
-{
-    QString SkillType = "Unknown Skill ID!";
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            SkillType = Skills.at(i).SkillType;
-    return SkillType;
 
+
+//CALCULATION
+void calculator::CalculateSuccessTresholdForActionID(int actionID)
+{
+
+    int success = GetBaseSuccessTreshold(actionID);
+    int difficulty = GetFinalDifficultyValueForActionID(actionID);
+
+    successTreshold = success + GetSumOfAccModifiers() + difficulty;
+    qDebug() << successTreshold;
 }
 
-QString calculator::GetSkillLevelFromSkillID(int ID)
+int calculator::GetBaseSuccessTreshold(int actionID)
 {
-    QString SkillType = "Unknown Skill ID!";
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            SkillType = Skills.at(i).SkillLevel;
-    return SkillType;
-}
-
-int calculator::GetActionCostFromActionID(int ID)
-{
-    int cost = 99;
-    for(int i=0;i<Actions.size();i++)
-        if(Actions.at(i).ID == ID)
-            cost = Actions.at(i).Cost;
-    return cost;
-}
-
-void calculator::SetActionCost()
-{
-    int actionID = GetCurrentActionID();
-    int actionCost = 100;
-    if(actionID != 7)
-        actionCost = GetActionCostFromActionID(actionID);
-    else
-        actionCost = GetSkillCostFromSkillID(selectedActionItemID);
-
-    if(actionCost >= 3 && actionCost < 125)
-        ui->label_action_cost_2->setText("AD");
-    else if(actionCost < 3)
-        ui->label_action_cost_2->setText("AM");
-    else
-        ui->label_action_cost_2->setText("AD+AM");
-}
-
-void calculator::setPlayerFinal()
-{
-    playerFinal = ui->comboBox_select_player->currentText();
-}
-
-void calculator::setActionFinal()
-{
-    QString actionFinal = ui->comboBox_select_action->currentText();
-
-    if(!selectedActionItemName.isEmpty())
+    int success;
+    if(actionID > -1 && actionID < 5) // Get base success for weapons (base weapon + weapon acc + armor modifiers)
     {
-        actionFinal.append(": ");
-        actionFinal.append(selectedActionItemName);
+        success = 50 + GetWeaponAccFromWeaponID(selectedActionItemID) + GetPlayersArmorWpnAccModifier(selectedPlayerID);
+        setSuccessTreshold(success);
+    }
+    else if(actionID == 7 || actionID == 18) // Get base success for skills (base skill mastery + armor modifiers)
+    {
+        if (!selectedActionItemName.contains(GetPlayerSpecializationSkill(selectedPlayerID)))
+            success = GetPlayerSkillMastery(selectedPlayerID,GetSkillTypeFromSkillID(selectedActionItemID)) + GetPlayersArmorSkillAccModifier(selectedPlayerID);
+        else
+            success = GetPlayerSkillMastery(selectedPlayerID,"Specjalizacja") + GetPlayersArmorSkillAccModifier(selectedPlayerID);
+
+        setSuccessTreshold(success);
+    }
+    else if(actionID > 9 && actionID < 13) // Get base success for omniblades (base of player evasiveness + weapon acc)
+    {
+        success = GetPlayerEvasiveness(selectedTargetID) + GetOmnibladeAccFromOmnibladeID(selectedActionItemID);
+        setSuccessTreshold(success);
+    }
+    else if(actionID == 19) // // Get base success for special ammo activation (base battle mastery + armor modifiers)
+    {
+        success = GetPlayerSkillMastery(selectedPlayerID,"Bojowe") + GetPlayersArmorSkillAccModifier(selectedPlayerID);
+        setSuccessTreshold(success);
+    }
+    else
+    {
+       success = 0;
     }
 
+    return success;
 }
 
-void calculator::setTargetFinal()
+int calculator::GetSumOfAccModifiers()
 {
-    playerFinal = ui->comboBox_select_target->currentText();
+    int acc_sum = 0;
+    for(int i=0;i<ui->tableWidget_AccMod->rowCount();i++)
+        acc_sum += ui->tableWidget_AccMod->item(i,1)->text().toInt();
+    return acc_sum;
 }
 
-void calculator::setActionCostFinal()
+int calculator::GetSumOfDmgModifiers()
 {
-    int actionID = GetCurrentActionID();
-    int cost = 100;
+    int dmg_sum = 0;
+    for(int i=0;i<ui->tableWidget_DmgMod->rowCount();i++)
+        dmg_sum += ui->tableWidget_DmgMod->item(i,1)->text().toInt();
+    return dmg_sum;
+}
 
-    if(actionID != 7)
-        cost = GetActionCostFromActionID(actionID);
+int calculator::GetDifficultyValueFromName(QString diff_name)
+{
+    if(diff_name == "Bardzo łatwy")
+        return 1;
+    else if(diff_name == "Łatwy")
+        return 2;
+    else if(diff_name == "Normalny")
+        return 3;
+    else if(diff_name == "Trudny")
+        return 4;
+    else if(diff_name == "Bardzo trudny")
+        return 5;
+    else if(diff_name == "Niemożliwy")
+        return 6;
     else
-        cost = GetSkillCostFromSkillID(selectedActionItemID);
+        return 99;
+}
 
-    if(PlayersArmorCostReduction(selectedPlayerID) != 0)
+int calculator::GetDifficultyModifierFromValue(int val)
+{
+    switch(val)
     {
-        cost = cost + PlayersArmorCostReduction(selectedPlayerID);
+    case 1:
+        return 30;
+    case 2:
+        return 15;
+    case 3:
+        return 0;
+    case 4:
+        return -15;
+    case 5:
+        return -30;
+    case 6:
+        return -50;
+    default:
+        return 9999;
+    }
+}
+
+int calculator::GetFinalDifficultyValueForActionID(int actionID)
+{
+    int difficulty_value = GetDifficultyValueFromName(difficulty_level_name);
+
+    if(actionID > -1 && actionID < 5) // Weapons
+    {
+        difficulty_value += GetPlayersArmorWpnDiffLevelModifier(selectedPlayerID);
+    }
+    else if(actionID == 7 || actionID == 18) // Skills
+    {
+        difficulty_value += GetPlayersArmorSkillDiffLevelModifier(selectedPlayerID);
+    }
+    else if(actionID > 9 && actionID < 13) // Meelee (base of player evasiveness + weapon acc)
+    {
+        difficulty_value += GetPlayersArmorMeeleeDiffLevelModifier(selectedPlayerID);
+    }
+    else if(actionID == 19) // Ammo
+    {
+        difficulty_value += GetPlayersArmorSkillDiffLevelModifier(selectedPlayerID);
+    }
+    else
+    {
+        difficulty_value = difficulty_value;
     }
 
-    if(cost >= 3 && cost < 125)
-        actionCostFinal = "AD";
-    else if(cost < 3)
-        actionCostFinal = "AM";
-    else
-        actionCostFinal = "AD+AM";
+    if(difficulty_value < 1)
+        difficulty_value = 1;
+    else if(difficulty_value > 6)
+        difficulty_value = 6;
 
-    qDebug() << "Final cost: " << actionCostFinal;
-}
+    return GetDifficultyModifierFromValue(difficulty_value);
 
-void calculator::setSuccessTresholdFinal()
-{
-
-}
-
-int calculator::PlayersArmorCostReduction(int playerID)
-{
-    int cost_red = 0;
-    for(int i=0;i<PlayerArmors.size();i++)
-        if(PlayerArmors.at(i).PlayerID == playerID)
-            for(int j=0;j<Armors.size();j++)
-                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID)
-                    cost_red += Armors.at(j).ActionSkillCost;
-    return cost_red;
-}
-
-void calculator::ChangeActionCost(QString newCost)
-{
-    actionCostFinal = newCost;
-}
-
-int calculator::GetSkillCostFromSkillID(int ID)
-{
-    int skillCost = 100;
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            skillCost = Skills.at(i).Cost;
-    return skillCost;
 }
 
 //CUSTOM SLOTS
 void calculator::GetDifficultyReasonSlot(QString reason)
 {
     difficulty_reason = reason;
+    setDifficultyInStats(difficulty_level_name,difficulty_reason);
 }
 
 void calculator::GetSelectedActionItemSlot(int id, QString name)
@@ -672,6 +609,7 @@ void calculator::on_comboBox_select_player_activated(int index)
 {
     int previously_selected_playerID = selectedPlayerID;
     selectedPlayerID = comboboxPlayersModel->item(index,1)->text().toInt();
+    selectedPlayerName = comboboxPlayersModel->item(index,0)->text();
 
     RemovePlayerFromTargetModel(selectedPlayerID);
     AddPlayerToTargetModel(previously_selected_playerID);
@@ -682,6 +620,7 @@ void calculator::on_comboBox_select_player_activated(int index)
 
 void calculator::on_comboBox_select_difficultylevel_activated(const QString &arg1)
 {
+    difficulty_level_name = arg1;
     dialogbox_difficultyreason *box = new dialogbox_difficultyreason();
     box->setAttribute(Qt::WA_DeleteOnClose);
     box->show();
@@ -689,27 +628,33 @@ void calculator::on_comboBox_select_difficultylevel_activated(const QString &arg
 
 }
 
-
 void calculator::on_comboBox_select_action_activated(int index)
 {
-    selectedActionItemName = "";
     int currentActionID = GetCurrentActionID();
-    if(currentActionID >-1 && currentActionID <10 || currentActionID == 13 || currentActionID == 14 || currentActionID > 16 && currentActionID < 20) //this actions require new dialog box
+    if((currentActionID >-1 && currentActionID <10) || currentActionID == 13 || currentActionID == 14 || (currentActionID > 16 && currentActionID < 20)) //this actions require new dialog box
     {
-        OpenAdditionalDialogBox(currentActionID);
+        OpenAdditionalActionDialogBoxForActionID(currentActionID);
     }
-    SetActionCost();
+    else
+    {
+        int actionCost = GetActionCostAfterCalculations(currentActionID);
+        QString actionType = GetActionTypeFromActionCost(actionCost);
+
+        setSelectedActionCostName(actionType);
+        setActionCostInStats(actionType);
+        setSelectedActionName();
+        setActionNameInStats(selectedActionName);
+    }
+
 }
-
-
-
 
 void calculator::on_pushButton_calculate_clicked()
 {
+    CalculateSuccessTresholdForActionID(GetCurrentActionID());
+}
 
-    setPlayerFinal();
-    setActionFinal();
-    setActionCostFinal();
-    setTargetFinal();
-    setSuccessTresholdFinal();
+void calculator::on_comboBox_select_target_activated(int index)
+{
+    selectedTargetName = comboboxTargetsModel->item(index,0)->text();
+    selectedTargetID = comboboxTargetsModel->item(index,1)->text().toInt();
 }

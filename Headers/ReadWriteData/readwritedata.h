@@ -29,7 +29,7 @@
 #include <Headers/Player/playeromniblademods.h>
 #include <Headers/ActiveEffects/activeeffect.h>
 #include <Headers/Player/playeractiveeffect.h>
-#include <calculator-actions.h>
+#include <Headers/Actions/actions.h>
 #include <QFile>
 #include <QDebug>
 

@@ -39,6 +39,7 @@ void dialogbox_action::on_pushButton_clicked()
     int itemID = ActionItem->item(currentRow,1)->text().toInt();
     QString itemName = ActionItem->item(currentRow,0)->text();
     emit SelectedActionItem(itemID,itemName);
+    emit DialogBoxClosed(true);
     close();
 }
 

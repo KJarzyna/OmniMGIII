@@ -25,6 +25,7 @@ public:
 
 signals:
     void SelectedActionItem(int,QString);
+    void DialogBoxClosed(bool);
 
 private slots:
 

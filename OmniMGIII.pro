@@ -22,6 +22,7 @@ SOURCES += main.cpp\
     mainwindow-armors.cpp \
     mainwindow-generators.cpp \
     mainwindow-omnikeys.cpp \
+    Sources/ClassDefinitions/actions.cpp \
     Sources/ClassDefinitions/armmodlist.cpp \
     Sources/ClassDefinitions/armor.cpp \
     Sources/ClassDefinitions/armorlist.cpp \
@@ -53,11 +54,15 @@ SOURCES += main.cpp\
     mainwindow-effects.cpp \
     dialogbox_save_module.cpp \
     calculator.cpp \
-    calculator-actions.cpp \
     dialogbox_difficultyreason.cpp \
-    dialogbox_action.cpp
+    dialogbox_action.cpp \
+    calculator-actions.cpp \
+    calculator-weapons.cpp \
+    calculator-skills.cpp \
+    calculator-player.cpp
 
 HEADERS  += mainwindow.h \
+    Headers/Actions/actions.h \
     Headers/Armor/armor.h \
     Headers/Armor/armmodlist.h \
     Headers/Armor/armorlist.h \
@@ -88,7 +93,6 @@ HEADERS  += mainwindow.h \
     Headers/Player/playeractiveeffect.h \
     dialogbox_save_module.h \
     calculator.h \
-    calculator-actions.h \
     dialogbox_difficultyreason.h \
     dialogbox_action.h
 
