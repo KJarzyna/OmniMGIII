@@ -41,6 +41,19 @@ int calculator::GetActionCostAfterCalculations(int actionID)
     return cost;
 }
 
+int calculator::GetActionAccModifierForActionIDandPlayerID(int actionID, int playerID)
+{
+    if(isActionWeaponRelated(actionID))
+        return GetPlayersArmorWpnAccModifier(playerID);
+    else if(isActionSkillRelated(actionID))
+        return GetPlayersArmorSkillAccModifier(playerID);
+    else if(isActionAmmoRelated(actionID))
+        return GetPlayersArmorSkillAccModifier(playerID);
+    else
+        return 0;
+
+}
+
 void calculator::setSelectedActionCostName(QString actionType)
 {
     selectedActionCostName = actionType;
@@ -77,6 +90,16 @@ void calculator::ActionDialogBoxClosed(bool db_closed)
         setActionCostInStats(actionType);
         setSelectedActionName();
         setActionNameInStats(selectedActionName);
+
+        if(isActionNeedTarget(actionID))
+            ui->comboBox_select_target->setEnabled(true);
+        else
+            ui->comboBox_select_target->setEnabled(false);
+
+        if(isActionNeedDifficultyCheck(actionID))
+            ui->comboBox_select_difficultylevel->setEnabled(true);
+        else
+            ui->comboBox_select_difficultylevel->setEnabled(false);
     }
 }
 
@@ -99,4 +122,78 @@ void calculator::setSelectedActionName()
 void calculator::setActionNameInStats(QString actionName)
 {
     ui->label_action_name_2->setText(actionName);
+}
+
+bool calculator::isActionHasSuccessCheck(int actionID)
+{
+    if(actionID > -1 && actionID < 5) // Get base success for weapons (base weapon + weapon acc + armor modifiers)
+        return true;
+    else if(actionID == 7 || actionID == 18) // Get base success for skills (base skill mastery + armor modifiers)
+        return true;
+    else if(actionID > 9 && actionID < 13) // Get base success for omniblades (base of player evasiveness + weapon acc)
+        return true;
+    else if(actionID == 19) // // Get base success for special ammo activation (base battle mastery + armor modifiers)
+        return true;
+    else
+       return false;
+}
+
+bool calculator::isActionWeaponRelated(int actionID)
+{
+    if(actionID > -1 && actionID < 5)
+        return true;
+    else
+       return false;
+}
+
+bool calculator::isActionSkillRelated(int actionID)
+{
+    if(actionID == 7 || actionID == 18) // Get base success for skills (base skill mastery + armor modifiers)
+        return true;
+    else
+       return false;
+}
+
+bool calculator::isActionMeeleeRelated(int actionID)
+{
+    if(actionID > 9 && actionID < 13) // Get base success for omniblades (base of player evasiveness + weapon acc)
+        return true;
+    else
+       return false;
+}
+
+bool calculator::isActionAmmoRelated(int actionID)
+{
+    if(actionID == 19) // Get base success for ammo (base skill mastery + armor modifiers)
+        return true;
+    else
+       return false;
+}
+
+bool calculator::isActionNeedTarget(int actionID)
+{
+    if(isActionWeaponRelated(actionID))
+        return true;
+    else if(isActionMeeleeRelated(actionID))
+        return true;
+    else if(isActionSkillRelated(actionID))
+        return true;
+    else if((actionID == 8 || actionID == 9) && selectedActionItemID == 1)
+        return true;
+    else
+       return false;
+}
+
+bool calculator::isActionNeedDifficultyCheck(int actionID)
+{
+    if(isActionWeaponRelated(actionID))
+        return true;
+    else if(isActionMeeleeRelated(actionID))
+        return true;
+    else if(isActionSkillRelated(actionID))
+        return true;
+    else if(isActionAmmoRelated(actionID))
+        return true;
+    else
+       return false;
 }

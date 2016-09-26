@@ -340,9 +340,9 @@ QStandardItemModel* calculator::GetItemModelForAllPlayerSkills()
         if(PlayerSkills.at(i).PlayerID == selectedPlayerID)
         {
             QString skillName = GetSkillNameFromSkillID(PlayerSkills.at(i).SkillID);
-            skillName.append(" [");
+            skillName.append(" (");
             skillName.append(GetSkillLevelFromSkillID(PlayerSkills.at(i).SkillID));
-            skillName.append("]");
+            skillName.append(")");
             itemNameVector.append(skillName);
             itemIDVector.append(PlayerSkills.at(i).SkillID);
         }
@@ -418,45 +418,230 @@ void calculator::setDifficultyInStats(QString level, QString reason)
     ui->label_difficulty_2->setText(difficulty_full);
 }
 
+//TEXT
+QString calculator::GetVisualTextFromSelectedInfo()
+{
+    QString full_text;
 
+    full_text = GetVisualHeader();
+    full_text += "<br>";
+    if(isActionHasSuccessCheck(GetCurrentActionID()))
+    {
+        full_text += GetVisualSuccessCheck();
+        full_text += "<br><br>";
+        full_text += "Szansa na sukces przy: &lt;";
+        full_text += QString::number(successTreshold);
+        full_text += "%";
+        full_text += "<br>";
+        full_text += GetVisualCriticalCheck();
+
+        full_text += "<br><br>";
+        full_text += "[dice]";
+        full_text += GetDiceTypeForActionID(GetCurrentActionID());
+        full_text += "[/dice]";
+
+        full_text += "<br><br>";
+        full_text += GetVisualCalculationSteps();
+    }
+
+    return full_text;
+}
+
+QString calculator::GetVisualHeader()
+{
+    QString header;
+    QString player = "<font color=#FF8000> " + selectedPlayerName + "</font>";
+    QString action = "<font color=#0080FF> [" + selectedActionName.toUpper() + "]</font>";
+    QString cost = "<font color=#0080FF> [" + selectedActionCostName + "]</font>";
+    QString target = "";
+    if(isActionNeedTarget(GetCurrentActionID()))
+        target = "<font color=#FF0000> [CEL: " + selectedTargetName + "]</font>";
+
+    header = player + action + cost + target;
+    return header;
+}
+
+QString calculator::GetVisualSuccessCheck()
+{
+    int currentActionID = GetCurrentActionID();
+
+    if(isActionHasSuccessCheck(currentActionID))
+    {
+        QString success;
+        success.append(QString::number(GetBaseSuccessTreshold(currentActionID)));
+
+        if(isActionWeaponRelated(currentActionID))
+        {
+            success.append(" + ");
+            success.append(QString::number(GetWeaponAccFromWeaponID(selectedActionItemID)));
+            success.append(" [Celność]");
+
+            if(GetPlayersArmorWpnAccModifier(selectedPlayerID) != 0)
+            {
+                success.append(" + ");
+                success.append(QString::number(GetPlayersArmorWpnAccModifier(selectedPlayerID)));
+                success.append(" [Pancerz]");
+            }
+        }
+        else if(isActionMeeleeRelated(currentActionID))
+        {
+            success.append(" + ");
+            success.append(QString::number(GetOmnibladeAccFromOmnibladeID(GetPlayersOmnibladeID(selectedPlayerID))));
+            success.append(" [Celność omni-ostrza]");
+        }
+
+        else if(isActionSkillRelated(currentActionID) || isActionAmmoRelated(currentActionID))
+        {
+            if(GetPlayersArmorSkillAccModifier(selectedPlayerID) != 0)
+            {
+                success.append(" + ");
+                success.append(QString::number(GetPlayersArmorSkillAccModifier(selectedPlayerID)));
+                success.append(" [Pancerz]");
+            }
+        }
+
+        success.append(" + ");
+        success.append(QString::number(GetDifficultyModifierFromValue(GetFinalDifficultyValueForActionID(currentActionID))));
+        success.append(" [Poziom ");
+        success.append(GetDifficultyNameFromValue(GetFinalDifficultyValueForActionID(currentActionID)));
+        success.append("]");
+
+        success.append(" = ");
+        success.append(QString::number(successTreshold));
+        success.append("%");
+        return success;
+    }
+}
+
+QString calculator::GetVisualCriticalCheck()
+{
+    QString crit = "Trafienie krytyczne przy: &#60;";
+    crit.append(QString::number(criticalTreshold));
+    crit.append("%");
+    return crit;
+}
+
+QString calculator::GetVisualCalculationSteps()
+{
+    QString text = "<font color=#8040BF>[fabuleoff]</font><br>";
+
+    if(ItemAndDifficulty.size() > 0 || AdditionalItemAndDifficulty.size() > 0)
+    {
+        text += "Poziom trudności:";
+        text += "<br>";
+        text += "Bazowo: ";
+        text += difficulty_level_name + " [";
+        text += difficulty_reason + "]";
+
+        for(int i=0;i<ItemAndDifficulty.size();i++)
+        {
+            text += "<br>";
+            text += QString::number(ItemAndDifficulty.at(i).value) + " [" + ItemAndDifficulty.at(i).name + "]";
+        }
+
+        for(int i=0;i<AdditionalItemAndDifficulty.size();i++)
+        {
+            text += "<br>";
+            text += QString::number(AdditionalItemAndDifficulty.at(i).value) + " [" + AdditionalItemAndDifficulty.at(i).name + "]";
+        }
+
+        text += "<br><br>";
+    }
+
+    if(ItemAndAccuracy.size() > 0)
+    {
+        text += "Premia do trafienia:";
+
+        for(int i=0;i<ItemAndAccuracy.size();i++)
+        {
+            text += "<br>";
+            text += QString::number(ItemAndAccuracy.at(i).value) + " [" + ItemAndAccuracy.at(i).name + "]";
+        }
+        text += "<br><br>";
+    }
+
+    if(ItemAndCritical.size() > 0)
+    {
+        text += "Premia do szansy na trafienie krytyczne:";
+
+        for(int i=0;i<ItemAndCritical.size();i++)
+        {
+            text += "<br>";
+            text += QString::number(ItemAndCritical.at(i).value) + " [" + ItemAndCritical.at(i).name + "]";
+        }
+        text += "<br><br>";
+    }
+
+    if(ItemAndActionCost.size() > 0)
+    {
+        text += "Zmiana kosztu akcji:";
+
+        for(int i=0;i<ItemAndActionCost.size();i++)
+        {
+            text += "<br>";
+            text += QString::number(ItemAndActionCost.at(i).value) + " [" + ItemAndActionCost.at(i).name + "]";
+        }
+        text += "<br><br>";
+    }
+    return text;
+}
+
+void calculator::setVisualTextToWidget(QString text)
+{
+    ui->textEdit_turn_1->setText(text);
+}
 
 //CALCULATION
 void calculator::CalculateSuccessTresholdForActionID(int actionID)
 {
 
     int success = GetBaseSuccessTreshold(actionID);
-    int difficulty = GetFinalDifficultyValueForActionID(actionID);
+    int difficulty = GetDifficultyModifierFromValue(GetFinalDifficultyValueForActionID(actionID));
+    int armor = GetActionAccModifierForActionIDandPlayerID(actionID,selectedPlayerID);
+    int weapon_acc = 0;
+    if(isActionWeaponRelated(actionID))
+        weapon_acc = GetWeaponAccFromWeaponID(selectedActionItemID);
+    else if(isActionMeeleeRelated(actionID))
+        weapon_acc = GetOmnibladeAccFromOmnibladeID(GetPlayersOmnibladeID(selectedPlayerID));
 
-    successTreshold = success + GetSumOfAccModifiers() + difficulty;
-    qDebug() << successTreshold;
+    int treshold = success + weapon_acc + difficulty + armor;
+    if(treshold > 90)
+        treshold = 90;
+    else if(treshold < 0)
+        treshold = 0;
+    setSuccessTreshold(treshold);
+}
+
+void calculator::CalculateCriticalTresholdForActionID(int actionID)
+{
+    int base = 5;
+    int crit_sum = base + GetPlayersArmorCriticalChanceModifier(selectedPlayerID);
+
+    setCriticalTreshold(crit_sum);
+
 }
 
 int calculator::GetBaseSuccessTreshold(int actionID)
 {
     int success;
-    if(actionID > -1 && actionID < 5) // Get base success for weapons (base weapon + weapon acc + armor modifiers)
+    if(isActionWeaponRelated(actionID)) // Get base success for weapons
     {
-        success = 50 + GetWeaponAccFromWeaponID(selectedActionItemID) + GetPlayersArmorWpnAccModifier(selectedPlayerID);
-        setSuccessTreshold(success);
+        success = 50;
     }
-    else if(actionID == 7 || actionID == 18) // Get base success for skills (base skill mastery + armor modifiers)
+    else if(isActionSkillRelated(actionID)) // Get base success for skills
     {
         if (!selectedActionItemName.contains(GetPlayerSpecializationSkill(selectedPlayerID)))
-            success = GetPlayerSkillMastery(selectedPlayerID,GetSkillTypeFromSkillID(selectedActionItemID)) + GetPlayersArmorSkillAccModifier(selectedPlayerID);
+            success = GetPlayerSkillMastery(selectedPlayerID,GetSkillTypeFromSkillID(selectedActionItemID));
         else
-            success = GetPlayerSkillMastery(selectedPlayerID,"Specjalizacja") + GetPlayersArmorSkillAccModifier(selectedPlayerID);
-
-        setSuccessTreshold(success);
+            success = GetPlayerSkillMastery(selectedPlayerID,"Specjalizacja");
     }
-    else if(actionID > 9 && actionID < 13) // Get base success for omniblades (base of player evasiveness + weapon acc)
+    else if(isActionMeeleeRelated(actionID)) // Get base success for omniblades
     {
-        success = GetPlayerEvasiveness(selectedTargetID) + GetOmnibladeAccFromOmnibladeID(selectedActionItemID);
-        setSuccessTreshold(success);
+        success = GetPlayerEvasiveness(selectedTargetID);
     }
-    else if(actionID == 19) // // Get base success for special ammo activation (base battle mastery + armor modifiers)
+    else if(isActionAmmoRelated(actionID)) // // Get base success for special ammo activation
     {
-        success = GetPlayerSkillMastery(selectedPlayerID,"Bojowe") + GetPlayersArmorSkillAccModifier(selectedPlayerID);
-        setSuccessTreshold(success);
+        success = GetPlayerSkillMastery(selectedPlayerID,"Bojowe");
     }
     else
     {
@@ -468,9 +653,18 @@ int calculator::GetBaseSuccessTreshold(int actionID)
 
 int calculator::GetSumOfAccModifiers()
 {
+    AdditionalItemAndDifficulty.clear();
     int acc_sum = 0;
     for(int i=0;i<ui->tableWidget_AccMod->rowCount();i++)
-        acc_sum += ui->tableWidget_AccMod->item(i,1)->text().toInt();
+    {
+        QSpinBox *spinbox = qobject_cast<QSpinBox*>(ui->tableWidget_AccMod->cellWidget(i,1));
+        acc_sum += spinbox->value();
+
+        C_ItemModificator item;
+        item.name = ui->tableWidget_AccMod->item(i,0)->text();
+        item.value = spinbox->value();
+        AdditionalItemAndDifficulty.append(item);
+    }
     return acc_sum;
 }
 
@@ -478,7 +672,10 @@ int calculator::GetSumOfDmgModifiers()
 {
     int dmg_sum = 0;
     for(int i=0;i<ui->tableWidget_DmgMod->rowCount();i++)
-        dmg_sum += ui->tableWidget_DmgMod->item(i,1)->text().toInt();
+    {
+        QSpinBox *spinbox = qobject_cast<QSpinBox*>(ui->tableWidget_DmgMod->cellWidget(i,1));
+        dmg_sum += spinbox->value();
+    }
     return dmg_sum;
 }
 
@@ -525,19 +722,19 @@ int calculator::GetFinalDifficultyValueForActionID(int actionID)
 {
     int difficulty_value = GetDifficultyValueFromName(difficulty_level_name);
 
-    if(actionID > -1 && actionID < 5) // Weapons
+    if(isActionWeaponRelated(actionID)) // Weapons
     {
         difficulty_value += GetPlayersArmorWpnDiffLevelModifier(selectedPlayerID);
     }
-    else if(actionID == 7 || actionID == 18) // Skills
+    else if(isActionSkillRelated(actionID)) // Skills
     {
         difficulty_value += GetPlayersArmorSkillDiffLevelModifier(selectedPlayerID);
     }
-    else if(actionID > 9 && actionID < 13) // Meelee (base of player evasiveness + weapon acc)
+    else if(isActionMeeleeRelated(actionID)) // Meelee (base of player evasiveness + weapon acc)
     {
         difficulty_value += GetPlayersArmorMeeleeDiffLevelModifier(selectedPlayerID);
     }
-    else if(actionID == 19) // Ammo
+    else if(isActionAmmoRelated(actionID)) // Ammo
     {
         difficulty_value += GetPlayersArmorSkillDiffLevelModifier(selectedPlayerID);
     }
@@ -546,13 +743,66 @@ int calculator::GetFinalDifficultyValueForActionID(int actionID)
         difficulty_value = difficulty_value;
     }
 
+    difficulty_value += GetSumOfAccModifiers();
+
     if(difficulty_value < 1)
         difficulty_value = 1;
     else if(difficulty_value > 6)
         difficulty_value = 6;
 
-    return GetDifficultyModifierFromValue(difficulty_value);
+    return difficulty_value;
 
+}
+
+QString calculator::GetDifficultyNameFromValue(int val)
+{
+    if(val == 1)
+        return "Bardzo łatwy";
+    else if(val == 2)
+        return "Łatwy";
+    else if(val == 3)
+        return "Normalny";
+    else if(val == 4)
+        return "Trudny";
+    else if(val == 5)
+        return "Bardzo trudny";
+    else if(val == 6)
+        return "Niemożliwy";
+    else
+        return "Nieznany";
+}
+
+QString calculator::GetDiceTypeForActionID(int actionID)
+{
+    if(actionID == 1 || actionID == 2)
+        return "4d100";
+    else
+        return "1d100";
+}
+
+bool calculator::CheckForWarnings()
+{
+    //Player Don't Have Enough Ammo
+    if(isActionWeaponRelated(GetCurrentActionID()) && GetAmmoLeftInPlayersWeapon(selectedPlayerID,selectedActionItemID) == 0)
+    {
+        QString warning = selectedPlayerName + " nie posiada pocisków w magazynku " + selectedActionItemName + "!";
+        PopUpWarning(warning);
+        return false;
+    }
+    return true;
+}
+
+void calculator::PopUpWarning(QString text)
+{
+    dialogbox_warning_generic *box = new dialogbox_warning_generic();
+    box->setAttribute(Qt::WA_DeleteOnClose);
+    box->setWarningLabel(text);
+    box->show();
+}
+
+void calculator::setCriticalTreshold(int treshold)
+{
+    criticalTreshold = treshold;
 }
 
 //CUSTOM SLOTS
@@ -576,8 +826,8 @@ void calculator::on_pushButton_AccMod_add_clicked()
     ui->tableWidget_AccMod->setItem(ui->tableWidget_AccMod->rowCount()-1,1,new QTableWidgetItem(5));
 
     QSpinBox *spinbox = new QSpinBox(this);
-    spinbox->setMinimum(-100);
-    spinbox->setMaximum(100);
+    spinbox->setMinimum(-5);
+    spinbox->setMaximum(5);
     ui->tableWidget_AccMod->setCellWidget(ui->tableWidget_AccMod->rowCount()-1,1,spinbox);
 }
 
@@ -646,11 +896,30 @@ void calculator::on_comboBox_select_action_activated(int index)
         setActionNameInStats(selectedActionName);
     }
 
+    if(isActionNeedTarget(currentActionID))
+        ui->comboBox_select_target->setEnabled(true);
+    else
+        ui->comboBox_select_target->setEnabled(false);
+
+    if(isActionNeedDifficultyCheck(currentActionID))
+        ui->comboBox_select_difficultylevel->setEnabled(true);
+    else
+        ui->comboBox_select_difficultylevel->setEnabled(false);
+
 }
 
 void calculator::on_pushButton_calculate_clicked()
 {
-    CalculateSuccessTresholdForActionID(GetCurrentActionID());
+    if(CheckForWarnings())
+    {
+        CalculateSuccessTresholdForActionID(GetCurrentActionID());
+        CalculateCriticalTresholdForActionID(GetCurrentActionID());
+        setVisualTextToWidget(GetVisualTextFromSelectedInfo());
+    }
+
+    ItemAndAccuracy.clear();
+    ItemAndDifficulty.clear();
+    ItemAndCritical.clear();
 }
 
 void calculator::on_comboBox_select_target_activated(int index)

@@ -57,9 +57,8 @@ int calculator::GetPlayerSkillMastery(int playerID, QString skillType)
             return Players.at(i).MasteryBiotic;
         else if(Players.at(i).PlayerID == playerID && skillType == "Specjalizacja")
             return Players.at(i).MasterySpec;
-        else
-            return 0;
     }
+    return 0;
 }
 
 QString calculator::GetPlayerSpecializationSkill(int playerID)
@@ -73,12 +72,20 @@ QString calculator::GetPlayerSpecializationSkill(int playerID)
 
 int calculator::GetPlayersArmorCostReduction(int playerID)
 {
+    ItemAndActionCost.clear();
     int cost_red = 0;
     for(int i=0;i<PlayerArmors.size();i++)
         if(PlayerArmors.at(i).PlayerID == playerID)
             for(int j=0;j<Armors.size();j++)
-                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID)
+                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID && Armors.at(j).ActionSkillCost != 0)
+                {
+                    C_ItemModificator item;
+                    item.name = Armors.at(j).ArmorName;
+                    item.value = Armors.at(j).ActionSkillCost;
+                    ItemAndActionCost.append(item);
+
                     cost_red += Armors.at(j).ActionSkillCost;
+                }
     return cost_red;
 }
 
@@ -117,44 +124,104 @@ int calculator::GetPlayersArmorWpnAccModifier(int playerID)
 
 int calculator::GetPlayersArmorWpnDiffLevelModifier(int playerID)
 {
+    ItemAndDifficulty.clear();
     int mod = 0;
     for(int i=0;i<PlayerArmors.size();i++)
         if(PlayerArmors.at(i).PlayerID == playerID)
             for(int j=0;j<Armors.size();j++)
-                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID)
+                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID && Armors.at(j).WpnLevelDifficulty != 0)
+                {
+                    C_ItemModificator item;
+                    item.name = Armors.at(j).ArmorName;
+                    item.value = Armors.at(j).WpnLevelDifficulty;
+                    ItemAndDifficulty.append(item);
+
                     mod += Armors.at(j).WpnLevelDifficulty;
+                }
     return mod;
 }
 
 int calculator::GetPlayersArmorSkillAccModifier(int playerID)
 {
+    ItemAndAccuracy.clear();
     int mod = 0;
     for(int i=0;i<PlayerArmors.size();i++)
         if(PlayerArmors.at(i).PlayerID == playerID)
             for(int j=0;j<Armors.size();j++)
-                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID)
+                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID && Armors.at(j).AdditionalSkillAcc != 0)
+                {
+                    C_ItemModificator item;
+                    item.name = Armors.at(j).ArmorName;
+                    item.value = Armors.at(j).AdditionalSkillAcc;
+                    ItemAndAccuracy.append(item);
+
                     mod += Armors.at(j).AdditionalSkillAcc;
+                }
     return mod;
 }
 
 int calculator::GetPlayersArmorSkillDiffLevelModifier(int playerID)
 {
+    ItemAndDifficulty.clear();
     int mod = 0;
     for(int i=0;i<PlayerArmors.size();i++)
         if(PlayerArmors.at(i).PlayerID == playerID)
             for(int j=0;j<Armors.size();j++)
-                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID)
+                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID && Armors.at(j).SkillLevelDifficulty != 0)
+                {
+                    C_ItemModificator item;
+                    item.name = Armors.at(j).ArmorName;
+                    item.value = Armors.at(j).SkillLevelDifficulty;
+                    ItemAndDifficulty.append(item);
+
                     mod += Armors.at(j).SkillLevelDifficulty;
+                }
     return mod;
 }
 
 int calculator::GetPlayersArmorMeeleeDiffLevelModifier(int playerID)
 {
+    ItemAndDifficulty.clear();
     int mod = 0;
     for(int i=0;i<PlayerArmors.size();i++)
         if(PlayerArmors.at(i).PlayerID == playerID)
             for(int j=0;j<Armors.size();j++)
-                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID)
+                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID && Armors.at(j).MeeleeLevelDifficulty != 0)
+                {
+                    C_ItemModificator item;
+                    item.name = Armors.at(j).ArmorName;
+                    item.value = Armors.at(j).MeeleeLevelDifficulty;
+                    ItemAndDifficulty.append(item);
+
                     mod += Armors.at(j).MeeleeLevelDifficulty;
+                }
+    return mod;
+}
+
+int calculator::GetPlayersOmnibladeID(int playerID)
+{
+    int ID = 9999;
+    for(int i=0;i<PlayerOmniblades.size();i++)
+        if(PlayerOmniblades.at(i).PlayerID == playerID)
+            ID = PlayerOmniblades.at(i).OmnibladeID;
+    return ID;
+}
+
+int calculator::GetPlayersArmorCriticalChanceModifier(int playerID)
+{
+    ItemAndCritical.clear();
+    int mod = 0;
+    for(int i=0;i<PlayerArmors.size();i++)
+        if(PlayerArmors.at(i).PlayerID == playerID)
+            for(int j=0;j<Armors.size();j++)
+                if(Armors.at(j).ArmorID == PlayerArmors.at(i).ArmorID && Armors.at(j).AdditionalCritChance != 0)
+                {
+                    C_ItemModificator item;
+                    item.name = Armors.at(j).ArmorName;
+                    item.value = Armors.at(j).AdditionalCritChance;
+                    ItemAndCritical.append(item);
+
+                    mod += Armors.at(j).AdditionalCritChance;
+                }
     return mod;
 }

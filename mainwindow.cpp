@@ -195,8 +195,10 @@ void MainWindow::DeletePlayerFromModel(int playerID)
 
 void MainWindow::SaveAll()
 {
-    int playerID = GetActivePlayerID();;
+    int playerID = GetActivePlayerID();
     SaveGeneralTab(playerID);
+    SaveSkillsTab(playerID);
+
 
     ReadWriteData csv;
     if(!csv.WritePlayersFromVectorToFile(Players,"Data/players.csv"))
@@ -257,15 +259,15 @@ void MainWindow::on_pushButton_skill_remove_clicked()
 
 void MainWindow::on_pushButton_calculate_skills_clicked()
 {
-    SaveSkillsTabToVector(0);
-    CalculatePlayerMasteries(0);
-    LoadPlayerMasteries(0);
-    LoadPlayerSpecialization(0);
+    SaveSkillsTabToVector(GetActivePlayerID());
+    CalculatePlayerMasteries(GetActivePlayerID());
+    LoadPlayerMasteries(GetActivePlayerID());
+    LoadPlayerSpecialization(GetActivePlayerID());
 }
 
 void MainWindow::on_comboBox_specialization_activated(const QString selectedItem)
 {
-    int playerIndex = GetPlayerIndex(0);
+    int playerIndex = GetPlayerIndex(GetActivePlayerID());
 
     if(PlayerHasSkill(playerIndex,selectedItem))
         Players[playerIndex].SpecializationSkill = selectedItem;

@@ -42,3 +42,10 @@ int calculator::GetOmnibladeAccFromOmnibladeID(int id)
             WeaponAcc = Omniblades.at(i).Acc;
     return WeaponAcc;
 }
+
+int calculator::GetAmmoLeftInPlayersWeapon(int playerID, int weaponID)
+{
+    for(int i=0;i<PlayerWeapons.size();i++)
+        if(PlayerWeapons.at(i).PlayerID == playerID && PlayerWeapons.at(i).WeaponID == weaponID)
+            return PlayerWeapons.at(i).AmmoLeft;
+}

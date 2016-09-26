@@ -8,8 +8,11 @@
 #include "mainwindow.h"
 #include <QString>
 #include "Headers/Actions/actions.h"
+#include "Headers/ItemModificator/itemmodificator.h"
+
 #include <dialogbox_difficultyreason.h>
 #include <dialogbox_action.h>
+#include <dialogbox_warning_generic.h>
 
 namespace Ui {
 class calculator;
@@ -47,6 +50,12 @@ public:
     QVector<C_ActiveEffect> ActiveEffect;
     QVector<C_Actions> Actions;
 
+    QVector<C_ItemModificator> ItemAndDifficulty;
+    QVector<C_ItemModificator> AdditionalItemAndDifficulty;
+    QVector<C_ItemModificator> ItemAndAccuracy;
+    QVector<C_ItemModificator> ItemAndCritical;
+    QVector<C_ItemModificator> ItemAndActionCost;
+
     QStandardItemModel *tableModel;
     QStandardItemModel *comboboxPlayersModel;
     QStandardItemModel *comboboxTargetsModel;
@@ -67,6 +76,7 @@ public:
     QString difficulty_reason;
 
     int successTreshold;
+    int criticalTreshold;
 
 
 private slots:
@@ -111,6 +121,8 @@ private:
     int GetPlayerSkillMastery(int playerID, QString skillType);
     QString GetPlayerSpecializationSkill(int playerID);
     int GetPlayerEvasiveness(int playerID);
+    int GetPlayersOmnibladeID(int playerID);
+    int GetPlayersArmorCriticalChanceModifier(int playerID);
 
 
     //Actions related
@@ -132,12 +144,22 @@ private:
     int GetActionCostFromActionID(int ID);
     int GetActionCostAfterCalculations(int actionID);
     QString GetActionTypeFromActionCost(int cost);
+    int GetActionAccModifierForActionIDandPlayerID(int actionID, int playerID);
+
+    bool isActionHasSuccessCheck(int actionID);
+    bool isActionWeaponRelated(int actionID);
+    bool isActionSkillRelated(int actionID);
+    bool isActionAmmoRelated(int actionID);
+    bool isActionMeeleeRelated(int actionID);
+    bool isActionNeedTarget(int actionID);
+    bool isActionNeedDifficultyCheck(int actionID);
 
     //Difficulty related
     void setDifficultyInStats(QString level, QString reason);
     int GetDifficultyValueFromName(QString diff_name);
     int GetDifficultyModifierFromValue(int val);
     int GetFinalDifficultyValueForActionID(int actionID);
+    QString GetDifficultyNameFromValue(int val);
 
     //
 
@@ -148,6 +170,7 @@ private:
     QString GetWeaponNameFromWeaponID(int ID);
     int GetWeaponAccFromWeaponID(int id);
     int GetOmnibladeAccFromOmnibladeID(int id);
+    int GetAmmoLeftInPlayersWeapon(int playerID, int weaponID);
 
     //GET
     QString GetEffectNameFromEffectID(int ID);
@@ -159,13 +182,30 @@ private:
     QString GetSkillLevelFromSkillID(int ID);
     int GetSkillCostFromSkillID(int ID);
 
+    //Text related
+    void setVisualTextToWidget(QString text);
+    QString GetVisualTextFromSelectedInfo();
+    QString GetVisualHeader();
+    QString GetVisualSuccessCheck();
+    QString GetVisualCriticalCheck();
+    QString GetVisualCalculationSteps();
+
+    //Critical related
 
     //Calculations related
     void setSuccessTreshold(int treshold);
+    void setCriticalTreshold(int treshold);
     void CalculateSuccessTresholdForActionID(int actionID);
+    void CalculateCriticalTresholdForActionID(int actionID);
+    void PopUpWarning(QString text);
+    bool CheckForWarnings();
+
     int GetSumOfAccModifiers();
     int GetSumOfDmgModifiers();
     int GetBaseSuccessTreshold(int actionID);
+    QString GetDiceTypeForActionID(int actionID);
+
+
 };
 
 #endif // CALCULATOR_H

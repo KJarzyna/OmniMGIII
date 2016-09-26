@@ -48,6 +48,7 @@ SOURCES += main.cpp\
     Sources/ClassDefinitions/weapon.cpp \
     Sources/ClassDefinitions/weaponlist.cpp \
     Sources/ClassDefinitions/wpnmodlist.cpp \
+    Sources/ClassDefinitions/itemmodificator.cpp \
     dialogbox_activeeffect.cpp \
     Sources/ClassDefinitions/activeeffect.cpp \
     Sources/ClassDefinitions/playeractiveeffect.cpp \
@@ -59,7 +60,8 @@ SOURCES += main.cpp\
     calculator-actions.cpp \
     calculator-weapons.cpp \
     calculator-skills.cpp \
-    calculator-player.cpp
+    calculator-player.cpp \
+    dialogbox_warning_generic.cpp
 
 HEADERS  += mainwindow.h \
     Headers/Actions/actions.h \
@@ -88,21 +90,23 @@ HEADERS  += mainwindow.h \
     Headers/Weapon/weapon.h \
     Headers/Weapon/weaponlist.h \
     Headers/Weapon/wpnmodlist.h \
+    Headers/ItemModificator/itemmodificator.h \
     dialogbox_activeeffect.h \
     Headers/ActiveEffects/activeeffect.h \
     Headers/Player/playeractiveeffect.h \
     dialogbox_save_module.h \
     calculator.h \
     dialogbox_difficultyreason.h \
-    dialogbox_action.h
-
+    dialogbox_action.h \
+    dialogbox_warning_generic.h
 
 FORMS    += mainwindow.ui \
     dialogbox_activeeffect.ui \
     dialogbox_save_module.ui \
     calculator.ui \
     dialogbox_difficultyreason.ui \
-    dialogbox_action.ui
+    dialogbox_action.ui \
+    dialogbox_warning_generic.ui
 
 RESOURCES += \
     resources.qrc
