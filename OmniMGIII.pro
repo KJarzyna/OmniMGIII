@@ -61,7 +61,8 @@ SOURCES += main.cpp\
     calculator-weapons.cpp \
     calculator-skills.cpp \
     calculator-player.cpp \
-    dialogbox_warning_generic.cpp
+    dialogbox_warning_generic.cpp \
+    dialogbox_postcalculation.cpp
 
 HEADERS  += mainwindow.h \
     Headers/Actions/actions.h \
@@ -98,7 +99,8 @@ HEADERS  += mainwindow.h \
     calculator.h \
     dialogbox_difficultyreason.h \
     dialogbox_action.h \
-    dialogbox_warning_generic.h
+    dialogbox_warning_generic.h \
+    dialogbox_postcalculation.h
 
 FORMS    += mainwindow.ui \
     dialogbox_activeeffect.ui \
@@ -106,21 +108,14 @@ FORMS    += mainwindow.ui \
     calculator.ui \
     dialogbox_difficultyreason.ui \
     dialogbox_action.ui \
-    dialogbox_warning_generic.ui
+    dialogbox_warning_generic.ui \
+    dialogbox_postcalculation.ui
 
 RESOURCES += \
     resources.qrc
 RC_ICONS = mainicon.ico
 
 DISTFILES += \
-    Data/armors.xlsx \
-    Data/generators.xlsx \
-    Data/player_actions.xlsx \
-    Data/player_equipement.xlsx \
-    Data/players.xlsx \
-    Data/possible_basic_actions.xlsx \
-    Data/skills.xlsx \
-    Data/weapons.xlsx \
     Resources/checkbox.png \
     Resources/down_arrow.png \
     Resources/handle.png \

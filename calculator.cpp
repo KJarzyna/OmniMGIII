@@ -418,6 +418,40 @@ void calculator::setDifficultyInStats(QString level, QString reason)
     ui->label_difficulty_2->setText(difficulty_full);
 }
 
+void calculator::setEnableAfterFirstCalculations(bool status)
+{
+    ui->pushButton_calculate->setEnabled(!status);
+    ui->textEdit_turn_1->setEnabled(status);
+    ui->pushButton_copy->setEnabled(status);
+    ui->pushButton_continue_calculations->setEnabled(status);
+}
+
+void calculator::setEnableAfterSecondCalculations(bool status)
+{
+    ui->pushButton_continue_calculations->setEnabled(!status);
+    ui->textEdit_turn_2->setEnabled(status);
+    ui->pushButton_copy_2->setEnabled(status);
+    ui->pushButton_approve->setEnabled(status);
+    ui->pushButton_disapprove->setEnabled(status);
+}
+
+void calculator::setEnableAllInput(bool status)
+{
+    ui->comboBox_select_player->setEnabled(status);
+    ui->comboBox_select_action->setEnabled(status);
+    ui->comboBox_select_target->setEnabled(status);
+    ui->comboBox_select_difficultylevel->setEnabled(status);
+
+    ui->tableWidget_AccMod->clearSelection();
+    ui->tableWidget_AccMod->setEnabled(status);
+    ui->tableWidget_DmgMod->clearSelection();
+    ui->tableWidget_DmgMod->setEnabled(status);
+    ui->pushButton_AccMod_add->setEnabled(status);
+    ui->pushButton_AccMod_remove->setEnabled(status);
+    ui->pushButton_DmgMod_add->setEnabled(status);
+    ui->pushButton_DmgMod_add_2->setEnabled(status);
+}
+
 //TEXT
 QString calculator::GetVisualTextFromSelectedInfo()
 {
@@ -434,15 +468,54 @@ QString calculator::GetVisualTextFromSelectedInfo()
         full_text += "%";
         full_text += "<br>";
         full_text += GetVisualCriticalCheck();
+        for(int i=0;i<GetVisualEffectCheck().size();i++)
+            full_text += GetVisualEffectCheck().at(i);
 
         full_text += "<br><br>";
         full_text += "[dice]";
         full_text += GetDiceTypeForActionID(GetCurrentActionID());
         full_text += "[/dice]";
 
+        //full_text += "<br><br>";
+        //full_text += GetVisualCalculationSteps();
+    }
+
+    return full_text;
+}
+
+QString calculator::GetFinalVisualTextFromSelectedInfo()
+{
+    QString full_text;
+
+    //full_text = GetVisualHeader();
+    //full_text += "<br>";
+    if(isActionHasSuccessCheck(GetCurrentActionID()))
+    {
+//        full_text += GetVisualSuccessCheck();
+//        full_text += "<br><br>";
+//        full_text += "Szansa na sukces przy: &lt;";
+//        full_text += QString::number(successTreshold);
+//        full_text += "%";
+//        full_text += "<br>";
+//        full_text += GetVisualCriticalCheck();
+//        for(int i=0;i<GetVisualEffectCheck().size();i++)
+//            full_text += GetVisualEffectCheck().at(i);
+
+//        full_text += "<br><br>";
+//        full_text += "[dice]";
+//        full_text += GetDiceTypeForActionID(GetCurrentActionID());
+//        full_text += "[/dice]";
+
+//        full_text += "<br><br>";
+        full_text = GetVisualSuccessResult();
+        full_text += "<br>";
+        full_text += GetVisualDamageResult();
+
         full_text += "<br><br>";
         full_text += GetVisualCalculationSteps();
     }
+    else
+        full_text = "Brak innych obliczeń do wykonania.";
 
     return full_text;
 }
@@ -492,6 +565,13 @@ QString calculator::GetVisualSuccessCheck()
 
         else if(isActionSkillRelated(currentActionID) || isActionAmmoRelated(currentActionID))
         {
+            if(GetSkillAccFromSkillID(selectedActionItemID) != 0)
+            {
+                success.append(" + ");
+                success.append(QString::number(GetSkillAccFromSkillID(selectedActionItemID)));
+                success.append(" [Poziom zdolności]");
+            }
+
             if(GetPlayersArmorSkillAccModifier(selectedPlayerID) != 0)
             {
                 success.append(" + ");
@@ -521,9 +601,84 @@ QString calculator::GetVisualCriticalCheck()
     return crit;
 }
 
+QStringList calculator::GetVisualEffectCheck()
+{
+    QStringList chance;
+    if(isActionSkillRelated(GetCurrentActionID()))
+    {
+        if(GetSkillStunChanceFromSkillID(selectedActionItemID) != 0)
+        {
+            QString chance_value = QString::number(GetSkillStunChanceFromSkillID(selectedActionItemID));
+            QString chance_full = "<br>Ogłuszenie przy: &#60;" + chance_value + "%";
+            chance.append(chance_full);
+        }
+        if(GetSkillKnockoutChanceFromSkillID(selectedActionItemID) != 0)
+        {
+            QString chance_value = QString::number(GetSkillKnockoutChanceFromSkillID(selectedActionItemID));
+            QString chance_full = "<br>Powalenie przy: &#60;" + chance_value + "%";
+            chance.append(chance_full);
+        }
+        if(GetSkillChillChanceFromSkillID(selectedActionItemID) != 0)
+        {
+            QString chance_value = QString::number(GetSkillChillChanceFromSkillID(selectedActionItemID));
+            QString chance_full = "<br>Schłodzenie przy: &#60;" + chance_value + "%";
+            chance.append(chance_full);
+        }
+        if(GetSkillFlameChanceFromSkillID(selectedActionItemID) != 0)
+        {
+            QString chance_value = QString::number(GetSkillFlameChanceFromSkillID(selectedActionItemID));
+            QString chance_full = "<br>Podpalenie przy: &#60;" + chance_value + "%";
+            chance.append(chance_full);
+        }
+        if(GetSkillUpliftChanceFromSkillID(selectedActionItemID) != 0)
+        {
+            QString chance_value = QString::number(GetSkillUpliftChanceFromSkillID(selectedActionItemID));
+            QString chance_full = "<br>Podniesienie przy: &#60;" + chance_value + "%";
+            chance.append(chance_full);
+        }
+    }
+
+    return chance;
+}
+
 QString calculator::GetVisualCalculationSteps()
 {
     QString text = "<font color=#8040BF>[fabuleoff]</font><br>";
+
+    if(dice_results.size() > 1)
+    {
+        text += "Obrażenia: ";
+
+        text += QString::number(GetModifiedBaseDamageDealt()) + "*" + QString::number(GetNumberOfSuccess()) + "*0.25";
+        if(isCriticalHit())
+        {
+            text += "*1.3";
+            text += " = " + QString::number(GetFinalDamageDealt()) + "<br>";
+        }
+        else
+            text += " = " + QString::number(GetFinalDamageDealt()) + "<br>";
+
+        for(int i=0;i<ItemAndDamage.size();i++)
+        {
+            text += QString::number(GetBaseDamageDealt()) + " [Obrażenia bazowe]";
+            text += QString::number(ItemAndDamage.at(i).value) + " [" + ItemAndDamage.at(i).name + "]";
+            text += "<br>";
+        }
+
+        text += "<br>";
+    }
+    else if(dice_results.size() == 1 && isCriticalHit())
+    {
+        text += "Obrażenia: ";
+        text += QString::number(GetModifiedBaseDamageDealt()) + "*1.3 = " + QString::number(GetFinalDamageDealt()) + "<br>";
+        for(int i=0;i<ItemAndDamage.size();i++)
+        {
+            text += QString::number(GetBaseDamageDealt()) + " [Obrażenia bazowe]";
+            text += QString::number(ItemAndDamage.at(i).value) + " [" + ItemAndDamage.at(i).name + "]";
+            text += "<br>";
+        }
+        text += "<br>";
+    }
 
     if(ItemAndDifficulty.size() > 0 || AdditionalItemAndDifficulty.size() > 0)
     {
@@ -583,12 +738,77 @@ QString calculator::GetVisualCalculationSteps()
         }
         text += "<br><br>";
     }
+    text += "<font color=#8040BF>[/fabuleoff]</font><br>";
     return text;
+}
+
+QString calculator::GetVisualSuccessResult()
+{
+    QString result;
+    result = "<font color=#00FFFF>Efekt: </font>";
+    if(isActionHasSuccessCheck(GetCurrentActionID()))
+    {
+        if(dice_results.size() == 1)
+        {
+            if(isActionNeedTarget(GetCurrentActionID()) && isCriticalHit())
+                result += "Trafienie krytyczne!";
+            else if(isActionNeedTarget(GetCurrentActionID()) && GetNumberOfSuccess() > 0)
+                result += "Trafienie!";
+            else if(isActionNeedTarget(GetCurrentActionID()) && GetNumberOfSuccess() == 0)
+                result += "Pudło!";
+            else if(!isActionNeedTarget(GetCurrentActionID()) && GetNumberOfSuccess() > 0)
+                result += "Sukces!";
+            else
+                result += "Porażka!";
+        }
+        else if(dice_results.size() == 4)
+        {
+            if(GetNumberOfSuccess() > 0)
+            {
+                result += "Trafienie na ";
+                result += QString::number(GetNumberOfSuccess());
+                result += " kościach!";
+            }
+            if(isCriticalHit())
+                result += " Trafienie krytyczne!";
+        }
+        else
+            result = "";
+    }
+    else
+        result = "";
+
+    return result;
+}
+
+QString calculator::GetVisualDamageResult()
+{
+    QString result;
+    if(dice_results.size() == 1 && isActionNeedTarget(GetCurrentActionID()))
+    {
+        result = "<font color=#00FFFF>Zadane obrażenia: </font>";
+        result += QString::number(GetFinalDamageDealt());
+        return result;
+    }
+    else if(dice_results.size() > 1 && isActionNeedTarget(GetCurrentActionID()))
+    {
+        int damage = GetFinalDamageDealt();
+        result = "<font color=#00FFFF>Zadane obrażenia: </font>";
+        result += QString::number(damage);
+        return result;
+    }
+    else
+        return "";
 }
 
 void calculator::setVisualTextToWidget(QString text)
 {
     ui->textEdit_turn_1->setText(text);
+}
+
+void calculator::setVisualTextToSecondWidget(QString text)
+{
+    ui->textEdit_turn_2->setText(text);
 }
 
 //CALCULATION
@@ -599,12 +819,16 @@ void calculator::CalculateSuccessTresholdForActionID(int actionID)
     int difficulty = GetDifficultyModifierFromValue(GetFinalDifficultyValueForActionID(actionID));
     int armor = GetActionAccModifierForActionIDandPlayerID(actionID,selectedPlayerID);
     int weapon_acc = 0;
+    int skill_acc = 0;
+
     if(isActionWeaponRelated(actionID))
         weapon_acc = GetWeaponAccFromWeaponID(selectedActionItemID);
     else if(isActionMeeleeRelated(actionID))
         weapon_acc = GetOmnibladeAccFromOmnibladeID(GetPlayersOmnibladeID(selectedPlayerID));
+    else if(isActionSkillRelated(actionID) || isActionAmmoRelated(actionID))
+        skill_acc = GetSkillAccFromSkillID(selectedActionItemID);
 
-    int treshold = success + weapon_acc + difficulty + armor;
+    int treshold = success + weapon_acc + difficulty + armor + skill_acc;
     if(treshold > 90)
         treshold = 90;
     else if(treshold < 0)
@@ -805,6 +1029,101 @@ void calculator::setCriticalTreshold(int treshold)
     criticalTreshold = treshold;
 }
 
+
+//CALCULATION PART 2
+void calculator::PopUpDicesQuestion()
+{
+    dialogbox_postcalculation *box = new dialogbox_postcalculation();
+    box->setAttribute(Qt::WA_DeleteOnClose);
+    if(GetCurrentActionID() == 1 || GetCurrentActionID() == 2 )
+        box->InitializeDices(4);
+    else
+        box->InitializeDices(1);
+    box->show();
+    connect(box,SIGNAL(DiceResults(QVector<int>)),this,SLOT(GetDiceResults(QVector<int>)));
+    connect(box,SIGNAL(DialogBoxClosed()),this,SLOT(DiceDialogBoxClosed()));
+}
+
+void calculator::DiceDialogBoxClosed()
+{
+    setEnableAfterSecondCalculations(true);
+    setVisualTextToSecondWidget(GetFinalVisualTextFromSelectedInfo());
+}
+
+int calculator::GetNumberOfSuccess()
+{
+    int numOfsuccess = 0;
+    for(int i=0;i<dice_results.size();i++)
+        if(dice_results.at(i) < successTreshold)
+            numOfsuccess++;
+   return numOfsuccess;
+}
+
+bool calculator::isCriticalHit()
+{
+    //check for Critical Hit on number of dices (numDices)
+
+    if(GetNumberOfSuccess() > 0)
+    {
+        if(dice_results.at(0) < criticalTreshold)
+            return true;
+        return false;
+    }
+    else
+        return false;
+}
+
+int calculator::GetBaseDamageDealt()
+{
+    int damage = 0;
+    if(isActionWeaponRelated(GetCurrentActionID()))
+    {
+        damage = GetWeaponBaseDamageFromWeaponID(selectedActionItemID);
+
+    }
+    else if(isActionSkillRelated(GetCurrentActionID()))
+    {
+        if(isPlayerHasShield(selectedTargetID))
+            damage = GetSkillDamageToShieldFromSkillID(selectedActionItemID);
+        else
+            damage = GetSkillDamageToArmorFromSkillID(selectedActionItemID);
+    }
+    else if(isActionMeeleeRelated(GetCurrentActionID()))
+    {
+        damage = GetOmnibladeDamageFromOmnibladeID(selectedActionItemID);
+    }
+
+    return damage;
+
+}
+
+int calculator::GetModifiedBaseDamageDealt()
+{
+    //Base damage modified by armor/special weapon effects/special ammo
+    int damage = GetBaseDamageDealt();
+
+    if(isActionWeaponRelated(GetCurrentActionID()) && !isPlayerHasShield(selectedTargetID))
+        GetWeaponDamageToArmorFromWeaponID(selectedActionItemID);
+    else if (isActionWeaponRelated(GetCurrentActionID()) && isPlayerHasShield(selectedTargetID))
+        GetWeaponDamageToShieldFromWeaponID(selectedActionItemID);
+
+    for(int i=0;i<ItemAndDamage.size();i++)
+        damage += ItemAndDamage.at(i).value;
+    return damage;
+}
+
+int calculator::GetFinalDamageDealt()
+{
+    int damage = GetModifiedBaseDamageDealt();
+
+    if(dice_results.size()>1)
+        damage = floor(damage*GetNumberOfSuccess()*0.25);
+
+    if(isCriticalHit())
+        damage = floor(damage*1.3);
+    return damage;
+}
+
 //CUSTOM SLOTS
 void calculator::GetDifficultyReasonSlot(QString reason)
 {
@@ -816,6 +1135,13 @@ void calculator::GetSelectedActionItemSlot(int id, QString name)
 {
     selectedActionItemID = id;
     selectedActionItemName = name;
+}
+
+void calculator::GetDiceResults(QVector<int> dices)
+{
+    dice_results.clear();
+    for(int i=0;i<dices.size();i++)
+        dice_results.append(dices.at(i));
 }
 
 //UI SLOTS
@@ -914,16 +1240,50 @@ void calculator::on_pushButton_calculate_clicked()
     {
         CalculateSuccessTresholdForActionID(GetCurrentActionID());
         CalculateCriticalTresholdForActionID(GetCurrentActionID());
+        setEnableAfterFirstCalculations(true);
+        setEnableAllInput(false);
         setVisualTextToWidget(GetVisualTextFromSelectedInfo());
     }
-
-    ItemAndAccuracy.clear();
-    ItemAndDifficulty.clear();
-    ItemAndCritical.clear();
 }
 
 void calculator::on_comboBox_select_target_activated(int index)
 {
     selectedTargetName = comboboxTargetsModel->item(index,0)->text();
     selectedTargetID = comboboxTargetsModel->item(index,1)->text().toInt();
+}
+
+void calculator::on_pushButton_continue_calculations_clicked()
+{
+    int actionID = GetCurrentActionID();
+    if(isActionHasSuccessCheck(actionID))
+        PopUpDicesQuestion();
+
+}
+
+void calculator::on_pushButton_approve_clicked()
+{
+    setEnableAllInput(true);
+    setEnableAfterSecondCalculations(false);
+    setEnableAfterFirstCalculations(false);
+    ui->textEdit_turn_1->clear();
+    ui->textEdit_turn_2->clear();
+
+    dice_results.clear();
+    ItemAndAccuracy.clear();
+    ItemAndDifficulty.clear();
+    ItemAndCritical.clear();
+}
+
+void calculator::on_pushButton_disapprove_clicked()
+{
+    setEnableAllInput(true);
+    setEnableAfterSecondCalculations(false);
+    setEnableAfterFirstCalculations(false);
+    ui->textEdit_turn_1->clear();
+    ui->textEdit_turn_2->clear();
+
+    dice_results.clear();
+    ItemAndAccuracy.clear();
+    ItemAndDifficulty.clear();
+    ItemAndCritical.clear();
 }

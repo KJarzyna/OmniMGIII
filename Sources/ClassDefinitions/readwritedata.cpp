@@ -91,6 +91,7 @@ bool ReadWriteData::ReadSkillsFromFileAndLoadToVector(QString filename, QVector<
                 skill.SelfShieldDrain = cells.at(12).toInt();
                 skill.SkillType = cells.at(13);
                 skill.SkillDescription = cells.at(14);
+                skill.SkillTarget = cells.at(15);
                 vector.append(skill);
             }
 
@@ -1124,7 +1125,7 @@ bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QStrin
     if (CreateFileBackup(filename) && outputFile.remove() && outputFile.open(QIODevice::ReadWrite))
     {
         QTextStream out(&outputFile);
-        line = "SkillID;SkillName;SkillLevel;SkillDmgToArmor;SkillDmgToShield;Cost;Acc;StunChance;KnockoutChance;ChillChance;FlameChance;UpliftChance;SelfShieldDrain;SkillType;SkillDescription";
+        line = "SkillID;SkillName;SkillLevel;SkillDmgToArmor;SkillDmgToShield;Cost;Acc;StunChance;KnockoutChance;ChillChance;FlameChance;UpliftChance;SelfShieldDrain;SkillTarget;SkillType;SkillDescription";
         out << line << endl;
 
         for (int i=0; i<vector.size();i++)
@@ -1159,6 +1160,8 @@ bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QStrin
             line.append(vector.at(i).SkillType);
             line.append(";");
             line.append(vector.at(i).SkillDescription);
+            line.append(";");
+            line.append(vector.at(i).SkillTarget);
             out << line << endl;
         }
 

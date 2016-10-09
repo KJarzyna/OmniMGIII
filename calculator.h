@@ -13,6 +13,7 @@
 #include <dialogbox_difficultyreason.h>
 #include <dialogbox_action.h>
 #include <dialogbox_warning_generic.h>
+#include <dialogbox_postcalculation.h>
 
 namespace Ui {
 class calculator;
@@ -55,6 +56,7 @@ public:
     QVector<C_ItemModificator> ItemAndAccuracy;
     QVector<C_ItemModificator> ItemAndCritical;
     QVector<C_ItemModificator> ItemAndActionCost;
+    QVector<C_ItemModificator> ItemAndDamage;
 
     QStandardItemModel *tableModel;
     QStandardItemModel *comboboxPlayersModel;
@@ -78,11 +80,15 @@ public:
     int successTreshold;
     int criticalTreshold;
 
+    //Damage related
+    QVector<int> dice_results;
 
 private slots:
     void GetDifficultyReasonSlot(QString reason);
     void GetSelectedActionItemSlot(int id, QString name);
     void ActionDialogBoxClosed(bool db_closed);
+    void GetDiceResults(QVector<int> dices);
+    void DiceDialogBoxClosed();
 
     void on_pushButton_AccMod_add_clicked();
     void on_pushButton_AccMod_remove_clicked();
@@ -94,6 +100,12 @@ private slots:
     void on_pushButton_calculate_clicked();
     void on_comboBox_select_target_activated(int index);
 
+    void on_pushButton_continue_calculations_clicked();
+
+    void on_pushButton_approve_clicked();
+
+    void on_pushButton_disapprove_clicked();
+
 private:
     Ui::calculator *ui;
 
@@ -103,6 +115,10 @@ private:
     void InitializeActionsComboBox();
     void InitializeTargetsComboBox();
     void InitializePlayerStats();
+
+    void setEnableAfterFirstCalculations(bool status);
+    void setEnableAfterSecondCalculations(bool status);
+    void setEnableAllInput(bool status);
 
     //Target related
     void RemovePlayerFromTargetModel(int playerID);
@@ -123,6 +139,7 @@ private:
     int GetPlayerEvasiveness(int playerID);
     int GetPlayersOmnibladeID(int playerID);
     int GetPlayersArmorCriticalChanceModifier(int playerID);
+    bool isPlayerHasShield(int playerID);
 
 
     //Actions related
@@ -154,6 +171,7 @@ private:
     bool isActionNeedTarget(int actionID);
     bool isActionNeedDifficultyCheck(int actionID);
 
+
     //Difficulty related
     void setDifficultyInStats(QString level, QString reason);
     int GetDifficultyValueFromName(QString diff_name);
@@ -171,6 +189,10 @@ private:
     int GetWeaponAccFromWeaponID(int id);
     int GetOmnibladeAccFromOmnibladeID(int id);
     int GetAmmoLeftInPlayersWeapon(int playerID, int weaponID);
+    int GetWeaponDamageToArmorFromWeaponID(int ID);
+    int GetWeaponDamageToShieldFromWeaponID(int ID);
+    int GetWeaponBaseDamageFromWeaponID(int ID);
+    int GetOmnibladeDamageFromOmnibladeID(int ID);
 
     //GET
     QString GetEffectNameFromEffectID(int ID);
@@ -180,14 +202,28 @@ private:
     QString GetSkillNameFromSkillID(int ID);
     QString GetSkillTypeFromSkillID(int ID);
     QString GetSkillLevelFromSkillID(int ID);
+    QString GetSkillTargetFromSkillID(int ID);
+    int GetSkillAccFromSkillID(int ID);
     int GetSkillCostFromSkillID(int ID);
+    int GetSkillStunChanceFromSkillID(int ID);
+    int GetSkillKnockoutChanceFromSkillID(int ID);
+    int GetSkillChillChanceFromSkillID(int ID);
+    int GetSkillFlameChanceFromSkillID(int ID);
+    int GetSkillUpliftChanceFromSkillID(int ID);
+    int GetSkillDamageToArmorFromSkillID(int ID);
+    int GetSkillDamageToShieldFromSkillID(int ID);
+
+
 
     //Text related
     void setVisualTextToWidget(QString text);
+    void setVisualTextToSecondWidget(QString text);
     QString GetVisualTextFromSelectedInfo();
+    QString GetFinalVisualTextFromSelectedInfo();
     QString GetVisualHeader();
     QString GetVisualSuccessCheck();
     QString GetVisualCriticalCheck();
+    QStringList GetVisualEffectCheck();
     QString GetVisualCalculationSteps();
 
     //Critical related
@@ -204,6 +240,16 @@ private:
     int GetSumOfDmgModifiers();
     int GetBaseSuccessTreshold(int actionID);
     QString GetDiceTypeForActionID(int actionID);
+
+    //Calculations part 2 related
+    void PopUpDicesQuestion();
+    QString GetVisualSuccessResult();
+    QString GetVisualDamageResult();
+    int GetNumberOfSuccess();
+    int GetBaseDamageDealt();
+    int GetModifiedBaseDamageDealt();
+    int GetFinalDamageDealt();
+    bool isCriticalHit();
 
 
 };

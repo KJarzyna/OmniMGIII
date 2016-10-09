@@ -49,3 +49,54 @@ int calculator::GetAmmoLeftInPlayersWeapon(int playerID, int weaponID)
         if(PlayerWeapons.at(i).PlayerID == playerID && PlayerWeapons.at(i).WeaponID == weaponID)
             return PlayerWeapons.at(i).AmmoLeft;
 }
+
+int calculator::GetWeaponDamageToArmorFromWeaponID(int id)
+{
+    int output = 0;
+    for(int i=0;i<Weapons.size();i++)
+        if(Weapons.at(i).WeaponID == id && Weapons.at(i).AdditionalDmgToArmor != 0)
+        {
+            C_ItemModificator item;
+            item.name = "Dodatkowe obrażenia broni przeciwko pancerzowi";
+            item.value = Weapons.at(i).AdditionalDmgToArmor;
+            ItemAndDamage.append(item);
+
+            output = Weapons.at(i).AdditionalDmgToArmor;
+        }
+    return output;
+}
+
+int calculator::GetWeaponDamageToShieldFromWeaponID(int id)
+{
+    int output = 0;
+    for(int i=0;i<Weapons.size();i++)
+        if(Weapons.at(i).WeaponID == id && Weapons.at(i).AdditionalDmgToShield != 0)
+        {
+            C_ItemModificator item;
+            item.name = "Dodatkowe obrażenia broni przeciwko tarczom";
+            item.value = Weapons.at(i).AdditionalDmgToShield;
+            ItemAndDamage.append(item);
+
+            output = Weapons.at(i).AdditionalDmgToShield;
+        }
+    return output;
+}
+
+int calculator::GetWeaponBaseDamageFromWeaponID(int id)
+{
+    int output = 0;
+    for(int i=0;i<Weapons.size();i++)
+        if(Weapons.at(i).WeaponID == id)
+            output = Weapons.at(i).DmgBase;
+    return output;
+}
+
+int calculator::GetOmnibladeDamageFromOmnibladeID(int id)
+{
+    int output = 0;
+    for(int i=0;i<Omniblades.size();i++)
+        if(Omniblades.at(i).ID == id)
+            output = Omniblades.at(i).Dmg;
+    return output;
+}
+

@@ -177,7 +177,12 @@ bool calculator::isActionNeedTarget(int actionID)
     else if(isActionMeeleeRelated(actionID))
         return true;
     else if(isActionSkillRelated(actionID))
-        return true;
+    {
+        if(GetSkillTargetFromSkillID(selectedActionItemID) == "target")
+            return true;
+        else
+            return false;
+    }
     else if((actionID == 8 || actionID == 9) && selectedActionItemID == 1)
         return true;
     else
@@ -197,3 +202,5 @@ bool calculator::isActionNeedDifficultyCheck(int actionID)
     else
        return false;
 }
+
+

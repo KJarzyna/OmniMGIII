@@ -225,3 +225,11 @@ int calculator::GetPlayersArmorCriticalChanceModifier(int playerID)
                 }
     return mod;
 }
+
+bool calculator::isPlayerHasShield(int playerID)
+{
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID && Players.at(i).ShieldCurrent > 0)
+            return true;
+   return false;
+}
