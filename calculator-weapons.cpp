@@ -87,7 +87,9 @@ int calculator::GetWeaponBaseDamageFromWeaponID(int id)
     int output = 0;
     for(int i=0;i<Weapons.size();i++)
         if(Weapons.at(i).WeaponID == id)
+        {
             output = Weapons.at(i).DmgBase;
+        }
     return output;
 }
 
@@ -96,7 +98,64 @@ int calculator::GetOmnibladeDamageFromOmnibladeID(int id)
     int output = 0;
     for(int i=0;i<Omniblades.size();i++)
         if(Omniblades.at(i).ID == id)
+        {
+            C_ItemModificator item;
+            item.name = Omniblades.at(i).Name;
+            item.value = Omniblades.at(i).Dmg;
+            ItemAndDamage.append(item);
+
             output = Omniblades.at(i).Dmg;
+        }
+
     return output;
 }
 
+int calculator::GetLightMeeleeDamageFromPlayerRace(int playerID)
+{
+
+    QString race;
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            race = Players.at(i).PlayerRace;
+
+    if(race == "Człowiek" || race == "Asari")
+        return 100;
+    else if(race == "Turianin" || race == "Batarianin")
+        return 150;
+    else if(race == "Quarianin" || race == "Salarianin")
+        return 100;
+    else if(race == "Geth")
+        return 150;
+    else if(race == "Geth")
+        return 200;
+    else if(race == "Vorcha" || race == "Drell")
+        return 100;
+    else
+        return 0;
+
+}
+
+int calculator::GetHeavyMeeleeDamageFromPlayerRace(int playerID)
+{
+
+    QString race;
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            race = Players.at(i).PlayerRace;
+
+    if(race == "Człowiek" || race == "Asari")
+        return 250;
+    else if(race == "Turianin" || race == "Batarianin")
+        return 300;
+    else if(race == "Quarianin" || race == "Salarianin")
+        return 200;
+    else if(race == "Geth")
+        return 300;
+    else if(race == "Kroganin")
+        return 350;
+    else if(race == "Vorcha" || race == "Drell")
+        return 250;
+    else
+        return 0;
+
+}

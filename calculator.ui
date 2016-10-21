@@ -672,6 +672,11 @@ border: black;
     </property>
     <item>
      <property name="text">
+      <string>--Wybierz poziom trudności--</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Bardzo łatwy</string>
      </property>
     </item>

@@ -203,4 +203,290 @@ bool calculator::isActionNeedDifficultyCheck(int actionID)
        return false;
 }
 
+bool calculator::isActionDealDamage(int actionID)
+{
+    if(isActionWeaponRelated(actionID))
+        return true;
+    else if(isActionMeeleeRelated(actionID))
+        return true;
+    else if(isActionSkillRelated(actionID))
+        return true;
+    else if(isActionAmmoRelated(actionID))
+        return false;
+    else
+       return false;
+}
+
+QStandardItemModel* calculator::GetItemModelBasedOnSelectedAction(int actionID)
+{
+
+    switch(actionID)
+    {
+    case 0:
+    {
+        QStandardItemModel *model = GetItemModelForWeaponType("PC");
+        return model;
+        break;
+    }
+    case 1:
+    {
+        QStandardItemModel *model = GetItemModelForWeaponType("PM");
+        return model;
+        break;
+    }
+    case 2:
+    {
+        QStandardItemModel *model = GetItemModelForWeaponType("KS");
+        return model;
+        break;
+    }
+    case 3:
+    {
+        QStandardItemModel *model = GetItemModelForWeaponType("KW");
+        return model;
+        break;
+    }
+    case 4:
+    {
+        QStandardItemModel *model = GetItemModelForWeaponType("Strz");
+        return model;
+        break;
+    }
+    case 5:
+    {
+        QStandardItemModel *model = GetItemModelForAllPlayerWeapons();
+        return model;
+        break;
+    }
+    case 6:
+    {
+        QStandardItemModel *model = GetItemModelForAllPlayerGenerators();
+        return model;
+        break;
+    }
+    case 7:
+    {
+        QStandardItemModel *model = GetItemModelForAllPlayerSkills();
+        return model;
+        break;
+    }
+    case 8:
+    {
+        QStandardItemModel *model = GetItemModelForGelUsage();
+        return model;
+        break;
+    }
+    case 9:
+    {
+        QStandardItemModel *model = GetItemModelForGelUsage();
+        return model;
+        break;
+    }
+    case 13:
+    {
+        QStandardItemModel *model = GetItemModelForAllPlayerWeapons();
+        return model;
+        break;
+    }
+    case 14:
+    {
+        QStandardItemModel *model = GetItemModelForAllPlayerWeapons();
+        return model;
+        break;
+    }
+    case 17:
+    {
+        QStandardItemModel *model = GetItemModelForAllPlayerGenerators();
+        return model;
+        break;
+    }
+    case 18:
+    {
+        QStandardItemModel *model = GetItemModelForAllPlayerSkills();
+        return model;
+        break;
+    }
+    case 19:
+    {
+        QStandardItemModel *model = GetItemModelForSpecialAmmo();
+        return model;
+        break;
+    }
+    default:
+    {
+        QStandardItemModel *model = GetItemModelForWeaponType("IntentionallyWrongType"); //returns empty model
+        return model;
+        break;
+    }
+
+    }
+
+}
+
+QStandardItemModel* calculator::GetItemModelForWeaponType(QString weaponType)
+{
+    QVector<QString> itemNameVector;
+    QVector<int> itemIDVector;
+    QStandardItemModel *empty_model = new QStandardItemModel(1,2,this);
+    empty_model->setItem(0,0, new QStandardItem("Brak")); //model returned if player don't have any items
+    empty_model->setItem(0,1, new QStandardItem("-1")); //model returned if player don't have any items
+
+    for(int i=0;i<PlayerWeapons.size();i++)
+        if(PlayerWeapons.at(i).PlayerID == selectedPlayerID && GetWeaponTypeFromWeaponID(PlayerWeapons.at(i).WeaponID) == weaponType)
+        {
+            itemNameVector.append(GetWeaponNameFromWeaponID(PlayerWeapons.at(i).WeaponID));
+            itemIDVector.append(PlayerWeapons.at(i).WeaponID);
+        }
+    if(!itemNameVector.isEmpty())
+    {
+        QStandardItemModel *model = new QStandardItemModel(itemNameVector.size(),2,this);
+        for(int i=0;i<itemNameVector.size();i++)
+        {
+            model->setItem(i,0, new QStandardItem(itemNameVector.at(i)));
+            model->setItem(i,1, new QStandardItem(QString::number(itemIDVector.at(i))));
+        }
+        return model;
+    }
+    else
+        {
+        return empty_model;
+        }
+}
+
+QStandardItemModel* calculator::GetItemModelForAllPlayerWeapons()
+{
+    QVector<QString> itemNameVector;
+    QVector<int> itemIDVector;
+    QStandardItemModel *empty_model = new QStandardItemModel(1,1,this);
+    empty_model->setItem(0,0, new QStandardItem("Brak")); //model returned if player don't have any items
+    empty_model->setItem(0,1, new QStandardItem("-1")); //model returned if player don't have any items
+
+    for(int i=0;i<PlayerWeapons.size();i++)
+        if(PlayerWeapons.at(i).PlayerID == selectedPlayerID)
+        {
+            itemNameVector.append(GetWeaponNameFromWeaponID(PlayerWeapons.at(i).WeaponID));
+            itemIDVector.append(PlayerWeapons.at(i).WeaponID);
+        }
+    if(!itemNameVector.isEmpty())
+    {
+        QStandardItemModel *model = new QStandardItemModel(itemNameVector.size(),2,this);
+        for(int i=0;i<itemNameVector.size();i++)
+        {
+            model->setItem(i,0, new QStandardItem(itemNameVector.at(i)));
+            model->setItem(i,1, new QStandardItem(QString::number(itemIDVector.at(i))));
+        }
+        return model;
+    }
+    else
+        {
+        return empty_model;
+        }
+}
+
+QStandardItemModel* calculator::GetItemModelForAllPlayerGenerators()
+{
+    QVector<QString> itemNameVector;
+    QVector<int> itemIDVector;
+    QStandardItemModel *empty_model = new QStandardItemModel(1,1,this);
+    empty_model->setItem(0,0, new QStandardItem("Brak")); //model returned if player don't have any items
+    empty_model->setItem(0,1, new QStandardItem("-1")); //model returned if player don't have any items
+
+    for(int i=0;i<PlayerGenerators.size();i++)
+        if(PlayerGenerators.at(i).PlayerID == selectedPlayerID)
+        {
+            itemNameVector.append(GetGeneratorNameFromGeneratorID(PlayerGenerators.at(i).GeneratorID));
+            itemIDVector.append(PlayerGenerators.at(i).GeneratorID);
+        }
+    if(!itemNameVector.isEmpty())
+    {
+        QStandardItemModel *model = new QStandardItemModel(itemNameVector.size(),2,this);
+        for(int i=0;i<itemNameVector.size();i++)
+        {
+            model->setItem(i,0, new QStandardItem(itemNameVector.at(i)));
+            model->setItem(i,1, new QStandardItem(QString::number(itemIDVector.at(i))));
+        }
+        return model;
+    }
+    else
+        {
+        return empty_model;
+        }
+}
+
+QStandardItemModel* calculator::GetItemModelForAllPlayerSkills()
+{
+    QVector<QString> itemNameVector;
+    QVector<int> itemIDVector;
+    QStandardItemModel *empty_model = new QStandardItemModel(1,1,this);
+    empty_model->setItem(0,0, new QStandardItem("Brak")); //model returned if player don't have any items
+    empty_model->setItem(0,1, new QStandardItem("-1")); //model returned if player don't have any items
+
+    for(int i=0;i<PlayerSkills.size();i++)
+        if(PlayerSkills.at(i).PlayerID == selectedPlayerID)
+        {
+            QString skillName = GetSkillNameFromSkillID(PlayerSkills.at(i).SkillID);
+            skillName.append(" (");
+            skillName.append(GetSkillLevelFromSkillID(PlayerSkills.at(i).SkillID));
+            skillName.append(")");
+            itemNameVector.append(skillName);
+            itemIDVector.append(PlayerSkills.at(i).SkillID);
+        }
+    if(!itemNameVector.isEmpty())
+    {
+        QStandardItemModel *model = new QStandardItemModel(itemNameVector.size(),2,this);
+        for(int i=0;i<itemNameVector.size();i++)
+        {
+            model->setItem(i,0, new QStandardItem(itemNameVector.at(i)));
+            model->setItem(i,1, new QStandardItem(QString::number(itemIDVector.at(i))));
+        }
+        return model;
+    }
+    else
+        {
+        return empty_model;
+        }
+}
+
+QStandardItemModel* calculator::GetItemModelForGelUsage()
+{
+    QStandardItemModel *model = new QStandardItemModel(2,2,this);
+    model->setItem(0,0, new QStandardItem("Na sobie"));
+    model->setItem(0,1, new QStandardItem("0"));
+    model->setItem(1,0, new QStandardItem("Na celu"));
+    model->setItem(1,1, new QStandardItem("1"));
+
+    return model;
+}
+
+QStandardItemModel* calculator::GetItemModelForSpecialAmmo()
+{
+    QVector<QString> itemNameVector;
+    QVector<int> itemIDVector;
+    QStandardItemModel *empty_model = new QStandardItemModel(1,1,this);
+    empty_model->setItem(0,0, new QStandardItem("Brak")); //model returned if player don't have any items
+    empty_model->setItem(0,1, new QStandardItem("-1")); //model returned if player don't have any items
+
+    for(int i=0;i<PlayerSkills.size();i++)
+        if(PlayerSkills.at(i).PlayerID == selectedPlayerID && GetSkillTypeFromSkillID(PlayerSkills.at(i).SkillID) == "Amunicja")
+        {
+            itemNameVector.append(GetWeaponNameFromWeaponID(PlayerSkills.at(i).SkillID));
+            itemIDVector.append(PlayerSkills.at(i).SkillID);
+        }
+    if(!itemNameVector.isEmpty())
+    {
+        QStandardItemModel *model = new QStandardItemModel(itemNameVector.size(),2,this);
+        for(int i=0;i<itemNameVector.size();i++)
+        {
+            model->setItem(i,0, new QStandardItem(itemNameVector.at(i)));
+            model->setItem(i,1, new QStandardItem(QString::number(itemIDVector.at(i))));
+        }
+        return model;
+    }
+    else
+        {
+        return empty_model;
+        }
+}
+
+
 

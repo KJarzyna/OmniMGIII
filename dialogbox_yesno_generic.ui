@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dialogbox_save_module</class>
- <widget class="QFrame" name="dialogbox_save_module">
+ <class>dialogbox_yesno_generic</class>
+ <widget class="QFrame" name="dialogbox_yesno_generic">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -492,10 +492,10 @@ QTableView QTableCornerButton::section {
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>50</y>
-     <width>240</width>
-     <height>51</height>
+     <x>20</x>
+     <y>10</y>
+     <width>361</width>
+     <height>111</height>
     </rect>
    </property>
    <property name="font">
@@ -541,7 +541,7 @@ QTableView QTableCornerButton::section {
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -567,11 +567,7 @@ QTableView QTableCornerButton::section {
     </item>
    </layout>
   </widget>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>pushButton_yes</zorder>
-  <zorder>pushButton_no</zorder>
-  <zorder>pushButton_no</zorder>
+  <zorder>layoutWidget</zorder>
   <zorder>label_2</zorder>
   <zorder>label</zorder>
  </widget>

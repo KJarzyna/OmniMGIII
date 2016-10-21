@@ -53,6 +53,7 @@ public:
 
     QVector<C_ItemModificator> ItemAndDifficulty;
     QVector<C_ItemModificator> AdditionalItemAndDifficulty;
+    QVector<C_ItemModificator> AdditionalItemAndDamage;
     QVector<C_ItemModificator> ItemAndAccuracy;
     QVector<C_ItemModificator> ItemAndCritical;
     QVector<C_ItemModificator> ItemAndActionCost;
@@ -89,6 +90,7 @@ private slots:
     void ActionDialogBoxClosed(bool db_closed);
     void GetDiceResults(QVector<int> dices);
     void DiceDialogBoxClosed();
+    void CalculationsApproved(bool approved);
 
     void on_pushButton_AccMod_add_clicked();
     void on_pushButton_AccMod_remove_clicked();
@@ -99,11 +101,8 @@ private slots:
     void on_comboBox_select_action_activated(int index);
     void on_pushButton_calculate_clicked();
     void on_comboBox_select_target_activated(int index);
-
     void on_pushButton_continue_calculations_clicked();
-
     void on_pushButton_approve_clicked();
-
     void on_pushButton_disapprove_clicked();
 
 private:
@@ -115,10 +114,15 @@ private:
     void InitializeActionsComboBox();
     void InitializeTargetsComboBox();
     void InitializePlayerStats();
+    void InitializeDifficultyLevel();
 
     void setEnableAfterFirstCalculations(bool status);
     void setEnableAfterSecondCalculations(bool status);
     void setEnableAllInput(bool status);
+
+    void ResetAction();
+    void ResetTarget();
+    void ResetDifficulty();
 
     //Target related
     void RemovePlayerFromTargetModel(int playerID);
@@ -128,6 +132,10 @@ private:
     QString GetPlayerNameFromPlayerID(int playerID);
     void setPlayerStats(int playerID);
     void setPlayerActiveEffects(int playerID);
+    void setPlayerCurrentArmor(int playerID, int value);
+    void setPlayerCurrentShield(int playerID, int value);
+    void reloadPlayerWeapon(int playerID, int weaponID);
+    void subtractAmmoFromPlayerWeapon(int playerID, int weaponID);
     int GetPlayersArmorCostReduction(int playerID);
     int GetPlayersArmorWpnAccModifier(int playerID);
     int GetPlayersArmorSkillAccModifier(int playerID);
@@ -139,6 +147,8 @@ private:
     int GetPlayerEvasiveness(int playerID);
     int GetPlayersOmnibladeID(int playerID);
     int GetPlayersArmorCriticalChanceModifier(int playerID);
+    int GetPlayerMaxShield(int playerID);
+    int GetPlayerMaxArmor(int playerID);
     bool isPlayerHasShield(int playerID);
 
 
@@ -170,6 +180,7 @@ private:
     bool isActionMeeleeRelated(int actionID);
     bool isActionNeedTarget(int actionID);
     bool isActionNeedDifficultyCheck(int actionID);
+    bool isActionDealDamage(int actionID);
 
 
     //Difficulty related
@@ -193,10 +204,13 @@ private:
     int GetWeaponDamageToShieldFromWeaponID(int ID);
     int GetWeaponBaseDamageFromWeaponID(int ID);
     int GetOmnibladeDamageFromOmnibladeID(int ID);
+    int GetLightMeeleeDamageFromPlayerRace(int playerID);
+    int GetHeavyMeeleeDamageFromPlayerRace(int playerID);
 
     //GET
     QString GetEffectNameFromEffectID(int ID);
     QString GetGeneratorNameFromGeneratorID(int ID);
+    int GetPlayerTechnoBuffFromOmnikey(int playerID);
 
     //Skill related
     QString GetSkillNameFromSkillID(int ID);
@@ -225,7 +239,12 @@ private:
     QString GetVisualCriticalCheck();
     QStringList GetVisualEffectCheck();
     QString GetVisualCalculationSteps();
-
+    QString GetVisualCalculationSteps_Damage();
+    QString GetVisualCalculationSteps_Difficulty();
+    QString GetVisualCalculationSteps_Cost();
+    QString GetVisualCalculationSteps_Critical();
+    QString GetVisualCalculationSteps_Accuracy();
+    QString GetVisualTargetArmorAndShieldLeftResult();
     //Critical related
 
     //Calculations related
@@ -249,6 +268,12 @@ private:
     int GetBaseDamageDealt();
     int GetModifiedBaseDamageDealt();
     int GetFinalDamageDealt();
+    int GetPlayerShieldCurrentAfterDamage(int playerID, int damage);
+    int GetPlayerArmorCurrentAfterDamage(int playerID, int damage);
+
+    //After Calculations
+    void ImplementAfterCalculationChanges();
+
     bool isCriticalHit();
 
 

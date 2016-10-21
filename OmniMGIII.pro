@@ -53,7 +53,6 @@ SOURCES += main.cpp\
     Sources/ClassDefinitions/activeeffect.cpp \
     Sources/ClassDefinitions/playeractiveeffect.cpp \
     mainwindow-effects.cpp \
-    dialogbox_save_module.cpp \
     calculator.cpp \
     dialogbox_difficultyreason.cpp \
     dialogbox_action.cpp \
@@ -62,7 +61,12 @@ SOURCES += main.cpp\
     calculator-skills.cpp \
     calculator-player.cpp \
     dialogbox_warning_generic.cpp \
-    dialogbox_postcalculation.cpp
+    dialogbox_postcalculation.cpp \
+    calculator-initialization.cpp \
+    calculator-text.cpp \
+    calculator-calculationfirst.cpp \
+    calculator-calculationsecond.cpp \
+    dialogbox_yesno_generic.cpp
 
 HEADERS  += mainwindow.h \
     Headers/Actions/actions.h \
@@ -95,21 +99,21 @@ HEADERS  += mainwindow.h \
     dialogbox_activeeffect.h \
     Headers/ActiveEffects/activeeffect.h \
     Headers/Player/playeractiveeffect.h \
-    dialogbox_save_module.h \
     calculator.h \
     dialogbox_difficultyreason.h \
     dialogbox_action.h \
     dialogbox_warning_generic.h \
-    dialogbox_postcalculation.h
+    dialogbox_postcalculation.h \
+    dialogbox_yesno_generic.h
 
 FORMS    += mainwindow.ui \
     dialogbox_activeeffect.ui \
-    dialogbox_save_module.ui \
     calculator.ui \
     dialogbox_difficultyreason.ui \
     dialogbox_action.ui \
     dialogbox_warning_generic.ui \
-    dialogbox_postcalculation.ui
+    dialogbox_postcalculation.ui \
+    dialogbox_yesno_generic.ui
 
 RESOURCES += \
     resources.qrc

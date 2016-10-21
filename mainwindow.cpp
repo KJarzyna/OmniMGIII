@@ -587,9 +587,13 @@ void MainWindow::on_pushButton_deletePlayer_clicked()
 void MainWindow::on_actionOmni_Kalkulator_triggered()
 {
 
-    dialogbox_save_module *box = new dialogbox_save_module;
+    dialogbox_yesno_generic *box = new dialogbox_yesno_generic;
     box->setAttribute(Qt::WA_DeleteOnClose);
-    connect(box,SIGNAL(SaveSignal(bool)),this,SLOT(CalculatorModuleSlot(bool)));
+    box->setWarningText1("Przed zmianą modułu, musisz zapisać wszelkie zmiany!");
+    box->setWarningText2("Zapisać?");
+    box->setDialogBoxType("SaveModule");
+    connect(box,SIGNAL(YesNoSignal(bool)),this,SLOT(CalculatorModuleSlot(bool)));
+
     box->show();
 }
 
@@ -599,6 +603,7 @@ void MainWindow::CalculatorModuleSlot(bool savesignal)
     {
         SaveAll();
         OpenCalculatorModule();
+        qDebug() << "DB Save module triggered";
     }
 }
 

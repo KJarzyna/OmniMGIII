@@ -677,7 +677,7 @@ bool ReadWriteData::ReadOmnikeysFromFileAndLoadToVector(QString filename, QVecto
                 item.ID = cells.at(0).toInt();
                 item.Name = cells.at(1);
                 item.ShieldBuff = cells.at(2).toInt();
-                item.TechnoBuff = cells.at(2).toInt();
+                item.TechnoBuff = cells.at(3).toInt();
                 vector.append(item);
             }
 

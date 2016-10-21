@@ -33,7 +33,7 @@
 #include "Headers/Player/playeractiveeffect.h"
 
 #include "dialogbox_activeeffect.h"
-#include "dialogbox_save_module.h"
+#include "dialogbox_yesno_generic.h"
 #include "calculator.h"
 
 namespace Ui {

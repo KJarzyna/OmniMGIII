@@ -233,3 +233,110 @@ bool calculator::isPlayerHasShield(int playerID)
             return true;
    return false;
 }
+
+int calculator::GetPlayerArmorCurrentAfterDamage(int playerID, int damage)
+{
+    int output = 99999;
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+        {
+            output = Players.at(i).ArmorCurrent - damage;
+
+            if(output > Players.at(i).ArmorMax)
+                output = Players.at(i).ArmorMax;
+        }
+
+    return output;
+
+}
+
+int calculator::GetPlayerMaxShield(int playerID)
+{
+    int output = 0;
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            output = Players.at(i).ShieldMax;
+    return output;
+}
+
+int calculator::GetPlayerMaxArmor(int playerID)
+{
+    int output = 0;
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            output = Players.at(i).ArmorMax;
+    return output;
+}
+
+int calculator::GetPlayerShieldCurrentAfterDamage(int playerID, int damage)
+{
+    int output = 99999;
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            output = Players.at(i).ShieldCurrent - damage;
+
+    if(output < 0)
+        output = 0;
+
+    return output;
+
+}
+
+int calculator::GetPlayerTechnoBuffFromOmnikey(int playerID)
+{
+    int output = 0;
+    int omniID = 99999;
+    for(int i=0;i<PlayerOmnikeys.size();i++)
+        if(PlayerOmnikeys.at(i).PlayerID == playerID)
+            omniID = PlayerOmnikeys.at(i).OmnikeyID;
+    for(int i=0;i<Omnikeys.size();i++)
+        if(Omnikeys.at(i).ID == omniID)
+            output = Omnikeys.at(i).TechnoBuff;
+
+    return output;
+}
+
+void calculator::setPlayerCurrentArmor(int playerID, int value)
+{
+     for(int i=0;i<Players.size();i++)
+         if(Players.at(i).PlayerID == playerID)
+             Players[i].ArmorCurrent = value;
+}
+
+void calculator::setPlayerCurrentShield(int playerID, int value)
+{
+     for(int i=0;i<Players.size();i++)
+         if(Players.at(i).PlayerID == playerID)
+             Players[i].ShieldCurrent = value;
+}
+
+void calculator::reloadPlayerWeapon(int playerID, int weaponID)
+{
+    int ammoMax = 0;
+    for(int i=0;i<Weapons.size();i++)
+        if(Weapons.at(i).WeaponID == weaponID)
+            ammoMax = Weapons.at(i).AmmoMaxInClip;
+
+    for(int i=0;i<PlayerWeapons.size();i++)
+        if(PlayerWeapons.at(i).PlayerID == playerID && PlayerWeapons.at(i).WeaponID == weaponID)
+            PlayerWeapons[i].AmmoLeft = ammoMax;
+}
+
+void calculator::subtractAmmoFromPlayerWeapon(int playerID, int weaponID)
+{
+    int ammoPerShot = 0;
+    int ammoLeft = 0;
+    for(int i=0;i<Weapons.size();i++)
+        if(Weapons.at(i).WeaponID == weaponID)
+            ammoPerShot = Weapons.at(i).AmmoPerShot;
+
+    for(int i=0;i<PlayerWeapons.size();i++)
+        if(PlayerWeapons.at(i).PlayerID == playerID && PlayerWeapons.at(i).WeaponID == weaponID)
+        {
+            ammoLeft = PlayerWeapons.at(i).AmmoLeft;
+            if(ammoLeft - ammoPerShot < 0)
+                PlayerWeapons[i].AmmoLeft = 0;
+            else
+                PlayerWeapons[i].AmmoLeft == PlayerWeapons.at(i).AmmoLeft - ammoPerShot;
+        }
+}
