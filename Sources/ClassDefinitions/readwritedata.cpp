@@ -1056,6 +1056,46 @@ bool ReadWriteData::ReadPlayerActiveEffectsFromFileAndLoadToVector(QString filen
 
 }
 
+bool ReadWriteData::ReadSkillActiveEffectsFromFileAndLoadToVector(QString filename, QVector<C_SkillActiveEffects> &vector)
+{
+    vector.clear();
+    QFile inputFile(filename);
+    C_SkillActiveEffects item;
+
+    if (inputFile.exists() && inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList cells = line.split(';');
+
+            if (cells.size()>0)
+            {
+                item.SkillID = cells.at(0).toInt();
+                item.EffectID = cells.at(1).toInt();
+                item.EffectChance = cells.at(2).toInt();
+                item.WorksWithShields = cells.at(3).toInt();
+                vector.append(item);
+            }
+
+        }
+
+        if (!vector.isEmpty())
+            vector.removeFirst();
+        else
+            qDebug() << "File " << filename << " is empty!";
+
+        inputFile.close();
+        return true;
+    }
+    else
+    {
+        qDebug() << filename << ": Couldn't open file or file doesn't exist!";
+        return false;
+    }
+
+}
 
 //WRITE PLAYERS
 bool ReadWriteData::WritePlayersFromVectorToFile(QVector<C_Player> &vector, QString filename)

@@ -2,6 +2,27 @@
 #include "ui_calculator.h"
 
 //TEXT
+
+void calculator::setVisualPlayerStats(int playerID)
+{
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+        {
+            ui->label_current_armor->setText(QString::number(Players.at(i).ArmorCurrent));
+            ui->label_max_armor->setText(QString::number(Players.at(i).ArmorMax));
+            ui->label_current_shield->setText(QString::number(Players.at(i).ShieldCurrent));
+            ui->label_max_shield->setText(QString::number(Players.at(i).ShieldMax));
+        }
+}
+
+void calculator::setVisualPlayerActiveEffects(int playerID)
+{
+    ui->listWidget_player_conditions->clear();
+    for(int i=0;i<PlayerActiveEffects.size();i++)
+        if(PlayerActiveEffects.at(i).PlayerID == playerID)
+            ui->listWidget_player_conditions->addItem(GetEffectNameFromEffectID(PlayerActiveEffects.at(i).EffectID));
+}
+
 QString calculator::GetVisualTextFromSelectedInfo()
 {
     QString full_text;
@@ -24,9 +45,6 @@ QString calculator::GetVisualTextFromSelectedInfo()
         full_text += "[dice]";
         full_text += GetDiceTypeForActionID(GetCurrentActionID());
         full_text += "[/dice]";
-
-        //full_text += "<br><br>";
-        //full_text += GetVisualCalculationSteps();
     }
 
     return full_text;
@@ -40,11 +58,14 @@ QString calculator::GetFinalVisualTextFromSelectedInfo()
     {
 
         full_text = GetVisualSuccessResult();
+        for(int i=0;i<GetVisualEffectSuccess().size();i++)
+            full_text += GetVisualEffectSuccess().at(i);
         full_text += "<br>";
 
         full_text += GetVisualDamageResult();
 
         full_text += GetVisualTargetArmorAndShieldLeftResult();
+        full_text += GetVisualTargetEffects();
 
         full_text += "<br><br>";
         full_text += GetVisualCalculationSteps();
@@ -52,6 +73,7 @@ QString calculator::GetFinalVisualTextFromSelectedInfo()
     else if(GetCurrentActionID() == 6 || GetCurrentActionID() == 9) // Generator Regeneration or Omni Usage
     {
         full_text += GetVisualTargetArmorAndShieldLeftResult();
+        full_text += GetVisualTargetEffects();
     }
     else
         full_text = "Brak innych obliczeń do wykonania.";
@@ -134,50 +156,103 @@ QString calculator::GetVisualSuccessCheck()
 
 QString calculator::GetVisualCriticalCheck()
 {
-    QString crit = "Trafienie krytyczne przy: &#60;";
-    crit.append(QString::number(criticalTreshold));
-    crit.append("%");
+    QString crit = "";
+    if(isActionNeedTarget(GetCurrentActionID()))
+    {
+        crit = "Trafienie krytyczne przy: &#60;";
+        crit.append(QString::number(criticalTreshold));
+        crit.append("%");
+    }
+
     return crit;
 }
 
 QStringList calculator::GetVisualEffectCheck()
 {
     QStringList chance;
-    if(isActionSkillRelated(GetCurrentActionID()))
+    if(isActionSkillRelated(GetCurrentActionID()) && isActionNeedTarget(GetCurrentActionID()))
     {
-        if(GetSkillStunChanceFromSkillID(selectedActionItemID) != 0)
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,3) != 0)
         {
-            QString chance_value = QString::number(GetSkillStunChanceFromSkillID(selectedActionItemID));
+            QString chance_value = QString::number(GetSkillEffectChanceFromSkillID(selectedActionItemID,3));
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_value = "0";
+
             QString chance_full = "<br>Ogłuszenie przy: &#60;" + chance_value + "%";
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_full += " (Cel okryty tarczami!)";
             chance.append(chance_full);
         }
-        if(GetSkillKnockoutChanceFromSkillID(selectedActionItemID) != 0)
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,2) != 0)
         {
-            QString chance_value = QString::number(GetSkillKnockoutChanceFromSkillID(selectedActionItemID));
+            QString chance_value = QString::number(GetSkillEffectChanceFromSkillID(selectedActionItemID,2));
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_value = "0";
+
             QString chance_full = "<br>Powalenie przy: &#60;" + chance_value + "%";
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_full += " (Cel okryty tarczami!)";
             chance.append(chance_full);
         }
-        if(GetSkillChillChanceFromSkillID(selectedActionItemID) != 0)
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,4) != 0)
         {
-            QString chance_value = QString::number(GetSkillChillChanceFromSkillID(selectedActionItemID));
+            QString chance_value = QString::number(GetSkillEffectChanceFromSkillID(selectedActionItemID,4));
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_value = "0";
+
             QString chance_full = "<br>Schłodzenie przy: &#60;" + chance_value + "%";
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_full += " (Cel okryty tarczami!)";
             chance.append(chance_full);
         }
-        if(GetSkillFlameChanceFromSkillID(selectedActionItemID) != 0)
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,5) != 0)
         {
-            QString chance_value = QString::number(GetSkillFlameChanceFromSkillID(selectedActionItemID));
+            QString chance_value = QString::number(GetSkillEffectChanceFromSkillID(selectedActionItemID,5));
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_value = "0";
+
             QString chance_full = "<br>Podpalenie przy: &#60;" + chance_value + "%";
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_full += " (Cel okryty tarczami!)";
             chance.append(chance_full);
         }
-        if(GetSkillUpliftChanceFromSkillID(selectedActionItemID) != 0)
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,6) != 0)
         {
-            QString chance_value = QString::number(GetSkillUpliftChanceFromSkillID(selectedActionItemID));
+            QString chance_value = QString::number(GetSkillEffectChanceFromSkillID(selectedActionItemID,6));
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_value = "0";
+
             QString chance_full = "<br>Podniesienie przy: &#60;" + chance_value + "%";
+            if(isPlayerHasShield(selectedTargetID) && !isSkillWorksWithShields(selectedActionItemID))
+                chance_full += " (Cel okryty tarczami!)";
             chance.append(chance_full);
         }
     }
 
     return chance;
+}
+
+QStringList calculator::GetVisualEffectSuccess()
+{
+    QStringList list;
+    int actionID = GetCurrentActionID();
+    if(GetNumberOfSuccess() > 0 && isActionSkillRelated(actionID) && isActionNeedTarget(actionID) && isSkillEffectApplicableToPlayer(selectedTargetID,selectedActionItemID))
+    {
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,2) > dice_results.at(0))
+            list.append(" Powalenie!");
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,3) > dice_results.at(0))
+            list.append(" Ogłuszenie!");
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,4) > dice_results.at(0))
+            list.append(" Schłodzenie!");
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,5) > dice_results.at(0))
+            list.append(" Podpalenie!");
+        if(GetSkillEffectChanceFromSkillID(selectedActionItemID,6) > dice_results.at(0))
+            list.append(" Podniesienie!");
+    }
+
+    if(list.isEmpty())
+        list.append("");
+    return list;
 }
 
 QString calculator::GetVisualCalculationSteps()
@@ -363,27 +438,22 @@ QString calculator::GetVisualCalculationSteps_Damage()
 {
     QString text = "";
 
+    SumAllDamageModificators();
+
     if(isActionDealDamage(GetCurrentActionID()) && GetNumberOfSuccess() > 0)
     {
         if(dice_results.size() > 1)
         {
             text += "Obrażenia:<br>";
 
-            if(ItemAndDamage.size() > 0 || AdditionalItemAndDamage.size() > 0)
+            if(SumItemAndDamage.size() > 0)
                 text += QString::number(GetBaseDamageDealt()) + " [Obrażenia bazowe]<br>";
 
-            for(int i=0;i<ItemAndDamage.size();i++)
+            for(int i=0;i<SumItemAndDamage.size();i++)
             {
-                if(ItemAndDamage.at(i).value > 0)
+                if(SumItemAndDamage.at(i).value > 0)
                     text += "+";
-                text +=  QString::number(ItemAndDamage.at(i).value) + " [" + ItemAndDamage.at(i).name + "]";
-                text += "<br>";
-            }
-            for(int i=0;i<AdditionalItemAndDamage.size();i++)
-            {
-                if(AdditionalItemAndDamage.at(i).value > 0)
-                    text += "+";
-                text += QString::number(AdditionalItemAndDamage.at(i).value) + " [" + AdditionalItemAndDamage.at(i).name + "]";
+                text +=  QString::number(SumItemAndDamage.at(i).value) + " [" + SumItemAndDamage.at(i).name + "]";
                 text += "<br>";
             }
 
@@ -403,44 +473,30 @@ QString calculator::GetVisualCalculationSteps_Damage()
         {
             text += "Obrażenia:<br>";
 
-            if(ItemAndDamage.size() > 0 || AdditionalItemAndDamage.size() > 0)
+            if(SumItemAndDamage.size() > 0)
                 text += QString::number(GetBaseDamageDealt()) + " [Obrażenia bazowe]<br>";
-            for(int i=0;i<ItemAndDamage.size();i++)
+            for(int i=0;i<SumItemAndDamage.size();i++)
             {
-                if(ItemAndDamage.at(i).value > 0)
+                if(SumItemAndDamage.at(i).value > 0)
                     text += "+";
-                text += QString::number(ItemAndDamage.at(i).value) + " [" + ItemAndDamage.at(i).name + "]";
-                text += "<br>";
-            }
-            for(int i=0;i<AdditionalItemAndDamage.size();i++)
-            {
-                if(AdditionalItemAndDamage.at(i).value > 0)
-                    text += "+";
-                text += QString::number(AdditionalItemAndDamage.at(i).value) + " [" + AdditionalItemAndDamage.at(i).name + "]";
+                text += QString::number(SumItemAndDamage.at(i).value) + " [" + SumItemAndDamage.at(i).name + "]";
                 text += "<br>";
             }
 
             text += QString::number(GetModifiedBaseDamageDealt()) + "*1.3 = " + QString::number(GetFinalDamageDealt()) + "<br>";
             text += "<br>";
         }
-        else if(dice_results.size() == 1 && (ItemAndDamage.size() > 0 || AdditionalItemAndDamage.size() > 0))
+        else if(dice_results.size() == 1 && SumItemAndDamage.size() > 0)
         {
             text += "Obrażenia:<br>";
 
-            if(ItemAndDamage.size() > 0 || AdditionalItemAndDamage.size() > 0)
+            if(SumItemAndDamage.size() > 0)
                 text += QString::number(GetBaseDamageDealt()) + " [Obrażenia bazowe]<br>";
-            for(int i=0;i<ItemAndDamage.size();i++)
+            for(int i=0;i<SumItemAndDamage.size();i++)
             {
-                if(ItemAndDamage.at(i).value > 0)
+                if(SumItemAndDamage.at(i).value > 0)
                     text += "+";
-                text += QString::number(ItemAndDamage.at(i).value) + " [" + ItemAndDamage.at(i).name + "]";
-                text += "<br>";
-            }
-            for(int i=0;i<AdditionalItemAndDamage.size();i++)
-            {
-                if(AdditionalItemAndDamage.at(i).value > 0)
-                    text += "+";
-                text += QString::number(AdditionalItemAndDamage.at(i).value) + " [" + AdditionalItemAndDamage.at(i).name + "]";
+                text += QString::number(SumItemAndDamage.at(i).value) + " [" + SumItemAndDamage.at(i).name + "]";
                 text += "<br>";
             }
 
@@ -474,7 +530,9 @@ QString calculator::GetVisualCalculationSteps_Accuracy()
 QString calculator::GetVisualCalculationSteps_Difficulty()
 {
     QString text = "";
-    if(ItemAndDifficulty.size() > 0 || AdditionalItemAndDifficulty.size() > 0)
+    SumAllDifficultyModificators();
+
+    if(SumItemAndDifficulty.size() > 0)
     {
         text += "Poziom trudności:";
         text += "<br>";
@@ -482,20 +540,12 @@ QString calculator::GetVisualCalculationSteps_Difficulty()
         if(!difficulty_reason.isEmpty() && !difficulty_reason.isNull())
             text += " [" + difficulty_reason + "]";
 
-        for(int i=0;i<ItemAndDifficulty.size();i++)
+        for(int i=0;i<SumItemAndDifficulty.size();i++)
         {
             text += "<br>";
-            if(ItemAndDifficulty.at(i).value > 0)
+            if(SumItemAndDifficulty.at(i).value > 0)
                 text += "+";
-            text += QString::number(ItemAndDifficulty.at(i).value) + " [" + ItemAndDifficulty.at(i).name + "]";
-        }
-
-        for(int i=0;i<AdditionalItemAndDifficulty.size();i++)
-        {
-            text += "<br>";
-            if(AdditionalItemAndDifficulty.at(i).value > 0)
-                text += "+";
-            text += QString::number(AdditionalItemAndDifficulty.at(i).value) + " [" + AdditionalItemAndDifficulty.at(i).name + "]";
+            text += QString::number(SumItemAndDifficulty.at(i).value) + " [" + SumItemAndDifficulty.at(i).name + "]";
         }
 
         text += "<br><br>";
@@ -542,6 +592,36 @@ QString calculator::GetVisualCalculationSteps_Cost()
         }
         text += "<br><br>";
     }
+
+    return text;
+}
+
+QString calculator::GetVisualTargetEffects()
+{
+    QString text = "";
+    int actionID = GetCurrentActionID();
+    for(int i=0;i<GetPlayerActiveEffects(selectedTargetID).size();i++)
+        text += GetPlayerActiveEffects(selectedTargetID).at(i) + ", ";
+
+    //Add new effect to target
+    if(isActionSkillRelated(actionID) && GetSkillTargetFromSkillID(selectedActionItemID) == "target" && GetNumberOfSuccess() > 0 && isSkillEffectApplicableToPlayer(selectedTargetID,selectedActionItemID))
+    {
+        for(int i=0;i<GetSkillEffectsFromSkillID(selectedActionItemID).size();i++)
+            text += GetEffectNameFromEffectID(GetSkillEffectsFromSkillID(selectedActionItemID).at(i)) + ", ";
+    }
+
+    //Add new "Ranny" effect to target
+    if(isActionDealDamage(actionID) && GetNumberOfSuccess() > 0 && (!isPlayerHasShield(selectedTargetID) || isActionMeeleeRelated(actionID)))
+        if(GetPlayerArmorCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()) < GetPlayerMaxArmor(selectedTargetID)*0.5)
+        {
+            if(GetPlayerActiveEffectsIDs(selectedTargetID).contains(0))
+                text.replace(GetEffectNameFromEffectID(0),GetEffectNameFromEffectID(1));
+            else if(!GetPlayerActiveEffectsIDs(selectedTargetID).contains(1))
+                text += GetEffectNameFromEffectID(0) + ", ";
+        }
+
+    if(!text.isEmpty())
+        text.chop(2);
 
     return text;
 }

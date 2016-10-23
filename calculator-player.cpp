@@ -25,26 +25,6 @@ void calculator::AddPlayerToTargetModel(int playerID)
     comboboxTargetsModel->setItem(comboboxTargetsModel->rowCount()-1,1,new QStandardItem(QString::number(playerID)));
 }
 
-void calculator::setPlayerStats(int playerID)
-{
-    for(int i=0;i<Players.size();i++)
-        if(Players.at(i).PlayerID == playerID)
-        {
-            ui->label_current_armor->setText(QString::number(Players.at(i).ArmorCurrent));
-            ui->label_max_armor->setText(QString::number(Players.at(i).ArmorMax));
-            ui->label_current_shield->setText(QString::number(Players.at(i).ShieldCurrent));
-            ui->label_max_shield->setText(QString::number(Players.at(i).ShieldMax));
-        }
-}
-
-void calculator::setPlayerActiveEffects(int playerID)
-{
-    ui->listWidget_player_conditions->clear();
-    for(int i=0;i<PlayerActiveEffects.size();i++)
-        if(PlayerActiveEffects.at(i).PlayerID == playerID)
-            ui->listWidget_player_conditions->addItem(GetEffectNameFromEffectID(PlayerActiveEffects.at(i).EffectID));
-}
-
 int calculator::GetPlayerSkillMastery(int playerID, QString skillType)
 {
     for(int i=0;i<Players.size();i++)
@@ -68,6 +48,26 @@ QString calculator::GetPlayerSpecializationSkill(int playerID)
         if(Players.at(i).PlayerID == playerID)
             skill = Players.at(i).SpecializationSkill;
     return skill;
+}
+
+QStringList calculator::GetPlayerActiveEffects(int playerID)
+{
+    QStringList list;
+    for(int i=0;i<PlayerActiveEffects.size();i++)
+        if(PlayerActiveEffects.at(i).PlayerID == playerID)
+            list.append(GetEffectNameFromEffectID(PlayerActiveEffects.at(i).EffectID));
+
+    return list;
+}
+
+QVector<int> calculator::GetPlayerActiveEffectsIDs(int playerID)
+{
+    QVector<int> list;
+    for(int i=0;i<PlayerActiveEffects.size();i++)
+        if(PlayerActiveEffects.at(i).PlayerID == playerID)
+            list.append(PlayerActiveEffects.at(i).EffectID);
+
+    return list;
 }
 
 int calculator::GetPlayersArmorCostReduction(int playerID)
@@ -234,6 +234,14 @@ bool calculator::isPlayerHasShield(int playerID)
    return false;
 }
 
+bool calculator::isPlayerHasEffect(int playerID, int effectID)
+{
+    for(int i=0;i<PlayerActiveEffects.size();i++)
+        if(PlayerActiveEffects.at(i).PlayerID == playerID && PlayerActiveEffects.at(i).EffectID == effectID)
+            return true;
+   return false;
+}
+
 int calculator::GetPlayerArmorCurrentAfterDamage(int playerID, int damage)
 {
     int output = 99999;
@@ -337,6 +345,6 @@ void calculator::subtractAmmoFromPlayerWeapon(int playerID, int weaponID)
             if(ammoLeft - ammoPerShot < 0)
                 PlayerWeapons[i].AmmoLeft = 0;
             else
-                PlayerWeapons[i].AmmoLeft == PlayerWeapons.at(i).AmmoLeft - ammoPerShot;
+                PlayerWeapons[i].AmmoLeft = PlayerWeapons.at(i).AmmoLeft - ammoPerShot;
         }
 }

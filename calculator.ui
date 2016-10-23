@@ -1248,7 +1248,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>200</y>
+      <y>230</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -1269,7 +1269,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>220</y>
+      <y>250</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -1290,7 +1290,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>250</y>
+      <y>280</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -1311,7 +1311,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>270</y>
+      <y>300</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -1335,7 +1335,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>330</y>
+      <y>360</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -1356,7 +1356,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>350</y>
+      <y>380</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -1374,6 +1374,32 @@ background-color: #242424;
     </property>
     <property name="wordWrap">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_deleteEffect">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>185</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_addEffect">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>185</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>+</string>
     </property>
    </widget>
   </widget>

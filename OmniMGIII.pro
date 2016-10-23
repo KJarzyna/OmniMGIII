@@ -66,7 +66,9 @@ SOURCES += main.cpp\
     calculator-text.cpp \
     calculator-calculationfirst.cpp \
     calculator-calculationsecond.cpp \
-    dialogbox_yesno_generic.cpp
+    dialogbox_yesno_generic.cpp \
+    Sources/ClassDefinitions/skillactiveeffects.cpp \
+    calculator-effects.cpp
 
 HEADERS  += mainwindow.h \
     Headers/Actions/actions.h \
@@ -104,7 +106,8 @@ HEADERS  += mainwindow.h \
     dialogbox_action.h \
     dialogbox_warning_generic.h \
     dialogbox_postcalculation.h \
-    dialogbox_yesno_generic.h
+    dialogbox_yesno_generic.h \
+    Headers/ActiveEffects/skillactiveeffects.h
 
 FORMS    += mainwindow.ui \
     dialogbox_activeeffect.ui \

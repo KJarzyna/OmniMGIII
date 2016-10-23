@@ -5,6 +5,7 @@
 #include "calculator-weapons.cpp"
 #include "calculator-skills.cpp"
 #include "calculator-player.cpp"
+#include "calculator-effects.cpp"
 #include "QDebug"
 
 calculator::calculator(QWidget *parent) :
@@ -55,20 +56,12 @@ bool calculator::ReadDataFromFiles()
     csv.ReadPlayerOmnibladeModsFromFileAndLoadToVector("Data/player_omniblademods.csv", PlayerOmnibladeMods);
     csv.ReadActiveEffectsFromFileAndLoadToVector("Data/activeeffects.csv", ActiveEffect);
     csv.ReadPlayerActiveEffectsFromFileAndLoadToVector("Data/player_activeeffects.csv", PlayerActiveEffects);
+    csv.ReadSkillActiveEffectsFromFileAndLoadToVector("Data/skill_effects.csv", SkillActiveEffects);
     csv.ReadActionsFromFileAndLoadToVector("Data/actions.csv", Actions);
     return true;
 }
 
-QString calculator::GetEffectNameFromEffectID(int ID)
-{
-    QString name = "NoName";
-    for(int i=0;i<ActiveEffect.size();i++)
-    {
-        if(ActiveEffect.at(i).ID == ID)
-            name = ActiveEffect.at(i).Name;
-    }
-    return name;
-}
+
 
 QString calculator::GetGeneratorNameFromGeneratorID(int ID)
 {
@@ -143,6 +136,7 @@ void calculator::ResetDifficulty()
     difficulty_level_name = "Nie wybrano poziomu trudności";
     difficulty_reason = "";
     setDifficultyInStats("Nie wybrano poziomu trudności", "");
+    WidgetItemAndDifficulty.clear();
 }
 
 //CUSTOM SLOTS
@@ -180,6 +174,10 @@ void calculator::CalculationsApproved(bool approved)
         ItemAndAccuracy.clear();
         ItemAndDifficulty.clear();
         ItemAndCritical.clear();
+        WidgetItemAndDifficulty.clear();
+        WidgetItemAndDamage.clear();
+        AdditionalItemAndDifficulty.clear();
+        AdditionalItemAndDamage.clear();
 
         ResetAction();
         ResetTarget();
@@ -188,6 +186,20 @@ void calculator::CalculationsApproved(bool approved)
 
     }
 }
+
+void calculator::ActiveEffectDialogBoxConfirmed(QStringList list)
+{
+    RemoveAllEffectsFromPlayer(selectedPlayerID);
+    for(int i=0;i<list.size();i++)
+        for(int j=0;j<ActiveEffect.size();j++)
+            if(ActiveEffect.at(j).Name == list.at(i))
+            {
+                AddEffectToPlayer(selectedPlayerID,ActiveEffect.at(j).ID);
+            }
+    setVisualPlayerActiveEffects(selectedPlayerID);
+}
+
+
 
 //UI SLOTS
 void calculator::on_pushButton_AccMod_add_clicked()
@@ -235,8 +247,8 @@ void calculator::on_comboBox_select_player_activated(int index)
     RemovePlayerFromTargetModel(selectedPlayerID);
     AddPlayerToTargetModel(previously_selected_playerID);
 
-    setPlayerStats(selectedPlayerID);
-    setPlayerActiveEffects(selectedPlayerID);
+    setVisualPlayerStats(selectedPlayerID);
+    setVisualPlayerActiveEffects(selectedPlayerID);
     ResetAction();
     ResetTarget();
     ResetDifficulty();
@@ -286,6 +298,7 @@ void calculator::on_pushButton_calculate_clicked()
 {
     if(CheckForWarnings())
     {
+        PerformAdditionalEffects();
         CalculateSuccessTresholdForActionID(GetCurrentActionID());
         CalculateCriticalTresholdForActionID(GetCurrentActionID());
         setEnableAfterFirstCalculations(true);
@@ -316,6 +329,7 @@ void calculator::on_pushButton_continue_calculations_clicked()
 void calculator::on_pushButton_approve_clicked()
 {
     dialogbox_yesno_generic *box = new dialogbox_yesno_generic;
+    box->setAttribute(Qt::WA_DeleteOnClose);
     box->setDialogBoxType("ApproveCalculations");
     box->setWarningText1("Czy na pewno chcesz zaakceptować wynik? Kliknięcie TAK sprawi, że efekty obliczeń zostaną wprowadzone (skutecznie zaatakowany cel otrzyma obrażenia, Regeneracja Tarcz sprawi, że tarcze gracza zostaną uzupełnione, itd). Jeżeli nie chcesz zapisywać efektów i dodać je ręcznie (lub zmienić obliczenia), kliknij NIE, a następnie ODRZUĆ na dole strony.");
     box->setWarningText2("Wprowadzić zmiany?");
@@ -335,9 +349,35 @@ void calculator::on_pushButton_disapprove_clicked()
     dice_results.clear();
     ItemAndAccuracy.clear();
     ItemAndDifficulty.clear();
+    WidgetItemAndDifficulty.clear();
+    WidgetItemAndDamage.clear();
+    AdditionalItemAndDifficulty.clear();
+    AdditionalItemAndDamage.clear();
     ItemAndCritical.clear();
 
     ResetAction();
     ResetTarget();
     ResetDifficulty();
+}
+
+void calculator::on_pushButton_deleteEffect_clicked()
+{
+    if(ui->listWidget_player_conditions->count() >0)
+    {
+        int selected_row = ui->listWidget_player_conditions->currentRow();
+        int effectID = GetEffectIDFromEffectName(ui->listWidget_player_conditions->item(selected_row)->text());
+
+        RemoveEffectFromPlayer(selectedPlayerID,effectID);
+        ui->listWidget_player_conditions->takeItem(selected_row);
+    }
+}
+
+void calculator::on_pushButton_addEffect_clicked()
+{
+    DialogBox_ActiveEffect *box = new DialogBox_ActiveEffect;
+    box->setAttribute(Qt::WA_DeleteOnClose);
+    box->AddEffectsToRightList(ActiveEffect);
+    box->AddEffectsToLeftList(ActiveEffect,PlayerActiveEffects,selectedPlayerID);
+    connect(box,SIGNAL(sendActiveEffectList(QStringList)),this,SLOT(ActiveEffectDialogBoxConfirmed(QStringList)));
+    box->show();
 }

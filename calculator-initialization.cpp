@@ -74,6 +74,6 @@ void calculator::InitializeDifficultyLevel()
 void calculator::InitializePlayerStats()
 {
     int playerID = comboboxPlayersModel->item(0,1)->text().toInt();
-    setPlayerStats(playerID);
-    setPlayerActiveEffects(playerID);
+    setVisualPlayerStats(playerID);
+    setVisualPlayerActiveEffects(playerID);
 }

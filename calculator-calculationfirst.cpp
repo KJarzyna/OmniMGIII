@@ -65,38 +65,53 @@ int calculator::GetBaseSuccessTreshold(int actionID)
     return success;
 }
 
-int calculator::GetSumOfAccModifiers()
+int calculator::GetSumOfWidgetDiffModifiers()
 {
-    AdditionalItemAndDifficulty.clear();
+    WidgetItemAndDifficulty.clear();
     int acc_sum = 0;
     for(int i=0;i<ui->tableWidget_AccMod->rowCount();i++)
     {
         QSpinBox *spinbox = qobject_cast<QSpinBox*>(ui->tableWidget_AccMod->cellWidget(i,1));
-        acc_sum += spinbox->value();
-
         C_ItemModificator item;
         item.name = ui->tableWidget_AccMod->item(i,0)->text();
         item.value = spinbox->value();
-        AdditionalItemAndDifficulty.append(item);
+        WidgetItemAndDifficulty.append(item);
     }
+
+    for(int i=0;i<WidgetItemAndDifficulty.size();i++)
+        acc_sum += WidgetItemAndDifficulty.at(i).value;
+
     return acc_sum;
 }
 
-int calculator::GetSumOfDmgModifiers()
+int calculator::GetSumOfWidgetDmgModifiers()
 {
-    AdditionalItemAndDamage.clear();
+    WidgetItemAndDamage.clear();
     int dmg_sum = 0;
     for(int i=0;i<ui->tableWidget_DmgMod->rowCount();i++)
     {
         QSpinBox *spinbox = qobject_cast<QSpinBox*>(ui->tableWidget_DmgMod->cellWidget(i,1));
-        dmg_sum += spinbox->value();
 
         C_ItemModificator item;
         item.name = ui->tableWidget_DmgMod->item(i,0)->text();
         item.value = spinbox->value();
-        AdditionalItemAndDamage.append(item);
+        WidgetItemAndDamage.append(item);
     }
+
+    for(int i=0;i<WidgetItemAndDamage.size();i++)
+        dmg_sum += WidgetItemAndDamage.at(i).value;
+
     return dmg_sum;
+}
+
+int calculator::GetSumOfAdditionalDiffModifiers()
+{
+    int acc_sum = 0;
+
+    for(int i=0;i<AdditionalItemAndDifficulty.size();i++)
+        acc_sum += AdditionalItemAndDifficulty.at(i).value;
+
+    return acc_sum;
 }
 
 int calculator::GetDifficultyValueFromName(QString diff_name)
@@ -163,7 +178,8 @@ int calculator::GetFinalDifficultyValueForActionID(int actionID)
         difficulty_value = difficulty_value;
     }
 
-    difficulty_value += GetSumOfAccModifiers();
+    difficulty_value += GetSumOfWidgetDiffModifiers();
+    difficulty_value += GetSumOfAdditionalDiffModifiers();
 
     if(difficulty_value < 1)
         difficulty_value = 1;
@@ -225,3 +241,24 @@ void calculator::setCriticalTreshold(int treshold)
     criticalTreshold = treshold;
 }
 
+void calculator::SumAllDifficultyModificators()
+{
+    SumItemAndDifficulty.clear();
+    for(int i=0;i<ItemAndDifficulty.size();i++)
+        SumItemAndDifficulty.append(ItemAndDifficulty.at(i));
+    for(int i=0;i<WidgetItemAndDifficulty.size();i++)
+        SumItemAndDifficulty.append(WidgetItemAndDifficulty.at(i));
+    for(int i=0;i<AdditionalItemAndDifficulty.size();i++)
+        SumItemAndDifficulty.append(AdditionalItemAndDifficulty.at(i));
+}
+
+void calculator::SumAllDamageModificators()
+{
+    SumItemAndDamage.clear();
+    for(int i=0;i<ItemAndDamage.size();i++)
+        SumItemAndDamage.append(ItemAndDamage.at(i));
+    for(int i=0;i<WidgetItemAndDamage.size();i++)
+        SumItemAndDamage.append(WidgetItemAndDamage.at(i));
+    for(int i=0;i<AdditionalItemAndDamage.size();i++)
+        SumItemAndDamage.append(AdditionalItemAndDamage.at(i));
+}

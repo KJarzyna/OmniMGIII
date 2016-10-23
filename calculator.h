@@ -9,11 +9,13 @@
 #include <QString>
 #include "Headers/Actions/actions.h"
 #include "Headers/ItemModificator/itemmodificator.h"
+#include "Headers/ActiveEffects/skillactiveeffects.h"
 
 #include <dialogbox_difficultyreason.h>
 #include <dialogbox_action.h>
 #include <dialogbox_warning_generic.h>
 #include <dialogbox_postcalculation.h>
+#include <dialogbox_activeeffect.h>
 
 namespace Ui {
 class calculator;
@@ -49,15 +51,23 @@ public:
     QVector<C_PlayerOmnibladeMods> PlayerOmnibladeMods;
     QVector<C_PlayerActiveEffect> PlayerActiveEffects;
     QVector<C_ActiveEffect> ActiveEffect;
+    QVector<C_SkillActiveEffects> SkillActiveEffects;
     QVector<C_Actions> Actions;
 
-    QVector<C_ItemModificator> ItemAndDifficulty;
-    QVector<C_ItemModificator> AdditionalItemAndDifficulty;
-    QVector<C_ItemModificator> AdditionalItemAndDamage;
+    QVector<C_ItemModificator> WidgetItemAndDifficulty; //Widget Difficulty Modificators
+    QVector<C_ItemModificator> WidgetItemAndDamage; //Widget Difficulty Modificators
+
+    QVector<C_ItemModificator> ItemAndDifficulty; //Equipment Difficulty Modificators ->
     QVector<C_ItemModificator> ItemAndAccuracy;
     QVector<C_ItemModificator> ItemAndCritical;
     QVector<C_ItemModificator> ItemAndActionCost;
-    QVector<C_ItemModificator> ItemAndDamage;
+    QVector<C_ItemModificator> ItemAndDamage; // <-
+
+    QVector<C_ItemModificator> AdditionalItemAndDifficulty;
+    QVector<C_ItemModificator> AdditionalItemAndDamage;
+
+    QVector<C_ItemModificator> SumItemAndDifficulty; // Sum of all additional modificators
+    QVector<C_ItemModificator> SumItemAndDamage;
 
     QStandardItemModel *tableModel;
     QStandardItemModel *comboboxPlayersModel;
@@ -91,6 +101,7 @@ private slots:
     void GetDiceResults(QVector<int> dices);
     void DiceDialogBoxClosed();
     void CalculationsApproved(bool approved);
+    void ActiveEffectDialogBoxConfirmed(QStringList list);
 
     void on_pushButton_AccMod_add_clicked();
     void on_pushButton_AccMod_remove_clicked();
@@ -104,6 +115,10 @@ private slots:
     void on_pushButton_continue_calculations_clicked();
     void on_pushButton_approve_clicked();
     void on_pushButton_disapprove_clicked();
+
+    void on_pushButton_deleteEffect_clicked();
+
+    void on_pushButton_addEffect_clicked();
 
 private:
     Ui::calculator *ui;
@@ -130,8 +145,9 @@ private:
 
     //Player related
     QString GetPlayerNameFromPlayerID(int playerID);
-    void setPlayerStats(int playerID);
-    void setPlayerActiveEffects(int playerID);
+    QString GetPlayerSpecializationSkill(int playerID);
+    QStringList GetPlayerActiveEffects(int playerID);
+    QVector<int> GetPlayerActiveEffectsIDs(int playerID);
     void setPlayerCurrentArmor(int playerID, int value);
     void setPlayerCurrentShield(int playerID, int value);
     void reloadPlayerWeapon(int playerID, int weaponID);
@@ -143,13 +159,13 @@ private:
     int GetPlayersArmorSkillDiffLevelModifier(int playerID);
     int GetPlayersArmorMeeleeDiffLevelModifier(int playerID);
     int GetPlayerSkillMastery(int playerID, QString skillType);
-    QString GetPlayerSpecializationSkill(int playerID);
     int GetPlayerEvasiveness(int playerID);
     int GetPlayersOmnibladeID(int playerID);
     int GetPlayersArmorCriticalChanceModifier(int playerID);
     int GetPlayerMaxShield(int playerID);
     int GetPlayerMaxArmor(int playerID);
     bool isPlayerHasShield(int playerID);
+    bool isPlayerHasEffect(int playerID, int effectID);
 
 
     //Actions related
@@ -208,7 +224,7 @@ private:
     int GetHeavyMeeleeDamageFromPlayerRace(int playerID);
 
     //GET
-    QString GetEffectNameFromEffectID(int ID);
+
     QString GetGeneratorNameFromGeneratorID(int ID);
     int GetPlayerTechnoBuffFromOmnikey(int playerID);
 
@@ -219,25 +235,33 @@ private:
     QString GetSkillTargetFromSkillID(int ID);
     int GetSkillAccFromSkillID(int ID);
     int GetSkillCostFromSkillID(int ID);
-    int GetSkillStunChanceFromSkillID(int ID);
-    int GetSkillKnockoutChanceFromSkillID(int ID);
-    int GetSkillChillChanceFromSkillID(int ID);
-    int GetSkillFlameChanceFromSkillID(int ID);
-    int GetSkillUpliftChanceFromSkillID(int ID);
     int GetSkillDamageToArmorFromSkillID(int ID);
     int GetSkillDamageToShieldFromSkillID(int ID);
+    bool isSkillWorksWithShields(int ID);
 
 
+    //Effect related
+    void AddEffectToPlayer(int playerID, int effectID);
+    void RemoveEffectFromPlayer(int playerID, int effectID);
+    void RemoveAllEffectsFromPlayer(int playerID);
+    QString GetEffectNameFromEffectID(int ID);
+    int GetEffectIDFromEffectName(QString name);
+    int GetSkillEffectChanceFromSkillID(int SkillID, int EffectID);
+    QVector<int> GetSkillEffectsFromSkillID(int skillID);
+    bool isSkillEffectApplicableToPlayer(int playerID, int skillID);
 
     //Text related
     void setVisualTextToWidget(QString text);
     void setVisualTextToSecondWidget(QString text);
+    void setVisualPlayerStats(int playerID);
+    void setVisualPlayerActiveEffects(int playerID);
     QString GetVisualTextFromSelectedInfo();
     QString GetFinalVisualTextFromSelectedInfo();
     QString GetVisualHeader();
     QString GetVisualSuccessCheck();
     QString GetVisualCriticalCheck();
     QStringList GetVisualEffectCheck();
+    QStringList GetVisualEffectSuccess();
     QString GetVisualCalculationSteps();
     QString GetVisualCalculationSteps_Damage();
     QString GetVisualCalculationSteps_Difficulty();
@@ -245,7 +269,10 @@ private:
     QString GetVisualCalculationSteps_Critical();
     QString GetVisualCalculationSteps_Accuracy();
     QString GetVisualTargetArmorAndShieldLeftResult();
-    //Critical related
+    QString GetVisualTargetEffects();
+
+    //ADDITIONAL EFFECTS
+    void PerformAdditionalEffects();
 
     //Calculations related
     void setSuccessTreshold(int treshold);
@@ -253,10 +280,13 @@ private:
     void CalculateSuccessTresholdForActionID(int actionID);
     void CalculateCriticalTresholdForActionID(int actionID);
     void PopUpWarning(QString text);
+    void SumAllDifficultyModificators();
+    void SumAllDamageModificators();
     bool CheckForWarnings();
 
-    int GetSumOfAccModifiers();
-    int GetSumOfDmgModifiers();
+    int GetSumOfWidgetDiffModifiers();
+    int GetSumOfWidgetDmgModifiers();
+    int GetSumOfAdditionalDiffModifiers();
     int GetBaseSuccessTreshold(int actionID);
     QString GetDiceTypeForActionID(int actionID);
 

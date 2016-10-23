@@ -603,7 +603,6 @@ void MainWindow::CalculatorModuleSlot(bool savesignal)
     {
         SaveAll();
         OpenCalculatorModule();
-        qDebug() << "DB Save module triggered";
     }
 }
 

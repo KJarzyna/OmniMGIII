@@ -30,6 +30,7 @@
 #include <Headers/ActiveEffects/activeeffect.h>
 #include <Headers/Player/playeractiveeffect.h>
 #include <Headers/Actions/actions.h>
+#include <Headers/ActiveEffects/skillactiveeffects.h>
 #include <QFile>
 #include <QDebug>
 
@@ -110,6 +111,7 @@ public:
     //ACTIVE EFFECTS
     bool ReadActiveEffectsFromFileAndLoadToVector(QString filename, QVector<C_ActiveEffect> &vector);
     bool ReadPlayerActiveEffectsFromFileAndLoadToVector(QString filename, QVector<C_PlayerActiveEffect> &vector);
+    bool ReadSkillActiveEffectsFromFileAndLoadToVector(QString filename, QVector<C_SkillActiveEffects> &vector);
 
     bool WritePlayerActiveEffectsFromVectorToFile(QVector<C_PlayerActiveEffect> &vector, QString filename);
 

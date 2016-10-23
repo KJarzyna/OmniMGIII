@@ -209,7 +209,7 @@ bool calculator::isActionDealDamage(int actionID)
         return true;
     else if(isActionMeeleeRelated(actionID))
         return true;
-    else if(isActionSkillRelated(actionID))
+    else if(isActionSkillRelated(actionID) && GetSkillTargetFromSkillID(selectedActionItemID) == "target")
         return true;
     else if(isActionAmmoRelated(actionID))
         return false;

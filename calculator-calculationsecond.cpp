@@ -84,13 +84,12 @@ int calculator::GetModifiedBaseDamageDealt()
     else if(isActionMeeleeRelated(GetCurrentActionID()))
         GetOmnibladeDamageFromOmnibladeID(selectedActionItemID);
 
-    for(int i=0;i<ItemAndDamage.size();i++)
-        damage += ItemAndDamage.at(i).value;
+    GetSumOfWidgetDmgModifiers();
+    SumAllDamageModificators();
 
-    GetSumOfDmgModifiers();
+    for(int i=0;i<SumItemAndDamage.size();i++)
+        damage += SumItemAndDamage.at(i).value;
 
-    for(int i=0;i<AdditionalItemAndDamage.size();i++)
-        damage += AdditionalItemAndDamage.at(i).value;
     return damage;
 }
 
@@ -153,4 +152,30 @@ void calculator::ImplementAfterCalculationChanges()
     {
         reloadPlayerWeapon(selectedPlayerID,selectedActionItemID);
     }
+
+    //Add effect to target
+    if(isActionSkillRelated(actionID) && GetSkillTargetFromSkillID(selectedActionItemID) == "target" && GetNumberOfSuccess() > 0 && isSkillEffectApplicableToPlayer(selectedTargetID,selectedActionItemID))
+    {
+        for(int i=0;i<GetSkillEffectsFromSkillID(selectedActionItemID).size();i++)
+            AddEffectToPlayer(selectedTargetID,GetSkillEffectsFromSkillID(selectedActionItemID).at(i));
+    }
+    //Add effect to player
+    else if(isActionSkillRelated(actionID) && GetSkillTargetFromSkillID(selectedActionItemID) == "self" && GetNumberOfSuccess() > 0 && isSkillEffectApplicableToPlayer(selectedTargetID,selectedActionItemID))
+    {
+        for(int i=0;i<GetSkillEffectsFromSkillID(selectedActionItemID).size();i++)
+            AddEffectToPlayer(selectedPlayerID,GetSkillEffectsFromSkillID(selectedActionItemID).at(i));
+        setVisualPlayerActiveEffects(selectedPlayerID);
+    }
+    //Add "Ranny" to player
+    if(isActionDealDamage(actionID) && GetNumberOfSuccess() > 0 && (!isPlayerHasShield(selectedTargetID) || isActionMeeleeRelated(actionID)))
+        if(GetPlayerArmorCurrentAfterDamage(selectedTargetID,0) < GetPlayerMaxArmor(selectedTargetID)*0.5)
+        {
+            if(GetPlayerActiveEffectsIDs(selectedTargetID).contains(0))
+            {
+                RemoveEffectFromPlayer(selectedTargetID,0);
+                AddEffectToPlayer(selectedTargetID,1);
+            }
+            else if(!GetPlayerActiveEffectsIDs(selectedTargetID).contains(1))
+                AddEffectToPlayer(selectedTargetID,0);
+        }
 }

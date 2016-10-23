@@ -56,49 +56,30 @@ int calculator::GetSkillCostFromSkillID(int ID)
     return skillCost;
 }
 
-int calculator::GetSkillStunChanceFromSkillID(int ID)
+int calculator::GetSkillEffectChanceFromSkillID(int SkillID, int EffectID)
 {
     int output = 0;
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            output = Skills.at(i).StunChance;
+    for(int i=0;i<SkillActiveEffects.size();i++)
+        if(SkillActiveEffects.at(i).SkillID == SkillID && SkillActiveEffects.at(i).EffectID == EffectID)
+            output = SkillActiveEffects.at(i).EffectChance;
     return output;
 }
 
-int calculator::GetSkillKnockoutChanceFromSkillID(int ID)
+bool calculator::isSkillWorksWithShields(int ID)
 {
-    int output = 0;
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            output = Skills.at(i).KnockoutChance;
+    bool output = false;
+    for(int i=0;i<SkillActiveEffects.size();i++)
+        if(SkillActiveEffects.at(i).SkillID == ID)
+            output = SkillActiveEffects.at(i).WorksWithShields;
     return output;
 }
 
-int calculator::GetSkillChillChanceFromSkillID(int ID)
+bool calculator::isSkillEffectApplicableToPlayer(int playerID, int skillID)
 {
-    int output = 0;
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            output = Skills.at(i).ChillChance;
-    return output;
-}
-
-int calculator::GetSkillFlameChanceFromSkillID(int ID)
-{
-    int output = 0;
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            output = Skills.at(i).FlameChance;
-    return output;
-}
-
-int calculator::GetSkillUpliftChanceFromSkillID(int ID)
-{
-    int output = 0;
-    for(int i=0;i<Skills.size();i++)
-        if(Skills.at(i).SkillID == ID)
-            output = Skills.at(i).UpliftChance;
-    return output;
+    if(isPlayerHasShield(playerID) && !isSkillWorksWithShields(skillID))
+        return false;
+    else
+        return true;
 }
 
 int calculator::GetSkillDamageToArmorFromSkillID(int id)

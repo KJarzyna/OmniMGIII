@@ -126,7 +126,7 @@ int calculator::GetLightMeeleeDamageFromPlayerRace(int playerID)
         return 100;
     else if(race == "Geth")
         return 150;
-    else if(race == "Geth")
+    else if(race == "Kroganin")
         return 200;
     else if(race == "Vorcha" || race == "Drell")
         return 100;
