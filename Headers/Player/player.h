@@ -18,6 +18,7 @@ public:
     int ArmorMax;
     int ShieldCurrent;
     int ShieldMax;
+    int BarrierCurrent;
 
     QString Status;
     QString ActiveEffects;

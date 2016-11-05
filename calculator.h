@@ -65,9 +65,13 @@ public:
 
     QVector<C_ItemModificator> AdditionalItemAndDifficulty;
     QVector<C_ItemModificator> AdditionalItemAndDamage;
+    QVector<C_ItemModificator> AdditionalItemAndActionCost;
+    QVector<C_ItemModificator> AdditionalItemAndCritical;
 
     QVector<C_ItemModificator> SumItemAndDifficulty; // Sum of all additional modificators
     QVector<C_ItemModificator> SumItemAndDamage;
+    QVector<C_ItemModificator> SumItemAndActionCost;
+    QVector<C_ItemModificator> SumItemAndCritical;
 
     QStandardItemModel *tableModel;
     QStandardItemModel *comboboxPlayersModel;
@@ -150,6 +154,7 @@ private:
     QVector<int> GetPlayerActiveEffectsIDs(int playerID);
     void setPlayerCurrentArmor(int playerID, int value);
     void setPlayerCurrentShield(int playerID, int value);
+    void setPlayerBarrier(int playerID, int value);
     void reloadPlayerWeapon(int playerID, int weaponID);
     void subtractAmmoFromPlayerWeapon(int playerID, int weaponID);
     int GetPlayersArmorCostReduction(int playerID);
@@ -165,6 +170,7 @@ private:
     int GetPlayerMaxShield(int playerID);
     int GetPlayerMaxArmor(int playerID);
     bool isPlayerHasShield(int playerID);
+    bool isPlayerHasBarrier(int playerID);
     bool isPlayerHasEffect(int playerID, int effectID);
 
 
@@ -237,6 +243,7 @@ private:
     int GetSkillCostFromSkillID(int ID);
     int GetSkillDamageToArmorFromSkillID(int ID);
     int GetSkillDamageToShieldFromSkillID(int ID);
+    int GetSkillBarrierFromSkillID(int ID);
     bool isSkillWorksWithShields(int ID);
 
 
@@ -273,15 +280,18 @@ private:
 
     //ADDITIONAL EFFECTS
     void PerformAdditionalEffects();
+    void PerformAdditionalEffectsAfterHit();
 
     //Calculations related
     void setSuccessTreshold(int treshold);
     void setCriticalTreshold(int treshold);
     void CalculateSuccessTresholdForActionID(int actionID);
     void CalculateCriticalTresholdForActionID(int actionID);
+    void CalculateFinalActionCostForActionID(int actionID);
     void PopUpWarning(QString text);
     void SumAllDifficultyModificators();
     void SumAllDamageModificators();
+    void SumAllActionCostModificators();
     bool CheckForWarnings();
 
     int GetSumOfWidgetDiffModifiers();
@@ -299,6 +309,7 @@ private:
     int GetModifiedBaseDamageDealt();
     int GetFinalDamageDealt();
     int GetPlayerShieldCurrentAfterDamage(int playerID, int damage);
+    int GetPlayerBarrierAfterDamage(int playerID, int damage);
     int GetPlayerArmorCurrentAfterDamage(int playerID, int damage);
 
     //After Calculations

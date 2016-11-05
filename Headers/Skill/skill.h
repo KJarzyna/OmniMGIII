@@ -14,7 +14,7 @@ public:
     int SkillDmgToShield;
     int Cost;
     int Acc;
-    int StunChance;
+    int AdditionalBarrier;
     int KnockoutChance;
     int ChillChance;
     int FlameChance;

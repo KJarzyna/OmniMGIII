@@ -120,6 +120,7 @@ void calculator::ResetAction()
     selectedActionItemID = -1;
     selectedActionCostName = "AD";
     setActionNameInStats("Nie wybrano akcji");
+    AdditionalItemAndActionCost.clear();
 }
 
 void calculator::ResetTarget()
@@ -189,6 +190,15 @@ void calculator::CalculationsApproved(bool approved)
 
 void calculator::ActiveEffectDialogBoxConfirmed(QStringList list)
 {
+    //set Player Barrier level if any Barrier-related skill is in the skill list
+    for(int i=7;i<24;i++)
+        if(list.contains(GetEffectNameFromEffectID(i)))
+            setPlayerBarrier(selectedPlayerID,GetSkillBarrierFromSkillID(i+44));
+    //set Player Umocnienie level if any Umocnienie-related skill is in the skill list
+    for(int i=126;i<143;i++)
+        if(list.contains(GetEffectNameFromEffectID(i)))
+            setPlayerBarrier(selectedPlayerID,GetSkillBarrierFromSkillID(i+154));
+
     RemoveAllEffectsFromPlayer(selectedPlayerID);
     for(int i=0;i<list.size();i++)
         for(int j=0;j<ActiveEffect.size();j++)
@@ -197,6 +207,7 @@ void calculator::ActiveEffectDialogBoxConfirmed(QStringList list)
                 AddEffectToPlayer(selectedPlayerID,ActiveEffect.at(j).ID);
             }
     setVisualPlayerActiveEffects(selectedPlayerID);
+    setVisualPlayerStats(selectedPlayerID);
 }
 
 
@@ -249,6 +260,7 @@ void calculator::on_comboBox_select_player_activated(int index)
 
     setVisualPlayerStats(selectedPlayerID);
     setVisualPlayerActiveEffects(selectedPlayerID);
+
     ResetAction();
     ResetTarget();
     ResetDifficulty();
@@ -301,6 +313,7 @@ void calculator::on_pushButton_calculate_clicked()
         PerformAdditionalEffects();
         CalculateSuccessTresholdForActionID(GetCurrentActionID());
         CalculateCriticalTresholdForActionID(GetCurrentActionID());
+        CalculateFinalActionCostForActionID(GetCurrentActionID());
         setEnableAfterFirstCalculations(true);
         setEnableAllInput(false);
         setVisualTextToWidget(GetVisualTextFromSelectedInfo());
@@ -366,6 +379,13 @@ void calculator::on_pushButton_deleteEffect_clicked()
     {
         int selected_row = ui->listWidget_player_conditions->currentRow();
         int effectID = GetEffectIDFromEffectName(ui->listWidget_player_conditions->item(selected_row)->text());
+
+        //Set Barrier/Umocnienie to 0
+        if((effectID > 6 && effectID < 24) || (effectID > 125 && effectID < 143))
+        {
+            setPlayerBarrier(selectedPlayerID, 0);
+            setVisualPlayerStats(selectedPlayerID);
+        }
 
         RemoveEffectFromPlayer(selectedPlayerID,effectID);
         ui->listWidget_player_conditions->takeItem(selected_row);

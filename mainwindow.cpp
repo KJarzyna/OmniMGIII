@@ -164,6 +164,7 @@ void MainWindow::AddNewPlayerToVector(QString playerName, int playerID)
     newplayer.ArmorMax = 500;
     newplayer.ShieldCurrent = 200;
     newplayer.ShieldMax = 200;
+    newplayer.BarrierCurrent = 0;
     newplayer.MasteryBattle = 30;
     newplayer.MasteryBiotic = 30;
     newplayer.MasteryTechno = 30;

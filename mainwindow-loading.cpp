@@ -19,6 +19,7 @@ void MainWindow::LoadPlayerGeneralTab(int playerID)
     ui->lineEdit_armor_full->setText(QString::number(Players.at(playerIndex).ArmorMax));
     ui->lineEdit_shield_current->setText(QString::number(Players.at(playerIndex).ShieldCurrent));
     ui->lineEdit_shield_full->setText(QString::number(Players.at(playerIndex).ShieldMax));
+    ui->lineEdit_barrier_current->setText(QString::number(Players.at(playerIndex).BarrierCurrent));
 
     for(int i=0;i<PlayerActiveEffects.size();i++)
         if(PlayerActiveEffects.at(i).PlayerID == playerID)

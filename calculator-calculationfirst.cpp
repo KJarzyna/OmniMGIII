@@ -31,8 +31,32 @@ void calculator::CalculateCriticalTresholdForActionID(int actionID)
     int base = 5;
     int crit_sum = base + GetPlayersArmorCriticalChanceModifier(selectedPlayerID);
 
+    for(int i=0;i<AdditionalItemAndCritical.size();i++)
+        crit_sum+=AdditionalItemAndCritical.at(i).value;
+
     setCriticalTreshold(crit_sum);
 
+}
+
+void calculator::CalculateFinalActionCostForActionID(int actionID)
+{
+    int cost = 100;
+    if(actionID != 7)
+        cost = GetActionCostFromActionID(actionID);
+    else
+        cost = GetSkillCostFromSkillID(selectedActionItemID);
+
+   if(GetPlayersArmorCostReduction(selectedPlayerID) != 0)
+       cost = cost + GetPlayersArmorCostReduction(selectedPlayerID);
+
+   SumAllActionCostModificators();
+
+    if(!SumItemAndActionCost.isEmpty())
+        for(int i=0;i<SumItemAndActionCost.size();i++)
+            cost += SumItemAndActionCost.at(i).value;
+
+    QString actionType = GetActionTypeFromActionCost(cost);
+    setSelectedActionCostName(actionType);
 }
 
 int calculator::GetBaseSuccessTreshold(int actionID)
@@ -261,4 +285,13 @@ void calculator::SumAllDamageModificators()
         SumItemAndDamage.append(WidgetItemAndDamage.at(i));
     for(int i=0;i<AdditionalItemAndDamage.size();i++)
         SumItemAndDamage.append(AdditionalItemAndDamage.at(i));
+}
+
+void calculator::SumAllActionCostModificators()
+{
+    SumItemAndActionCost.clear();
+    for(int i=0;i<ItemAndActionCost.size();i++)
+        SumItemAndActionCost.append(ItemAndActionCost.at(i));
+    for(int i=0;i<AdditionalItemAndActionCost.size();i++)
+        SumItemAndActionCost.append(AdditionalItemAndActionCost.at(i));
 }

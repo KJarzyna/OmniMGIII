@@ -31,7 +31,7 @@ bool ReadWriteData::ReadPlayersFromFileAndLoadToVector(QString filename, QVector
                 player.ArmorMax = cells.at(6).toInt();
                 player.ShieldCurrent = cells.at(7).toInt();
                 player.ShieldMax = cells.at(8).toInt();
-                player.Status = cells.at(9);
+                player.BarrierCurrent = cells.at(9).toInt();
                 player.ActiveEffects = cells.at(10);
                 player.SpecializationSkill = cells.at(11);
                 player.MasteryBattle = cells.at(12).toInt();
@@ -83,7 +83,7 @@ bool ReadWriteData::ReadSkillsFromFileAndLoadToVector(QString filename, QVector<
                 skill.SkillDmgToShield = cells.at(4).toInt();
                 skill.Cost = cells.at(5).toInt();
                 skill.Acc = cells.at(6).toInt();
-                skill.StunChance = cells.at(7).toInt();
+                skill.AdditionalBarrier = cells.at(7).toInt();
                 skill.KnockoutChance = cells.at(8).toInt();
                 skill.ChillChance = cells.at(9).toInt();
                 skill.FlameChance = cells.at(10).toInt();
@@ -1106,7 +1106,7 @@ bool ReadWriteData::WritePlayersFromVectorToFile(QVector<C_Player> &vector, QStr
     if (CreateFileBackup(filename) && outputFile.remove() && outputFile.open(QIODevice::ReadWrite))
     {
         QTextStream out(&outputFile);
-        line = "PlayerID;PlayerName;PlayerRace;PlayerClass;PlayerType;ArmorCurrent;ArmorMax;ShieldCurrent;ShieldMax;Status;ActiveEffects;SpecializationSkill;MasteryBattle;MasteryBiotic;MasteryTechno;MasterySpec";
+        line = "PlayerID;PlayerName;PlayerRace;PlayerClass;PlayerType;ArmorCurrent;ArmorMax;ShieldCurrent;ShieldMax;BarrierCurrent;ActiveEffects;SpecializationSkill;MasteryBattle;MasteryBiotic;MasteryTechno;MasterySpec";
         out << line << endl;
 
         for (int i=0; i<vector.size();i++)
@@ -1130,7 +1130,7 @@ bool ReadWriteData::WritePlayersFromVectorToFile(QVector<C_Player> &vector, QStr
             line.append(";");
             line.append(QString::number(vector.at(i).ShieldMax));
             line.append(";");
-            line.append(vector.at(i).Status);
+            line.append(vector.at(i).BarrierCurrent);
             line.append(";");
             line.append(vector.at(i).ActiveEffects);
             line.append(";");
@@ -1165,7 +1165,7 @@ bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QStrin
     if (CreateFileBackup(filename) && outputFile.remove() && outputFile.open(QIODevice::ReadWrite))
     {
         QTextStream out(&outputFile);
-        line = "SkillID;SkillName;SkillLevel;SkillDmgToArmor;SkillDmgToShield;Cost;Acc;StunChance;KnockoutChance;ChillChance;FlameChance;UpliftChance;SelfShieldDrain;SkillTarget;SkillType;SkillDescription";
+        line = "SkillID;SkillName;SkillLevel;SkillDmgToArmor;SkillDmgToShield;Cost;Acc;AdditionalBarrier;KnockoutChance;ChillChance;FlameChance;UpliftChance;SelfShieldDrain;SkillTarget;SkillType;SkillDescription";
         out << line << endl;
 
         for (int i=0; i<vector.size();i++)
@@ -1185,7 +1185,7 @@ bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QStrin
             line.append(";");
             line.append(QString::number(vector.at(i).Acc));
             line.append(";");
-            line.append(QString::number(vector.at(i).StunChance));
+            line.append(QString::number(vector.at(i).AdditionalBarrier));
             line.append(";");
             line.append(QString::number(vector.at(i).KnockoutChance));
             line.append(";");

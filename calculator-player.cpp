@@ -234,6 +234,14 @@ bool calculator::isPlayerHasShield(int playerID)
    return false;
 }
 
+bool calculator::isPlayerHasBarrier(int playerID)
+{
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID && Players.at(i).BarrierCurrent > 0)
+            return true;
+   return false;
+}
+
 bool calculator::isPlayerHasEffect(int playerID, int effectID)
 {
     for(int i=0;i<PlayerActiveEffects.size();i++)
@@ -290,6 +298,20 @@ int calculator::GetPlayerShieldCurrentAfterDamage(int playerID, int damage)
 
 }
 
+int calculator::GetPlayerBarrierAfterDamage(int playerID, int damage)
+{
+    int output = 99999;
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            output = Players.at(i).BarrierCurrent - damage;
+
+    if(output < 0)
+        output = 0;
+
+    return output;
+
+}
+
 int calculator::GetPlayerTechnoBuffFromOmnikey(int playerID)
 {
     int output = 0;
@@ -316,6 +338,13 @@ void calculator::setPlayerCurrentShield(int playerID, int value)
      for(int i=0;i<Players.size();i++)
          if(Players.at(i).PlayerID == playerID)
              Players[i].ShieldCurrent = value;
+}
+
+void calculator::setPlayerBarrier(int playerID, int value)
+{
+     for(int i=0;i<Players.size();i++)
+         if(Players.at(i).PlayerID == playerID)
+             Players[i].BarrierCurrent = value;
 }
 
 void calculator::reloadPlayerWeapon(int playerID, int weaponID)

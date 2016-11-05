@@ -65,6 +65,15 @@ int calculator::GetSkillEffectChanceFromSkillID(int SkillID, int EffectID)
     return output;
 }
 
+int calculator::GetSkillBarrierFromSkillID(int ID)
+{
+    int mod = 0;
+    for(int i=0;i<Skills.size();i++)
+        if(Skills.at(i).SkillID == ID)
+            mod = Skills.at(i).AdditionalBarrier;
+    return mod;
+}
+
 bool calculator::isSkillWorksWithShields(int ID)
 {
     bool output = false;

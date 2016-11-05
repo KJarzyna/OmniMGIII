@@ -12,6 +12,7 @@ void calculator::setVisualPlayerStats(int playerID)
             ui->label_max_armor->setText(QString::number(Players.at(i).ArmorMax));
             ui->label_current_shield->setText(QString::number(Players.at(i).ShieldCurrent));
             ui->label_max_shield->setText(QString::number(Players.at(i).ShieldMax));
+            ui->label_current_barrier->setText(QString::number(Players.at(i).BarrierCurrent));
         }
 }
 
@@ -273,25 +274,37 @@ QString calculator::GetVisualCalculationSteps()
 QString calculator::GetVisualTargetArmorAndShieldLeftResult()
 {
     QString text = "";
-    QString shield_max = "", shield_current = "", armor_max = "", armor_current = "";
+    QString shield_max = "", shield_current = "", armor_max = "", armor_current = "", barrier = "";
 
     if(isActionNeedTarget(GetCurrentActionID()) && GetNumberOfSuccess() > 0 && !isActionMeeleeRelated(GetCurrentActionID()))
     {
         text += "<br><br>";
         text += selectedTargetName + ":<br>";
 
-        for(int i=0;i<Players.size();i++)
-            if(Players.at(i).PlayerID == selectedTargetID)
-            {
-                shield_max = QString::number(Players.at(i).ShieldMax);
-                armor_max = QString::number(Players.at(i).ArmorMax);
+        shield_max = QString::number(GetPlayerMaxShield(selectedTargetID));
+        armor_max = QString::number(GetPlayerMaxArmor(selectedTargetID));
 
-                shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
-                if(Players.at(i).ShieldCurrent == 0)
-                    armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
-                else
-                    armor_current = QString::number(Players.at(i).ArmorCurrent);
-            }
+        if(isPlayerHasBarrier(selectedTargetID))
+        {
+            barrier = QString::number(GetPlayerBarrierAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+            shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0));
+            armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,0));
+        }
+        else if(!isPlayerHasBarrier(selectedTargetID) && isPlayerHasShield(selectedTargetID))
+        {
+            shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+            armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,0));
+        }
+        else if(!isPlayerHasShield(selectedTargetID) && !isPlayerHasBarrier(selectedTargetID))
+            armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+        else
+            armor_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0));
+
+        if(isPlayerHasBarrier(selectedTargetID))
+        {
+            text += "Bariera <font color=#BF80FF>";
+            text += barrier + "</font> ";
+        }
 
         text += "Tarcze <font color=#0080FF>";
         text += shield_current + "/" + shield_max + "</font> ";
@@ -304,16 +317,37 @@ QString calculator::GetVisualTargetArmorAndShieldLeftResult()
         text += "<br><br>";
         text += selectedTargetName + ":<br>";
 
-        for(int i=0;i<Players.size();i++)
-            if(Players.at(i).PlayerID == selectedTargetID)
-            {
-                shield_max = QString::number(Players.at(i).ShieldMax);
-                armor_max = QString::number(Players.at(i).ArmorMax);
 
-                shield_current = QString::number(Players.at(i).ShieldCurrent);
-                armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
-            }
+        shield_max = QString::number(GetPlayerMaxShield(selectedTargetID));
+        armor_max = QString::number(GetPlayerMaxArmor(selectedTargetID));
+        barrier = QString::number(GetPlayerBarrierAfterDamage(selectedTargetID,0));
 
+        shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0));
+        armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+
+        if(isPlayerHasBarrier(selectedTargetID))
+        {
+            text += "Bariera <font color=#BF80FF>";
+            text += barrier + "</font> ";
+        }
+        text += "Tarcze <font color=#0080FF>";
+        text += shield_current + "/" + shield_max + "</font> ";
+        text += "Pancerz <font color=#FFBF00>";
+        text += armor_current + "/" + armor_max + "</font><br>";
+    }
+
+    else if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID > 50 && selectedActionItemID < 68)    // Barrier Regeneration
+    {
+        text += selectedPlayerName + ":<br>";
+        shield_max = QString::number(GetPlayerMaxShield(selectedPlayerID));
+        armor_max = QString::number(GetPlayerMaxArmor(selectedPlayerID));
+
+        barrier = QString::number(GetSkillBarrierFromSkillID(selectedActionItemID));
+        shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,0));
+        armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedPlayerID,0));
+
+        text += "Bariera <font color=#BF80FF>";
+        text += barrier + "</font> ";
         text += "Tarcze <font color=#0080FF>";
         text += shield_current + "/" + shield_max + "</font> ";
         text += "Pancerz <font color=#FFBF00>";
@@ -323,17 +357,18 @@ QString calculator::GetVisualTargetArmorAndShieldLeftResult()
     else if(GetCurrentActionID() == 6)                                          // Shield Regeneration
     {
         text += selectedPlayerName + ":<br>";
+        shield_max = QString::number(GetPlayerMaxShield(selectedPlayerID));
+        armor_max = QString::number(GetPlayerMaxArmor(selectedPlayerID));
 
-        for(int i=0;i<Players.size();i++)
-            if(Players.at(i).PlayerID == selectedPlayerID)
-            {
-                shield_max = QString::number(Players.at(i).ShieldMax);
-                armor_max = QString::number(Players.at(i).ArmorMax);
+        barrier = QString::number(GetPlayerBarrierAfterDamage(selectedPlayerID,0));
+        shield_current = QString::number(GetPlayerMaxShield(selectedPlayerID));
+        armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedPlayerID,0));
 
-                shield_current = QString::number(Players.at(i).ShieldMax);
-                armor_current = QString::number(Players.at(i).ArmorCurrent);
-            }
-
+        if(isPlayerHasBarrier(selectedPlayerID))
+        {
+            text += "Bariera <font color=#BF80FF>";
+            text += barrier + "</font> ";
+        }
         text += "Tarcze <font color=#0080FF>";
         text += shield_current + "/" + shield_max + "</font> ";
         text += "Pancerz <font color=#FFBF00>";
@@ -347,32 +382,40 @@ QString calculator::GetVisualTargetArmorAndShieldLeftResult()
         else
             text += selectedTargetName + ":<br>";
 
-        for(int i=0;i<Players.size();i++)
+        if(selectedActionItemID == 0)
         {
-            if(selectedActionItemID == 0 && Players.at(i).PlayerID == selectedPlayerID)
-            {
-                shield_max = QString::number(Players.at(i).ShieldMax);
-                armor_max = QString::number(Players.at(i).ArmorMax);
+            shield_max = QString::number(GetPlayerMaxShield(selectedPlayerID));
+            armor_max = QString::number(GetPlayerMaxArmor(selectedPlayerID));
 
-                shield_current = QString::number(Players.at(i).ShieldCurrent);
+            shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,0));
 
-                int armorRepaired = Players.at(i).ArmorMax*(0.2 + GetPlayerTechnoBuffFromOmnikey(selectedPlayerID)*0.01);
-                int armorNew = GetPlayerArmorCurrentAfterDamage(selectedPlayerID,-armorRepaired);
-                armor_current = QString::number(armorNew);
-            }
-            else if(selectedActionItemID == 1 && Players.at(i).PlayerID == selectedTargetID)
-            {
-                shield_max = QString::number(Players.at(i).ShieldMax);
-                armor_max = QString::number(Players.at(i).ArmorMax);
+            int armorRepaired = GetPlayerMaxArmor(selectedPlayerID)*(0.2 + GetPlayerTechnoBuffFromOmnikey(selectedPlayerID)*0.01);
+            int armorNew = GetPlayerArmorCurrentAfterDamage(selectedPlayerID,-armorRepaired);
+            armor_current = QString::number(armorNew);
+        }
+        else if(selectedActionItemID == 1)
+        {
+            shield_max = QString::number(GetPlayerMaxShield(selectedTargetID));
+            armor_max = QString::number(GetPlayerMaxArmor(selectedTargetID));
 
-                shield_current = QString::number(Players.at(i).ShieldCurrent);
+            shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0));
 
-                int armorRepaired = Players.at(i).ArmorMax*(0.2 + GetPlayerTechnoBuffFromOmnikey(selectedTargetID)*0.1);
-                int armorNew = GetPlayerArmorCurrentAfterDamage(selectedTargetID,-armorRepaired);
-                armor_current = QString::number(armorNew);
-            }
+            int armorRepaired = GetPlayerMaxArmor(selectedTargetID)*(0.2 + GetPlayerTechnoBuffFromOmnikey(selectedTargetID)*0.1);
+            int armorNew = GetPlayerArmorCurrentAfterDamage(selectedTargetID,-armorRepaired);
+            armor_current = QString::number(armorNew);
         }
 
+
+        if(selectedActionItemID == 0 && isPlayerHasBarrier(selectedPlayerID))
+        {
+            text += "Bariera <font color=#BF80FF>";
+            text += GetPlayerBarrierAfterDamage(selectedPlayerID,0) + "</font> ";
+        }
+        else if(selectedActionItemID == 1 && isPlayerHasBarrier(selectedTargetID))
+        {
+            text += "Bariera <font color=#BF80FF>";
+            text += GetPlayerBarrierAfterDamage(selectedTargetID,0) + "</font> ";
+        }
         text += "Tarcze <font color=#0080FF>";
         text += shield_current + "/" + shield_max + "</font> ";
         text += "Pancerz <font color=#FFBF00>";
@@ -558,7 +601,7 @@ QString calculator::GetVisualCalculationSteps_Critical()
 {
     QString text = "";
 
-    if(ItemAndCritical.size() > 0)
+    if(ItemAndCritical.size() > 0 || AdditionalItemAndCritical.size() > 0)
     {
         text += "Premia do szansy na trafienie krytyczne:";
 
@@ -568,6 +611,13 @@ QString calculator::GetVisualCalculationSteps_Critical()
             if(ItemAndCritical.at(i).value > 0)
                 text += "+";
             text += QString::number(ItemAndCritical.at(i).value) + " [" + ItemAndCritical.at(i).name + "]";
+        }
+        for(int i=0;i<AdditionalItemAndCritical.size();i++)
+        {
+            text += "<br>";
+            if(AdditionalItemAndCritical.at(i).value > 0)
+                text += "+";
+            text += QString::number(AdditionalItemAndCritical.at(i).value) + " [" + AdditionalItemAndCritical.at(i).name + "]";
         }
         text += "<br><br>";
     }
@@ -579,16 +629,18 @@ QString calculator::GetVisualCalculationSteps_Cost()
 {
     QString text = "";
 
-    if(ItemAndActionCost.size() > 0)
+    SumAllActionCostModificators();
+
+    if(SumItemAndActionCost.size() > 0)
     {
         text += "Zmiana kosztu akcji:";
 
-        for(int i=0;i<ItemAndActionCost.size();i++)
+        for(int i=0;i<SumItemAndActionCost.size();i++)
         {
             text += "<br>";
-            if(ItemAndActionCost.at(i).value > 0)
+            if(SumItemAndActionCost.at(i).value > 0)
                 text += "+";
-            text += QString::number(ItemAndActionCost.at(i).value) + " [" + ItemAndActionCost.at(i).name + "]";
+            text += QString::number(SumItemAndActionCost.at(i).value) + " [" + SumItemAndActionCost.at(i).name + "]";
         }
         text += "<br><br>";
     }

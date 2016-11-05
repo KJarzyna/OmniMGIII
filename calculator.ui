@@ -1051,7 +1051,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
+      <y>100</y>
       <width>171</width>
       <height>121</height>
      </rect>
@@ -1248,7 +1248,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>230</y>
+      <y>270</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -1269,7 +1269,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>250</y>
+      <y>290</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -1290,7 +1290,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>280</y>
+      <y>320</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -1311,7 +1311,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>300</y>
+      <y>340</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -1335,7 +1335,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>360</y>
+      <y>400</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -1356,7 +1356,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>380</y>
+      <y>420</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -1380,7 +1380,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>185</y>
+      <y>225</y>
       <width>31</width>
       <height>21</height>
      </rect>
@@ -1393,7 +1393,7 @@ background-color: #242424;
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>185</y>
+      <y>225</y>
       <width>31</width>
       <height>21</height>
      </rect>
@@ -1401,6 +1401,52 @@ background-color: #242424;
     <property name="text">
      <string>+</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>50</y>
+      <width>51</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_barrier">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Bariera:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_current_barrier">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

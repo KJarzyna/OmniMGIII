@@ -35,8 +35,12 @@ int calculator::GetActionCostAfterCalculations(int actionID)
     else
         cost = GetSkillCostFromSkillID(selectedActionItemID);
 
-    if(GetPlayersArmorCostReduction(selectedPlayerID) != 0)
-        cost = cost + GetPlayersArmorCostReduction(selectedPlayerID);
+   if(GetPlayersArmorCostReduction(selectedPlayerID) != 0)
+       cost = cost + GetPlayersArmorCostReduction(selectedPlayerID);
+
+    if(!SumItemAndActionCost.isEmpty())
+        for(int i=0;i<SumItemAndActionCost.size();i++)
+            cost += SumItemAndActionCost.at(i).value;
 
     return cost;
 }
