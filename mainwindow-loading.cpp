@@ -271,6 +271,7 @@ LoadPlayerSkillsTab(id);
 LoadPlayerWeaponsTab(id);
 LoadPlayerArmorsTab(id);
 LoadPlayerEquipementTab(id);
+ui->tabWidget->setCurrentIndex(0);
 }
 
 void MainWindow::LoadGeneratorCharges(int playerID)

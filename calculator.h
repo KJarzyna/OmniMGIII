@@ -5,17 +5,20 @@
 #include <QtCore>
 #include <QtGui>
 #include <QSpinBox>
+#include <QCloseEvent>
 #include "mainwindow.h"
 #include <QString>
 #include "Headers/Actions/actions.h"
 #include "Headers/ItemModificator/itemmodificator.h"
 #include "Headers/ActiveEffects/skillactiveeffects.h"
+#include "skilldescription.h"
 
 #include <dialogbox_difficultyreason.h>
 #include <dialogbox_action.h>
 #include <dialogbox_warning_generic.h>
 #include <dialogbox_postcalculation.h>
 #include <dialogbox_activeeffect.h>
+#include <dialogbox_details.h>
 
 namespace Ui {
 class calculator;
@@ -53,9 +56,12 @@ public:
     QVector<C_ActiveEffect> ActiveEffect;
     QVector<C_SkillActiveEffects> SkillActiveEffects;
     QVector<C_Actions> Actions;
+    QVector<C_SkillDescription> SkillDescriptions;
 
     QVector<C_ItemModificator> WidgetItemAndDifficulty; //Widget Difficulty Modificators
+    QVector<C_ItemModificator> WidgetItemAndDifficulty_M;
     QVector<C_ItemModificator> WidgetItemAndDamage; //Widget Difficulty Modificators
+    QVector<C_ItemModificator> WidgetItemAndDamage_M;
 
     QVector<C_ItemModificator> ItemAndDifficulty; //Equipment Difficulty Modificators ->
     QVector<C_ItemModificator> ItemAndAccuracy;
@@ -98,6 +104,9 @@ public:
     //Damage related
     QVector<int> dice_results;
 
+signals:
+    void CalculatorClosed();
+
 private slots:
     void GetDifficultyReasonSlot(QString reason);
     void GetSelectedActionItemSlot(int id, QString name);
@@ -119,14 +128,41 @@ private slots:
     void on_pushButton_continue_calculations_clicked();
     void on_pushButton_approve_clicked();
     void on_pushButton_disapprove_clicked();
-
     void on_pushButton_deleteEffect_clicked();
-
     void on_pushButton_addEffect_clicked();
+    void on_checkBox_sukces_check_M_clicked(bool checked);
+    void on_pushButton_AccMod_add_M_clicked();
+    void on_pushButton_AccMod_remove_M_clicked();
+    void on_pushButton_DmgMod_add_M_clicked();
+    void on_pushButton_DmgMod_remove_M_clicked();
+    void on_comboBox_select_player_M_activated(int index);
+    void on_tabWidget_calculation_type_currentChanged(int index);
+    void on_pushButton_approve_M_clicked();
+    void on_pushButton_disapprove_M_clicked();
 
 private:
     Ui::calculator *ui;
 
+    //MANUAL
+    void InitializeDmgModTable_Manual();
+    void InitializeAccModTable_Manual();
+    void InitializeTestVisibility_Manaul(bool state);
+    void InitializePlayersComboBoxDamage_Manual();
+    void ResetAdditionalDifficulty();
+    void ResetAdditionalDamage();
+    QString GetVisualTextFromSelectedInfo_Manual();
+    QString GetVisualHeader_Manual();
+    QString GetVisualDmgHeader_Manual();
+    QString GetVisualSuccessCheck_Manual();
+    QString GetVisualCalculationSteps_Difficulty_Manual();
+    QString GetVisualCalculationSteps_Damage_Manual();
+    QString GetVisualTargetArmorAndShieldLeftResult_Manual();
+    int GetSumOfWidgetDiffModifiers_Manual();
+    int GetSumOfWidgetDamageModifiers_Manual();
+    int GetFinalDamageTaken_Manual();
+
+    //AUTOMATIC
+    void InitializeManualAutomatic();
     void InitializeDmgModTable();
     void InitializeAccModTable();
     void InitializePlayersComboBox();
@@ -142,6 +178,8 @@ private:
     void ResetAction();
     void ResetTarget();
     void ResetDifficulty();
+
+    void OpenDetailsWindow(QString type);
 
     //Target related
     void RemovePlayerFromTargetModel(int playerID);
@@ -239,6 +277,10 @@ private:
     QString GetSkillTypeFromSkillID(int ID);
     QString GetSkillLevelFromSkillID(int ID);
     QString GetSkillTargetFromSkillID(int ID);
+    QString GetSkillDescriptionFromSkillLevel(int skillID, QString level);
+    QString GetSkillDescriptionFromSkillID(int skillID);
+    int GetSkillDescriptionIDFromSkillID(int skillID);
+    QStringList SplitSkillLevelFull(QString skillLevel);
     int GetSkillAccFromSkillID(int ID);
     int GetSkillCostFromSkillID(int ID);
     int GetSkillDamageToArmorFromSkillID(int ID);
@@ -316,7 +358,12 @@ private:
     void ImplementAfterCalculationChanges();
 
     bool isCriticalHit();
+    bool isAutomaticModeSelected();
+    int getManualModeTypeSelected();
 
+    void SaveAll();
+
+    void closeEvent(QCloseEvent *event);
 
 };
 

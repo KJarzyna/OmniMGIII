@@ -90,7 +90,7 @@ bool ReadWriteData::ReadSkillsFromFileAndLoadToVector(QString filename, QVector<
                 skill.UpliftChance = cells.at(11).toInt();
                 skill.SelfShieldDrain = cells.at(12).toInt();
                 skill.SkillType = cells.at(13);
-                skill.SkillDescription = cells.at(14);
+                skill.SkillDescriptionID = cells.at(14).toInt();
                 skill.SkillTarget = cells.at(15);
                 vector.append(skill);
             }
@@ -170,6 +170,54 @@ bool ReadWriteData::ReadSkillListFromFileAndLoadToVector(QString filename, QVect
             {
                 skill.SkillName = cells.at(0);
                 skill.SkillType = cells.at(1);
+                vector.append(skill);
+            }
+
+        }
+
+        if (!vector.isEmpty())
+            vector.removeFirst();
+        else
+            qDebug() << "File " << filename << " is empty!";
+
+        inputFile.close();
+        return true;
+    }
+    else
+    {
+        qDebug() << filename << ": Couldn't open file or file doesn't exist!";
+        return false;
+    }
+
+}
+
+bool ReadWriteData::ReadSkillsDescriptionsFromFileAndLoadToVector(QString filename, QVector<C_SkillDescription> & vector)
+{
+    vector.clear();
+    QFile inputFile(filename);
+    C_SkillDescription skill;
+
+    if (inputFile.exists() && inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList cells = line.split(';');
+
+            if (cells.size()>0)
+            {
+                skill.ID = cells.at(0).toInt();
+                skill.Base = cells.at(1);
+                skill.Level1 = cells.at(2);
+                skill.Level2 = cells.at(3);
+                skill.Level3 = cells.at(4);
+                skill.Level4A = cells.at(5);
+                skill.Level4B = cells.at(6);
+                skill.Level5A = cells.at(7);
+                skill.Level5B = cells.at(8);
+                skill.Level6A = cells.at(9);
+                skill.Level6B = cells.at(10);
                 vector.append(skill);
             }
 
@@ -529,6 +577,46 @@ bool ReadWriteData::ReadArmorModListFromFileAndLoadToVector(QString filename, QV
     else
     {
         qDebug() << filename << ": Couldn't open file or file doesn't exist!";
+        return false;
+    }
+
+}
+
+bool ReadWriteData::ReadItemDescriptionsFromFileAndLoadToVector(QString filename, QVector<C_ItemDescription> & vector)
+{
+    vector.clear();
+    QFile inputFile(filename);
+    C_ItemDescription item;
+
+    if (inputFile.exists() && inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList cells = line.split(';');
+
+            if (cells.size()>0)
+            {
+                item.ID = cells.at(0).toInt();
+                item.Description = cells.at(1);
+
+                vector.append(item);
+            }
+
+        }
+
+        if (!vector.isEmpty())
+            vector.removeFirst();
+        else
+            qDebug() << "File " << filename << " is empty!";
+
+        inputFile.close();
+        return true;
+    }
+    else
+    {
+        qDebug() <<  filename << ": Couldn't open file or file doesn't exist!";
         return false;
     }
 
@@ -1199,7 +1287,7 @@ bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QStrin
             line.append(";");
             line.append(vector.at(i).SkillType);
             line.append(";");
-            line.append(vector.at(i).SkillDescription);
+            line.append(vector.at(i).SkillDescriptionID);
             line.append(";");
             line.append(vector.at(i).SkillTarget);
             out << line << endl;

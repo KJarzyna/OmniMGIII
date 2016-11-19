@@ -6,6 +6,7 @@
 #include <QtGui>
 #include <QVector>
 #include <QTreeWidgetItem>
+#include <QListWidgetItem>
 #include "Headers/Player/player.h"
 #include "Headers/Skill/skill.h"
 #include "Headers/Skill/skilllist.h"
@@ -32,8 +33,12 @@
 #include "Headers/ActiveEffects/activeeffect.h"
 #include "Headers/Player/playeractiveeffect.h"
 
+#include "itemdescription.h"
+#include "skilldescription.h"
+
 #include "dialogbox_activeeffect.h"
 #include "dialogbox_yesno_generic.h"
+#include "dialogbox_details.h"
 #include "calculator.h"
 
 namespace Ui {
@@ -74,6 +79,17 @@ public:
     QVector<C_PlayerActiveEffect> PlayerActiveEffects;
     QVector<C_ActiveEffect> ActiveEffect;
 
+    QVector<C_SkillDescription> SkillDescriptions;
+
+    QVector<C_ItemDescription> armor_desc;
+    QVector<C_ItemDescription> armormod_desc;
+    QVector<C_ItemDescription> omnikey_desc;
+    QVector<C_ItemDescription> omniblade_desc;
+    QVector<C_ItemDescription> generator_desc;
+    QVector<C_ItemDescription> omnikeymod_desc;
+    QVector<C_ItemDescription> omniblademod_desc;
+    QVector<C_ItemDescription> weaponmod_desc;
+
     QStandardItemModel *PlayersModel; //Column 1 for Name, column 2 (hidden) for ID
 
 private slots:
@@ -108,6 +124,24 @@ private slots:
     void on_pushButton_deletePlayer_clicked();
     void on_actionOmni_Kalkulator_triggered();
     void CalculatorModuleSlot(bool savesignal);
+    void on_lineEdit_player_class_textEdited(const QString &arg1);
+    void on_comboBox_player_type_activated(const QString &arg1);
+    void on_lineEdit_shield_current_textEdited(const QString &arg1);
+    void on_lineEdit_shield_full_textEdited(const QString &arg1);
+    void on_lineEdit_armor_current_textEdited(const QString &arg1);
+    void on_lineEdit_armor_full_textEdited(const QString &arg1);
+    void on_lineEdit_barrier_current_textEdited(const QString &arg1);
+    void on_listWidget_armors_list_itemDoubleClicked(QListWidgetItem *item);
+
+    void RefreshMainModule();
+
+    void on_tableWidget_weapons_cellDoubleClicked(int row, int column);
+
+    void on_listWidget_armormods_list_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_tableWidget_generators_cellDoubleClicked(int row, int column);
+
+    void on_tableWidget_skills_cellDoubleClicked(int row, int column);
 
 private:
     Ui::MainWindow *ui;
@@ -258,6 +292,7 @@ private:
     int GetPlayerMasteryPoints(int playerID, QString mastery);
     QString GetPlayerSpecializationType(int playerID);
     QString GetSkillNameFromSkillID(int skillID);
+    QString GetSkillLevelFromSkillID(int skillID);
     int GetSkillIDFromSkillNameAndLevel(QString skillName, QString skillLevel);
     QString GetActionCostFromCost(int cost);
     QString GetWpnModNameFromWpnModID(int modid);
@@ -277,10 +312,24 @@ private:
     int GetOmnibladeModIDFromOmnibladeModName(QString Name);
     int GetMaxAmmoOfWeaponFromWeaponName(QString Name);
     int GetEffectIDFromEffectName(QString name);
+    QString GetOmnikeyNameFromOmnikeyID(int ID);
+    QString GetOmnikeyModNameFromOmnikeyModID(int ID);
+    QString GetOmnibladeNameFromOmnibladeID(int ID);
+    QString GetOmnibladeModNameFromOmnibladeModID(int ID);
     QString GetEffectNameFromEffectID(int ID);
 
-    //CALCULATOR RELATED
+    //DETAILS
+    QString GetVisualItemDescriptionFromItemID(int itemID, QVector<C_ItemDescription> item_container, QString item_type);
+    QString GetItemDescriptionFromItemID(int itemID, QVector<C_ItemDescription> item_container);
+    void ShowItemDetails(int itemID, QVector<C_ItemDescription> c_desc, QString item_type);
+    void ShowSkillDetails(int itemID);
 
+    QString GetSkillDescriptionFromSkillLevel(int skillID, QString level);
+    QStringList SplitSkillLevelFull(QString skillLevel);
+    QString GetSkillDescriptionFromSkillID(int skillID);
+    int GetSkillDescriptionIDFromSkillID(int skillID);
+
+    //CALCULATOR RELATED
     void Reload(int playerID, int weaponID);
     void ReloadAll(int playerID);
 

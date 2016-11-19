@@ -31,6 +31,16 @@ int MainWindow::GetOmnikeyIDFromOmnikeyName(QString Name)
     return ID;
 }
 
+QString MainWindow::GetOmnikeyNameFromOmnikeyID(int ID)
+{
+    QString Name = "NoNameFound";
+    for(int i=0;i<Omnikeys.size();i++)
+        if(Omnikeys.at(i).ID == ID )
+            Name = Omnikeys.at(i).Name;
+
+    return Name;
+}
+
 void MainWindow::SetOmnikeyToDefault()
 {
     ui->comboBox_omnikey_name->setCurrentIndex(0);
@@ -64,6 +74,16 @@ int MainWindow::GetOmnikeyModIDFromOmnikeyModName(QString Name)
             ID = OmnikeyMods.at(i).ID;
     }
     return ID;
+}
+
+QString MainWindow::GetOmnikeyModNameFromOmnikeyModID(int ID)
+{
+    QString Name = "NoNameFound";
+    for(int i=0;i<OmnikeyMods.size();i++)
+        if(OmnikeyMods.at(i).ID == ID )
+            Name = OmnikeyMods.at(i).Name;
+
+    return Name;
 }
 
 void MainWindow::SetOmnikeyModToDefault()
@@ -101,6 +121,16 @@ int MainWindow::GetOmnibladeIDFromOmnibladeName(QString Name)
     return ID;
 }
 
+QString MainWindow::GetOmnibladeNameFromOmnibladeID(int ID)
+{
+    QString Name = "NoNameFound";
+    for(int i=0;i<Omniblades.size();i++)
+        if(Omniblades.at(i).ID == ID )
+            Name = Omniblades.at(i).Name;
+
+    return Name;
+}
+
 void MainWindow::SetOmnibladeToDefault()
 {
     ui->comboBox_omniblade_type->setCurrentIndex(0);
@@ -133,6 +163,16 @@ int MainWindow::GetOmnibladeModIDFromOmnibladeModName(QString Name)
             ID = OmnibladeMods.at(i).ID;
     }
     return ID;
+}
+
+QString MainWindow::GetOmnibladeModNameFromOmnibladeModID(int ID)
+{
+    QString Name = "NoNameFound";
+    for(int i=0;i<OmnibladeMods.size();i++)
+        if(OmnibladeMods.at(i).ID == ID )
+            Name = OmnibladeMods.at(i).Name;
+
+    return Name;
 }
 
 void MainWindow::SetOmnibladeModToDefault()

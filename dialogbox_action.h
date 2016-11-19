@@ -4,6 +4,7 @@
 #include <QFrame>
 #include <QString>
 #include <QStandardItemModel>
+#include <QMouseEvent>
 
 namespace Ui {
 class dialogbox_action;

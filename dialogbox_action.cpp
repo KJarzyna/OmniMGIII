@@ -1,5 +1,6 @@
 #include "dialogbox_action.h"
 #include "ui_dialogbox_action.h"
+#include "dialogbox_details.h"
 #include <QDebug>
 
 dialogbox_action::dialogbox_action(QWidget *parent) :

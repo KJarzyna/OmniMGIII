@@ -31,6 +31,8 @@
 #include <Headers/Player/playeractiveeffect.h>
 #include <Headers/Actions/actions.h>
 #include <Headers/ActiveEffects/skillactiveeffects.h>
+#include "skilldescription.h"
+#include "itemdescription.h"
 #include <QFile>
 #include <QDebug>
 
@@ -49,6 +51,7 @@ public:
     bool ReadSkillsFromFileAndLoadToVector(QString filename, QVector<C_Skill> &vector);
     bool ReadPlayerSkillFromFileAndLoadToVector(QString filename, QVector<C_PlayerSkill> &vector);
     bool ReadSkillListFromFileAndLoadToVector(QString filename, QVector<C_SkillList> &vector);
+    bool ReadSkillsDescriptionsFromFileAndLoadToVector(QString filename, QVector<C_SkillDescription> &vector);
 
     bool WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QString filename);
     bool WritePlayerSkillFromVectorToFile(QVector<C_PlayerSkill> &vector, QString filename);
@@ -69,6 +72,7 @@ public:
     bool ReadArmorListFromFileAndLoadToVector(QString filename, QVector<C_ArmorList> &vector);
     bool ReadArmorsFromFileAndLoadToVector(QString filename, QVector<C_Armor> &vector);
     bool ReadPlayerArmorsFromFileAndLoadToVector(QString filename, QVector<C_PlayerArmor> &vector);
+    bool ReadItemDescriptionsFromFileAndLoadToVector(QString filename, QVector<C_ItemDescription> &vector);
 
     bool WritePlayerArmorsFromVectorToFile(QVector<C_PlayerArmor> &vector, QString filename);
 

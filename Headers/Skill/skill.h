@@ -21,7 +21,7 @@ public:
     int UpliftChance;
     int SelfShieldDrain;
     QString SkillType;
-    QString SkillDescription;
+    int SkillDescriptionID;
     QString SkillTarget;
 
 

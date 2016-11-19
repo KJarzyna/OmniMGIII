@@ -491,7 +491,7 @@ QTableView QTableCornerButton::section {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -860,7 +860,7 @@ QTableView QTableCornerButton::section {
        <string>Usuń gracza</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>440</x>
@@ -899,15 +899,13 @@ QTableView QTableCornerButton::section {
        </item>
       </layout>
      </widget>
+     <zorder>layoutWidget</zorder>
      <zorder>formLayoutWidget</zorder>
      <zorder>gridLayoutWidget</zorder>
      <zorder>listWidget_player_conditions</zorder>
      <zorder>label_activeeffect</zorder>
      <zorder>pushButton_add_activeEffect</zorder>
      <zorder>pushButton_deletePlayer</zorder>
-     <zorder>label_barrier</zorder>
-     <zorder>lineEdit_armor_current</zorder>
-     <zorder>lineEdit_barrier_current</zorder>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -1477,6 +1475,14 @@ color: orange;</string>
        </item>
       </layout>
      </widget>
+     <zorder>tableWidget_skills</zorder>
+     <zorder>horizontalLayoutWidget_3</zorder>
+     <zorder>pushButton_skill_remove</zorder>
+     <zorder>verticalLayoutWidget</zorder>
+     <zorder>pushButton_calculate_skills</zorder>
+     <zorder>treeWidget_skill_list</zorder>
+     <zorder>horizontalLayoutWidget</zorder>
+     <zorder>pushButton_skill_add</zorder>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -2377,6 +2383,9 @@ color: orange;</string>
         <height>51</height>
        </rect>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
@@ -2620,6 +2629,22 @@ color: orange;</string>
     </property>
     <property name="text">
      <string>+</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_show_details">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>50</y>
+      <width>151</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Włącz pokazywanie detali</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

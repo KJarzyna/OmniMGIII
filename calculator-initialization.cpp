@@ -1,6 +1,14 @@
 #include "calculator.h"
 #include "ui_calculator.h"
 
+void calculator::InitializeManualAutomatic()
+{
+    ui->tabWidget_calculation_type->setCurrentIndex(0);
+    ui->tabWidget_manual_type->setCurrentIndex(0);
+    ui->pushButton_approve_M->setVisible(false);
+    ui->pushButton_disapprove_M->setVisible(false);
+}
+
 void calculator::InitializeAccModTable()
 {
     ui->tableWidget_AccMod->setColumnWidth(0,300);
@@ -16,6 +24,7 @@ void calculator::InitializeDmgModTable()
     ui->tableWidget_DmgMod->horizontalHeader()->setStretchLastSection(true);
 
 }
+
 
 void calculator::InitializePlayersComboBox()
 {

@@ -88,6 +88,15 @@ bool MainWindow::ReadDataFromFiles()
     csv.ReadPlayerOmnibladeModsFromFileAndLoadToVector("Data/player_omniblademods.csv", PlayerOmnibladeMods);
     csv.ReadActiveEffectsFromFileAndLoadToVector("Data/activeeffects.csv", ActiveEffect);
     csv.ReadPlayerActiveEffectsFromFileAndLoadToVector("Data/player_activeeffects.csv", PlayerActiveEffects);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/armor_descriptions.csv", armor_desc);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/armormod_descriptions.csv", armormod_desc);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/weaponmod_descriptions.csv", weaponmod_desc);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/omnikey_descriptions.csv", omnikey_desc);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/omnikeymod_descriptions.csv", omnikeymod_desc);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/omniblade_descriptions.csv", omniblade_desc);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/omniblademod_descriptions.csv", omniblademod_desc);
+    csv.ReadItemDescriptionsFromFileAndLoadToVector("Data/generator_descriptions.csv", generator_desc);
+    csv.ReadSkillsDescriptionsFromFileAndLoadToVector("Data/skills_descriptions.csv", SkillDescriptions);
     return true;
 }
 
@@ -196,9 +205,9 @@ void MainWindow::DeletePlayerFromModel(int playerID)
 
 void MainWindow::SaveAll()
 {
-    int playerID = GetActivePlayerID();
-    SaveGeneralTab(playerID);
-    SaveSkillsTab(playerID);
+    //int playerID = GetActivePlayerID();
+    //SaveGeneralTab(playerID); Do wywalenia - check
+    //SaveSkillsTab(playerID); Do wywalenia - check
 
 
     ReadWriteData csv;
@@ -228,6 +237,81 @@ void MainWindow::SaveAll()
     ui->statusBar->showMessage("Zapis zakończony!", 3000);
 }
 
+QString MainWindow::GetItemDescriptionFromItemID(int itemID, QVector<C_ItemDescription> item_container)
+{
+    for(int i=0;i<item_container.size();i++)
+        if(item_container.at(i).ID == itemID)
+            return item_container.at(i).Description;
+}
+
+QString MainWindow::GetVisualItemDescriptionFromItemID(int itemID, QVector<C_ItemDescription> item_container, QString item_type)
+{
+    QString description_full = "";
+
+    for(int i=0;i<item_container.size();i++)
+        if(item_container.at(i).ID == itemID)
+        {
+            if(item_type == "armor")
+                description_full = "<center><font color=#FF8000>" + GetArmorNameFromArmorID(itemID) + "</font>";
+            else if(item_type == "armormod")
+                description_full = "<center><font color=#FF8000>" + GetArmorModNameFromArmorModID(itemID) + "</font>";
+            else if(item_type == "omnikey")
+                description_full = "<center><font color=#FF8000>" + GetOmnikeyNameFromOmnikeyID(itemID) + "</font>";
+            else if(item_type == "omnikeymod")
+                description_full = "<center><font color=#FF8000>" + GetOmnikeyModNameFromOmnikeyModID(itemID) + "</font>";
+            else if(item_type == "omniblade")
+                description_full = "<center><font color=#FF8000>" + GetOmnibladeNameFromOmnibladeID(itemID) + "</font>";
+            else if(item_type == "omniblademod")
+                description_full = "<center><font color=#FF8000>" + GetOmnibladeModNameFromOmnibladeModID(itemID) + "</font>";
+            else if(item_type == "generator")
+                description_full = "<center><font color=#FF8000>" + GetGeneratorNameFromGeneratorID(itemID) + "</font>";
+            else if(item_type == "weaponmod")
+                description_full = "<center><font color=#FF8000>" + GetWpnModNameFromWpnModID(itemID) + "</font>";
+            else
+                description_full = "<font color=#FF8000>Item's name not found</font>";
+
+            description_full += "<br>";
+            description_full += "<i>" + item_container.at(i).Description + "</i></center>";
+            description_full += "<br><br>";
+
+        }
+
+    return description_full;
+}
+
+void MainWindow::RefreshMainModule()
+{
+    ReadDataFromFiles();
+    InitializeAmmoLeftList();
+    InitializePlayerList();
+    LoadPlayer(0);
+    CalculatePlayerMasteries(0);
+}
+
+void MainWindow::ShowItemDetails(int itemID, QVector<C_ItemDescription> c_desc, QString item_type)
+{
+
+    QString description = GetVisualItemDescriptionFromItemID(itemID,c_desc,item_type);
+
+    dialogbox_details *box = new dialogbox_details();
+    box->setAttribute(Qt::WA_DeleteOnClose);
+    box->setDetailsText(description);
+    box->show();
+
+}
+
+void MainWindow::ShowSkillDetails(int itemID)
+{
+
+    QString description = GetSkillDescriptionFromSkillID(itemID);;
+
+    dialogbox_details *box = new dialogbox_details();
+    box->setAttribute(Qt::WA_DeleteOnClose);
+    box->setDetailsText(description);
+    box->show();
+
+}
+
 //SLOTS
 
 void MainWindow::on_pushButton_skill_add_clicked()
@@ -238,6 +322,8 @@ void MainWindow::on_pushButton_skill_add_clicked()
         int skillID = GetSkillIDFromSkillNameAndLevel(ui->treeWidget_skill_list->currentItem()->text(0),ui->comboBox_skill_level->currentText());
         AddSkillToTable();
         AddSkillToPlayer(skillID, playerID);
+        if(ui->checkBox_show_details->isChecked())
+            ShowSkillDetails(skillID);
     }
 
 }
@@ -329,6 +415,8 @@ void MainWindow::on_pushButton_mod_add_clicked()
         {
             AddWpnModToTable();
             AddWpnModToPlayer(weaponModID, weaponID, playerID);
+            if(ui->checkBox_show_details->isChecked())
+                ShowItemDetails(weaponModID,weaponmod_desc,"weaponmod");
         }
         else
         {
@@ -355,6 +443,9 @@ void MainWindow::on_pushButton_armor_add_clicked()
         {
             AddArmorToList();
             AddArmorToPlayer(armorID,playerID);
+            if(ui->checkBox_show_details->isChecked())
+                ShowItemDetails(armorID,armor_desc,"armor");
+
         }
         else
         {
@@ -396,6 +487,9 @@ void MainWindow::on_pushButton_mod_armor_add_clicked()
         {
             AddArmorModToList();
             AddArmorModToPlayer(armorModID,playerID);
+            if(ui->checkBox_show_details->isChecked())
+                ShowItemDetails(armorModID,armormod_desc,"armormod");
+
         }
         else
         {
@@ -431,6 +525,8 @@ void MainWindow::on_pushButton_generator_add_clicked()
             AddGeneratorToTable();
             AddGeneratorToPlayer(generatorID,playerID);
             ui->lineEdit_gen_charges_left->setText(ui->tableWidget_generators->item(0,2)->text());
+            if(ui->checkBox_show_details->isChecked())
+                ShowItemDetails(generatorID,generator_desc,"generator");
         }
         else
         {
@@ -460,6 +556,8 @@ void MainWindow::on_comboBox_omnikey_name_activated(const QString &arg1)
     RemoveOmnikeyFromPlayer(playerID);
     int omnikeyID = GetOmnikeyIDFromOmnikeyName(arg1);
     AddOmnikeyToPlayer(omnikeyID, playerID);
+    if(ui->checkBox_show_details->isChecked())
+        ShowItemDetails(omnikeyID,omnikey_desc,"omnikey");
 }
 
 void MainWindow::on_comboBox_omnikey_submod_name_activated(const QString &arg1)
@@ -468,6 +566,8 @@ void MainWindow::on_comboBox_omnikey_submod_name_activated(const QString &arg1)
     RemoveOmnikeyModFromPlayer(playerID);
     int omnikeyID = GetOmnikeyModIDFromOmnikeyModName(arg1);
     AddOmnikeyModToPlayer(omnikeyID, playerID);
+    if(ui->checkBox_show_details->isChecked())
+        ShowItemDetails(omnikeyID,omnikeymod_desc,"omnikeymod");
 }
 
 void MainWindow::on_comboBox_omniblade_type_activated(const QString &arg1)
@@ -476,6 +576,8 @@ void MainWindow::on_comboBox_omniblade_type_activated(const QString &arg1)
     RemoveOmnibladeFromPlayer(playerID);
     int omnibladeID = GetOmnibladeIDFromOmnibladeName(arg1);
     AddOmnibladeToPlayer(omnibladeID, playerID);
+    if(ui->checkBox_show_details->isChecked())
+        ShowItemDetails(omnibladeID,omniblade_desc,"omniblade");
 }
 
 void MainWindow::on_comboBox_omniblade_mod_name_activated(const QString &arg1)
@@ -484,6 +586,8 @@ void MainWindow::on_comboBox_omniblade_mod_name_activated(const QString &arg1)
     RemoveOmnibladeModFromPlayer(playerID);
     int omnibladeID = GetOmnibladeModIDFromOmnibladeModName(arg1);
     AddOmnibladeModToPlayer(omnibladeID, playerID);
+    if(ui->checkBox_show_details->isChecked())
+        ShowItemDetails(omnibladeID,omniblademod_desc,"omniblademod");
 
 }
 
@@ -611,5 +715,110 @@ void MainWindow::OpenCalculatorModule()
 {
     calculator *calcModule = new calculator;
     calcModule->setAttribute(Qt::WA_DeleteOnClose);
+    connect(calcModule,SIGNAL(CalculatorClosed()),this,SLOT(RefreshMainModule()));
     calcModule->show();
+}
+
+void MainWindow::on_lineEdit_player_class_textEdited(const QString &arg1)
+{
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].PlayerClass = arg1;
+}
+
+void MainWindow::on_comboBox_player_type_activated(const QString &arg1)
+{
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].PlayerType = arg1;
+}
+
+void MainWindow::on_lineEdit_shield_current_textEdited(const QString &arg1)
+{
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].ShieldCurrent = arg1.toInt();
+}
+
+void MainWindow::on_lineEdit_shield_full_textEdited(const QString &arg1)
+{
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].ShieldMax = arg1.toInt();
+}
+
+void MainWindow::on_lineEdit_armor_current_textEdited(const QString &arg1)
+{
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].ArmorCurrent = arg1.toInt();
+}
+
+void MainWindow::on_lineEdit_armor_full_textEdited(const QString &arg1)
+{
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].ArmorMax = arg1.toInt();
+}
+
+void MainWindow::on_lineEdit_barrier_current_textEdited(const QString &arg1)
+{
+    int playerID = GetActivePlayerID();
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].BarrierCurrent = arg1.toInt();
+}
+
+void MainWindow::on_listWidget_armors_list_itemDoubleClicked(QListWidgetItem *item)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        int armorID = GetArmorIDFromArmorName(item->text());
+        ShowItemDetails(armorID,armor_desc,"armor");
+    }
+
+}
+
+void MainWindow::on_tableWidget_weapons_cellDoubleClicked(int row, int column)
+{
+    if(ui->checkBox_show_details->isChecked() && column == 7)
+    {
+        int wpnModID = GetWpnModIDFromWpnModName(ui->tableWidget_weapons->item(row,column)->text());
+        ShowItemDetails(wpnModID,weaponmod_desc,"weaponmod");
+    }
+}
+
+void MainWindow::on_listWidget_armormods_list_itemDoubleClicked(QListWidgetItem *item)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        int armorModID = GetArmorModIDFromArmorModName(item->text());
+        ShowItemDetails(armorModID,armormod_desc,"armormod");
+    }
+}
+
+void MainWindow::on_tableWidget_generators_cellDoubleClicked(int row, int column)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        int generatorID = GetGeneratorIDFromGeneratorName(ui->tableWidget_generators->item(0,0)->text());
+        ShowItemDetails(generatorID,generator_desc,"generator");
+    }
+}
+
+void MainWindow::on_tableWidget_skills_cellDoubleClicked(int row, int column)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        QString skillName = ui->tableWidget_skills->item(row,0)->text();
+        QString skillLevel = ui->tableWidget_skills->item(row,1)->text();
+        int skillID = GetSkillIDFromSkillNameAndLevel(skillName,skillLevel);
+        ShowSkillDetails(skillID);
+    }
 }

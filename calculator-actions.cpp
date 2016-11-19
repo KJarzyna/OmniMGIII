@@ -104,6 +104,11 @@ void calculator::ActionDialogBoxClosed(bool db_closed)
             ui->comboBox_select_difficultylevel->setEnabled(true);
         else
             ui->comboBox_select_difficultylevel->setEnabled(false);
+
+        if(isActionSkillRelated(actionID))
+        {
+            OpenDetailsWindow("skill");
+        }
     }
 }
 
