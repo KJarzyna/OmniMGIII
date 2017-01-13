@@ -9,7 +9,8 @@ void MainWindow::LoadPlayerGeneralTab(int playerID)
     int playerIndex = GetPlayerIndex(playerID);
 
     ui->lineEdit_player_name->setText(Players.at(playerIndex).PlayerName);
-    ui->lineEdit_player_race->setText(Players.at(playerIndex).PlayerRace);
+    //ui->lineEdit_player_race->setText(Players.at(playerIndex).PlayerRace);
+    ui->comboBox_player_race->setCurrentText(Players.at(playerIndex).PlayerRace);
     ui->lineEdit_player_class->setText(Players.at(playerIndex).PlayerClass);
     if(Players.at(playerIndex).PlayerType == "Gracz")
         ui->comboBox_player_type->setCurrentIndex(0);

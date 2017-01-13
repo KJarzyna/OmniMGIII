@@ -40,6 +40,7 @@
 #include "dialogbox_yesno_generic.h"
 #include "dialogbox_details.h"
 #include "calculator.h"
+#include "race.h"
 
 namespace Ui {
 class MainWindow;
@@ -78,6 +79,7 @@ public:
     QVector<C_PlayerOmnibladeMods> PlayerOmnibladeMods;
     QVector<C_PlayerActiveEffect> PlayerActiveEffects;
     QVector<C_ActiveEffect> ActiveEffect;
+    QVector<C_Race> Races;
 
     QVector<C_SkillDescription> SkillDescriptions;
 
@@ -91,6 +93,7 @@ public:
     QVector<C_ItemDescription> weaponmod_desc;
 
     QStandardItemModel *PlayersModel; //Column 1 for Name, column 2 (hidden) for ID
+    QStandardItemModel *RaceModel;
 
 private slots:
     void on_pushButton_skill_add_clicked();
@@ -132,16 +135,13 @@ private slots:
     void on_lineEdit_armor_full_textEdited(const QString &arg1);
     void on_lineEdit_barrier_current_textEdited(const QString &arg1);
     void on_listWidget_armors_list_itemDoubleClicked(QListWidgetItem *item);
-
     void RefreshMainModule();
-
     void on_tableWidget_weapons_cellDoubleClicked(int row, int column);
-
     void on_listWidget_armormods_list_itemDoubleClicked(QListWidgetItem *item);
-
     void on_tableWidget_generators_cellDoubleClicked(int row, int column);
-
     void on_tableWidget_skills_cellDoubleClicked(int row, int column);
+
+    void on_comboBox_player_race_activated(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
@@ -174,6 +174,7 @@ private:
     void InitializeOmnibladeModsList();
     void InitializeAmmoLeftList();
     void InitializePlayerList();
+    void InitializeRaceList();
 
     //SKILL RELATED
     void AddSkillToTable();

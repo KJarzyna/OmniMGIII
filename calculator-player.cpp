@@ -91,24 +91,11 @@ int calculator::GetPlayersArmorCostReduction(int playerID)
 
 int calculator::GetPlayerEvasiveness(int playerID)
 {
+    int eva = 99999;
     for(int i=0;i<Players.size();i++)
-    {
         if(Players.at(i).PlayerID == playerID)
-        {
-            if(Players.at(i).PlayerRace == "Człowiek" || Players.at(i).PlayerRace == "Asari")
-                return 50;
-            else if(Players.at(i).PlayerRace == "Turianin" || Players.at(i).PlayerRace == "Batarianin")
-                return 55;
-            else if(Players.at(i).PlayerRace == "Quarianin" || Players.at(i).PlayerRace == "Salarianin")
-                return 40;
-            else if(Players.at(i).PlayerRace == "Geth" || Players.at(i).PlayerRace == "Kroganin")
-                return 60;
-            else if(Players.at(i).PlayerRace == "Vorcha" || Players.at(i).PlayerRace == "Drell")
-                return 45;
-            else
-                return 50;
-        }
-    }
+            eva = GetEvasivenessFromRaceID(GetRaceIDFromRaceName(Players.at(i).PlayerRace));
+    return eva;
 }
 
 int calculator::GetPlayersArmorWpnAccModifier(int playerID)
@@ -376,4 +363,49 @@ void calculator::subtractAmmoFromPlayerWeapon(int playerID, int weaponID)
             else
                 PlayerWeapons[i].AmmoLeft = PlayerWeapons.at(i).AmmoLeft - ammoPerShot;
         }
+}
+
+int calculator::GetRaceIDFromRaceName(QString name)
+{
+    int ID = 99999;
+    for(int i=0;i<Races.size();i++)
+        if(Races.at(i).Name == name)
+            ID = Races.at(i).ID;
+    return ID;
+}
+
+int calculator::GetHeavyDamageFromRaceID(int ID)
+{
+    int dmg = 99999;
+    for(int i=0;i<Races.size();i++)
+        if(Races.at(i).ID == ID)
+            dmg = Races.at(i).HeavyDamage;
+    return dmg;
+}
+
+int calculator::GetLightDamageFromRaceID(int ID)
+{
+    int dmg = 99999;
+    for(int i=0;i<Races.size();i++)
+        if(Races.at(i).ID == ID)
+            dmg = Races.at(i).LightDamage;
+    return dmg;
+}
+
+int calculator::GetAreaDamageFromRaceID(int ID)
+{
+    int dmg = 99999;
+    for(int i=0;i<Races.size();i++)
+        if(Races.at(i).ID == ID)
+            dmg = Races.at(i).AreaDamage;
+    return dmg;
+}
+
+int calculator::GetEvasivenessFromRaceID(int ID)
+{
+    int eva = 99999;
+    for(int i=0;i<Races.size();i++)
+        if(Races.at(i).ID == ID)
+            eva = Races.at(i).HitChance;
+    return eva;
 }

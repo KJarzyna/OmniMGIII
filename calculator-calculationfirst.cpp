@@ -249,6 +249,30 @@ bool calculator::CheckForWarnings()
         PopUpWarning(warning);
         return false;
     }
+
+    //Player Don't Have Shield and Can't Use Dirsuptor
+    if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID > 88 && selectedActionItemID < 110 && !isPlayerHasShield(selectedPlayerID))
+    {
+        QString warning = selectedPlayerName + " nie posiada tarcz! Nie można skorzystać z Dysruptora Fazowego!";
+        PopUpWarning(warning);
+        return false;
+    }
+
+    //Player is under Sabotage
+    if(isActionWeaponRelated(GetCurrentActionID()) && isPlayerHasEffect(selectedPlayerID,166))
+    {
+        QString warning = selectedPlayerName + " nie może oddać strzału! Broń pod efektem Sabotażu!";
+        PopUpWarning(warning);
+        return false;
+    }
+
+    //Player is under Ogłuszenie
+    if(isPlayerHasEffect(selectedPlayerID,3))
+    {
+        QString warning = selectedPlayerName + " nie może wykonywać akcji, bo jest pod efektem Ogłuszenia!";
+        PopUpWarning(warning);
+        return false;
+    }
     return true;
 }
 

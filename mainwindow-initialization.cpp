@@ -327,7 +327,19 @@ void MainWindow::InitializePlayerList()
         PlayersModel->setItem(i,1,new QStandardItem(QString::number(Players.at(i).PlayerID)));
     }
     ui->comboBox_select_player->setModel(PlayersModel);
+}
 
-    //for (int i=0; i<Players.size();i++)
-        //ui->comboBox_select_player->addItem(Players.at(i).PlayerName);
+void MainWindow::InitializeRaceList()
+{
+    //Create and populate custom Model with Race Name and RaceID, where RaceID is hidden
+    RaceModel = new QStandardItemModel(Races.size(),2,this);
+    for (int i=0; i<Races.size();i++)
+    {
+        RaceModel->setItem(i,0,new QStandardItem(Races.at(i).Name));
+        RaceModel->setItem(i,1,new QStandardItem(QString::number(Races.at(i).ID)));
+    }
+    RaceModel->setItem(Races.size(),0,new QStandardItem("Dodaj nową rasę..."));
+    RaceModel->setItem(Races.size(),1,new QStandardItem("-1"));
+
+    ui->comboBox_player_race->setModel(RaceModel);
 }

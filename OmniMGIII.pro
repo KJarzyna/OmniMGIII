@@ -72,7 +72,8 @@ SOURCES += main.cpp\
     calculator-manualmode.cpp \
     dialogbox_details.cpp \
     skilldescription.cpp \
-    itemdescription.cpp
+    itemdescription.cpp \
+    c_race.cpp
 
 HEADERS  += mainwindow.h \
     Headers/Actions/actions.h \
@@ -114,7 +115,8 @@ HEADERS  += mainwindow.h \
     Headers/ActiveEffects/skillactiveeffects.h \
     dialogbox_details.h \
     skilldescription.h \
-    itemdescription.h
+    itemdescription.h \
+    race.h
 
 FORMS    += mainwindow.ui \
     dialogbox_activeeffect.ui \

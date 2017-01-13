@@ -86,13 +86,13 @@ void calculator::PerformAdditionalEffects()
         AdditionalItemAndDifficulty.append(item);
     }
     //Ogłuszony
-    if(isPlayerHasEffect(selectedPlayerID,3))
-    {
-        dialogbox_warning_generic *box = new dialogbox_warning_generic;
-        box->setAttribute(Qt::WA_DeleteOnClose);
-        box->setWarningLabel("Postać jest ogłuszona! Nie może wykonywać akcji!");
-        box->show();
-    }
+//    if(isPlayerHasEffect(selectedPlayerID,3))
+//    {
+//        dialogbox_warning_generic *box = new dialogbox_warning_generic;
+//        box->setAttribute(Qt::WA_DeleteOnClose);
+//        box->setWarningLabel("Postać jest ogłuszona! Nie może wykonywać akcji!");
+//        box->show();
+//    }
     //Schłodzony - Gracz
     if(isPlayerHasEffect(selectedPlayerID,4))
     {
@@ -438,6 +438,46 @@ void calculator::PerformAdditionalEffects()
             item.value = 2;
             AdditionalItemAndDifficulty.append(item);
         }
+
+        //Spalenie - Cel
+        for(int i=297;i<314;i++)
+            if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID == i && isPlayerHasEffect(selectedTargetID,4))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Spalenia (cel Schłodzony)";
+                item.value = +100;
+                AdditionalItemAndDamage.append(item);
+            }
+
+        //Kriowybuch - Cel
+        for(int i=341;i<358;i++)
+            if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID == i && isPlayerHasEffect(selectedTargetID,5))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Kriowybuchu (cel Podpalony)";
+                item.value = +100;
+                AdditionalItemAndDamage.append(item);
+            }
+
+        //Sabotaż - Gracz
+        if(isPlayerHasEffect(selectedPlayerID,166))
+            {
+                C_ItemModificator item;
+                item.name = "Zmniejszone obrażenia od Sabotażu 3";
+                item.value = -0.5*GetModifiedBaseDamageDealt();
+                AdditionalItemAndDamage.append(item);
+            }
+
+        //Natychmiastowe Zamrożenie - Cel
+        for(int i=447;i<464;i++)
+            if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID == i && isPlayerHasEffect(selectedTargetID,5))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Natychmiastowego Zamrożenia (cel Podpalony)";
+                item.value = +50;
+                AdditionalItemAndDamage.append(item);
+            }
+
 }
 
 void calculator::PerformAdditionalEffectsAfterHit()
@@ -462,4 +502,39 @@ void calculator::PerformAdditionalEffectsAfterHit()
         item.value = 0.1*GetModifiedBaseDamageDealt();
         AdditionalItemAndDamage.append(item);
         }
+
+    //Rzut 5A - Cel
+    if(isActionSkillRelated(GetCurrentActionID()) && (selectedActionItemID == 5 || selectedActionItemID == 7 ||
+        selectedActionItemID == 9 || selectedActionItemID == 10 || selectedActionItemID == 14 ||
+        selectedActionItemID == 16) && isPlayerHasEffect(selectedTargetID,6))
+        {
+        C_ItemModificator item;
+        item.name = "2 x więcej obrażeń od Rzutu 5A (Cel Podniesiony)";
+        item.value = 2*GetModifiedBaseDamageDealt();
+        AdditionalItemAndDamage.append(item);
+        }
+
+
+    //Odkształcenie 4A - Cel
+    if(isActionSkillRelated(GetCurrentActionID()) && (selectedActionItemID == 113 || selectedActionItemID == 115 ||
+        selectedActionItemID == 116 || selectedActionItemID == 119 || selectedActionItemID == 120 ||
+        selectedActionItemID == 121 || selectedActionItemID == 125) && isPlayerHasEffect(selectedTargetID,6))
+        {
+        C_ItemModificator item;
+        item.name = "Dodatkowe 100 obrażeń od Odkształcenia 4A (Cel Podniesiony)";
+        item.value = 100;
+        AdditionalItemAndDamage.append(item);
+        }
+
+    //Przeciążenie 5A - Cel
+    if(isCriticalHit() && isPlayerHasShield(selectedTargetID) && isActionSkillRelated(GetCurrentActionID()) && (selectedActionItemID == 319 ||
+    selectedActionItemID == 321 || selectedActionItemID == 323 || selectedActionItemID == 324 || selectedActionItemID == 328 ||
+    selectedActionItemID == 330))
+        {
+        C_ItemModificator item;
+        item.name = "Podwójne obrażenia krytyczne od Przeciążenia 5A";
+        item.value = GetModifiedBaseDamageDealt();
+        AdditionalItemAndDamage.append(item);
+        }
+
 }

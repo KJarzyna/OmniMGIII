@@ -249,7 +249,7 @@ QString calculator::GetVisualCalculationSteps_Damage_Manual()
 QString calculator::GetVisualTargetArmorAndShieldLeftResult_Manual()
 {
     QString text = "";
-    QString shield_max = "", shield_current = "", armor_max = "", armor_current = "", barrier = "";
+    QString shield_max = "0", shield_current = "0", armor_max = "0", armor_current = "0", barrier = "0";
     int damage_taken = ui->spinBox_damage_M->value() + GetSumOfWidgetDamageModifiers_Manual();
 
     if(!ui->checkBox_ignore_shields_M->isChecked())

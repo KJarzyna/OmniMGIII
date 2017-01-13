@@ -112,50 +112,18 @@ int calculator::GetOmnibladeDamageFromOmnibladeID(int id)
 
 int calculator::GetLightMeeleeDamageFromPlayerRace(int playerID)
 {
-
-    QString race;
+    int dmg = 99999;
     for(int i=0;i<Players.size();i++)
         if(Players.at(i).PlayerID == playerID)
-            race = Players.at(i).PlayerRace;
-
-    if(race == "Człowiek" || race == "Asari")
-        return 100;
-    else if(race == "Turianin" || race == "Batarianin")
-        return 150;
-    else if(race == "Quarianin" || race == "Salarianin")
-        return 100;
-    else if(race == "Geth")
-        return 150;
-    else if(race == "Kroganin")
-        return 200;
-    else if(race == "Vorcha" || race == "Drell")
-        return 100;
-    else
-        return 0;
-
+            dmg = GetLightDamageFromRaceID(GetRaceIDFromRaceName(Players.at(i).PlayerRace));
+    return dmg;
 }
 
 int calculator::GetHeavyMeeleeDamageFromPlayerRace(int playerID)
 {
-
-    QString race;
+    int dmg = 99999;
     for(int i=0;i<Players.size();i++)
         if(Players.at(i).PlayerID == playerID)
-            race = Players.at(i).PlayerRace;
-
-    if(race == "Człowiek" || race == "Asari")
-        return 250;
-    else if(race == "Turianin" || race == "Batarianin")
-        return 300;
-    else if(race == "Quarianin" || race == "Salarianin")
-        return 200;
-    else if(race == "Geth")
-        return 300;
-    else if(race == "Kroganin")
-        return 350;
-    else if(race == "Vorcha" || race == "Drell")
-        return 250;
-    else
-        return 0;
-
+            dmg = GetHeavyDamageFromRaceID(GetRaceIDFromRaceName(Players.at(i).PlayerRace));
+    return dmg;
 }

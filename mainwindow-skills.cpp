@@ -325,9 +325,9 @@ QString MainWindow::GetSkillDescriptionFromSkillID(int skillID)
     for(int i=0;i<SkillDescriptions.size();i++)
         if(SkillDescriptions.at(i).getID() == descriptionID)
         {
-            description_full = "<center><font color=#FF8000>" + GetSkillNameFromSkillID(skillID) + "</font>";
+            description_full = "<center><font color=#FF8000>" + GetSkillNameFromSkillID(skillID) + "</font></center>";
             description_full += "<br>";
-            description_full += "<i>" + SkillDescriptions.at(i).getSkillBaseDescription() + "</i></center>";
+            description_full += "" + SkillDescriptions.at(i).getSkillBaseDescription() + "";
             description_full += "<br><br>";
         }
         else

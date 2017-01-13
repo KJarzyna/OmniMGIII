@@ -157,6 +157,12 @@ void calculator::ImplementAfterCalculationChanges()
         reloadPlayerWeapon(selectedPlayerID,selectedActionItemID);
     }
 
+    //Shield deterioration (Phase Disruptor)
+    if(isActionSkillRelated(actionID) && selectedActionItemID > 88 && selectedActionItemID < 110)
+    {
+        setPlayerCurrentShield(selectedPlayerID,GetPlayerShieldCurrentAfterDamage(selectedPlayerID,GetSkillSelfShieldDrainFromSKillID(selectedActionItemID)));
+    }
+
 
     //Remove effect from target (Barrier/Umocnienie)
     if(!isPlayerHasBarrier(selectedTargetID))

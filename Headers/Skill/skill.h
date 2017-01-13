@@ -15,10 +15,6 @@ public:
     int Cost;
     int Acc;
     int AdditionalBarrier;
-    int KnockoutChance;
-    int ChillChance;
-    int FlameChance;
-    int UpliftChance;
     int SelfShieldDrain;
     QString SkillType;
     int SkillDescriptionID;

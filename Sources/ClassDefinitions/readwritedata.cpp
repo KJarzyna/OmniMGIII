@@ -59,6 +59,51 @@ bool ReadWriteData::ReadPlayersFromFileAndLoadToVector(QString filename, QVector
 
 }
 
+//READ RACES
+bool ReadWriteData::ReadRacesFromFileAndLoadToVector(QString filename, QVector<C_Race> & vector)
+{
+    vector.clear();
+    QFile inputFile(filename);
+    C_Race race;
+
+    if (inputFile.exists() && inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList cells = line.split(';');
+
+            if (cells.size()>0)
+            {
+                race.ID = cells.at(0).toInt();
+                race.Name = cells.at(1);
+                race.HeavyDamage = cells.at(2).toInt();
+                race.LightDamage = cells.at(3).toInt();
+                race.AreaDamage = cells.at(4).toInt();
+                race.HitChance = cells.at(5).toInt();
+
+                vector.append(race);
+            }
+
+        }
+
+        if (!vector.isEmpty())
+            vector.removeFirst();
+        else
+            qDebug() << "File " << filename << " is empty!";
+
+        inputFile.close();
+        return true;
+    }
+    else
+    {
+        qDebug() <<  filename << ": Couldn't open file or file doesn't exist!";
+        return false;
+    }
+
+}
+
 //READ SKILLS
 bool ReadWriteData::ReadSkillsFromFileAndLoadToVector(QString filename, QVector<C_Skill> & vector)
 {
@@ -84,14 +129,10 @@ bool ReadWriteData::ReadSkillsFromFileAndLoadToVector(QString filename, QVector<
                 skill.Cost = cells.at(5).toInt();
                 skill.Acc = cells.at(6).toInt();
                 skill.AdditionalBarrier = cells.at(7).toInt();
-                skill.KnockoutChance = cells.at(8).toInt();
-                skill.ChillChance = cells.at(9).toInt();
-                skill.FlameChance = cells.at(10).toInt();
-                skill.UpliftChance = cells.at(11).toInt();
-                skill.SelfShieldDrain = cells.at(12).toInt();
-                skill.SkillType = cells.at(13);
-                skill.SkillDescriptionID = cells.at(14).toInt();
-                skill.SkillTarget = cells.at(15);
+                skill.SelfShieldDrain = cells.at(8).toInt();
+                skill.SkillType = cells.at(9);
+                skill.SkillDescriptionID = cells.at(10).toInt();
+                skill.SkillTarget = cells.at(11);
                 vector.append(skill);
             }
 
@@ -1244,8 +1285,8 @@ bool ReadWriteData::WritePlayersFromVectorToFile(QVector<C_Player> &vector, QStr
     }
 }
 
-//WRITE SKILLS
-bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QString filename)
+//WRITE RACES
+bool ReadWriteData::WriteRacesFromVectorToFile(QVector<C_Race> &vector, QString filename)
 {
     QFile outputFile(filename);
     QString line;
@@ -1253,43 +1294,23 @@ bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QStrin
     if (CreateFileBackup(filename) && outputFile.remove() && outputFile.open(QIODevice::ReadWrite))
     {
         QTextStream out(&outputFile);
-        line = "SkillID;SkillName;SkillLevel;SkillDmgToArmor;SkillDmgToShield;Cost;Acc;AdditionalBarrier;KnockoutChance;ChillChance;FlameChance;UpliftChance;SelfShieldDrain;SkillTarget;SkillType;SkillDescription";
+        line = "ID;Name;HeavyDamage;LightDamage;AreaDamage;HitChance";
         out << line << endl;
 
         for (int i=0; i<vector.size();i++)
         {
             line.clear();
-            line.append(QString::number(vector.at(i).SkillID));
+            line.append(QString::number(vector.at(i).ID));
             line.append(";");
-            line.append(vector.at(i).SkillName);
+            line.append(vector.at(i).Name);
             line.append(";");
-            line.append(vector.at(i).SkillLevel);
+            line.append(QString::number(vector.at(i).HeavyDamage));
             line.append(";");
-            line.append(QString::number(vector.at(i).SkillDmgToArmor));
+            line.append(QString::number(vector.at(i).LightDamage));
             line.append(";");
-            line.append(QString::number(vector.at(i).SkillDmgToShield));
+            line.append(QString::number(vector.at(i).AreaDamage));
             line.append(";");
-            line.append(QString::number(vector.at(i).Cost));
-            line.append(";");
-            line.append(QString::number(vector.at(i).Acc));
-            line.append(";");
-            line.append(QString::number(vector.at(i).AdditionalBarrier));
-            line.append(";");
-            line.append(QString::number(vector.at(i).KnockoutChance));
-            line.append(";");
-            line.append(QString::number(vector.at(i).ChillChance));
-            line.append(";");
-            line.append(QString::number(vector.at(i).FlameChance));
-            line.append(";");
-            line.append(QString::number(vector.at(i).UpliftChance));
-            line.append(";");
-            line.append(QString::number(vector.at(i).SelfShieldDrain));
-            line.append(";");
-            line.append(vector.at(i).SkillType);
-            line.append(";");
-            line.append(vector.at(i).SkillDescriptionID);
-            line.append(";");
-            line.append(vector.at(i).SkillTarget);
+            line.append(QString::number(vector.at(i).HitChance));
             out << line << endl;
         }
 
@@ -1303,6 +1324,8 @@ bool ReadWriteData::WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QStrin
     }
 }
 
+
+//WRITE SKILLS
 bool ReadWriteData::WritePlayerSkillFromVectorToFile(QVector<C_PlayerSkill> &vector, QString filename)
 {
     QFile outputFile(filename);

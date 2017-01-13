@@ -33,6 +33,7 @@
 #include <Headers/ActiveEffects/skillactiveeffects.h>
 #include "skilldescription.h"
 #include "itemdescription.h"
+#include "race.h"
 #include <QFile>
 #include <QDebug>
 
@@ -43,8 +44,10 @@ public:
 
     //GENERAL
     bool ReadPlayersFromFileAndLoadToVector(QString filename, QVector<C_Player> &vector);
+    bool ReadRacesFromFileAndLoadToVector(QString filename, QVector<C_Race> &vector);
 
     bool WritePlayersFromVectorToFile(QVector<C_Player> &vector, QString filename);
+    bool WriteRacesFromVectorToFile(QVector<C_Race> &vector, QString filename);
 
     //SKILLS
 
@@ -53,7 +56,7 @@ public:
     bool ReadSkillListFromFileAndLoadToVector(QString filename, QVector<C_SkillList> &vector);
     bool ReadSkillsDescriptionsFromFileAndLoadToVector(QString filename, QVector<C_SkillDescription> &vector);
 
-    bool WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QString filename);
+    //bool WriteSkillsFromVectorToFile(QVector<C_Skill> &vector, QString filename);
     bool WritePlayerSkillFromVectorToFile(QVector<C_PlayerSkill> &vector, QString filename);
     bool WriteSkillListFromVectorToFile(QVector<C_SkillList> &vector, QString filename);
 

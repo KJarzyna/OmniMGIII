@@ -522,7 +522,7 @@ border: black;
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>441</width>
+     <width>431</width>
      <height>581</height>
     </rect>
    </property>
@@ -537,11 +537,20 @@ border: black;
    <property name="textFormat">
     <enum>Qt::RichText</enum>
    </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
    <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    <set>Qt::AlignJustify|Qt::AlignTop</set>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="indent">
+    <number>0</number>
    </property>
   </widget>
   <zorder>label</zorder>

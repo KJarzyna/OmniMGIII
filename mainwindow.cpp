@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     InitializeOmnibladeModsList();
     InitializeAmmoLeftList();
     InitializePlayerList();
+    InitializeRaceList();
 
     LoadPlayer(0);
 
@@ -64,6 +65,7 @@ bool MainWindow::ReadDataFromFiles()
 {
     ReadWriteData csv;
     csv.ReadPlayersFromFileAndLoadToVector("Data/players.csv", Players);
+    csv.ReadRacesFromFileAndLoadToVector("Data/races.csv", Races);
     csv.ReadSkillsFromFileAndLoadToVector("Data/skills.csv", Skills);
     csv.ReadSkillListFromFileAndLoadToVector("Data/skills_baselist.csv", SkillList);
     csv.ReadPlayerSkillFromFileAndLoadToVector("Data/player_skills.csv", PlayerSkills);
@@ -133,7 +135,7 @@ void MainWindow::ClearGeneralTab()
 {
     ui->lineEdit_player_name->clear();
     ui->lineEdit_player_class->clear();
-    ui->lineEdit_player_race->clear();
+    ui->comboBox_player_race->setCurrentIndex(0);
     ui->lineEdit_armor_current->clear();
     ui->lineEdit_armor_full->clear();
     ui->lineEdit_shield_current->clear();
@@ -205,10 +207,6 @@ void MainWindow::DeletePlayerFromModel(int playerID)
 
 void MainWindow::SaveAll()
 {
-    //int playerID = GetActivePlayerID();
-    //SaveGeneralTab(playerID); Do wywalenia - check
-    //SaveSkillsTab(playerID); Do wywalenia - check
-
 
     ReadWriteData csv;
     if(!csv.WritePlayersFromVectorToFile(Players,"Data/players.csv"))
@@ -322,6 +320,7 @@ void MainWindow::on_pushButton_skill_add_clicked()
         int skillID = GetSkillIDFromSkillNameAndLevel(ui->treeWidget_skill_list->currentItem()->text(0),ui->comboBox_skill_level->currentText());
         AddSkillToTable();
         AddSkillToPlayer(skillID, playerID);
+        on_pushButton_calculate_skills_clicked();
         if(ui->checkBox_show_details->isChecked())
             ShowSkillDetails(skillID);
     }
@@ -340,6 +339,7 @@ void MainWindow::on_pushButton_skill_remove_clicked()
 
         RemoveSkillFromTable();
         RemoveSkillFromPlayer(skillID,playerID);
+        on_pushButton_calculate_skills_clicked();
     }
 
 }
@@ -820,5 +820,26 @@ void MainWindow::on_tableWidget_skills_cellDoubleClicked(int row, int column)
         QString skillLevel = ui->tableWidget_skills->item(row,1)->text();
         int skillID = GetSkillIDFromSkillNameAndLevel(skillName,skillLevel);
         ShowSkillDetails(skillID);
+    }
+}
+
+void MainWindow::on_comboBox_player_race_activated(const QString &arg1)
+{
+    int currentRow = ui->comboBox_player_race->currentIndex();
+    int raceID = RaceModel->item(currentRow,1)->text().toInt();
+
+    if(raceID == -1) //If "Dodaj nową rasę" is sellected
+    {
+        dialogbox_warning_generic *box = new dialogbox_warning_generic();
+        box->setAttribute(Qt::WA_DeleteOnClose);
+        box->setWarningLabel("Jeszcze ni działa! Idź se gdzie indziej!");
+        box->show();
+    }
+    else
+    {
+        int playerID = GetActivePlayerID();
+        for(int i=0;i<Players.size();i++)
+            if(Players.at(i).PlayerID == playerID)
+                Players[i].PlayerRace = arg1;
     }
 }

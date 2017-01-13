@@ -5,7 +5,7 @@ void MainWindow::SaveGeneralTabToVector(int playerID)
 {
     int playerIndex = GetPlayerIndex(playerID);
     Players[playerIndex].PlayerName = ui->lineEdit_player_name->text();
-    Players[playerIndex].PlayerRace = ui->lineEdit_player_race->text();
+    Players[playerIndex].PlayerRace = ui->comboBox_player_race->currentText();
     Players[playerIndex].PlayerClass = ui->lineEdit_player_class->text();
     Players[playerIndex].PlayerType = ui->comboBox_player_type->currentText();
 

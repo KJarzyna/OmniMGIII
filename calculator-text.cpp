@@ -274,7 +274,7 @@ QString calculator::GetVisualCalculationSteps()
 QString calculator::GetVisualTargetArmorAndShieldLeftResult()
 {
     QString text = "";
-    QString shield_max = "", shield_current = "", armor_max = "", armor_current = "", barrier = "";
+    QString shield_max = "0", shield_current = "0", armor_max = "0", armor_current = "0", barrier = "0";
 
     if(isActionNeedTarget(GetCurrentActionID()) && GetNumberOfSuccess() > 0 && !isActionMeeleeRelated(GetCurrentActionID()))
     {
@@ -415,6 +415,28 @@ QString calculator::GetVisualTargetArmorAndShieldLeftResult()
         {
             text += "Bariera <font color=#BF80FF>";
             text += GetPlayerBarrierAfterDamage(selectedTargetID,0) + "</font> ";
+        }
+        text += "Tarcze <font color=#0080FF>";
+        text += shield_current + "/" + shield_max + "</font> ";
+        text += "Pancerz <font color=#FFBF00>";
+        text += armor_current + "/" + armor_max + "</font><br>";
+    }
+
+
+    if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID > 88 && selectedActionItemID < 110)    // Phase Disruptor
+    {
+        text += "<br>" + selectedPlayerName + ":<br>";
+        shield_max = QString::number(GetPlayerMaxShield(selectedPlayerID));
+        armor_max = QString::number(GetPlayerMaxArmor(selectedPlayerID));
+
+        barrier = QString::number(GetPlayerBarrierAfterDamage(selectedPlayerID,0));
+        shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,GetSkillSelfShieldDrainFromSKillID(selectedActionItemID)));
+        armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedPlayerID,0));
+
+        if(isPlayerHasBarrier(selectedPlayerID))
+        {
+            text += "Bariera <font color=#BF80FF>";
+            text += barrier + "</font> ";
         }
         text += "Tarcze <font color=#0080FF>";
         text += shield_current + "/" + shield_max + "</font> ";
@@ -686,4 +708,16 @@ void calculator::setVisualTextToWidget(QString text)
 void calculator::setVisualTextToSecondWidget(QString text)
 {
     ui->textEdit_turn_2->setText(text);
+}
+
+QString calculator::ConvertVisualTextToCitadelFormat(QString text)
+{
+    text.replace("<font color","[color");
+    text.replace("</font>", "[/color]");
+    text.replace("<br>","\n");
+    text.replace(">","]");
+    text.replace("&#60;","<");
+    text.replace("&lt;","<");
+    return text;
+
 }

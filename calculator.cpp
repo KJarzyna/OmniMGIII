@@ -9,6 +9,7 @@
 #include "calculator-manualmode.cpp"
 #include "QDebug"
 #include <QMessageBox>
+#include <QClipboard>
 
 
 calculator::calculator(QWidget *parent) :
@@ -46,6 +47,7 @@ bool calculator::ReadDataFromFiles()
 {
     ReadWriteData csv;
     csv.ReadPlayersFromFileAndLoadToVector("Data/players.csv", Players);
+    csv.ReadRacesFromFileAndLoadToVector("Data/races.csv", Races);
     csv.ReadSkillsFromFileAndLoadToVector("Data/skills.csv", Skills);
     csv.ReadPlayerSkillFromFileAndLoadToVector("Data/player_skills.csv", PlayerSkills);
     csv.ReadWeaponsFromFileAndLoadToVector("Data/weapons.csv", Weapons);
@@ -395,6 +397,7 @@ void calculator::on_pushButton_calculate_clicked()
         ui->pushButton_disapprove_M->setEnabled(true);
         ui->tabWidget_calculation_type->setEnabled(false);
         ui->tabWidget_manual_type->setEnabled(false);
+        ui->pushButton_copy->setEnabled(true);
     }
     else if(!isAutomaticModeSelected() && getManualModeTypeSelected() == 1) // Manual Dmg
     {
@@ -405,6 +408,7 @@ void calculator::on_pushButton_calculate_clicked()
         ui->pushButton_disapprove_M->setEnabled(true);
         ui->tabWidget_calculation_type->setEnabled(false);
         ui->tabWidget_manual_type->setEnabled(false);
+        ui->pushButton_copy->setEnabled(true);
     }
 }
 
@@ -549,3 +553,34 @@ void calculator::closeEvent(QCloseEvent *event)
         event->ignore();
 }
 
+
+void calculator::on_pushButton_copy_clicked()
+{
+   if(isAutomaticModeSelected())
+   {
+       QString text = ConvertVisualTextToCitadelFormat(GetVisualTextFromSelectedInfo());
+       QClipboard *clipboard = QApplication::clipboard();
+       clipboard->setText(text);
+   }
+   else if(!isAutomaticModeSelected() && getManualModeTypeSelected() == 0) // Manual Action/Test
+   {
+       QString text = ConvertVisualTextToCitadelFormat(GetVisualTextFromSelectedInfo_Manual());
+       QClipboard *clipboard = QApplication::clipboard();
+       clipboard->setText(text);
+
+   }
+   else if(!isAutomaticModeSelected() && getManualModeTypeSelected() == 1) // Manual Dmg
+   {
+       QString text = ConvertVisualTextToCitadelFormat(GetVisualTextFromSelectedInfo_Manual());
+       QClipboard *clipboard = QApplication::clipboard();
+       clipboard->setText(text);
+   }
+
+}
+
+void calculator::on_pushButton_copy_2_clicked()
+{
+    QString text = ConvertVisualTextToCitadelFormat(GetFinalVisualTextFromSelectedInfo());
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(text);
+}

@@ -33,6 +33,7 @@ public:
     ~calculator();
 
     QVector<C_Player> Players;
+    QVector<C_Race> Races;
     QVector<C_Skill> Skills;
     QVector<C_PlayerSkill> PlayerSkills;
     QVector<C_Weapon> Weapons;
@@ -101,6 +102,9 @@ public:
     int successTreshold;
     int criticalTreshold;
 
+    bool playerStatsChanged; //not used yet (for rework)
+    bool targetStatsChanged; //not used yet (For rework)
+
     //Damage related
     QVector<int> dice_results;
 
@@ -139,6 +143,10 @@ private slots:
     void on_tabWidget_calculation_type_currentChanged(int index);
     void on_pushButton_approve_M_clicked();
     void on_pushButton_disapprove_M_clicked();
+
+    void on_pushButton_copy_clicked();
+
+    void on_pushButton_copy_2_clicked();
 
 private:
     Ui::calculator *ui;
@@ -271,6 +279,12 @@ private:
 
     QString GetGeneratorNameFromGeneratorID(int ID);
     int GetPlayerTechnoBuffFromOmnikey(int playerID);
+    int GetLightDamageFromRaceID(int ID);
+    int GetHeavyDamageFromRaceID(int ID);
+    int GetAreaDamageFromRaceID(int ID);
+    int GetEvasivenessFromRaceID(int ID);
+    int GetRaceIDFromRaceName(QString name);
+
 
     //Skill related
     QString GetSkillNameFromSkillID(int ID);
@@ -286,6 +300,7 @@ private:
     int GetSkillDamageToArmorFromSkillID(int ID);
     int GetSkillDamageToShieldFromSkillID(int ID);
     int GetSkillBarrierFromSkillID(int ID);
+    int GetSkillSelfShieldDrainFromSKillID(int skillID);
     bool isSkillWorksWithShields(int ID);
 
 
@@ -319,6 +334,7 @@ private:
     QString GetVisualCalculationSteps_Accuracy();
     QString GetVisualTargetArmorAndShieldLeftResult();
     QString GetVisualTargetEffects();
+    QString ConvertVisualTextToCitadelFormat(QString text);
 
     //ADDITIONAL EFFECTS
     void PerformAdditionalEffects();

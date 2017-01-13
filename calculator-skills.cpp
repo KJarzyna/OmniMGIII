@@ -213,3 +213,10 @@ int calculator::GetSkillDescriptionIDFromSkillID(int skillID)
         if(Skills.at(i).SkillID == skillID)
             return Skills.at(i).SkillDescriptionID;
 }
+
+int calculator::GetSkillSelfShieldDrainFromSKillID(int skillID)
+{
+    for(int i=0;i<Skills.size();i++)
+        if(Skills.at(i).SkillID == skillID)
+            return Skills.at(i).SelfShieldDrain;
+}
