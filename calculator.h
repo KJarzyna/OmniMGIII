@@ -70,10 +70,12 @@ public:
     QVector<C_ItemModificator> ItemAndActionCost;
     QVector<C_ItemModificator> ItemAndDamage; // <-
 
+
     QVector<C_ItemModificator> AdditionalItemAndDifficulty;
     QVector<C_ItemModificator> AdditionalItemAndDamage;
     QVector<C_ItemModificator> AdditionalItemAndActionCost;
     QVector<C_ItemModificator> AdditionalItemAndCritical;
+    QVector<C_ItemModificator> AdditionalItemAndShield;
 
     QVector<C_ItemModificator> SumItemAndDifficulty; // Sum of all additional modificators
     QVector<C_ItemModificator> SumItemAndDamage;

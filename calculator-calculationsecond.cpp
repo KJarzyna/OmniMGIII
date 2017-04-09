@@ -111,6 +111,51 @@ void calculator::ImplementAfterCalculationChanges()
 {
     int actionID = GetCurrentActionID();
 
+    //Shield Boost (Wyssanie Energii)
+    if(isActionSkillRelated(actionID) && selectedActionItemID > 463 && selectedActionItemID < 481 && GetNumberOfSuccess() > 0)
+    {
+        int i = selectedActionItemID;
+
+        if(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0) != 0)
+        {
+            int shieldDrained = GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetSkillDamageToShieldFromSkillID(selectedActionItemID));
+            if(shieldDrained == 0)
+                shieldDrained = -GetPlayerShieldCurrentAfterDamage(selectedTargetID,0);
+            else
+                shieldDrained = GetSkillSelfShieldDrainFromSKillID(selectedActionItemID);
+
+            if(i != 467 && i != 469 && i != 470 && i != 473 && i != 474 && i != 475 && i != 479)  //Not allowed to boost shield over MaxShield
+            {
+                if(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,0) != GetPlayerMaxShield(selectedPlayerID))
+                {
+                    if(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,shieldDrained) > GetPlayerMaxShield(selectedPlayerID))
+                        setPlayerCurrentShield(selectedPlayerID,GetPlayerMaxShield(selectedPlayerID));
+                    else
+                        setPlayerCurrentShield(selectedPlayerID,GetPlayerShieldCurrentAfterDamage(selectedPlayerID,shieldDrained));
+                }
+            }
+            else
+                setPlayerCurrentShield(selectedPlayerID,GetPlayerShieldCurrentAfterDamage(selectedPlayerID,shieldDrained));
+        }
+    }
+
+    //Shield Boost (Szarża)
+    if(isActionSkillRelated(actionID) && selectedActionItemID > 514 && selectedActionItemID < 532 && GetNumberOfSuccess() > 0)
+    {
+        int i = selectedActionItemID;
+
+        if(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0) != 0 && i != 524 && i != 528 && i != 529 && i != 530)
+        {
+            int shieldBoosted = GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetSkillDamageToShieldFromSkillID(selectedActionItemID));
+            setPlayerCurrentShield(selectedPlayerID,shieldBoosted);
+        }
+        else if(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0) != 0 && (i == 524 || i == 528 || i == 529 || i == 530)) // Boost to 100%
+        {
+            int shieldBoosted = GetPlayerMaxShield(selectedPlayerID);
+            setPlayerCurrentShield(selectedPlayerID,shieldBoosted);
+        }
+    }
+
     //Perform changes to player armor/shield/barrier after taking damage
     if(isActionDealDamage(actionID) && GetNumberOfSuccess() > 0 && !isActionMeeleeRelated(actionID))
     {
@@ -162,6 +207,13 @@ void calculator::ImplementAfterCalculationChanges()
     {
         setPlayerCurrentShield(selectedPlayerID,GetPlayerShieldCurrentAfterDamage(selectedPlayerID,GetSkillSelfShieldDrainFromSKillID(selectedActionItemID)));
     }
+
+    //Shield deterioration (Nova)
+    if(isActionSkillRelated(actionID) && selectedActionItemID > 531 && selectedActionItemID < 549 && GetNumberOfSuccess() > 0)
+    {
+        setPlayerCurrentShield(selectedPlayerID,GetPlayerShieldCurrentAfterDamage(selectedPlayerID,GetSkillSelfShieldDrainFromSKillID(selectedActionItemID)));
+    }
+
 
 
     //Remove effect from target (Barrier/Umocnienie)

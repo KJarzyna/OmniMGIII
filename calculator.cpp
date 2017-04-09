@@ -211,13 +211,20 @@ void calculator::CalculationsApproved(bool approved)
         ui->textEdit_turn_2->clear();
 
         dice_results.clear();
+
         ItemAndAccuracy.clear();
         ItemAndDifficulty.clear();
         ItemAndCritical.clear();
+        ItemAndActionCost.clear();
+        ItemAndDamage.clear();
+
         WidgetItemAndDifficulty.clear();
         WidgetItemAndDamage.clear();
+
         AdditionalItemAndDifficulty.clear();
         AdditionalItemAndDamage.clear();
+        AdditionalItemAndCritical.clear();
+        AdditionalItemAndActionCost.clear();
 
         ResetAction();
         ResetTarget();
@@ -464,13 +471,20 @@ void calculator::on_pushButton_disapprove_clicked()
         ui->textEdit_turn_2->clear();
 
         dice_results.clear();
+
         ItemAndAccuracy.clear();
         ItemAndDifficulty.clear();
+        ItemAndCritical.clear();
+        ItemAndActionCost.clear();
+        ItemAndDamage.clear();
+
         WidgetItemAndDifficulty.clear();
         WidgetItemAndDamage.clear();
+
         AdditionalItemAndDifficulty.clear();
         AdditionalItemAndDamage.clear();
-        ItemAndCritical.clear();
+        AdditionalItemAndCritical.clear();
+        AdditionalItemAndActionCost.clear();
 
         ResetAction();
         ResetTarget();

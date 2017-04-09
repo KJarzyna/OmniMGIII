@@ -444,6 +444,53 @@ QString calculator::GetVisualTargetArmorAndShieldLeftResult()
         text += armor_current + "/" + armor_max + "</font><br>";
     }
 
+    if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID > 463 && selectedActionItemID < 481)    // Wyssanie Energii
+    {
+        text += "<br>" + selectedPlayerName + ":<br>";
+        shield_max = QString::number(GetPlayerMaxShield(selectedPlayerID));
+        armor_max = QString::number(GetPlayerMaxArmor(selectedPlayerID));
+
+        barrier = QString::number(GetPlayerBarrierAfterDamage(selectedPlayerID,0));
+
+        int i =selectedActionItemID;
+        if(GetPlayerShieldCurrentAfterDamage(selectedTargetID,0) != 0)
+        {
+            int shieldDrained = GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetSkillDamageToShieldFromSkillID(selectedActionItemID));
+            if(shieldDrained == 0)
+                shieldDrained = -GetPlayerShieldCurrentAfterDamage(selectedTargetID,0);
+            else
+                shieldDrained = GetSkillSelfShieldDrainFromSKillID(selectedActionItemID);
+
+            if(i != 467 && i != 469 && i != 470 && i != 473 && i != 474 && i != 475 && i != 479) //Not allowed to boost shield over MaxShield
+            {
+                if(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,0) != GetPlayerMaxShield(selectedPlayerID))
+                {
+                    if(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,shieldDrained) > GetPlayerMaxShield(selectedPlayerID))
+                        shield_current = QString::number(GetPlayerMaxShield(selectedPlayerID));
+                    else
+                        shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,shieldDrained));
+                }
+            }
+            else
+                shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,shieldDrained));
+        }
+        else
+            shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,0));
+
+        //shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedPlayerID,GetSkillSelfShieldDrainFromSKillID(selectedActionItemID)));
+        armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedPlayerID,0));
+
+        if(isPlayerHasBarrier(selectedPlayerID))
+        {
+            text += "Bariera <font color=#BF80FF>";
+            text += barrier + "</font> ";
+        }
+        text += "Tarcze <font color=#0080FF>";
+        text += shield_current + "/" + shield_max + "</font> ";
+        text += "Pancerz <font color=#FFBF00>";
+        text += armor_current + "/" + armor_max + "</font><br>";
+    }
+
     return text;
 }
 

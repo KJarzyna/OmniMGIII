@@ -478,6 +478,77 @@ void calculator::PerformAdditionalEffects()
                 AdditionalItemAndDamage.append(item);
             }
 
+        //Skan Taktyczny - Cel
+        for(int i=167;i<184;i++)
+        {
+            if(isPlayerHasEffect(selectedTargetID,i))
+            {
+                C_ItemModificator item;
+                item.name = "Efekt od Skanu Taktycznego (1)";
+                item.value = 5;
+                AdditionalItemAndCritical.append(item);
+            }
+        }
+
+        if(isPlayerHasEffect(selectedTargetID,171) || isPlayerHasEffect(selectedTargetID,174) || isPlayerHasEffect(selectedTargetID,175) || // Skanowanie 4B
+                isPlayerHasEffect(selectedTargetID,179) || isPlayerHasEffect(selectedTargetID,180) || isPlayerHasEffect(selectedTargetID,181) ||
+                isPlayerHasEffect(selectedTargetID,183))
+        {
+            C_ItemModificator item;
+            item.name = "Dodatkowy efekt od Skanu Taktycznego (4B)";
+            item.value = 5;
+            AdditionalItemAndCritical.append(item);
+        }
+
+        if(isPlayerHasEffect(selectedTargetID,172) || isPlayerHasEffect(selectedTargetID,174) || isPlayerHasEffect(selectedTargetID,176) || // Skanowanie 5A
+                isPlayerHasEffect(selectedTargetID,177) || isPlayerHasEffect(selectedTargetID,181) || isPlayerHasEffect(selectedTargetID,183))
+        {
+            C_ItemModificator item;
+            item.name = "Dodatkowy efekt od Skanu Taktycznego (5A)";
+            item.value = -1;
+            AdditionalItemAndDifficulty.append(item);
+        }
+
+        if(isPlayerHasEffect(selectedTargetID,176) || isPlayerHasEffect(selectedTargetID,180) || isPlayerHasEffect(selectedTargetID,181) || // Skanowanie 6A
+                isPlayerHasEffect(selectedTargetID,182))
+        {
+            C_ItemModificator item;
+            item.name = "Dodatkowy efekt od Skanu Taktycznego (6A)";
+            item.value = -99;
+            AdditionalItemAndActionCost.append(item);
+        }
+
+        //Pancerz Technologiczny - Gracz
+        for(int i=184;i<201;i++)
+        {
+            if(isPlayerHasEffect(selectedPlayerID,i))
+            {
+                C_ItemModificator item;
+                item.name = "Efekt od Pancerza Technologicznego (1)";
+                item.value = 3;
+                AdditionalItemAndActionCost.append(item);
+            }
+        }
+
+        if(isPlayerHasEffect(selectedPlayerID,190) || isPlayerHasEffect(selectedPlayerID,192 || isPlayerHasEffect(selectedPlayerID,195) || isPlayerHasEffect(selectedPlayerID,196) ||
+           isPlayerHasEffect(selectedPlayerID,197) || isPlayerHasEffect(selectedPlayerID,199)))
+        {
+            C_ItemModificator item;
+            item.name = "Efekt od Pancerza Technologicznego (5B)";
+            item.value = -2;
+            AdditionalItemAndActionCost.append(item);
+        }
+
+        if(isPlayerHasEffect(selectedPlayerID,194) || isPlayerHasEffect(selectedPlayerID,195 || isPlayerHasEffect(selectedPlayerID,196) || isPlayerHasEffect(selectedPlayerID,200)))
+        {
+            C_ItemModificator item;
+            item.name = "Efekt od Pancerza Technologicznego (6B)";
+            item.value = -2;
+            AdditionalItemAndActionCost.append(item);
+        }
+
+
+
 }
 
 void calculator::PerformAdditionalEffectsAfterHit()
@@ -536,5 +607,110 @@ void calculator::PerformAdditionalEffectsAfterHit()
         item.value = GetModifiedBaseDamageDealt();
         AdditionalItemAndDamage.append(item);
         }
+
+    //Skan Taktyczny 4A - Cel
+    if(isPlayerHasEffect(selectedTargetID,170) || isPlayerHasEffect(selectedTargetID,172) || isPlayerHasEffect(selectedTargetID,173) || // Skanowanie 4A
+            isPlayerHasEffect(selectedTargetID,176) || isPlayerHasEffect(selectedTargetID,177) || isPlayerHasEffect(selectedTargetID,178) ||
+            isPlayerHasEffect(selectedTargetID,182))
+    {
+        C_ItemModificator item;
+        item.name = "Dodatkowy efekt od Skanu Taktycznego (4A)";
+        item.value = 25;
+        AdditionalItemAndDamage.append(item);
+    }
+
+    //Szarża Biotyczna 6B - Cel
+    if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID == 525 || selectedActionItemID == 526 || selectedActionItemID == 527 || selectedActionItemID == 531)
+    {
+        C_ItemModificator item;
+        item.name = "Dodatkowy efekt od Szarży Biotycznej (6B))";
+        item.value = 100;
+        AdditionalItemAndDamage.append(item);
+    }
+
+    //Pancerz Technologiczny - Gracz
+    for(int i=184;i<201;i++)
+    {
+        if(isActionMeeleeRelated(GetCurrentActionID()) && isPlayerHasEffect(selectedPlayerID,i))
+        {
+            C_ItemModificator item;
+            item.name = "Efekt od Pancerza Technologicznego (1)";
+            item.value = 25;
+            AdditionalItemAndDamage.append(item);
+        }
+    }
+
+    //Pancerz Technologiczny 4A - Gracz
+    if(isActionMeeleeRelated(GetCurrentActionID()) && (isPlayerHasEffect(selectedPlayerID,187) || isPlayerHasEffect(selectedPlayerID,189) || isPlayerHasEffect(selectedPlayerID,190) ||
+       isPlayerHasEffect(selectedPlayerID,193) || isPlayerHasEffect(selectedPlayerID,194) || isPlayerHasEffect(selectedPlayerID,195) || isPlayerHasEffect(selectedPlayerID,199)))
+    {
+        C_ItemModificator item;
+        item.name = "Dodatkowy efekt od Pancerza Technologicznego (4A)";
+        item.value = 25;
+        AdditionalItemAndDamage.append(item);
+    }
+
+    //Pancerz Technologiczny 5A - Gracz
+    if(isActionSkillRelated(GetCurrentActionID()) && isActionDealDamage(GetCurrentActionID()) && (isPlayerHasEffect(selectedPlayerID,189) || isPlayerHasEffect(selectedPlayerID,191) ||
+       isPlayerHasEffect(selectedPlayerID,193) || isPlayerHasEffect(selectedPlayerID,194) || isPlayerHasEffect(selectedPlayerID,198) || isPlayerHasEffect(selectedPlayerID,200)))
+    {
+        C_ItemModificator item;
+        item.name = "Dodatkowy efekt od Pancerza Technologicznego (5A)";
+        item.value = 50;
+        AdditionalItemAndDamage.append(item);
+    }
+
+    //Pancerz Technologiczny - Cel
+    for(int i=184;i<201;i++)
+    {
+        if(isPlayerHasEffect(selectedTargetID,i))
+        {
+            C_ItemModificator item;
+            item.name = "Efekt od Pancerza Technologicznego (1)";
+            item.value = -50;
+            AdditionalItemAndDamage.append(item);
+        }
+    }
+
+    //Pancerz Technologiczny 6A - Cel
+    if(isPlayerHasEffect(selectedTargetID,193) || isPlayerHasEffect(selectedTargetID,197 || isPlayerHasEffect(selectedTargetID,198) || isPlayerHasEffect(selectedTargetID,199)))
+    {
+        C_ItemModificator item;
+        item.name = "Dodatkowy efekt od Pancerza Technologicznego (6A)";
+        item.value = -50;
+        AdditionalItemAndDamage.append(item);
+    }
+
+    //Kamuflaż Taktyczny - Gracz
+    for(int i=201;i<218;i++)
+    {
+        if((isActionMeeleeRelated(GetCurrentActionID()) || isActionWeaponRelated(GetCurrentActionID())) && isPlayerHasEffect(selectedPlayerID,i))
+        {
+            C_ItemModificator item;
+            item.name = "Efekt od Kamuflaża Taktycznego (1)";
+            item.value = 50;
+            AdditionalItemAndDamage.append(item);
+        }
+    }
+
+    //Kamuflaż Taktyczny 4A - Gracz
+    if(isActionMeeleeRelated(GetCurrentActionID()) && (isPlayerHasEffect(selectedPlayerID,204) || isPlayerHasEffect(selectedPlayerID,206) || isPlayerHasEffect(selectedPlayerID,207) ||
+       isPlayerHasEffect(selectedPlayerID,210) || isPlayerHasEffect(selectedPlayerID,211) || isPlayerHasEffect(selectedPlayerID,212) || isPlayerHasEffect(selectedPlayerID,216)))
+    {
+        C_ItemModificator item;
+        item.name = "Dodatkowy efekt od Kamuflaża Taktycznego (4A)";
+        item.value = 50;
+        AdditionalItemAndDamage.append(item);
+    }
+
+    //Kamuflaż Taktyczny 4B - Gracz
+    if(isActionWeaponRelated(GetCurrentActionID()) && (isPlayerHasEffect(selectedPlayerID,205) || isPlayerHasEffect(selectedPlayerID,208) || isPlayerHasEffect(selectedPlayerID,209) ||
+       isPlayerHasEffect(selectedPlayerID,213) || isPlayerHasEffect(selectedPlayerID,214) || isPlayerHasEffect(selectedPlayerID,215) || isPlayerHasEffect(selectedPlayerID,217)))
+    {
+        C_ItemModificator item;
+        item.name = "Dodatkowy efekt od Kamuflaża Taktycznego (4B)";
+        item.value = 50;
+        AdditionalItemAndDamage.append(item);
+    }
 
 }

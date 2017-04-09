@@ -1,4 +1,5 @@
 #include "Headers/ReadWriteData/readwritedata.h"
+#include <QTextCodec>
 
 ReadWriteData::ReadWriteData()
 {
@@ -1235,6 +1236,8 @@ bool ReadWriteData::WritePlayersFromVectorToFile(QVector<C_Player> &vector, QStr
     if (CreateFileBackup(filename) && outputFile.remove() && outputFile.open(QIODevice::ReadWrite))
     {
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;PlayerName;PlayerRace;PlayerClass;PlayerType;ArmorCurrent;ArmorMax;ShieldCurrent;ShieldMax;BarrierCurrent;ActiveEffects;SpecializationSkill;MasteryBattle;MasteryBiotic;MasteryTechno;MasterySpec";
         out << line << endl;
 
@@ -1294,6 +1297,8 @@ bool ReadWriteData::WriteRacesFromVectorToFile(QVector<C_Race> &vector, QString 
     if (CreateFileBackup(filename) && outputFile.remove() && outputFile.open(QIODevice::ReadWrite))
     {
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "ID;Name;HeavyDamage;LightDamage;AreaDamage;HitChance";
         out << line << endl;
 
@@ -1334,6 +1339,8 @@ bool ReadWriteData::WritePlayerSkillFromVectorToFile(QVector<C_PlayerSkill> &vec
     if (CreateFileBackup(filename) && outputFile.remove() && outputFile.open(QIODevice::ReadWrite))
     {
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;SkillID";
         out << line << endl;
 
@@ -1365,6 +1372,8 @@ bool ReadWriteData::WriteSkillListFromVectorToFile(QVector<C_SkillList> &vector,
     {
         QTextStream out(&outputFile);
         out.flush();
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "SkillName;SkillType";
         out << line << endl;
 
@@ -1397,6 +1406,8 @@ bool ReadWriteData::WritePlayerWeaponsFromVectorToFile(QVector<C_PlayerWeapon> &
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;WeaponID;ModID;AmmoLeft";
         out << line << endl;
 
@@ -1433,6 +1444,8 @@ bool ReadWriteData::WritePlayerArmorsFromVectorToFile(QVector<C_PlayerArmor> &ve
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;ArmorID";
         out << line << endl;
 
@@ -1465,6 +1478,8 @@ bool ReadWriteData::WritePlayerArmorModsFromVectorToFile(QVector<C_PlayerArmorMo
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;ArmorModID";
         out << line << endl;
 
@@ -1497,6 +1512,8 @@ bool ReadWriteData::WritePlayerGeneratorsFromVectorToFile(QVector<C_PlayerGenera
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;GeneratorID;ChargesLeft";
         out << line << endl;
 
@@ -1531,6 +1548,8 @@ bool ReadWriteData::WritePlayerOmnikeysFromVectorToFile(QVector<C_PlayerOmnikeys
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;OmnikeyID";
         out << line << endl;
 
@@ -1562,6 +1581,8 @@ bool ReadWriteData::WritePlayerOmnikeyModsFromVectorToFile(QVector<C_PlayerOmnik
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;OmnikeyModID";
         out << line << endl;
 
@@ -1594,6 +1615,8 @@ bool ReadWriteData::WritePlayerOmnibladesFromVectorToFile(QVector<C_PlayerOmnibl
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;OmnibladeID";
         out << line << endl;
 
@@ -1625,6 +1648,8 @@ bool ReadWriteData::WritePlayerOmnibladeModsFromVectorToFile(QVector<C_PlayerOmn
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;OmnibladeModID";
         out << line << endl;
 
@@ -1658,6 +1683,8 @@ bool ReadWriteData::WritePlayerActiveEffectsFromVectorToFile(QVector<C_PlayerAct
     {
 
         QTextStream out(&outputFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out.setGenerateByteOrderMark(true);
         line = "PlayerID;EffectID";
         out << line << endl;
 

@@ -258,6 +258,14 @@ bool calculator::CheckForWarnings()
         return false;
     }
 
+    //Player Don't Have Shield and Can't Use Nova
+    if(isActionSkillRelated(GetCurrentActionID()) && selectedActionItemID > 531 && selectedActionItemID < 549 && !isPlayerHasShield(selectedPlayerID))
+    {
+        QString warning = selectedPlayerName + " nie posiada tarcz! Nie można użyć Nowy!";
+        PopUpWarning(warning);
+        return false;
+    }
+
     //Player is under Sabotage
     if(isActionWeaponRelated(GetCurrentActionID()) && isPlayerHasEffect(selectedPlayerID,166))
     {
