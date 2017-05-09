@@ -409,3 +409,10 @@ int calculator::GetEvasivenessFromRaceID(int ID)
             eva = Races.at(i).HitChance;
     return eva;
 }
+
+int calculator::GetPlayerActiveAmmoID(int playerID)
+{
+    for(int i=0;i<PlayerActiveEffects.size();i++)
+        if(PlayerActiveEffects.at(i).PlayerID == playerID && GetEffectNameFromEffectID(PlayerActiveEffects.at(i).EffectID).contains("Amunicja"))
+                return PlayerActiveEffects.at(i).EffectID;
+}

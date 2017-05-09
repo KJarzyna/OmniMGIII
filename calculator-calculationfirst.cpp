@@ -69,7 +69,23 @@ int calculator::GetBaseSuccessTreshold(int actionID)
     else if(isActionSkillRelated(actionID)) // Get base success for skills
     {
         if (!selectedActionItemName.contains(GetPlayerSpecializationSkill(selectedPlayerID)))
-            success = GetPlayerSkillMastery(selectedPlayerID,GetSkillTypeFromSkillID(selectedActionItemID));
+        {
+//            if(GetSkillTypeFromSkillID(selectedActionItemID) == "Klasowe")
+//            {
+//                if(GetSkillNameFromSkillID(selectedActionItemID).contains("Pancerz Technologiczny"))
+//                    success = GetPlayerSkillMastery(selectedPlayerID,"Technologiczne");
+//                else if(GetSkillNameFromSkillID(selectedActionItemID).contains("Amunicja Dysrupcyjna"))
+//                    success = GetPlayerSkillMastery(selectedPlayerID,"Bojowe");
+//                else if(GetSkillNameFromSkillID(selectedActionItemID).contains("Szarża Biotyczna"))
+//                    success = GetPlayerSkillMastery(selectedPlayerID,"Biotyczne");
+//                else if(GetSkillNameFromSkillID(selectedActionItemID).contains("Nowa"))
+//                    success = GetPlayerSkillMastery(selectedPlayerID,"Biotyczne");
+//                else if(GetSkillNameFromSkillID(selectedActionItemID).contains("Kamuflaż Taktyczny"))
+//                    success = GetPlayerSkillMastery(selectedPlayerID,"Technologiczne");
+//            }
+//            else
+                success = GetPlayerSkillMastery(selectedPlayerID,GetSkillTypeFromSkillID(selectedActionItemID));
+        }
         else
             success = GetPlayerSkillMastery(selectedPlayerID,"Specjalizacja");
     }

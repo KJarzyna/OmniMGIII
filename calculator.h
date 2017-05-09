@@ -315,6 +315,8 @@ private:
     int GetSkillEffectChanceFromSkillID(int SkillID, int EffectID);
     QVector<int> GetSkillEffectsFromSkillID(int skillID);
     bool isSkillEffectApplicableToPlayer(int playerID, int skillID);
+    bool isPlayerHasAmmoActive(int playerID);
+    int GetPlayerActiveAmmoID(int playerID);
 
     //Text related
     void setVisualTextToWidget(QString text);

@@ -741,6 +741,12 @@ QString calculator::GetVisualTargetEffects()
                 text += GetEffectNameFromEffectID(0) + ", ";
         }
 
+    //Add ammunition effect
+//    if(isActionWeaponRelated(actionID) && isPlayerHasAmmoActive(selectedPlayerID))
+//    {
+
+//    }
+
     if(!text.isEmpty())
         text.chop(2);
 

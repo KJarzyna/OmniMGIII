@@ -547,7 +547,75 @@ void calculator::PerformAdditionalEffects()
             AdditionalItemAndActionCost.append(item);
         }
 
+        //Amunicja Dysrupcyjna
+        for(int i=218;i<235;i++)
+            if(isPlayerHasEffect(selectedPlayerID,i))
+            {
+                //5B
+                if(i==224 || i==226 || i==229 || i==230 || i==231 || i==233)
+                {
+                    C_ItemModificator item;
+                    item.name = "Dodatkowy efekt od Amunicji Dysrupcyjnej (5B)";
+                    item.value = 5;
+                    AdditionalItemAndCritical.append(item);
+                }
+            }
 
+        //Amunicja Zapalająca
+        for(int i=235;i<252;i++)
+            if(isPlayerHasEffect(selectedPlayerID,i))
+            {
+                //5B
+                if(i==241 || i==243 || i==246 || i==247 || i==248 || i==250)
+                {
+                    C_ItemModificator item;
+                    item.name = "Dodatkowy efekt od Amunicji Zapalającej (5B)";
+                    item.value = 5;
+                    AdditionalItemAndCritical.append(item);
+                }
+            }
+
+        //Amunicja Krio
+        for(int i=252;i<269;i++)
+            if(isPlayerHasEffect(selectedPlayerID,i))
+            {
+                //5B
+                if(i==258 || i==260 || i==263 || i==264 || i==265 || i==267)
+                {
+                    C_ItemModificator item;
+                    item.name = "Dodatkowy efekt od Krio-Amunicji (5B)";
+                    item.value = 5;
+                    AdditionalItemAndCritical.append(item);
+                }
+            }
+
+        //Amunicja PrzeciwPancerna
+        for(int i=269;i<286;i++)
+            if(isPlayerHasEffect(selectedPlayerID,i))
+            {
+                //5B
+                if(i==275 || i==277 || i==280 || i==281 || i==282 || i==284)
+                {
+                    C_ItemModificator item;
+                    item.name = "Dodatkowy efekt od Przeciwpancernej (5B)";
+                    item.value = 5;
+                    AdditionalItemAndCritical.append(item);
+                }
+            }
+
+        //Amunicja Odkształcająca
+        for(int i=286;i<303;i++)
+            if(isPlayerHasEffect(selectedPlayerID,i))
+            {
+                //5B
+                if(i==292 || i==294 || i==297 || i==298 || i==299 || i==301)
+                {
+                    C_ItemModificator item;
+                    item.name = "Dodatkowy efekt od Odkształcającej (5B)";
+                    item.value = 5;
+                    AdditionalItemAndCritical.append(item);
+                }
+            }
 
 }
 
@@ -713,4 +781,92 @@ void calculator::PerformAdditionalEffectsAfterHit()
         AdditionalItemAndDamage.append(item);
     }
 
+    //AMUNICJE
+
+    //Amunicja Dysrupcyjna
+    for(int i=218;i<235;i++)
+        if(isPlayerHasEffect(selectedPlayerID,i))
+        {
+            //2
+            if(i>218 && i<235 && isPlayerHasShield(selectedTargetID))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Amunicji Dysrupcyjnej (2)";
+                item.value = 30;
+                AdditionalItemAndDamage.append(item);
+            }
+            //3
+            if(i>219 && i<235 && isPlayerHasShield(selectedTargetID))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Amunicji Dysrupcyjnej (3)";
+                item.value = 20;
+                AdditionalItemAndDamage.append(item);
+            }
+            //4A
+            if((i==221 || i==223 || i==224 || i==227 || i==228 || i==229 || i==233) && isPlayerHasShield(selectedTargetID))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Amunicji Dysrupcyjnej (4A)";
+                item.value = 30;
+                AdditionalItemAndDamage.append(item);
+            }
+        }
+
+    //Amunicja Przeciwpancerna
+    for(int i=269;i<286;i++)
+        if(isPlayerHasEffect(selectedPlayerID,i))
+        {
+            //2
+            if(i>269 && i<286 && !isPlayerHasShield(selectedTargetID))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Amunicji Przeciwpancernej (2)";
+                item.value = 25;
+                AdditionalItemAndDamage.append(item);
+            }
+            //4B
+            if((i==273 || i==276 || i==277 || i==281 || i==282 || i==283 || i==285) && !isPlayerHasShield(selectedTargetID))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Amunicji Przeciwpancernej (4B)";
+                item.value = 25;
+                AdditionalItemAndDamage.append(item);
+            }
+
+        }
+
+    //Amunicja Odkształcająca
+    for(int i=286;i<303;i++)
+        if(isPlayerHasEffect(selectedPlayerID,i))
+        {
+            //2
+            if(i>286 && i<303 && !isPlayerHasShield(selectedTargetID))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Amunicji Odkształcającej (2)";
+                item.value = 25;
+                AdditionalItemAndDamage.append(item);
+            }
+            //5A
+            if((i==291 || i==293 || i==295 || i==296 || i==300 || i==302) && !isPlayerHasShield(selectedTargetID))
+            {
+                C_ItemModificator item;
+                item.name = "Dodatkowy efekt od Amunicji Odkształcającej (5A)";
+                item.value = 25;
+                AdditionalItemAndDamage.append(item);
+            }
+
+        }
+
+
 }
+
+bool calculator::isPlayerHasAmmoActive(int playerID)
+{
+    for(int i=0;i<PlayerActiveEffects.size();i++)
+        if(PlayerActiveEffects.at(i).PlayerID == playerID && GetEffectNameFromEffectID(PlayerActiveEffects.at(i).EffectID).contains("Amunicja"))
+                return true;
+   return false;
+}
+
