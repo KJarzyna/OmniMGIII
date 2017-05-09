@@ -265,6 +265,7 @@ QString calculator::GetVisualCalculationSteps()
     text += GetVisualCalculationSteps_Accuracy();
     text += GetVisualCalculationSteps_Cost();
     text += GetVisualCalculationSteps_Critical();
+    text += GetVisualCalculationSteps_Additional();
 
     text += "<font color=#8040BF>[/fabuleoff]</font><br>";
 
@@ -292,8 +293,51 @@ QString calculator::GetVisualTargetArmorAndShieldLeftResult()
         }
         else if(!isPlayerHasBarrier(selectedTargetID) && isPlayerHasShield(selectedTargetID))
         {
-            shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
-            armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,0));
+            //Player has Disruptive Ammo ON
+            for(int i=218;i<235;i++)
+                if(isPlayerHasEffect(selectedPlayerID,i))
+                {
+                    //3+
+                    if(i>219 && i<235)
+                    {
+                        int dmgToArmor = (GetPlayerShieldCurrentAfterDamage(selectedTargetID,0) - GetFinalDamageDealt())*(-1);
+                        if(dmgToArmor <= 0)
+                        {
+                            shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+                            armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,0));
+                        }
+                        else
+                        {
+                            if(dmgToArmor > 30 && (i!=223 || i!=225 || i!=227 || i!=228 || i!=232 || i!=234)) //3
+                            {
+                                shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+                                armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,30));
+                                QString AdditText = "30 obrażeń przechodzi na pancerz! (Efekt Amunicji Dysrupcyjnej 3)";
+                                AdditionalFabuleOffText.append(AdditText);
+                            }
+                            else if((i==223 || i==225 || i==227 || i==228 || i==232 || i==234) && dmgToArmor > 50) //5A
+                            {
+                                shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+                                armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,50));
+                                QString AdditText = "50 obrażeń przechodzi na pancerz! (Efekt Amunicji Dysrupcyjnej 4A)";
+                                AdditionalFabuleOffText.append(AdditText);
+                            }
+                            else
+                            {
+                                shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+                                armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,dmgToArmor));
+                                QString AdditText = QString::number(dmgToArmor) + " obrażeń przechodzi na pancerz! (Efekt Amunicji Dysrupcyjnej)";
+                                AdditionalFabuleOffText.append(AdditText);
+                            }
+                        }
+                    }
+                    break;
+                }
+            else
+                {
+                    shield_current = QString::number(GetPlayerShieldCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
+                    armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,0));
+                }
         }
         else if(!isPlayerHasShield(selectedTargetID) && !isPlayerHasBarrier(selectedTargetID))
             armor_current = QString::number(GetPlayerArmorCurrentAfterDamage(selectedTargetID,GetFinalDamageDealt()));
@@ -710,6 +754,25 @@ QString calculator::GetVisualCalculationSteps_Cost()
             if(SumItemAndActionCost.at(i).value > 0)
                 text += "+";
             text += QString::number(SumItemAndActionCost.at(i).value) + " [" + SumItemAndActionCost.at(i).name + "]";
+        }
+        text += "<br><br>";
+    }
+
+    return text;
+}
+
+QString calculator::GetVisualCalculationSteps_Additional()
+{
+    QString text = "";
+
+    if(AdditionalFabuleOffText.size() > 0)
+    {
+        text += "Dodatkowe:";
+
+        for(int i=0;i<AdditionalFabuleOffText.size();i++)
+        {
+            text += "<br>";
+            text += AdditionalFabuleOffText.at(i);
         }
         text += "<br><br>";
     }

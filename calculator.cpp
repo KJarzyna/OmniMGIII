@@ -226,6 +226,8 @@ void calculator::CalculationsApproved(bool approved)
         AdditionalItemAndCritical.clear();
         AdditionalItemAndActionCost.clear();
 
+        AdditionalFabuleOffText.clear();
+
         ResetAction();
         ResetTarget();
         ResetDifficulty();
@@ -485,6 +487,8 @@ void calculator::on_pushButton_disapprove_clicked()
         AdditionalItemAndDamage.clear();
         AdditionalItemAndCritical.clear();
         AdditionalItemAndActionCost.clear();
+
+        AdditionalFabuleOffText.clear();
 
         ResetAction();
         ResetTarget();

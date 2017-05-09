@@ -82,6 +82,8 @@ public:
     QVector<C_ItemModificator> SumItemAndActionCost;
     QVector<C_ItemModificator> SumItemAndCritical;
 
+    QVector<QString> AdditionalFabuleOffText;
+
     QStandardItemModel *tableModel;
     QStandardItemModel *comboboxPlayersModel;
     QStandardItemModel *comboboxTargetsModel;
@@ -336,6 +338,7 @@ private:
     QString GetVisualCalculationSteps_Cost();
     QString GetVisualCalculationSteps_Critical();
     QString GetVisualCalculationSteps_Accuracy();
+    QString GetVisualCalculationSteps_Additional();
     QString GetVisualTargetArmorAndShieldLeftResult();
     QString GetVisualTargetEffects();
     QString ConvertVisualTextToCitadelFormat(QString text);

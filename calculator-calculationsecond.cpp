@@ -160,6 +160,7 @@ void calculator::ImplementAfterCalculationChanges()
     if(isActionDealDamage(actionID) && GetNumberOfSuccess() > 0 && !isActionMeeleeRelated(actionID))
     {
         int damage_dealt = GetFinalDamageDealt();
+        int currentShield = GetPlayerShieldCurrentAfterDamage(selectedTargetID,0);
 
         if (isPlayerHasBarrier(selectedTargetID))
             setPlayerBarrier(selectedTargetID,GetPlayerBarrierAfterDamage(selectedTargetID,damage_dealt));
@@ -171,7 +172,38 @@ void calculator::ImplementAfterCalculationChanges()
         if(isActionWeaponRelated(actionID))
             subtractAmmoFromPlayerWeapon(selectedPlayerID,selectedActionItemID);
 
+        //Player have Disruptive Ammo
+        for(int i=218;i<235;i++)
+            if(isPlayerHasEffect(selectedPlayerID,i))
+            {
+                //3+
+                if(i>219 && i<235)
+                {
+                    int dmgToArmor = (currentShield - damage_dealt)*(-1);
+
+                    if(dmgToArmor <= 0)
+                    {
+                        //do Nothing
+                    }
+                    else
+                    {
+                        if(dmgToArmor > 30 && (i!=223 || i!=225 || i!=227 || i!=228 || i!=232 || i!=234))                       //3
+                        {
+                            setPlayerCurrentArmor(selectedTargetID,GetPlayerArmorCurrentAfterDamage(selectedTargetID,30));
+                        }
+                        else if((i==223 || i==225 || i==227 || i==228 || i==232 || i==234) && dmgToArmor > 50)                  //5A
+                        {
+                            setPlayerCurrentArmor(selectedTargetID,GetPlayerArmorCurrentAfterDamage(selectedTargetID,50));
+                        }
+                        else
+                        {
+                            setPlayerCurrentArmor(selectedTargetID,GetPlayerArmorCurrentAfterDamage(selectedTargetID,dmgToArmor));
+                        }
+                    }
+                }
+            }
     }
+
     //Perform changes to player armor after taking meelee damage
     else if(isActionMeeleeRelated(actionID) && GetNumberOfSuccess() > 0)
     {
