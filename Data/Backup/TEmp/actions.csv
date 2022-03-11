@@ -1,0 +1,27 @@
+ActionID;ActionName;ActionCost
+0;Strza³ z pistoletu ciê¿kiego;0
+1;Strza³ z pistoletu maszynowego;0
+2;Strza³ z karabinu szturmowego;100
+3;Strza³ z karabinu wyborowego;100
+4;Strza³ ze strzelby;100
+5;Prze³adowanie broni;100
+6;Regeneracja tarcz;100
+7;U¿ycie zdolnoœci;100
+8;U¿ycie medi-¿elu;100
+9;U¿ycie omni-¿elu;100
+10;Atak Omni-ostrzem (lekki);0
+11;Atak Omni-ostrzem (ciê¿ki);100
+12;Atak Omni-ostrzem (obszarowy);150
+13;Wyci¹gniêcie broni;0
+14;Schowanie broni;0
+15;Przymierzenie;0
+16;Koncentracja;0
+17;Aktywacja ekwipunku (generator);0
+18;Aktywacja cechy zdolnoœci;0
+19;Aktywacja amunicji specjalnej;99
+20;Ruch (krótki);0
+21;Ruch (d³ugi);0
+22;Precyzja (lekka);0
+23;Precyzja (skupiona);99
+24;Pozycja obronna (lekka);0
+25;Pozycja obronna (skupiona);99

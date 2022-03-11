@@ -1,0 +1,7 @@
+﻿ID###MainText###Title
+0###To do list:<br>- Rozwiązać zagadkę znikających pracowników<br>- Zdobyć milion expa<br>- Odlecieć w stronę zachodzącego słońca###KlendagoN
+1######Wolne miejsce
+2######Wolne miejsce
+3######Wolne miejsce
+4######wolne miejsce
+5######wolne miejsce

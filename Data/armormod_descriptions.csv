@@ -1,0 +1,12 @@
+ID;Description
+0;Brak wybranego ulepszenia do pancerza.
+1;-1 do kosztu mocy biotycznych
+2;+50 obra¿eñ do mocy biotycznych za ka¿dego adepta w pobli¿u
+3;+20 obra¿eñ do mocy biotycznych
+4;-1 do kosztu mocy technologicznych
+5;Je¿eli przeciwnik zosta³ trafiony wczeœniej jak¹œ moc¹ technologiczn¹ (w tej turze), moc technologiczna gracza zadaje dodatkowe 30 obra¿eñ.
+6;+20 obra¿eñ do mocy technologicznych
+7;Medi-¿el jest aplikowany automatycznie po otrzymaniu rany i nie kosztuje akcji.
+8;+25 do maksymalnych tarcz, +25 do maksymalnego pancerza
+9;Je¿eli u¿ytkownik posiada mniej ni¿ 300 punktów pancerza, na koñcu ka¿dej tury jego pancerz regeneruje sobie 30 punktów.
+10;Po utracie tarcz, modu³ automatycznie i za darmo przywraca 100 punktów tarcz (bez wzgledu na iloœæ pozosta³ych ³adunków generatora lub omni-¿eli). Aktywne raz na walkê.

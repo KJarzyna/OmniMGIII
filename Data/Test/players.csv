@@ -1,0 +1,4 @@
+PlayerID;PlayerName;PlayerRace;PlayerClass;PlayerType;ArmorCurrent;ArmorMax;ShieldCurrent;ShieldMax;Status;ActiveEffects;SpecializationSkill;MasteryBattle;MasteryBiotic;MasteryTechno;MasterySpec
+0;Vexarius Viyo;Turianin;Stra¿nik;Gracz;500;500;350;350;Normalny;Brak;Brak;35;50;30;0
+1;Bleys Belford;Cz³owiek;¯o³nierz;Gracz;500;500;200;200;Normalny;Brak;NoSpecialization;0;0;0;0
+2;Kroganin z Krwawej Hordy;Kroganin;¯o³nierz;NPC;700;700;200;200;Ranny (1);Brak;NoSpecialization;0;0;0;0

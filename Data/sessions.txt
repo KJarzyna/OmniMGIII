@@ -1,0 +1,7 @@
+﻿ID###MainText###Title
+0######Tytuł sesji
+1######Wolne miejsce
+2######Wolne miejsce
+3######Wolne miejsce
+4######wolne miejsce
+5######wolne miejsce

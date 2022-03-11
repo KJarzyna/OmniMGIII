@@ -43,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
     LoadPlayer(0);
 
     CalculatePlayerMasteries(0);
+
+    ui->label_skill_specialization->setVisible(false);
+    ui->lineEdit_skill_calcvalue_specialization->setVisible(false);
 }
 
 MainWindow::~MainWindow()

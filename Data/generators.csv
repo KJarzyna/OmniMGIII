@@ -1,0 +1,15 @@
+GeneratorID;GeneratorName;ShieldPower;Charges;Recharge;HasAbility
+0;Standardowy;400;0;3;Nie
+0;Standardowy wzmocniony;500;0;3;Nie
+0;Standardowy szybki;300;0;3;Nie
+1;Hyperion;200;2;2;Nie
+2;Bestia;250;3;3;Tak
+3;Wojownik;250;3;3;Tak
+4;Stra¿nik;250;3;3;Tak
+5;Tajfun;250;3;2;Nie
+6;Feniks;300;4;4;Tak
+7;Cierñ;350;3;2;Tak
+8;Ares;350;3;2;Tak
+9;Grom;400;3;3;Tak
+10;Ortros;500;3;3;Tak
+11;Hydra;500;2;2;Tak

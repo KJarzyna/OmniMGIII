@@ -1,0 +1,48 @@
+ArmorID;ArmorName;ArmorType;AdditionalArmor;AdditionalShield;ActionSkillCost;AdditionalCritChance;AdditionalCritDmg;AdditionalWpnDmg;AdditionalSkillDmg;AdditionalMeeleeDmg;WpnLevelDifficulty;MeeleeLevelDifficulty;SkillLevelDifficulty;AdditionalSkillAcc;AdditionalWpnAcc
+0;He³m N7;H;25;0;0;0;0;0;0;0;0;0;0;0;0
+1;Maska Poœmiertna;H;0;0;0;0;0;0;0;0;0;-1;0;0;0
+2;Wizjer Kuvashi;H;0;0;0;5;10;0;0;0;0;0;0;0;0
+3;Interfejs Stra¿nika;H;0;25;0;0;0;0;0;0;0;0;0;0;0
+4;He³m Pustu³ka;H;0;0;0;0;0;0;0;0;0;0;0;0;0
+5;He³m Kondensatorowy;H;0;0;0;0;0;0;0;0;0;0;0;0;0
+6;Wizjer Archon;H;0;0;-2;0;0;0;0;0;0;0;0;0;0
+7;Wizjer Umbra;H;0;0;0;0;0;0;0;0;0;0;0;10;0
+8;Kaptur Zwiadowczy;H;0;0;0;0;0;0;0;0;-1;0;0;0;0
+9;Wizjer Pamiêciowy;H;0;0;-1;0;0;0;0;0;0;0;0;5;0
+10;He³m Securitel;H;10;10;0;0;0;0;0;0;0;0;0;0;0
+11;Nak³adka Delumcore;H;0;0;0;5;0;0;0;0;-1;0;0;0;0
+12;Napierœnik N7;NAP;50;0;0;0;0;0;0;0;0;0;0;0;0
+13;Napierœnik Kassa Fabrication;NAP;0;50;0;0;0;0;0;0;0;0;0;0;0
+14;Napierœnik Rada Serrice;NAP;0;0;0;0;0;0;10;0;0;0;0;0;0
+15;Napierœnik Rosenkov Materials;NAP;0;0;-2;0;0;0;0;0;0;0;0;0;0
+16;Napierœnik Armax Arsenal;NAP;0;0;0;0;0;0;0;0;0;0;0;0;0
+17;Napierœnik Ariake Technologies;NAP;0;0;0;0;0;0;0;10;0;0;0;0;0
+18;Napierœnik Hehne-Kedar;NAP;0;0;0;0;0;10;0;0;0;0;0;0;0
+19;Naramienniki N7;NAR;25;0;0;0;0;0;0;0;0;0;0;0;0
+20;Naramienniki Kassa Fabrication;NAR;0;25;0;0;0;0;0;0;0;0;0;0;0
+21;Naramienniki Rada Serrice;NAR;0;0;0;0;0;0;5;0;0;0;0;0;0
+22;Naramienniki Rosenkov Materials;NAR;0;0;-1;0;0;0;0;0;0;0;0;0;0
+23;Naramienniki Armax Arsenal;NAR;0;0;0;5;0;0;0;0;0;0;0;0;0
+24;Naramienniki Ariake Technologies;NAR;0;0;0;0;0;0;0;5;0;0;0;0;0
+25;Naramienniki Hehne-Kedar;NAR;0;0;0;0;0;5;0;0;0;0;0;0;0
+26;Nagolenniki N7;NAG;30;0;0;0;0;0;0;0;0;0;0;0;0
+27;Nagolenniki Kassa Fabrication;NAG;0;30;0;0;0;0;0;0;0;0;0;0;0
+28;Nagolenniki Rada Serrice;NAG;0;0;0;0;0;0;5;0;0;0;0;0;0
+29;Nagolenniki Rosenkov Materials;NAG;0;0;-1;0;0;0;0;0;0;0;0;0;0
+30;Nagolenniki Armax Arsenal;NAG;0;0;0;5;0;0;0;0;0;0;0;0;0
+31;Nagolenniki Ariake Technologies;NAG;0;0;0;0;0;0;0;5;0;0;0;0;0
+32;Nagolenniki Hehne-Kedar;NAG;0;0;0;0;0;5;0;0;0;0;0;0;0
+33;Rêkawice N7;R;20;0;0;0;0;0;0;0;0;0;0;0;0
+34;Rêkawice Kassa Fabrication;R;0;20;0;0;0;0;0;0;0;0;0;0;0
+35;Rêkawice Rada Serrice;R;0;0;0;0;0;0;5;0;0;0;0;0;0
+36;Rêkawice Rosenkov Materials;R;0;0;-1;0;0;0;0;0;0;0;0;0;0
+37;Rêkawice Armax Arsenal;R;0;0;0;0;5;0;0;0;0;0;0;0;0
+38;Rêkawice Ariake Technologies;R;0;0;0;0;0;0;0;5;0;0;0;0;0
+39;Rêkawice Hehne-Kedar;R;0;0;0;0;0;5;0;0;0;0;0;0;0
+40;Pancerz Cerberusa;SPEC;50;50;0;0;0;5;0;0;-1;0;0;0;0
+41;Pancerz Inferno;SPEC;0;0;-5;0;0;0;10;0;0;0;0;5;0
+42;Pancerz Terminusa;SPEC;0;50;0;0;0;0;0;10;0;-1;0;0;0
+43;Pancerz Zbieraczy;SPEC;60;60;0;0;0;0;0;0;0;0;0;0;0
+44;Pancerz Krwawych smoków;SPEC;0;50;-2;0;0;0;10;0;0;0;0;0;0
+45;Pancerz Rachmistrza;SPEC;30;30;0;0;0;0;0;10;-1;-1;0;10;0
+46;N7 Obroñca;SPEC;40;40;0;0;0;-1;0;0;5;0;0;0;0

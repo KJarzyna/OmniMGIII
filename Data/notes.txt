@@ -1,0 +1,1 @@
+﻿SessionID###Category###Title###Text###PosX###PosY

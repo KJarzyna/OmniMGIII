@@ -1,0 +1,17 @@
+ID;Description
+0;Brak wybranego ulepszenia do broni.
+1;Dostêpny dla: karabinów szturmowych, pistoletów maszynowych<br>Przy rzutach broni samoczynnej, o trafieniu krytycznym decyduj¹ 2 pierwsze kostki, nie 1.
+2;Dostêpne dla: ka¿dego typu broni.<br>+1 poch³aniacz z mechanicznego punktu widzenia, który mo¿emy przenosiæ.
+3;Dostêpne dla: ka¿dego typu broni.<br>Niweluje odrzut (czyli negatywny modyfikator gdy nie celujesz).
+4;Dostêpny dla: karabinów szturmowych, ciê¿kich pistoletów, PM<br>Obni¿a poziom trudnoœci strza³u o 1 tylko jeœli u¿ytkownik z niego korzysta (czyli przymierza/celuje w swojej AM).
+5;Dostêpny dla: snajperek<br>Zwiêksza celnoœæ broni o 10.
+6;Dostêpny dla: karabinów szturmowych, karabinów snajperskich<br>Ulepszenie pozwalaj¹ce wykrywaæ nieprzyjació³ za œcianami i w dymie za pomoc¹ celownika z czterokrotnym powiêkszeniem, dodatkowo zwiêksza stabilnoœæ i celnoœæ podczas przybli¿enia. Test o poziom ³atwiejszy.<br><br>UWAGA: Tak du¿e zbli¿enie wi¹¿e siê z koniecznoœci¹ zajêcia odpowiedniej pozycji i starannego celowania. Wystrza³ poch³ania AM i AD. Nie mo¿na stosowaæ z ulepszonym celownikiem.
+7;Dostêpny dla: ciê¿kich pistoletów, PM, karabinów szturmowych, karabinów snajperskich<br>Zwiêksza obra¿enia broni o 50. Nie mo¿na stosowaæ z szybk¹ lub ciê¿k¹ luf¹. 
+8;Dostêpny dla: ka¿dego typu broni<br>Pociski przebijaj¹ cienkie os³ony i œciany (do25cm gruboœci), efekt kumuluje siê z amunicj¹ dr¹¿¹c¹.
+9;Dostêpny dla: strzelb, karabinów szturmowych<br>Umo¿liwia wykonanie ataku omni-ostrzem zamontowanym przy broni jako AM. Obra¿enia: 100, szansa: 50% 
+10;Dostêpny dla: karabinów szturmowych, ciê¿kich pistoletów, PM, karabinów snajperskich<br>Rozpoczynaj¹c turê od strza³u z broni, u¿ytkownik ma inicjatywê +3. Nie mo¿na stosowaæ z innymi lufami.
+11;Dostêpny dla: ciê¿kich pistoletów<br>Umo¿liwia wykonanie jako AM ataku wrêcz z szans¹ 50% (plus modyfikatory). Uderzenie w tarcze zabiera 50 ich wartoœci, uderzenie w cia³o/pancerz powala przeciwnika na 1 turê.
+12;Dostêpny dla: ciê¿kich pistoletów<br>Strza³ kosztuje AD, obra¿enia zwiêkszaj¹ siê o 100.
+13;Dostêpny dla: ciê¿kich pistoletów<br>Szansa na krytyk +5%
+14;Dostêpny dla: ciê¿kich pistoletów, PM<br>Obra¿enia mocy: +50
+15;Dostêpny dla: karabinów snajperskich<br>Przymierzenie daje nie +5, a +15.

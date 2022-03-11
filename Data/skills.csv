@@ -1,0 +1,652 @@
+SkillID;SkillName;SkillLevel;SkillDmgToArmor;SkillDmgToShield;Cost;Acc;AdditionalBarrier;SelfShieldDrain;SkillType;DescriptionID;SkillTarget
+0;Rzut;1;50;0;5;0;0;0;Biotyczne;0;target
+1;Rzut;2;50;0;5;5;0;0;Biotyczne;0;target
+2;Rzut;3;80;0;5;5;0;0;Biotyczne;0;target
+3;Rzut;4A;80;0;5;5;0;0;Biotyczne;0;target
+4;Rzut;4B;80;0;5;5;0;0;Biotyczne;0;target
+5;Rzut;5AA;80;0;5;5;0;0;Biotyczne;0;target
+6;Rzut;5AB;80;0;5;5;0;0;Biotyczne;0;target
+7;Rzut;5BA;80;0;5;5;0;0;Biotyczne;0;target
+8;Rzut;5BB;80;0;5;5;0;0;Biotyczne;0;target
+9;Rzut;6AAA;100;0;5;5;0;0;Biotyczne;0;target
+10;Rzut;6AAB;80;0;5;5;0;0;Biotyczne;0;target
+11;Rzut;6ABB;80;0;4;5;0;0;Biotyczne;0;target
+12;Rzut;6BBB;80;0;4;5;0;0;Biotyczne;0;target
+13;Rzut;6BBA;100;0;4;5;0;0;Biotyczne;0;target
+14;Rzut;6BAA;100;0;5;5;0;0;Biotyczne;0;target
+15;Rzut;6ABA;100;0;4;5;0;0;Biotyczne;0;target
+16;Rzut;6BAB;80;0;5;5;0;0;Biotyczne;0;target
+17;Fala uderzeniowa;1;60;0;8;0;0;0;Biotyczne;1;target
+18;Fala uderzeniowa;2;80;0;8;0;0;0;Biotyczne;1;target
+19;Fala uderzeniowa;3;80;0;8;5;0;0;Biotyczne;1;target
+20;Fala uderzeniowa;4A;110;0;8;5;0;0;Biotyczne;1;target
+21;Fala uderzeniowa;4B;80;0;8;5;0;0;Biotyczne;1;target
+22;Fala uderzeniowa;5AA;110;0;8;5;0;0;Biotyczne;1;target
+23;Fala uderzeniowa;5AB;110;0;7;5;0;0;Biotyczne;1;target
+24;Fala uderzeniowa;5BA;80;0;8;5;0;0;Biotyczne;1;target
+25;Fala uderzeniowa;5BB;80;0;7;5;0;0;Biotyczne;1;target
+26;Fala uderzeniowa;6AAA;110;0;8;5;0;0;Biotyczne;1;target
+27;Fala uderzeniowa;6AAB;140;0;8;5;0;0;Biotyczne;1;target
+28;Fala uderzeniowa;6ABB;140;0;7;5;0;0;Biotyczne;1;target
+29;Fala uderzeniowa;6BBB;110;0;7;5;0;0;Biotyczne;1;target
+30;Fala uderzeniowa;6BBA;80;0;7;5;0;0;Biotyczne;1;target
+31;Fala uderzeniowa;6BAA;80;0;8;5;0;0;Biotyczne;1;target
+32;Fala uderzeniowa;6ABA;110;0;7;5;0;0;Biotyczne;1;target
+33;Fala uderzeniowa;6BAB;110;0;8;5;0;0;Biotyczne;1;target
+34;Przyci¹gniêcie;1;0;0;5;0;0;0;Biotyczne;2;target
+35;Przyci¹gniêcie;2;0;0;5;5;0;0;Biotyczne;2;target
+36;Przyci¹gniêcie;3;30;0;5;5;0;0;Biotyczne;2;target
+37;Przyci¹gniêcie;4A;30;0;5;5;0;0;Biotyczne;2;target
+38;Przyci¹gniêcie;4B;50;0;5;5;0;0;Biotyczne;2;target
+39;Przyci¹gniêcie;5AA;30;0;5;5;0;0;Biotyczne;2;target
+40;Przyci¹gniêcie;5AB;30;0;4;5;0;0;Biotyczne;2;target
+41;Przyci¹gniêcie;5BA;50;0;5;5;0;0;Biotyczne;2;target
+42;Przyci¹gniêcie;5BB;50;0;4;5;0;0;Biotyczne;2;target
+43;Przyci¹gniêcie;6AAA;30;0;5;5;0;0;Biotyczne;2;target
+44;Przyci¹gniêcie;6AAB;30;0;5;5;0;0;Biotyczne;2;target
+45;Przyci¹gniêcie;6ABB;30;0;4;5;0;0;Biotyczne;2;target
+46;Przyci¹gniêcie;6BBB;50;0;4;5;0;0;Biotyczne;2;target
+47;Przyci¹gniêcie;6BBA;50;0;4;5;0;0;Biotyczne;2;target
+48;Przyci¹gniêcie;6BAA;50;0;5;5;0;0;Biotyczne;2;target
+49;Przyci¹gniêcie;6ABA;30;0;4;5;0;0;Biotyczne;2;target
+50;Przyci¹gniêcie;6BAB;50;0;5;5;0;0;Biotyczne;2;target
+51;Bariera;1;0;0;10;0;50;0;Biotyczne;3;self
+52;Bariera;2;0;0;10;5;50;0;Biotyczne;3;self
+53;Bariera;3;0;0;10;5;65;0;Biotyczne;3;self
+54;Bariera;4A;0;0;10;5;65;0;Biotyczne;3;self
+55;Bariera;4B;0;0;10;5;80;0;Biotyczne;3;self
+56;Bariera;5AA;0;0;10;5;65;0;Biotyczne;3;self
+57;Bariera;5AB;0;0;10;10;65;0;Biotyczne;3;self
+58;Bariera;5BA;0;0;10;5;80;0;Biotyczne;3;self
+59;Bariera;5BB;0;0;10;10;80;0;Biotyczne;3;self
+60;Bariera;6AAA;0;0;10;5;65;0;Biotyczne;3;self
+61;Bariera;6AAB;0;0;10;5;65;0;Biotyczne;3;self
+62;Bariera;6ABB;0;0;10;10;65;0;Biotyczne;3;self
+63;Bariera;6BBB;0;0;10;10;80;0;Biotyczne;3;self
+64;Bariera;6BBA;0;0;10;10;80;0;Biotyczne;3;self
+65;Bariera;6BAA;0;0;10;5;80;0;Biotyczne;3;self
+66;Bariera;6ABA;0;0;10;10;65;0;Biotyczne;3;self
+67;Bariera;6BAB;0;0;10;5;80;0;Biotyczne;3;self
+68;Bariera (detonacja);1;100;100;0;0;0;0;Biotyczne;3;self
+69;Bariera (detonacja);2;100;100;0;5;0;0;Biotyczne;3;self
+70;Bariera (detonacja);3;100;100;0;5;0;0;Biotyczne;3;self
+71;Bariera (detonacja);4A;100;100;0;5;0;0;Biotyczne;3;self
+72;Bariera (detonacja);4B;100;100;0;5;0;0;Biotyczne;3;self
+73;Bariera (detonacja);5AA;100;100;0;5;0;0;Biotyczne;3;self
+74;Bariera (detonacja);5AB;100;100;0;10;0;0;Biotyczne;3;self
+75;Bariera (detonacja);5BA;100;100;0;5;0;0;Biotyczne;3;self
+76;Bariera (detonacja);5BB;100;100;0;10;0;0;Biotyczne;3;self
+77;Bariera (detonacja);6AAA;100;100;0;5;0;0;Biotyczne;3;self
+78;Bariera (detonacja);6AAB;100;100;0;5;0;0;Biotyczne;3;self
+79;Bariera (detonacja);6ABB;100;100;0;10;0;0;Biotyczne;3;self
+80;Bariera (detonacja);6BBB;100;100;0;10;0;0;Biotyczne;3;self
+81;Bariera (detonacja);6BBA;100;100;0;10;0;0;Biotyczne;3;self
+82;Bariera (detonacja);6BAA;100;100;0;5;0;0;Biotyczne;3;self
+83;Bariera (detonacja);6ABA;100;100;0;10;0;0;Biotyczne;3;self
+84;Bariera (detonacja);6BAB;100;100;0;5;0;0;Biotyczne;3;self
+85;Bariera (wzmocniona detonacja);6AAA;200;200;50;5;0;0;Biotyczne;3;self
+86;Bariera (wzmocniona detonacja);6BBA;200;200;50;10;0;0;Biotyczne;3;self
+87;Bariera (wzmocniona detonacja);6BAA;200;200;50;5;0;0;Biotyczne;3;self
+88;Bariera (wzmocniona detonacja);6ABA;200;200;50;10;0;0;Biotyczne;3;self
+89;Dysruptor fazowy;1;50;50;8;0;0;50;Biotyczne;4;target
+90;Dysruptor fazowy;2;50;50;8;5;0;50;Biotyczne;4;target
+91;Dysruptor fazowy;3;75;75;8;5;0;50;Biotyczne;4;target
+92;Dysruptor fazowy;4A;75;75;7;5;0;50;Biotyczne;4;target
+93;Dysruptor fazowy;4B;75;75;8;10;0;50;Biotyczne;4;target
+94;Dysruptor fazowy;5AA;75;75;7;5;0;25;Biotyczne;4;target
+95;Dysruptor fazowy;5AB;100;100;7;5;0;50;Biotyczne;4;target
+96;Dysruptor fazowy;5BA;75;75;8;10;0;25;Biotyczne;4;target
+97;Dysruptor fazowy;5BB;100;100;8;10;0;50;Biotyczne;4;target
+98;Dysruptor fazowy;6AAA;75;75;7;5;0;25;Biotyczne;4;target
+99;Dysruptor fazowy;6AAB;75;75;7;5;0;25;Biotyczne;4;target
+100;Dysruptor fazowy;6ABB;100;100;7;5;0;50;Biotyczne;4;target
+101;Dysruptor fazowy;6BBB;100;100;8;10;0;50;Biotyczne;4;target
+102;Dysruptor fazowy;6BBA;100;100;8;10;0;50;Biotyczne;4;target
+103;Dysruptor fazowy;6BAA;75;75;8;10;0;25;Biotyczne;4;target
+104;Dysruptor fazowy;6ABA;100;100;7;5;0;50;Biotyczne;4;target
+105;Dysruptor fazowy;6BAB;75;75;8;10;0;25;Biotyczne;4;target
+106;Dysruptor fazowy (na³adowany);6AAA;150;150;7;5;0;25;Biotyczne;4;target
+107;Dysruptor fazowy (na³adowany);6BBA;150;150;8;10;0;50;Biotyczne;4;target
+108;Dysruptor fazowy (na³adowany);6BAA;150;150;8;10;0;25;Biotyczne;4;target
+109;Dysruptor fazowy (na³adowany);6ABA;150;150;7;5;0;50;Biotyczne;4;target
+110;Odkszta³cenie;1;200;200;8;0;0;0;Biotyczne;5;target
+111;Odkszta³cenie;2;200;200;8;5;0;0;Biotyczne;5;target
+112;Odkszta³cenie;3;210;210;8;5;0;0;Biotyczne;5;target
+113;Odkszta³cenie;4A;210;210;8;5;0;0;Biotyczne;5;target
+114;Odkszta³cenie;4B;210;210;8;5;0;0;Biotyczne;5;target
+115;Odkszta³cenie;5AA;210;210;8;5;0;0;Biotyczne;5;target
+116;Odkszta³cenie;5AB;260;260;8;5;0;0;Biotyczne;5;target
+117;Odkszta³cenie;5BA;210;210;8;5;0;0;Biotyczne;5;target
+118;Odkszta³cenie;5BB;260;260;8;5;0;0;Biotyczne;5;target
+119;Odkszta³cenie;6AAA;210;210;7;5;0;0;Biotyczne;5;target
+120;Odkszta³cenie;6AAB;210;210;8;5;0;0;Biotyczne;5;target
+121;Odkszta³cenie;6ABB;260;260;8;5;0;0;Biotyczne;5;target
+122;Odkszta³cenie;6BBB;260;260;8;5;0;0;Biotyczne;5;target
+123;Odkszta³cenie;6BBA;260;260;7;5;0;0;Biotyczne;5;target
+124;Odkszta³cenie;6BAA;210;210;7;5;0;0;Biotyczne;5;target
+125;Odkszta³cenie;6ABA;260;260;7;5;0;0;Biotyczne;5;target
+126;Odkszta³cenie;6BAB;210;210;8;5;0;0;Biotyczne;5;target
+127;Osobliwoœæ;1;0;0;8;0;0;0;Biotyczne;6;target
+128;Osobliwoœæ;2;0;0;8;0;0;0;Biotyczne;6;target
+129;Osobliwoœæ;3;0;0;8;5;0;0;Biotyczne;6;target
+130;Osobliwoœæ;4A;0;0;8;5;0;0;Biotyczne;6;target
+131;Osobliwoœæ;4B;0;0;8;5;0;0;Biotyczne;6;target
+132;Osobliwoœæ;5AA;0;0;8;5;0;0;Biotyczne;6;target
+133;Osobliwoœæ;5AB;0;0;8;5;0;0;Biotyczne;6;target
+134;Osobliwoœæ;5BA;0;0;8;5;0;0;Biotyczne;6;target
+135;Osobliwoœæ;5BB;0;0;8;5;0;0;Biotyczne;6;target
+136;Osobliwoœæ;6AAA;70;70;8;5;0;0;Biotyczne;6;target
+137;Osobliwoœæ;6AAB;0;0;8;5;0;0;Biotyczne;6;target
+138;Osobliwoœæ;6ABB;0;0;8;5;0;0;Biotyczne;6;target
+139;Osobliwoœæ;6BBB;0;0;8;5;0;0;Biotyczne;6;target
+140;Osobliwoœæ;6BBA;70;70;8;5;0;0;Biotyczne;6;target
+141;Osobliwoœæ;6BAA;70;70;8;5;0;0;Biotyczne;6;target
+142;Osobliwoœæ;6ABA;70;70;8;5;0;0;Biotyczne;6;target
+143;Osobliwoœæ;6BAB;0;0;8;5;0;0;Biotyczne;6;target
+144;Zastój;1;0;0;10;0;0;0;Biotyczne;7;target
+145;Zastój;2;0;0;10;5;0;0;Biotyczne;7;target
+146;Zastój;3;0;0;10;5;0;0;Biotyczne;7;target
+147;Zastój;4A;0;0;10;5;0;0;Biotyczne;7;target
+148;Zastój;4B;0;0;10;5;0;0;Biotyczne;7;target
+149;Zastój;5AA;0;0;10;5;0;0;Biotyczne;7;target
+150;Zastój;5AB;0;0;9;5;0;0;Biotyczne;7;target
+151;Zastój;5BA;0;0;10;5;0;0;Biotyczne;7;target
+152;Zastój;5BB;0;0;9;5;0;0;Biotyczne;7;target
+153;Zastój;6AAA;0;0;10;5;0;0;Biotyczne;7;target
+154;Zastój;6AAB;0;0;10;5;0;0;Biotyczne;7;target
+155;Zastój;6ABB;0;0;9;5;0;0;Biotyczne;7;target
+156;Zastój;6BBB;0;0;9;5;0;0;Biotyczne;7;target
+157;Zastój;6BBA;0;0;9;5;0;0;Biotyczne;7;target
+158;Zastój;6BAA;0;0;10;5;0;0;Biotyczne;7;target
+159;Zastój;6ABA;0;0;9;5;0;0;Biotyczne;7;target
+160;Zastój;6BAB;0;0;10;5;0;0;Biotyczne;7;target
+161;Kula Biotyczna;1;0;0;10;0;0;0;Biotyczne;8;self
+162;Kula Biotyczna;2;0;0;10;5;0;0;Biotyczne;8;self
+163;Kula Biotyczna;3;0;0;10;5;0;0;Biotyczne;8;self
+164;Kula Biotyczna;4A;0;0;10;5;0;0;Biotyczne;8;self
+165;Kula Biotyczna;4B;0;0;10;5;0;0;Biotyczne;8;self
+166;Kula Biotyczna;5AA;0;0;10;5;0;0;Biotyczne;8;self
+167;Kula Biotyczna;5AB;0;0;9;5;0;0;Biotyczne;8;self
+168;Kula Biotyczna;5BA;0;0;10;5;0;0;Biotyczne;8;self
+169;Kula Biotyczna;5BB;0;0;9;5;0;0;Biotyczne;8;self
+170;Kula Biotyczna;6AAA;0;0;10;5;0;0;Biotyczne;8;self
+171;Kula Biotyczna;6AAB;0;0;10;5;0;0;Biotyczne;8;self
+172;Kula Biotyczna;6ABB;0;0;9;5;0;0;Biotyczne;8;self
+173;Kula Biotyczna;6BBB;0;0;9;5;0;0;Biotyczne;8;self
+174;Kula Biotyczna;6BBA;0;0;9;5;0;0;Biotyczne;8;self
+175;Kula Biotyczna;6BAA;0;0;10;5;0;0;Biotyczne;8;self
+176;Kula Biotyczna;6ABA;0;0;9;5;0;0;Biotyczne;8;self
+177;Kula Biotyczna;6BAB;0;0;10;5;0;0;Biotyczne;8;self
+178;Skupienie biotyczne;1;0;0;10;0;0;0;Biotyczne;9;self
+179;Skupienie biotyczne;2;0;0;10;5;0;0;Biotyczne;9;self
+180;Skupienie biotyczne;3;0;0;10;5;0;0;Biotyczne;9;self
+181;Skupienie biotyczne;4A;0;0;10;5;0;0;Biotyczne;9;self
+182;Skupienie biotyczne;4B;0;0;10;5;0;0;Biotyczne;9;self
+183;Skupienie biotyczne;5AA;0;0;10;5;0;0;Biotyczne;9;self
+184;Skupienie biotyczne;5AB;0;0;10;5;0;0;Biotyczne;9;self
+185;Skupienie biotyczne;5BA;0;0;10;5;0;0;Biotyczne;9;self
+186;Skupienie biotyczne;5BB;0;0;10;5;0;0;Biotyczne;9;self
+187;Skupienie biotyczne;6AAA;0;0;10;5;0;0;Biotyczne;9;self
+188;Skupienie biotyczne;6AAB;0;0;10;5;0;0;Biotyczne;9;self
+189;Skupienie biotyczne;6ABB;0;0;10;5;0;0;Biotyczne;9;self
+190;Skupienie biotyczne;6BBB;0;0;10;5;0;0;Biotyczne;9;self
+191;Skupienie biotyczne;6BBA;0;0;10;5;0;0;Biotyczne;9;self
+192;Skupienie biotyczne;6BAA;0;0;10;5;0;0;Biotyczne;9;self
+193;Skupienie biotyczne;6ABA;0;0;10;5;0;0;Biotyczne;9;self
+194;Skupienie biotyczne;6BAB;0;0;10;5;0;0;Biotyczne;9;self
+195;Skok adrenaliny;1;0;0;5;0;0;0;Bojowe;10;self
+196;Skok adrenaliny;2;0;0;5;0;0;0;Bojowe;10;self
+197;Skok adrenaliny;3;0;0;5;0;0;0;Bojowe;10;self
+198;Skok adrenaliny;4A;0;0;5;0;0;0;Bojowe;10;self
+199;Skok adrenaliny;4B;0;0;5;0;0;0;Bojowe;10;self
+200;Skok adrenaliny;5AA;0;0;4;0;0;0;Bojowe;10;self
+201;Skok adrenaliny;5AB;0;0;5;0;0;0;Bojowe;10;self
+202;Skok adrenaliny;5BA;0;0;4;0;0;0;Bojowe;10;self
+203;Skok adrenaliny;5BB;0;0;5;0;0;0;Bojowe;10;self
+204;Skok adrenaliny;6AAA;0;0;4;0;0;0;Bojowe;10;self
+205;Skok adrenaliny;6AAB;0;0;4;0;0;0;Bojowe;10;self
+206;Skok adrenaliny;6ABB;0;0;5;0;0;0;Bojowe;10;self
+207;Skok adrenaliny;6BBB;0;0;5;0;0;0;Bojowe;10;self
+208;Skok adrenaliny;6BBA;0;0;5;0;0;0;Bojowe;10;self
+209;Skok adrenaliny;6BAA;0;0;4;0;0;0;Bojowe;10;self
+210;Skok adrenaliny;6ABA;0;0;5;0;0;0;Bojowe;10;self
+211;Skok adrenaliny;6BAB;0;0;4;0;0;0;Bojowe;10;self
+212;Pakiet Stymulantów;1;0;0;7;0;0;0;Bojowe;11;self
+213;Pakiet Stymulantów;2;0;0;7;0;0;0;Bojowe;11;self
+214;Pakiet Stymulantów;3;0;0;7;0;0;0;Bojowe;11;self
+215;Pakiet Stymulantów;4A;0;0;7;0;0;0;Bojowe;11;self
+216;Pakiet Stymulantów;4B;0;0;7;0;0;0;Bojowe;11;self
+217;Pakiet Stymulantów;5AA;0;0;7;0;0;0;Bojowe;11;self
+218;Pakiet Stymulantów;5AB;0;0;6;0;0;0;Bojowe;11;self
+219;Pakiet Stymulantów;5BA;0;0;7;0;0;0;Bojowe;11;self
+220;Pakiet Stymulantów;5BB;0;0;6;0;0;0;Bojowe;11;self
+221;Pakiet Stymulantów;6AAA;0;0;7;0;0;0;Bojowe;11;self
+222;Pakiet Stymulantów;6AAB;0;0;7;0;0;0;Bojowe;11;self
+223;Pakiet Stymulantów;6ABB;0;0;6;0;0;0;Bojowe;11;self
+224;Pakiet Stymulantów;6BBB;0;0;6;0;0;0;Bojowe;11;self
+225;Pakiet Stymulantów;6BBA;0;0;6;0;0;0;Bojowe;11;self
+226;Pakiet Stymulantów;6BAA;0;0;7;0;0;0;Bojowe;11;self
+227;Pakiet Stymulantów;6ABA;0;0;6;0;0;0;Bojowe;11;self
+228;Pakiet Stymulantów;6BAB;0;0;7;0;0;0;Bojowe;11;self
+229;Szkolenie bojowe;1;0;0;0;0;0;0;Bojowe;12;self
+230;Szkolenie bojowe;2;0;0;0;0;0;0;Bojowe;12;self
+231;Szkolenie bojowe;3;0;0;0;0;0;0;Bojowe;12;self
+232;Szkolenie bojowe;4A;0;0;0;0;0;0;Bojowe;12;self
+233;Szkolenie bojowe;4B;0;0;0;0;0;0;Bojowe;12;self
+234;Szkolenie bojowe;5AA;0;0;0;0;0;0;Bojowe;12;self
+235;Szkolenie bojowe;5AB;0;0;0;0;0;0;Bojowe;12;self
+236;Szkolenie bojowe;5BA;0;0;0;0;0;0;Bojowe;12;self
+237;Szkolenie bojowe;5BB;0;0;0;0;0;0;Bojowe;12;self
+238;Szkolenie bojowe;6AAA;0;0;0;0;0;0;Bojowe;12;self
+239;Szkolenie bojowe;6AAB;0;0;0;0;0;0;Bojowe;12;self
+240;Szkolenie bojowe;6ABB;0;0;0;0;0;0;Bojowe;12;self
+241;Szkolenie bojowe;6BBB;0;0;0;0;0;0;Bojowe;12;self
+242;Szkolenie bojowe;6BBA;0;0;0;0;0;0;Bojowe;12;self
+243;Szkolenie bojowe;6BAA;0;0;0;0;0;0;Bojowe;12;self
+244;Szkolenie bojowe;6ABA;0;0;0;0;0;0;Bojowe;12;self
+245;Szkolenie bojowe;6BAB;0;0;0;0;0;0;Bojowe;12;self
+246;Strza³ wstrz¹sowy;1;50;50;5;0;0;0;Bojowe;13;target
+247;Strza³ wstrz¹sowy;2;80;80;5;0;0;0;Bojowe;13;target
+248;Strza³ wstrz¹sowy;3;80;80;5;5;0;0;Bojowe;13;target
+249;Strza³ wstrz¹sowy;4A;80;80;5;5;0;0;Bojowe;13;target
+250;Strza³ wstrz¹sowy;4B;80;80;5;5;0;0;Bojowe;13;target
+251;Strza³ wstrz¹sowy;5AA;80;80;4;5;0;0;Bojowe;13;target
+252;Strza³ wstrz¹sowy;5AB;80;80;5;5;0;0;Bojowe;13;target
+253;Strza³ wstrz¹sowy;5BA;80;80;4;5;0;0;Bojowe;13;target
+254;Strza³ wstrz¹sowy;5BB;80;80;5;5;0;0;Bojowe;13;target
+255;Strza³ wstrz¹sowy;6AAA;80;80;4;5;0;0;Bojowe;13;target
+256;Strza³ wstrz¹sowy;6AAB;80;80;4;5;0;0;Bojowe;13;target
+257;Strza³ wstrz¹sowy;6ABB;80;80;5;5;0;0;Bojowe;13;target
+258;Strza³ wstrz¹sowy;6BBB;80;80;5;5;0;0;Bojowe;13;target
+259;Strza³ wstrz¹sowy;6BBA;80;80;5;5;0;0;Bojowe;13;target
+260;Strza³ wstrz¹sowy;6BAA;80;80;4;5;0;0;Bojowe;13;target
+261;Strza³ wstrz¹sowy;6ABA;80;80;5;5;0;0;Bojowe;13;target
+262;Strza³ wstrz¹sowy;6BAB;80;80;4;5;0;0;Bojowe;13;target
+263;RzeŸ;1;150;50;9;0;0;0;Bojowe;14;target
+264;RzeŸ;2;200;60;9;0;0;0;Bojowe;14;target
+265;RzeŸ;3;200;60;9;5;0;0;Bojowe;14;target
+266;RzeŸ;4A;200;60;9;5;0;0;Bojowe;14;target
+267;RzeŸ;4B;200;60;9;5;0;0;Bojowe;14;target
+268;RzeŸ;5AA;200;60;8;5;0;0;Bojowe;14;target
+269;RzeŸ;5AB;250;80;9;5;0;0;Bojowe;14;target
+270;RzeŸ;5BA;200;60;8;5;0;0;Bojowe;14;target
+271;RzeŸ;5BB;250;80;9;5;0;0;Bojowe;14;target
+272;RzeŸ;6AAA;200;60;8;5;0;0;Bojowe;14;target
+273;RzeŸ;6AAB;300;110;8;5;0;0;Bojowe;14;target
+274;RzeŸ;6ABB;350;130;9;5;0;0;Bojowe;14;target
+275;RzeŸ;6BBB;350;130;9;5;0;0;Bojowe;14;target
+276;RzeŸ;6BBA;250;80;9;5;0;0;Bojowe;14;target
+277;RzeŸ;6BAA;200;60;8;5;0;0;Bojowe;14;target
+278;RzeŸ;6ABA;250;80;9;5;0;0;Bojowe;14;target
+279;RzeŸ;6BAB;300;110;8;5;0;0;Bojowe;14;target
+280;Umocnienie;1;0;0;10;0;50;0;Bojowe;15;self
+281;Umocnienie;2;0;0;10;5;50;0;Bojowe;15;self
+282;Umocnienie;3;0;0;10;5;75;0;Bojowe;15;self
+283;Umocnienie;4A;0;0;10;5;75;0;Bojowe;15;self
+284;Umocnienie;4B;0;0;10;5;100;0;Bojowe;15;self
+285;Umocnienie;5AA;0;0;10;5;75;0;Bojowe;15;self
+286;Umocnienie;5AB;0;0;10;5;75;0;Bojowe;15;self
+287;Umocnienie;5BA;0;0;10;5;100;0;Bojowe;15;self
+288;Umocnienie;5BB;0;0;10;5;100;0;Bojowe;15;self
+289;Umocnienie;6AAA;0;0;10;5;75;0;Bojowe;15;self
+290;Umocnienie;6AAB;0;0;10;5;75;0;Bojowe;15;self
+291;Umocnienie;6ABB;0;0;10;5;75;0;Bojowe;15;self
+292;Umocnienie;6BBB;0;0;10;5;100;0;Bojowe;15;self
+293;Umocnienie;6BBA;0;0;10;5;100;0;Bojowe;15;self
+294;Umocnienie;6BAA;0;0;10;5;100;0;Bojowe;15;self
+295;Umocnienie;6ABA;0;0;10;5;75;0;Bojowe;15;self
+296;Umocnienie;6BAB;0;0;10;5;100;0;Bojowe;15;self
+297;Spalenie;1;200;0;8;0;0;0;Technologiczne;16;target
+298;Spalenie;2;200;0;8;5;0;0;Technologiczne;16;target
+299;Spalenie;3;200;0;8;5;0;0;Technologiczne;16;target
+300;Spalenie;4A;200;0;7;5;0;0;Technologiczne;16;target
+301;Spalenie;4B;200;0;8;5;0;0;Technologiczne;16;target
+302;Spalenie;5AA;200;0;7;5;0;0;Technologiczne;16;target
+303;Spalenie;5AB;200;0;7;5;0;0;Technologiczne;16;target
+304;Spalenie;5BA;200;0;8;5;0;0;Technologiczne;16;target
+305;Spalenie;5BB;200;0;8;5;0;0;Technologiczne;16;target
+306;Spalenie;6AAA;200;100;7;5;0;0;Technologiczne;16;target
+307;Spalenie;6AAB;200;0;7;5;0;0;Technologiczne;16;target
+308;Spalenie;6ABB;200;0;7;5;0;0;Technologiczne;16;target
+309;Spalenie;6BBB;200;0;8;5;0;0;Technologiczne;16;target
+310;Spalenie;6BBA;200;100;8;5;0;0;Technologiczne;16;target
+311;Spalenie;6BAA;200;100;8;5;0;0;Technologiczne;16;target
+312;Spalenie;6ABA;200;100;7;5;0;0;Technologiczne;16;target
+313;Spalenie;6BAB;200;0;8;5;0;0;Technologiczne;16;target
+314;Przeci¹¿enie;1;50;200;8;0;0;0;Technologiczne;17;target
+315;Przeci¹¿enie;2;50;200;8;5;0;0;Technologiczne;17;target
+316;Przeci¹¿enie;3;50;250;8;5;0;0;Technologiczne;17;target
+317;Przeci¹¿enie;4A;50;250;7;5;0;0;Technologiczne;17;target
+318;Przeci¹¿enie;4B;50;250;8;5;0;0;Technologiczne;17;target
+319;Przeci¹¿enie;5AA;50;250;7;5;0;0;Technologiczne;17;target
+320;Przeci¹¿enie;5AB;50;250;7;5;0;0;Technologiczne;17;target
+321;Przeci¹¿enie;5BA;50;250;8;5;0;0;Technologiczne;17;target
+322;Przeci¹¿enie;5BB;50;250;8;5;0;0;Technologiczne;17;target
+323;Przeci¹¿enie;6AAA;50;250;7;5;0;0;Technologiczne;17;target
+324;Przeci¹¿enie;6AAB;50;250;7;5;0;0;Technologiczne;17;target
+325;Przeci¹¿enie;6ABB;50;250;7;5;0;0;Technologiczne;17;target
+326;Przeci¹¿enie;6BBB;50;250;8;5;0;0;Technologiczne;17;target
+327;Przeci¹¿enie;6BBA;50;250;8;5;0;0;Technologiczne;17;target
+328;Przeci¹¿enie;6BAA;50;250;8;5;0;0;Technologiczne;17;target
+329;Przeci¹¿enie;6ABA;50;250;7;5;0;0;Technologiczne;17;target
+330;Przeci¹¿enie;6BAB;50;250;8;5;0;0;Technologiczne;17;target
+331;Przeci¹¿enie (s³absze);5AB;25;125;0;5;0;0;Technologiczne;17;target
+332;Przeci¹¿enie (s³absze);5BB;25;125;0;5;0;0;Technologiczne;17;target
+333;Przeci¹¿enie (s³absze);6ABB;25;125;0;5;0;0;Technologiczne;17;target
+334;Przeci¹¿enie (s³absze);6BBB;25;125;0;5;0;0;Technologiczne;17;target
+335;Przeci¹¿enie (s³absze);6BBA;25;125;0;5;0;0;Technologiczne;17;target
+336;Przeci¹¿enie (s³absze);6ABA;25;125;0;5;0;0;Technologiczne;17;target
+337;Przeci¹¿enie (na³adowane);6AAA;100;500;99;5;0;0;Technologiczne;17;target
+338;Przeci¹¿enie (na³adowane);6BBA;100;500;99;5;0;0;Technologiczne;17;target
+339;Przeci¹¿enie (na³adowane);6BAA;100;500;99;5;0;0;Technologiczne;17;target
+340;Przeci¹¿enie (na³adowane);6ABA;100;500;99;5;0;0;Technologiczne;17;target
+341;Kriowybuch;1;100;0;5;0;0;0;Technologiczne;18;target
+342;Kriowybuch;2;100;0;5;5;0;0;Technologiczne;18;target
+343;Kriowybuch;3;100;0;5;5;0;0;Technologiczne;18;target
+344;Kriowybuch;4A;100;0;4;5;0;0;Technologiczne;18;target
+345;Kriowybuch;4B;100;0;5;5;0;0;Technologiczne;18;target
+346;Kriowybuch;5AA;100;0;4;5;0;0;Technologiczne;18;target
+347;Kriowybuch;5AB;100;0;4;5;0;0;Technologiczne;18;target
+348;Kriowybuch;5BA;100;0;5;5;0;0;Technologiczne;18;target
+349;Kriowybuch;5BB;100;0;5;5;0;0;Technologiczne;18;target
+350;Kriowybuch;6AAA;100;0;4;5;0;0;Technologiczne;18;target
+351;Kriowybuch;6AAB;200;0;4;5;0;0;Technologiczne;18;target
+352;Kriowybuch;6ABB;200;0;4;5;0;0;Technologiczne;18;target
+353;Kriowybuch;6BBB;200;0;5;5;0;0;Technologiczne;18;target
+354;Kriowybuch;6BBA;100;0;5;5;0;0;Technologiczne;18;target
+355;Kriowybuch;6BAA;100;0;5;5;0;0;Technologiczne;18;target
+356;Kriowybuch;6ABA;100;0;4;5;0;0;Technologiczne;18;target
+357;Kriowybuch;6BAB;200;0;5;5;0;0;Technologiczne;18;target
+358;Skupienie biotyczne (detonacja);5BB;50;50;10;5;0;0;Biotyczne;19;self
+359;Skupienie biotyczne (detonacja);6ABB;50;50;10;5;0;0;Biotyczne;19;self
+360;Skupienie biotyczne (detonacja);6BBB;50;50;10;5;0;0;Biotyczne;19;self
+361;Skupienie biotyczne (detonacja);6BBA;50;50;10;5;0;0;Biotyczne;19;self
+362;Sonda Bojowa;1;0;0;6;0;0;0;Technologiczne;20;self
+363;Sonda Bojowa;2;0;0;6;0;0;0;Technologiczne;20;self
+364;Sonda Bojowa;3;0;0;6;0;0;0;Technologiczne;20;self
+365;Sonda Bojowa;4A;0;0;6;0;0;0;Technologiczne;20;self
+366;Sonda Bojowa;4B;0;0;6;0;0;0;Technologiczne;20;self
+367;Sonda Bojowa;5AA;0;0;6;0;0;0;Technologiczne;20;self
+368;Sonda Bojowa;5AB;0;0;6;0;0;0;Technologiczne;20;self
+369;Sonda Bojowa;5BA;0;0;6;0;0;0;Technologiczne;20;self
+370;Sonda Bojowa;5BB;0;0;6;0;0;0;Technologiczne;20;self
+371;Sonda Bojowa;6AAA;0;0;6;0;0;0;Technologiczne;20;self
+372;Sonda Bojowa;6AAB;0;0;6;0;0;0;Technologiczne;20;self
+373;Sonda Bojowa;6ABB;0;0;6;0;0;0;Technologiczne;20;self
+374;Sonda Bojowa;6BBB;0;0;6;0;0;0;Technologiczne;20;self
+375;Sonda Bojowa;6BBA;0;0;6;0;0;0;Technologiczne;20;self
+376;Sonda Bojowa;6BAA;0;0;6;0;0;0;Technologiczne;20;self
+377;Sonda Bojowa;6ABA;0;0;6;0;0;0;Technologiczne;20;self
+378;Sonda Bojowa;6BAB;0;0;6;0;0;0;Technologiczne;20;self
+379;Sonda Obronna;1;0;0;6;0;0;0;Technologiczne;21;self
+380;Sonda Obronna;2;0;0;6;0;0;0;Technologiczne;21;self
+381;Sonda Obronna;3;0;0;6;0;0;0;Technologiczne;21;self
+382;Sonda Obronna;4A;0;0;6;0;0;0;Technologiczne;21;self
+383;Sonda Obronna;4B;0;0;6;0;0;0;Technologiczne;21;self
+384;Sonda Obronna;5AA;0;0;6;0;0;0;Technologiczne;21;self
+385;Sonda Obronna;5AB;0;0;6;0;0;0;Technologiczne;21;self
+386;Sonda Obronna;5BA;0;0;6;0;0;0;Technologiczne;21;self
+387;Sonda Obronna;5BB;0;0;6;0;0;0;Technologiczne;21;self
+388;Sonda Obronna;6AAA;0;0;6;0;0;0;Technologiczne;21;self
+389;Sonda Obronna;6AAB;0;0;6;0;0;0;Technologiczne;21;self
+390;Sonda Obronna;6ABB;0;0;6;0;0;0;Technologiczne;21;self
+391;Sonda Obronna;6BBB;0;0;6;0;0;0;Technologiczne;21;self
+392;Sonda Obronna;6BBA;0;0;6;0;0;0;Technologiczne;21;self
+393;Sonda Obronna;6BAA;0;0;6;0;0;0;Technologiczne;21;self
+394;Sonda Obronna;6ABA;0;0;6;0;0;0;Technologiczne;21;self
+395;Sonda Obronna;6BAB;0;0;6;0;0;0;Technologiczne;21;self
+396;Wie¿yczka Stra¿nicza;1;0;0;6;0;0;0;Technologiczne;22;self
+397;Wie¿yczka Stra¿nicza;2;0;0;6;0;0;0;Technologiczne;22;self
+398;Wie¿yczka Stra¿nicza;3;0;0;6;0;0;0;Technologiczne;22;self
+399;Wie¿yczka Stra¿nicza;4A;0;0;6;0;0;0;Technologiczne;22;self
+400;Wie¿yczka Stra¿nicza;4B;0;0;6;0;0;0;Technologiczne;22;self
+401;Wie¿yczka Stra¿nicza;5AA;0;0;6;0;0;0;Technologiczne;22;self
+402;Wie¿yczka Stra¿nicza;5AB;0;0;6;0;0;0;Technologiczne;22;self
+403;Wie¿yczka Stra¿nicza;5BA;0;0;6;0;0;0;Technologiczne;22;self
+404;Wie¿yczka Stra¿nicza;5BB;0;0;6;0;0;0;Technologiczne;22;self
+405;Wie¿yczka Stra¿nicza;6AAA;0;0;6;0;0;0;Technologiczne;22;self
+406;Wie¿yczka Stra¿nicza;6AAB;0;0;6;0;0;0;Technologiczne;22;self
+407;Wie¿yczka Stra¿nicza;6ABB;0;0;6;0;0;0;Technologiczne;22;self
+408;Wie¿yczka Stra¿nicza;6BBB;0;0;6;0;0;0;Technologiczne;22;self
+409;Wie¿yczka Stra¿nicza;6BBA;0;0;6;0;0;0;Technologiczne;22;self
+410;Wie¿yczka Stra¿nicza;6BAA;0;0;6;0;0;0;Technologiczne;22;self
+411;Wie¿yczka Stra¿nicza;6ABA;0;0;6;0;0;0;Technologiczne;22;self
+412;Wie¿yczka Stra¿nicza;6BAB;0;0;6;0;0;0;Technologiczne;22;self
+413;Sabota¿;1;0;0;5;0;0;0;Technologiczne;23;target
+414;Sabota¿;2;0;0;5;5;0;0;Technologiczne;23;target
+415;Sabota¿;3;0;0;5;5;0;0;Technologiczne;23;target
+416;Sabota¿;4A;0;0;4;5;0;0;Technologiczne;23;target
+417;Sabota¿;4B;0;0;5;5;0;0;Technologiczne;23;target
+418;Sabota¿;5AA;0;0;4;5;0;0;Technologiczne;23;target
+419;Sabota¿;5AB;0;0;4;5;0;0;Technologiczne;23;target
+420;Sabota¿;5BA;0;0;5;5;0;0;Technologiczne;23;target
+421;Sabota¿;5BB;0;0;5;5;0;0;Technologiczne;23;target
+422;Sabota¿;6AAA;0;0;4;5;0;0;Technologiczne;23;target
+423;Sabota¿;6AAB;0;0;4;5;0;0;Technologiczne;23;target
+424;Sabota¿;6ABB;0;0;4;5;0;0;Technologiczne;23;target
+425;Sabota¿;6BBB;0;0;5;5;0;0;Technologiczne;23;target
+426;Sabota¿;6BBA;0;0;5;5;0;0;Technologiczne;23;target
+427;Sabota¿;6BAA;0;0;5;5;0;0;Technologiczne;23;target
+428;Sabota¿;6ABA;0;0;4;5;0;0;Technologiczne;23;target
+429;Sabota¿;6BAB;0;0;5;5;0;0;Technologiczne;23;target
+430;Siatka Pojmañ;1;150;75;10;0;0;0;Technologiczne;24;target
+431;Siatka Pojmañ;2;150;75;10;5;0;0;Technologiczne;24;target
+432;Siatka Pojmañ;3;150;75;10;5;0;0;Technologiczne;24;target
+433;Siatka Pojmañ;4A;150;75;10;5;0;0;Technologiczne;24;target
+434;Siatka Pojmañ;4B;150;75;10;5;0;0;Technologiczne;24;target
+435;Siatka Pojmañ;5AA;150;75;10;5;0;0;Technologiczne;24;target
+436;Siatka Pojmañ;5AB;150;75;10;5;0;0;Technologiczne;24;target
+437;Siatka Pojmañ;5BA;150;75;10;5;0;0;Technologiczne;24;target
+438;Siatka Pojmañ;5BB;150;75;10;5;0;0;Technologiczne;24;target
+439;Siatka Pojmañ;6AAA;150;75;10;5;0;0;Technologiczne;24;target
+440;Siatka Pojmañ;6AAB;150;75;10;5;0;0;Technologiczne;24;target
+441;Siatka Pojmañ;6ABB;150;75;10;5;0;0;Technologiczne;24;target
+442;Siatka Pojmañ;6BBB;150;75;10;5;0;0;Technologiczne;24;target
+443;Siatka Pojmañ;6BBA;150;75;10;5;0;0;Technologiczne;24;target
+444;Siatka Pojmañ;6BAA;150;75;10;5;0;0;Technologiczne;24;target
+445;Siatka Pojmañ;6ABA;150;75;10;5;0;0;Technologiczne;24;target
+446;Siatka Pojmañ;6BAB;150;75;10;5;0;0;Technologiczne;24;target
+447;Natychmiastowe Zamro¿enie;1;150;0;8;0;0;0;Technologiczne;25;target
+448;Natychmiastowe Zamro¿enie;2;150;0;8;0;0;0;Technologiczne;25;target
+449;Natychmiastowe Zamro¿enie;3;150;0;8;5;0;0;Technologiczne;25;target
+450;Natychmiastowe Zamro¿enie;4A;150;0;8;5;0;0;Technologiczne;25;target
+451;Natychmiastowe Zamro¿enie;4B;150;0;8;10;0;0;Technologiczne;25;target
+452;Natychmiastowe Zamro¿enie;5AA;150;0;8;5;0;0;Technologiczne;25;target
+453;Natychmiastowe Zamro¿enie;5AB;150;0;8;10;0;0;Technologiczne;25;target
+454;Natychmiastowe Zamro¿enie;5BA;150;0;8;5;0;0;Technologiczne;25;target
+455;Natychmiastowe Zamro¿enie;5BB;150;0;8;10;0;0;Technologiczne;25;target
+456;Natychmiastowe Zamro¿enie;6AAA;150;0;8;5;0;0;Technologiczne;25;target
+457;Natychmiastowe Zamro¿enie;6AAB;150;0;8;5;0;0;Technologiczne;25;target
+458;Natychmiastowe Zamro¿enie;6ABB;150;0;8;10;0;0;Technologiczne;25;target
+459;Natychmiastowe Zamro¿enie;6BBB;150;0;8;10;0;0;Technologiczne;25;target
+460;Natychmiastowe Zamro¿enie;6BBA;150;0;8;10;0;0;Technologiczne;25;target
+461;Natychmiastowe Zamro¿enie;6BAA;150;0;8;5;0;0;Technologiczne;25;target
+462;Natychmiastowe Zamro¿enie;6ABA;150;0;8;10;0;0;Technologiczne;25;target
+463;Natychmiastowe Zamro¿enie;6BAB;150;0;8;5;0;0;Technologiczne;25;target
+464;Wyssanie Energii;1;0;25;7;0;0;-25;Technologiczne;26;target
+465;Wyssanie Energii;2;0;25;7;5;0;-25;Technologiczne;26;target
+466;Wyssanie Energii;3;0;50;7;5;0;-50;Technologiczne;26;target
+467;Wyssanie Energii;4A;0;50;7;5;0;-50;Technologiczne;26;target
+468;Wyssanie Energii;4B;0;50;7;5;0;-50;Technologiczne;26;target
+469;Wyssanie Energii;5AA;0;50;6;5;0;-50;Technologiczne;26;target
+470;Wyssanie Energii;5AB;0;75;7;5;0;-75;Technologiczne;26;target
+471;Wyssanie Energii;5BA;0;50;6;5;0;-50;Technologiczne;26;target
+472;Wyssanie Energii;5BB;0;75;7;5;0;-75;Technologiczne;26;target
+473;Wyssanie Energii;6AAA;0;50;6;5;0;-50;Technologiczne;26;target
+474;Wyssanie Energii;6AAB;0;50;6;5;0;-50;Technologiczne;26;target
+475;Wyssanie Energii;6ABB;0;75;7;5;0;-75;Technologiczne;26;target
+476;Wyssanie Energii;6BBB;0;75;7;5;0;-75;Technologiczne;26;target
+477;Wyssanie Energii;6BBA;0;75;7;5;0;-75;Technologiczne;26;target
+478;Wyssanie Energii;6BAA;0;50;6;5;0;-50;Technologiczne;26;target
+479;Wyssanie Energii;6ABA;0;75;7;5;0;-75;Technologiczne;26;target
+480;Wyssanie Energii;6BAB;0;50;6;5;0;-50;Technologiczne;26;target
+481;Skan Taktyczny;1;0;0;7;0;0;0;Technologiczne;27;target
+482;Skan Taktyczny;2;0;0;7;0;0;0;Technologiczne;27;target
+483;Skan Taktyczny;3;0;0;7;0;0;0;Technologiczne;27;target
+484;Skan Taktyczny;4A;0;0;7;0;0;0;Technologiczne;27;target
+485;Skan Taktyczny;4B;0;0;7;5;0;0;Technologiczne;27;target
+486;Skan Taktyczny;5AA;0;0;7;0;0;0;Technologiczne;27;target
+487;Skan Taktyczny;5AB;0;0;6;0;0;0;Technologiczne;27;target
+488;Skan Taktyczny;5BA;0;0;7;5;0;0;Technologiczne;27;target
+489;Skan Taktyczny;5BB;0;0;6;5;0;0;Technologiczne;27;target
+490;Skan Taktyczny;6AAA;0;0;7;0;0;0;Technologiczne;27;target
+491;Skan Taktyczny;6AAB;0;0;7;0;0;0;Technologiczne;27;target
+492;Skan Taktyczny;6ABB;0;0;6;0;0;0;Technologiczne;27;target
+493;Skan Taktyczny;6BBB;0;0;6;5;0;0;Technologiczne;27;target
+494;Skan Taktyczny;6BBA;0;0;6;5;0;0;Technologiczne;27;target
+495;Skan Taktyczny;6BAA;0;0;7;5;0;0;Technologiczne;27;target
+496;Skan Taktyczny;6ABA;0;0;6;0;0;0;Technologiczne;27;target
+497;Skan Taktyczny;6BAB;0;0;7;5;0;0;Technologiczne;27;target
+498;Amunicja Dysrupcyjna;1;0;0;99;0;0;0;Klasowe;28;self
+499;Amunicja Dysrupcyjna;2;0;0;99;0;0;0;Klasowe;28;self
+500;Amunicja Dysrupcyjna;3;0;0;99;0;0;0;Klasowe;28;self
+501;Amunicja Dysrupcyjna;4A;0;0;99;0;0;0;Klasowe;28;self
+502;Amunicja Dysrupcyjna;4B;0;0;99;0;0;0;Klasowe;28;self
+503;Amunicja Dysrupcyjna;5AA;0;0;99;0;0;0;Klasowe;28;self
+504;Amunicja Dysrupcyjna;5AB;0;0;99;0;0;0;Klasowe;28;self
+505;Amunicja Dysrupcyjna;5BA;0;0;99;0;0;0;Klasowe;28;self
+506;Amunicja Dysrupcyjna;5BB;0;0;99;0;0;0;Klasowe;28;self
+507;Amunicja Dysrupcyjna;6AAA;0;0;99;0;0;0;Klasowe;28;self
+508;Amunicja Dysrupcyjna;6AAB;0;0;99;0;0;0;Klasowe;28;self
+509;Amunicja Dysrupcyjna;6ABB;0;0;99;0;0;0;Klasowe;28;self
+510;Amunicja Dysrupcyjna;6BBB;0;0;99;0;0;0;Klasowe;28;self
+511;Amunicja Dysrupcyjna;6BBA;0;0;99;0;0;0;Klasowe;28;self
+512;Amunicja Dysrupcyjna;6BAA;0;0;99;0;0;0;Klasowe;28;self
+513;Amunicja Dysrupcyjna;6ABA;0;0;99;0;0;0;Klasowe;28;self
+514;Amunicja Dysrupcyjna;6BAB;0;0;99;0;0;0;Klasowe;28;self
+515;Szar¿a Biotyczna;1;70;70;8;0;0;-100;Klasowe;29;target
+516;Szar¿a Biotyczna;2;70;70;8;5;0;-100;Klasowe;29;target
+517;Szar¿a Biotyczna;3;70;70;8;5;0;-100;Klasowe;29;target
+518;Szar¿a Biotyczna;4A;100;100;8;5;0;-100;Klasowe;29;target
+519;Szar¿a Biotyczna;4B;70;70;8;5;0;-100;Klasowe;29;target
+520;Szar¿a Biotyczna;5AA;100;100;7;5;0;-100;Klasowe;29;target
+521;Szar¿a Biotyczna;5AB;100;100;8;5;0;-160;Klasowe;29;target
+522;Szar¿a Biotyczna;5BA;70;70;7;5;0;-100;Klasowe;29;target
+523;Szar¿a Biotyczna;5BB;70;70;8;5;0;-160;Klasowe;29;target
+524;Szar¿a Biotyczna;6AAA;100;100;7;5;0;-100;Klasowe;29;target
+525;Szar¿a Biotyczna;6AAB;100;100;7;5;0;-100;Klasowe;29;target
+526;Szar¿a Biotyczna;6ABB;100;100;8;5;0;-160;Klasowe;29;target
+527;Szar¿a Biotyczna;6BBB;70;70;8;5;0;-160;Klasowe;29;target
+528;Szar¿a Biotyczna;6BBA;70;70;8;5;0;-160;Klasowe;29;target
+529;Szar¿a Biotyczna;6BAA;70;70;7;5;0;-100;Klasowe;29;target
+530;Szar¿a Biotyczna;6ABA;100;100;8;5;0;-160;Klasowe;29;target
+531;Szar¿a Biotyczna;6BAB;70;70;7;5;0;-100;Klasowe;29;target
+532;Nowa;1;150;150;5;0;0;150;Klasowe;30;target
+533;Nowa;2;150;150;5;5;0;150;Klasowe;30;target
+534;Nowa;3;150;150;5;5;0;150;Klasowe;30;target
+535;Nowa;4A;200;200;5;5;0;150;Klasowe;30;target
+536;Nowa;4B;150;150;5;5;0;100;Klasowe;30;target
+537;Nowa;5AA;200;200;4;5;0;150;Klasowe;30;target
+538;Nowa;5AB;200;200;5;5;0;150;Klasowe;30;target
+539;Nowa;5BA;150;150;4;5;0;100;Klasowe;30;target
+540;Nowa;5BB;150;150;5;5;0;100;Klasowe;30;target
+541;Nowa;6AAA;200;200;4;5;0;150;Klasowe;30;target
+542;Nowa;6AAB;200;200;4;5;50;150;Klasowe;30;target
+543;Nowa;6ABB;200;200;5;5;50;150;Klasowe;30;target
+544;Nowa;6BBB;150;150;5;5;50;100;Klasowe;30;target
+545;Nowa;6BBA;150;150;5;5;0;100;Klasowe;30;target
+546;Nowa;6BAA;150;150;4;5;0;100;Klasowe;30;target
+547;Nowa;6ABA;200;200;5;5;0;150;Klasowe;30;target
+548;Nowa;6BAB;150;150;4;5;50;100;Klasowe;30;target
+549;Pancerz Technologiczny;1;0;0;10;0;0;0;Klasowe;31;self
+550;Pancerz Technologiczny;2;0;0;10;5;0;0;Klasowe;31;self
+551;Pancerz Technologiczny;3;0;0;10;5;0;0;Klasowe;31;self
+552;Pancerz Technologiczny;4A;0;0;10;5;0;0;Klasowe;31;self
+553;Pancerz Technologiczny;4B;0;0;10;5;0;0;Klasowe;31;self
+554;Pancerz Technologiczny;5AA;0;0;10;5;0;0;Klasowe;31;self
+555;Pancerz Technologiczny;5AB;0;0;10;5;0;0;Klasowe;31;self
+556;Pancerz Technologiczny;5BA;0;0;10;5;0;0;Klasowe;31;self
+557;Pancerz Technologiczny;5BB;0;0;10;5;0;0;Klasowe;31;self
+558;Pancerz Technologiczny;6AAA;0;0;10;5;0;0;Klasowe;31;self
+559;Pancerz Technologiczny;6AAB;0;0;10;5;0;0;Klasowe;31;self
+560;Pancerz Technologiczny;6ABB;0;0;10;5;0;0;Klasowe;31;self
+561;Pancerz Technologiczny;6BBB;0;0;10;5;0;0;Klasowe;31;self
+562;Pancerz Technologiczny;6BBA;0;0;10;5;0;0;Klasowe;31;self
+563;Pancerz Technologiczny;6BAA;0;0;10;5;0;0;Klasowe;31;self
+564;Pancerz Technologiczny;6ABA;0;0;10;5;0;0;Klasowe;31;self
+565;Pancerz Technologiczny;6BAB;0;0;10;5;0;0;Klasowe;31;self
+566;Kamufla¿ Taktyczny;1;0;0;8;0;0;0;Klasowe;32;self
+567;Kamufla¿ Taktyczny;2;0;0;8;5;0;0;Klasowe;32;self
+568;Kamufla¿ Taktyczny;3;0;0;8;5;0;0;Klasowe;32;self
+569;Kamufla¿ Taktyczny;4A;0;0;8;5;0;0;Klasowe;32;self
+570;Kamufla¿ Taktyczny;4B;0;0;8;5;0;0;Klasowe;32;self
+571;Kamufla¿ Taktyczny;5AA;0;0;8;5;0;0;Klasowe;32;self
+572;Kamufla¿ Taktyczny;5AB;0;0;8;5;0;0;Klasowe;32;self
+573;Kamufla¿ Taktyczny;5BA;0;0;8;5;0;0;Klasowe;32;self
+574;Kamufla¿ Taktyczny;5BB;0;0;8;5;0;0;Klasowe;32;self
+575;Kamufla¿ Taktyczny;6AAA;0;0;8;5;0;0;Klasowe;32;self
+576;Kamufla¿ Taktyczny;6AAB;0;0;8;5;0;0;Klasowe;32;self
+577;Kamufla¿ Taktyczny;6ABB;0;0;8;5;0;0;Klasowe;32;self
+578;Kamufla¿ Taktyczny;6BBB;0;0;8;5;0;0;Klasowe;32;self
+579;Kamufla¿ Taktyczny;6BBA;0;0;8;5;0;0;Klasowe;32;self
+580;Kamufla¿ Taktyczny;6BAA;0;0;8;5;0;0;Klasowe;32;self
+581;Kamufla¿ Taktyczny;6ABA;0;0;8;5;0;0;Klasowe;32;self
+582;Kamufla¿ Taktyczny;6BAB;0;0;8;5;0;0;Klasowe;32;self
+583;Amunicja Zapalaj¹ca;1;0;0;99;0;0;0;Amunicja;33;self
+584;Amunicja Zapalaj¹ca;2;0;0;99;0;0;0;Amunicja;33;self
+585;Amunicja Zapalaj¹ca;3;0;0;99;0;0;0;Amunicja;33;self
+586;Amunicja Zapalaj¹ca;4A;0;0;99;0;0;0;Amunicja;33;self
+587;Amunicja Zapalaj¹ca;4B;0;0;99;0;0;0;Amunicja;33;self
+588;Amunicja Zapalaj¹ca;5AA;0;0;99;0;0;0;Amunicja;33;self
+589;Amunicja Zapalaj¹ca;5AB;0;0;99;0;0;0;Amunicja;33;self
+590;Amunicja Zapalaj¹ca;5BA;0;0;99;0;0;0;Amunicja;33;self
+591;Amunicja Zapalaj¹ca;5BB;0;0;99;0;0;0;Amunicja;33;self
+592;Amunicja Zapalaj¹ca;6AAA;0;0;99;0;0;0;Amunicja;33;self
+593;Amunicja Zapalaj¹ca;6AAB;0;0;99;0;0;0;Amunicja;33;self
+594;Amunicja Zapalaj¹ca;6ABB;0;0;99;0;0;0;Amunicja;33;self
+595;Amunicja Zapalaj¹ca;6BBB;0;0;99;0;0;0;Amunicja;33;self
+596;Amunicja Zapalaj¹ca;6BBA;0;0;99;0;0;0;Amunicja;33;self
+597;Amunicja Zapalaj¹ca;6BAA;0;0;99;0;0;0;Amunicja;33;self
+598;Amunicja Zapalaj¹ca;6ABA;0;0;99;0;0;0;Amunicja;33;self
+599;Amunicja Zapalaj¹ca;6BAB;0;0;99;0;0;0;Amunicja;33;self
+600;Krio-Amunicja;1;0;0;99;0;0;0;Amunicja;34;self
+601;Krio-Amunicja;2;0;0;99;0;0;0;Amunicja;34;self
+602;Krio-Amunicja;3;0;0;99;0;0;0;Amunicja;34;self
+603;Krio-Amunicja;4A;0;0;99;0;0;0;Amunicja;34;self
+604;Krio-Amunicja;4B;0;0;99;0;0;0;Amunicja;34;self
+605;Krio-Amunicja;5AA;0;0;99;0;0;0;Amunicja;34;self
+606;Krio-Amunicja;5AB;0;0;99;0;0;0;Amunicja;34;self
+607;Krio-Amunicja;5BA;0;0;99;0;0;0;Amunicja;34;self
+608;Krio-Amunicja;5BB;0;0;99;0;0;0;Amunicja;34;self
+609;Krio-Amunicja;6AAA;0;0;99;0;0;0;Amunicja;34;self
+610;Krio-Amunicja;6AAB;0;0;99;0;0;0;Amunicja;34;self
+611;Krio-Amunicja;6ABB;0;0;99;0;0;0;Amunicja;34;self
+612;Krio-Amunicja;6BBB;0;0;99;0;0;0;Amunicja;34;self
+613;Krio-Amunicja;6BBA;0;0;99;0;0;0;Amunicja;34;self
+614;Krio-Amunicja;6BAA;0;0;99;0;0;0;Amunicja;34;self
+615;Krio-Amunicja;6ABA;0;0;99;0;0;0;Amunicja;34;self
+616;Krio-Amunicja;6BAB;0;0;99;0;0;0;Amunicja;34;self
+617;Amunicja Przeciwpancerna;1;0;0;99;0;0;0;Amunicja;35;self
+618;Amunicja Przeciwpancerna;2;0;0;99;0;0;0;Amunicja;35;self
+619;Amunicja Przeciwpancerna;3;0;0;99;0;0;0;Amunicja;35;self
+620;Amunicja Przeciwpancerna;4A;0;0;99;0;0;0;Amunicja;35;self
+621;Amunicja Przeciwpancerna;4B;0;0;99;0;0;0;Amunicja;35;self
+622;Amunicja Przeciwpancerna;5AA;0;0;99;0;0;0;Amunicja;35;self
+623;Amunicja Przeciwpancerna;5AB;0;0;99;0;0;0;Amunicja;35;self
+624;Amunicja Przeciwpancerna;5BA;0;0;99;0;0;0;Amunicja;35;self
+625;Amunicja Przeciwpancerna;5BB;0;0;99;0;0;0;Amunicja;35;self
+626;Amunicja Przeciwpancerna;6AAA;0;0;99;0;0;0;Amunicja;35;self
+627;Amunicja Przeciwpancerna;6AAB;0;0;99;0;0;0;Amunicja;35;self
+628;Amunicja Przeciwpancerna;6ABB;0;0;99;0;0;0;Amunicja;35;self
+629;Amunicja Przeciwpancerna;6BBB;0;0;99;0;0;0;Amunicja;35;self
+630;Amunicja Przeciwpancerna;6BBA;0;0;99;0;0;0;Amunicja;35;self
+631;Amunicja Przeciwpancerna;6BAA;0;0;99;0;0;0;Amunicja;35;self
+632;Amunicja Przeciwpancerna;6ABA;0;0;99;0;0;0;Amunicja;35;self
+633;Amunicja Przeciwpancerna;6BAB;0;0;99;0;0;0;Amunicja;35;self
+634;Amunicja Odkszta³caj¹ca;1;0;0;99;0;0;0;Amunicja;36;self
+635;Amunicja Odkszta³caj¹ca;2;0;0;99;0;0;0;Amunicja;36;self
+636;Amunicja Odkszta³caj¹ca;3;0;0;99;0;0;0;Amunicja;36;self
+637;Amunicja Odkszta³caj¹ca;4A;0;0;99;0;0;0;Amunicja;36;self
+638;Amunicja Odkszta³caj¹ca;4B;0;0;99;0;0;0;Amunicja;36;self
+639;Amunicja Odkszta³caj¹ca;5AA;0;0;99;0;0;0;Amunicja;36;self
+640;Amunicja Odkszta³caj¹ca;5AB;0;0;99;0;0;0;Amunicja;36;self
+641;Amunicja Odkszta³caj¹ca;5BA;0;0;99;0;0;0;Amunicja;36;self
+642;Amunicja Odkszta³caj¹ca;5BB;0;0;99;0;0;0;Amunicja;36;self
+643;Amunicja Odkszta³caj¹ca;6AAA;0;0;99;0;0;0;Amunicja;36;self
+644;Amunicja Odkszta³caj¹ca;6AAB;0;0;99;0;0;0;Amunicja;36;self
+645;Amunicja Odkszta³caj¹ca;6ABB;0;0;99;0;0;0;Amunicja;36;self
+646;Amunicja Odkszta³caj¹ca;6BBB;0;0;99;0;0;0;Amunicja;36;self
+647;Amunicja Odkszta³caj¹ca;6BBA;0;0;99;0;0;0;Amunicja;36;self
+648;Amunicja Odkszta³caj¹ca;6BAA;0;0;99;0;0;0;Amunicja;36;self
+649;Amunicja Odkszta³caj¹ca;6ABA;0;0;99;0;0;0;Amunicja;36;self
+650;Amunicja Odkszta³caj¹ca;6BAB;0;0;99;0;0;0;Amunicja;36;self

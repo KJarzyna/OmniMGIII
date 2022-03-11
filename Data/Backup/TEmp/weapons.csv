@@ -1,0 +1,9 @@
+WeaponID;WeaponName;WeaponType;DmgBase;AdditionalDmgToArmor;AdditionalDmgToShield;Acc;Cost;AmmoPerShot;AmmoMaxInClip;Recoil;AdditionalCritChance
+0;M-3 Predator;PC;50;0;0;20;0;1;15;0;0
+1;M-5 Falanga;PC;77;0;0;20;0;1;12;0;0
+2;M-6 Kat;PC;184;0;0;20;0;1;6;0;0
+3;M-4 Shuriken;PM;155;0;0;10;0;8;32;0;0
+4;M-9 Grom;PM;273;0;0;10;0;10;50;0;0
+5;M-12 Szarañcza;PM;360;0;0;25;0;2;10;0;0
+6;M-8 Mœciciel;KS;260;0;0;10;99;10;30;0;0
+7;M-15 Windykator;KS;360;0;0;20;99;9;27;0;0

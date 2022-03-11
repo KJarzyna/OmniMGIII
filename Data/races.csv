@@ -1,0 +1,11 @@
+ID;Name;HeavyDamage;LightDamage;AreaDamage;Evasion
+0;Cz³owiek;250;100;250;50
+1;Asari;0;100;0;50
+2;Batarianin;300;150;0;55
+3;Drell;250;100;0;45
+4;Geth;300;150;300;45
+5;Kroganin;350;200;0;60
+6;Quarianin;200;100;0;40
+7;Salarianin;200;100;0;40
+8;Turianin;300;150;0;55
+9;Vorcha;250;100;0;45

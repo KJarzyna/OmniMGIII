@@ -92,10 +92,11 @@ void MainWindow::InitializeSkillListTreeWidget()
 
 void MainWindow::InitializeSkillListSpecialization()
 {
-    for (int i=0; i<SkillList.size(); i++)
-    {
-        ui->comboBox_specialization->addItem(SkillList.at(i).SkillName);
-    }
+    ui->comboBox_specialization->addItem("Brak");
+//    for (int i=0; i<SkillList.size(); i++)
+//    {
+//        ui->comboBox_specialization->addItem(SkillList.at(i).SkillName);
+//    }
 }
 
 void MainWindow::InitializeWeaponListTreeWidget()

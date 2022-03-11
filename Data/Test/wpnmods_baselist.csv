@@ -1,0 +1,17 @@
+ModID;ModName;ModType
+0;Brak;NoType
+1;Stabilizator;KS,PM
+2;Ulepszenie magazynka;PC,PM,KS,KW,STRZ
+3;Ultralekkie materia³y;PC,PM,KS,KW,STRZ
+4;Celownik optyczny;PC,PM,KS
+5;Ulepszony celownik;KW
+6;Celownik termiczny;KS,KW
+7;Przed³u¿ona lufa;PC,PM,KS,KW
+8;Modyfikacja przeciwpancerna;PC,PM,KS,KW,STRZ
+9;Omni-ostrze/bagnet;STRZ,KS
+10;Szybka lufa;PC,PM,KS,KW
+11;Paralizator;PC
+12;Ciê¿ka lufa;PC
+13;System urazów czaszki;PC
+14;Wzmacniacz mocy;PC,PM
+15;Mod skupieniowy;KW
