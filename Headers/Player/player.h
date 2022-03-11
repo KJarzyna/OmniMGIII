@@ -30,6 +30,8 @@ public:
     int MasteryTechno;
     int MasterySpec;
 
+    QString Notes;
+
 };
 
 #endif // PLAYER_H

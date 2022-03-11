@@ -141,12 +141,23 @@ private slots:
 
     void on_comboBox_player_race_activated(const QString &arg1);
 
+    void on_tableWidget_weapons_preview_cellDoubleClicked(int row, int column);
+
+    void on_tableWidget_skills_preview_cellDoubleClicked(int row, int column);
+
+    void on_listWidget_armors_list_preview_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_listWidget_armormods_list_preview_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_tableWidget_generators_preview_cellDoubleClicked(int row, int column);
+
 private:
     Ui::MainWindow *ui;
 
     //GENERAL
     void ClearAllTabs();
     void ClearGeneralTab();
+    void ClearConfgurationTab();
     int GetActivePlayerID();
     int FindLastUsedPlayerID();
     void AddNewPlayerToVector(QString playerName, int playerID);
@@ -276,6 +287,9 @@ private:
     void LoadGeneratorCharges(int playerID);
     void LoadPlayer(int id);
 
+    void SavePlayerNotesToVector(int playerID);
+    int currentlySelectedPlayerID;
+
     //---check if still used----
     void SaveGeneralTab(int playerID);
     void SaveGeneralTabToVector(int playerID);
@@ -330,7 +344,7 @@ private:
 
     //CALCULATOR RELATED
     void Reload(int playerID, int weaponID);
-    void ReloadAll(int playerID);
+    void ReloadAll(int playerID, int selected_row);
 
     bool PlayerHasSkill(int playerID, QString skillName);
     bool PlayerHasArmor(int playerID, int armorID);

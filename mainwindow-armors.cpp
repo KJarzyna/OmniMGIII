@@ -21,16 +21,18 @@ void MainWindow::AddArmorToList()
         if (Armors.at(i).ArmorName == selected_armorname)
         {
             ui->listWidget_armors_list->insertItem(ui->listWidget_armors_list->count(),new QListWidgetItem(Armors.at(i).ArmorName));
+            ui->listWidget_armors_list_preview->insertItem(ui->listWidget_armors_list_preview->count(),new QListWidgetItem(Armors.at(i).ArmorName));
         }
     }
 }
 
 void MainWindow::RemoveArmorFromList()
 {
-    if(ui->listWidget_armors_list->count() >0)
+    if(ui->listWidget_armors_list_preview->count() >0)
     {
-        int selected_row = ui->listWidget_armors_list->currentRow();
+        int selected_row = ui->listWidget_armors_list_preview->currentRow();
         ui->listWidget_armors_list->takeItem(selected_row);
+        ui->listWidget_armors_list_preview->takeItem(selected_row);
     }
 }
 
@@ -99,6 +101,7 @@ void MainWindow::AddArmorModToList()
             if (ArmModList.at(i).ArmorModName == selected_modname)
             {
                 ui->listWidget_armormods_list->insertItem(ui->listWidget_armormods_list->count(),new QListWidgetItem(ArmModList.at(i).ArmorModName));
+                ui->listWidget_armormods_list_preview->insertItem(ui->listWidget_armormods_list_preview->count(),new QListWidgetItem(ArmModList.at(i).ArmorModName));
             }
         }
     }
@@ -106,10 +109,11 @@ void MainWindow::AddArmorModToList()
 
 void MainWindow::RemoveArmorModFromList()
 {
-    if(ui->listWidget_armormods_list->count()>0)
+    if(ui->listWidget_armormods_list_preview->count()>0)
     {
-        int selected_row = ui->listWidget_armormods_list->currentRow();
+        int selected_row = ui->listWidget_armormods_list_preview->currentRow();
         ui->listWidget_armormods_list->takeItem(selected_row);
+        ui->listWidget_armormods_list_preview->takeItem(selected_row);
     }
 }
 

@@ -33,16 +33,29 @@ void MainWindow::AddWeaponToTable()
             ui->tableWidget_weapons->setItem(new_row,2,new QTableWidgetItem(QString::number(Weapons.at(i).Acc)));
             ui->tableWidget_weapons->setItem(new_row,3,new QTableWidgetItem(QString::number(Weapons.at(i).Recoil)));
             ui->tableWidget_weapons->setItem(new_row,4,new QTableWidgetItem(GetActionCostFromCost(Weapons.at(i).Cost)));
-            ui->tableWidget_weapons->setItem(new_row,5,new QTableWidgetItem(QString::number(Weapons.at(i).AmmoMaxInClip)));
-            ui->tableWidget_weapons->setItem(new_row,6,new QTableWidgetItem(Weapons.at(i).WeaponType));
+            ui->tableWidget_weapons->setItem(new_row,5,new QTableWidgetItem(Weapons.at(i).WeaponType));
+            ui->tableWidget_weapons->setItem(new_row,6,new QTableWidgetItem("Brak"));
             ui->tableWidget_weapons->setItem(new_row,7,new QTableWidgetItem("Brak"));
-            ui->tableWidget_weapons->setItem(new_row,8,new QTableWidgetItem("Brak"));
 
             ui->tableWidget_weapons_preview->insertRow(new_row);
             ui->tableWidget_weapons_preview->setItem(new_row,0,new QTableWidgetItem(Weapons.at(i).WeaponName));
             ui->tableWidget_weapons_preview->setItem(new_row,1,new QTableWidgetItem(Weapons.at(i).WeaponType));
             ui->tableWidget_weapons_preview->setItem(new_row,2,new QTableWidgetItem("Brak"));
             ui->tableWidget_weapons_preview->setItem(new_row,3,new QTableWidgetItem("Brak"));
+
+            ui->tableWidget_weapons->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+            ui->tableWidget_weapons->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons->item(new_row,4)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons->item(new_row,5)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons->item(new_row,6)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons->item(new_row,7)->setTextAlignment(Qt::AlignCenter);
+
+            ui->tableWidget_weapons_preview->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+            ui->tableWidget_weapons_preview->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons_preview->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_weapons_preview->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
         }
     }
 }
@@ -239,16 +252,21 @@ void MainWindow::AddWeaponToAmmoTable()
         QString selected_weaponname;
         selected_weaponname = ui->treeWidget_weapon_list->currentItem()->text(0);
 
+
         for (int i=0; i<Weapons.size(); i++)
         {
             if (Weapons.at(i).WeaponName == selected_weaponname)
             {
-                ui->tableWidget_wpn_ammo->insertRow(ui->tableWidget_wpn_ammo->rowCount());
-                ui->tableWidget_wpn_ammo->setRowHeight(ui->tableWidget_wpn_ammo->rowCount()-1,20);
-                ui->tableWidget_wpn_ammo->setItem(ui->tableWidget_wpn_ammo->rowCount()-1,0,new QTableWidgetItem(Weapons.at(i).WeaponName));
-                ui->tableWidget_wpn_ammo->setItem(ui->tableWidget_wpn_ammo->rowCount()-1,1,new QTableWidgetItem(QString::number(Weapons.at(i).AmmoMaxInClip)));
-                ui->tableWidget_wpn_ammo->item(ui->tableWidget_wpn_ammo->rowCount()-1,1)->setTextAlignment(Qt::AlignCenter);
-                ui->tableWidget_wpn_ammo->item(ui->tableWidget_wpn_ammo->rowCount()-1,0)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+                //int AmmoLeft = GetCurrentAmmoInPlayerWeaponFromWeaponID(Weapons.at(i).WeaponID,playerID);
+                int new_row = ui->tableWidget_wpn_ammo->rowCount();
+                ui->tableWidget_wpn_ammo->insertRow(new_row);
+                ui->tableWidget_wpn_ammo->setRowHeight(new_row,20);
+                ui->tableWidget_wpn_ammo->setItem(new_row,0,new QTableWidgetItem(Weapons.at(i).WeaponName));
+                ui->tableWidget_wpn_ammo->setItem(new_row,1,new QTableWidgetItem(QString::number(Weapons.at(i).AmmoMaxInClip)));
+                ui->tableWidget_wpn_ammo->setItem(new_row,2,new QTableWidgetItem(QString::number(Weapons.at(i).AmmoMaxInClip)));
+                ui->tableWidget_wpn_ammo->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_wpn_ammo->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_wpn_ammo->item(new_row,0)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
             }
         }
 
@@ -296,11 +314,13 @@ void MainWindow::Reload(int playerID, int weaponID)
     }
 }
 
-void MainWindow::ReloadAll(int playerID)
+void MainWindow::ReloadAll(int playerID, int selected_row)
 {
+    int weaponID = GetWeaponIDFromWeaponName(ui->tableWidget_wpn_ammo->item(selected_row,0)->text());
+
     for(int i=0;i<PlayerWeapons.size();i++)
     {
-       if(PlayerWeapons.at(i).PlayerID == playerID)
-           Reload(playerID,PlayerWeapons.at(i).WeaponID);
+       if(PlayerWeapons.at(i).PlayerID == playerID && PlayerWeapons.at(i).WeaponID == weaponID)
+           Reload(playerID,weaponID);
     }
 }

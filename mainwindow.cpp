@@ -118,6 +118,7 @@ QString MainWindow::GetActionCostFromCost(int cost)
 void MainWindow::ClearAllTabs()
 {
     ClearGeneralTab();
+    ClearConfgurationTab();
     ClearSkillTable();
     SetSpecializationToDefault();
     SetMasteriesToZero();
@@ -144,7 +145,17 @@ void MainWindow::ClearGeneralTab()
     ui->lineEdit_shield_current->clear();
     ui->lineEdit_shield_full->clear();
     ui->listWidget_player_conditions->clear();
+    ui->plainTextEdit->clear();
     ui->comboBox_player_type->setCurrentIndex(0);
+}
+
+void MainWindow::ClearConfgurationTab()
+{
+    ui->tableWidget_generators_preview->setRowCount(0);
+    ui->tableWidget_skills_preview->setRowCount(0);
+    ui->tableWidget_weapons_preview->setRowCount(0);
+    ui->listWidget_armormods_list_preview->clear();
+    ui->listWidget_armors_list_preview->clear();
 }
 
 int MainWindow::GetActivePlayerID()
@@ -212,6 +223,8 @@ void MainWindow::SaveAll()
 {
 
     ReadWriteData csv;
+
+    SavePlayerNotesToVector(currentlySelectedPlayerID);
     if(!csv.WritePlayersFromVectorToFile(Players,"Data/players.csv"))
         qDebug() << "Zapis players.csv nie powiódł się!";
     if(!csv.WritePlayerSkillFromVectorToFile(PlayerSkills, "Data/player_skills.csv"))
@@ -332,12 +345,12 @@ void MainWindow::on_pushButton_skill_add_clicked()
 
 void MainWindow::on_pushButton_skill_remove_clicked()
 {
-    if(!ui->tableWidget_skills->selectedItems().isEmpty())
+    if(!ui->tableWidget_skills_preview->selectedItems().isEmpty())
     {
         int playerID = GetActivePlayerID();;
         int skillID;
-        QString skillName = ui->tableWidget_skills->item(ui->tableWidget_skills->currentRow(),0)->text();
-        QString skillLevel = ui->tableWidget_skills->item(ui->tableWidget_skills->currentRow(),1)->text();
+        QString skillName = ui->tableWidget_skills_preview->item(ui->tableWidget_skills_preview->currentRow(),0)->text();
+        QString skillLevel = ui->tableWidget_skills_preview->item(ui->tableWidget_skills_preview->currentRow(),1)->text();
         skillID = GetSkillIDFromSkillNameAndLevel(skillName,skillLevel);
 
         RemoveSkillFromTable();
@@ -447,11 +460,11 @@ void MainWindow::on_pushButton_armor_add_clicked()
 
 void MainWindow::on_pushButton_armor_remove_clicked()
 {
-    if(!ui->listWidget_armors_list->selectedItems().isEmpty())
+    if(!ui->listWidget_armors_list_preview->selectedItems().isEmpty())
     {
         int playerID = GetActivePlayerID();;
         int armorID;
-        QString armorName = ui->listWidget_armors_list->item(ui->listWidget_armors_list->currentRow())->text();
+        QString armorName = ui->listWidget_armors_list_preview->item(ui->listWidget_armors_list_preview->currentRow())->text();
 
         armorID = GetArmorIDFromArmorName(armorName);
         RemoveArmorFromList();
@@ -491,11 +504,11 @@ void MainWindow::on_pushButton_mod_armor_add_clicked()
 
 void MainWindow::on_pushButton_mod_armor_remove_clicked()
 {
-    if(!ui->listWidget_armormods_list->selectedItems().isEmpty())
+    if(!ui->listWidget_armormods_list_preview->selectedItems().isEmpty())
     {
         int playerID = GetActivePlayerID();;
         int armorModID;
-        QString armorModName = ui->listWidget_armormods_list->item(ui->listWidget_armormods_list->currentRow())->text();
+        QString armorModName = ui->listWidget_armormods_list_preview->item(ui->listWidget_armormods_list_preview->currentRow())->text();
 
         armorModID = GetArmorModIDFromArmorModName(armorModName);
         RemoveArmorModFromList();
@@ -508,7 +521,7 @@ void MainWindow::on_pushButton_generator_add_clicked()
         int playerID = GetActivePlayerID();;
         int generatorID = GetGeneratorIDFromGeneratorName(ui->comboBox_generator_name->currentText());
 
-        if(ui->tableWidget_generators->rowCount()<1)
+        if(ui->tableWidget_generators_preview->rowCount()<1)
         {
             AddGeneratorToTable();
             AddGeneratorToPlayer(generatorID,playerID);
@@ -526,11 +539,11 @@ void MainWindow::on_pushButton_generator_add_clicked()
 
 void MainWindow::on_pushButton_generator_remove_clicked()
 {
-    if(!ui->tableWidget_generators->selectedItems().isEmpty())
+    if(!ui->tableWidget_generators_preview->selectedItems().isEmpty())
     {
         int playerID = GetActivePlayerID();;
         int generatorID;
-        QString generatorName = ui->tableWidget_generators->item(ui->tableWidget_generators->currentRow(),0)->text();
+        QString generatorName = ui->tableWidget_generators_preview->item(ui->tableWidget_generators_preview->currentRow(),0)->text();
 
         generatorID = GetGeneratorIDFromGeneratorName(generatorName);
         RemoveGeneratorFromTable();
@@ -592,8 +605,9 @@ void MainWindow::on_comboBox_omniblade_mod_name_activated(const QString &arg1)
 
 void MainWindow::on_pushButton_reloadAll_clicked()
 {
+    int selected_row = ui->tableWidget_wpn_ammo->currentRow();
     int playerID = GetActivePlayerID();;
-    ReloadAll(playerID);
+    ReloadAll(playerID,selected_row);
 }
 
 void MainWindow::on_treeWidget_weapon_list_itemDoubleClicked(QTreeWidgetItem *item, int column)
@@ -636,6 +650,7 @@ void MainWindow::on_tableWidget_wpn_ammo_cellChanged(int row, int column)
 
 void MainWindow::on_comboBox_select_player_activated(const QString &arg1)
 {
+    SavePlayerNotesToVector(currentlySelectedPlayerID);
     ClearAllTabs();
     int playerID = GetActivePlayerID();
     LoadPlayer(playerID);
@@ -767,7 +782,7 @@ void MainWindow::on_listWidget_armors_list_itemDoubleClicked(QListWidgetItem *it
 
 void MainWindow::on_tableWidget_weapons_cellDoubleClicked(int row, int column)
 {
-    if(ui->checkBox_show_details->isChecked() && column == 7)
+    if(ui->checkBox_show_details->isChecked() && (column == 6 || column == 7))
     {
         int wpnModID = GetWpnModIDFromWpnModName(ui->tableWidget_weapons->item(row,column)->text());
         ShowItemDetails(wpnModID,weaponmod_desc,"weaponmod");
@@ -823,3 +838,57 @@ void MainWindow::on_comboBox_player_race_activated(const QString &arg1)
                 Players[i].PlayerRace = arg1;
     }
 }
+
+
+
+void MainWindow::on_tableWidget_weapons_preview_cellDoubleClicked(int row, int column)
+{
+    if(ui->checkBox_show_details->isChecked() && (column == 2 || column == 3))
+    {
+        int wpnModID = GetWpnModIDFromWpnModName(ui->tableWidget_weapons_preview->item(row,column)->text());
+        ShowItemDetails(wpnModID,weaponmod_desc,"weaponmod");
+    }
+}
+
+
+void MainWindow::on_tableWidget_skills_preview_cellDoubleClicked(int row, int column)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        QString skillName = ui->tableWidget_skills_preview->item(row,0)->text();
+        QString skillLevel = ui->tableWidget_skills_preview->item(row,1)->text();
+        int skillID = GetSkillIDFromSkillNameAndLevel(skillName,skillLevel);
+        ShowSkillDetails(skillID);
+    }
+}
+
+
+void MainWindow::on_listWidget_armors_list_preview_itemDoubleClicked(QListWidgetItem *item)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        int armorID = GetArmorIDFromArmorName(item->text());
+        ShowItemDetails(armorID,armor_desc,"armor");
+    }
+}
+
+
+void MainWindow::on_listWidget_armormods_list_preview_itemDoubleClicked(QListWidgetItem *item)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        int armorModID = GetArmorModIDFromArmorModName(item->text());
+        ShowItemDetails(armorModID,armormod_desc,"armormod");
+    }
+}
+
+
+void MainWindow::on_tableWidget_generators_preview_cellDoubleClicked(int row, int column)
+{
+    if(ui->checkBox_show_details->isChecked())
+    {
+        int generatorID = GetGeneratorIDFromGeneratorName(ui->tableWidget_generators_preview->item(0,0)->text());
+        ShowItemDetails(generatorID,generator_desc,"generator");
+    }
+}
+

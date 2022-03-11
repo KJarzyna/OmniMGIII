@@ -25,6 +25,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
@@ -104,6 +105,10 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label_armor_list_2;
     QTableWidget *tableWidget_generators;
+    QWidget *verticalLayoutWidget_7;
+    QVBoxLayout *verticalLayout_7;
+    QLabel *label_armor_list_3;
+    QPlainTextEdit *plainTextEdit;
     QPushButton *pushButton_reloadAll;
     QTableWidget *tableWidget_wpn_ammo;
     QWidget *tab_2;
@@ -136,10 +141,13 @@ public:
     QPushButton *pushButton_mod_armor_remove;
     QComboBox *comboBox_mod_armor_name;
     QPushButton *pushButton_mod_armor_add;
+    QListWidget *listWidget_armors_list_preview;
+    QListWidget *listWidget_armormods_list_preview;
     QGroupBox *groupBox_4;
     QPushButton *pushButton_generator_remove;
     QComboBox *comboBox_generator_name;
     QPushButton *pushButton_generator_add;
+    QTableWidget *tableWidget_generators_preview;
     QWidget *verticalLayoutWidget_6;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_title;
@@ -649,7 +657,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(20, 60, 1211, 751));
+        tabWidget->setGeometry(QRect(20, 60, 1211, 761));
         tab_1 = new QWidget();
         tab_1->setObjectName(QString::fromUtf8("tab_1"));
         formLayoutWidget = new QWidget(tab_1);
@@ -892,8 +900,8 @@ public:
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
         groupBox_7->setGeometry(QRect(410, 270, 791, 161));
         tableWidget_weapons = new QTableWidget(groupBox_7);
-        if (tableWidget_weapons->columnCount() < 9)
-            tableWidget_weapons->setColumnCount(9);
+        if (tableWidget_weapons->columnCount() < 8)
+            tableWidget_weapons->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         __qtablewidgetitem4->setFont(font2);
         tableWidget_weapons->setHorizontalHeaderItem(0, __qtablewidgetitem4);
@@ -918,9 +926,6 @@ public:
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
         __qtablewidgetitem11->setFont(font2);
         tableWidget_weapons->setHorizontalHeaderItem(7, __qtablewidgetitem11);
-        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        __qtablewidgetitem12->setFont(font2);
-        tableWidget_weapons->setHorizontalHeaderItem(8, __qtablewidgetitem12);
         tableWidget_weapons->setObjectName(QString::fromUtf8("tableWidget_weapons"));
         tableWidget_weapons->setGeometry(QRect(10, 30, 771, 111));
         tableWidget_weapons->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -931,10 +936,10 @@ public:
         tableWidget_weapons->horizontalHeader()->setDefaultSectionSize(175);
         groupBox_8 = new QGroupBox(tab_1);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        groupBox_8->setGeometry(QRect(10, 450, 1191, 251));
+        groupBox_8->setGeometry(QRect(10, 450, 1191, 271));
         verticalLayoutWidget_5 = new QWidget(groupBox_8);
         verticalLayoutWidget_5->setObjectName(QString::fromUtf8("verticalLayoutWidget_5"));
-        verticalLayoutWidget_5->setGeometry(QRect(930, 20, 241, 212));
+        verticalLayoutWidget_5->setGeometry(QRect(930, 20, 241, 231));
         verticalLayout_5 = new QVBoxLayout(verticalLayoutWidget_5);
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setContentsMargins(11, 11, 11, 11);
@@ -1014,7 +1019,7 @@ public:
 
         verticalLayoutWidget_3 = new QWidget(groupBox_8);
         verticalLayoutWidget_3->setObjectName(QString::fromUtf8("verticalLayoutWidget_3"));
-        verticalLayoutWidget_3->setGeometry(QRect(410, 20, 251, 181));
+        verticalLayoutWidget_3->setGeometry(QRect(410, 20, 251, 231));
         verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget_3);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -1035,7 +1040,7 @@ public:
 
         verticalLayoutWidget_2 = new QWidget(groupBox_8);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(10, 19, 381, 91));
+        verticalLayoutWidget_2->setGeometry(QRect(10, 19, 381, 101));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -1049,23 +1054,20 @@ public:
         verticalLayout_2->addWidget(label_armor_list_2);
 
         tableWidget_generators = new QTableWidget(verticalLayoutWidget_2);
-        if (tableWidget_generators->columnCount() < 5)
-            tableWidget_generators->setColumnCount(5);
+        if (tableWidget_generators->columnCount() < 4)
+            tableWidget_generators->setColumnCount(4);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        __qtablewidgetitem12->setFont(font2);
+        tableWidget_generators->setHorizontalHeaderItem(0, __qtablewidgetitem12);
         QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
         __qtablewidgetitem13->setFont(font2);
-        tableWidget_generators->setHorizontalHeaderItem(0, __qtablewidgetitem13);
+        tableWidget_generators->setHorizontalHeaderItem(1, __qtablewidgetitem13);
         QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
         __qtablewidgetitem14->setFont(font2);
-        tableWidget_generators->setHorizontalHeaderItem(1, __qtablewidgetitem14);
+        tableWidget_generators->setHorizontalHeaderItem(2, __qtablewidgetitem14);
         QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
         __qtablewidgetitem15->setFont(font2);
-        tableWidget_generators->setHorizontalHeaderItem(2, __qtablewidgetitem15);
-        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
-        __qtablewidgetitem16->setFont(font2);
-        tableWidget_generators->setHorizontalHeaderItem(3, __qtablewidgetitem16);
-        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
-        __qtablewidgetitem17->setFont(font2);
-        tableWidget_generators->setHorizontalHeaderItem(4, __qtablewidgetitem17);
+        tableWidget_generators->setHorizontalHeaderItem(3, __qtablewidgetitem15);
         tableWidget_generators->setObjectName(QString::fromUtf8("tableWidget_generators"));
         tableWidget_generators->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget_generators->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -1074,21 +1076,44 @@ public:
 
         verticalLayout_2->addWidget(tableWidget_generators);
 
+        verticalLayoutWidget_7 = new QWidget(groupBox_8);
+        verticalLayoutWidget_7->setObjectName(QString::fromUtf8("verticalLayoutWidget_7"));
+        verticalLayoutWidget_7->setGeometry(QRect(10, 130, 381, 121));
+        verticalLayout_7 = new QVBoxLayout(verticalLayoutWidget_7);
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        verticalLayout_7->setContentsMargins(0, 0, 0, 0);
+        label_armor_list_3 = new QLabel(verticalLayoutWidget_7);
+        label_armor_list_3->setObjectName(QString::fromUtf8("label_armor_list_3"));
+        label_armor_list_3->setFont(font2);
+        label_armor_list_3->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_7->addWidget(label_armor_list_3);
+
+        plainTextEdit = new QPlainTextEdit(verticalLayoutWidget_7);
+        plainTextEdit->setObjectName(QString::fromUtf8("plainTextEdit"));
+
+        verticalLayout_7->addWidget(plainTextEdit);
+
         pushButton_reloadAll = new QPushButton(tab_1);
         pushButton_reloadAll->setObjectName(QString::fromUtf8("pushButton_reloadAll"));
         pushButton_reloadAll->setGeometry(QRect(140, 400, 111, 21));
         pushButton_reloadAll->setFont(font1);
         tableWidget_wpn_ammo = new QTableWidget(tab_1);
-        if (tableWidget_wpn_ammo->columnCount() < 2)
-            tableWidget_wpn_ammo->setColumnCount(2);
+        if (tableWidget_wpn_ammo->columnCount() < 3)
+            tableWidget_wpn_ammo->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
+        __qtablewidgetitem16->setFont(font2);
+        tableWidget_wpn_ammo->setHorizontalHeaderItem(0, __qtablewidgetitem16);
+        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
+        __qtablewidgetitem17->setFont(font2);
+        tableWidget_wpn_ammo->setHorizontalHeaderItem(1, __qtablewidgetitem17);
         QTableWidgetItem *__qtablewidgetitem18 = new QTableWidgetItem();
         __qtablewidgetitem18->setFont(font2);
-        tableWidget_wpn_ammo->setHorizontalHeaderItem(0, __qtablewidgetitem18);
-        QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
-        __qtablewidgetitem19->setFont(font2);
-        tableWidget_wpn_ammo->setHorizontalHeaderItem(1, __qtablewidgetitem19);
+        tableWidget_wpn_ammo->setHorizontalHeaderItem(2, __qtablewidgetitem18);
         tableWidget_wpn_ammo->setObjectName(QString::fromUtf8("tableWidget_wpn_ammo"));
-        tableWidget_wpn_ammo->setGeometry(QRect(90, 310, 211, 81));
+        tableWidget_wpn_ammo->setGeometry(QRect(20, 310, 351, 81));
         tableWidget_wpn_ammo->setEditTriggers(QAbstractItemView::DoubleClicked);
         tableWidget_wpn_ammo->setShowGrid(false);
         tabWidget->addTab(tab_1, QString());
@@ -1185,20 +1210,14 @@ public:
         treeWidget_skill_list->setObjectName(QString::fromUtf8("treeWidget_skill_list"));
         treeWidget_skill_list->setGeometry(QRect(20, 30, 191, 161));
         tableWidget_skills_preview = new QTableWidget(groupBox);
-        if (tableWidget_skills_preview->columnCount() < 4)
-            tableWidget_skills_preview->setColumnCount(4);
+        if (tableWidget_skills_preview->columnCount() < 2)
+            tableWidget_skills_preview->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
+        __qtablewidgetitem19->setFont(font2);
+        tableWidget_skills_preview->setHorizontalHeaderItem(0, __qtablewidgetitem19);
         QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
         __qtablewidgetitem20->setFont(font2);
-        tableWidget_skills_preview->setHorizontalHeaderItem(0, __qtablewidgetitem20);
-        QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
-        __qtablewidgetitem21->setFont(font2);
-        tableWidget_skills_preview->setHorizontalHeaderItem(1, __qtablewidgetitem21);
-        QTableWidgetItem *__qtablewidgetitem22 = new QTableWidgetItem();
-        __qtablewidgetitem22->setFont(font2);
-        tableWidget_skills_preview->setHorizontalHeaderItem(2, __qtablewidgetitem22);
-        QTableWidgetItem *__qtablewidgetitem23 = new QTableWidgetItem();
-        __qtablewidgetitem23->setFont(font2);
-        tableWidget_skills_preview->setHorizontalHeaderItem(3, __qtablewidgetitem23);
+        tableWidget_skills_preview->setHorizontalHeaderItem(1, __qtablewidgetitem20);
         tableWidget_skills_preview->setObjectName(QString::fromUtf8("tableWidget_skills_preview"));
         tableWidget_skills_preview->setGeometry(QRect(230, 30, 311, 221));
         tableWidget_skills_preview->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -1261,18 +1280,18 @@ public:
         tableWidget_weapons_preview = new QTableWidget(groupBox_2);
         if (tableWidget_weapons_preview->columnCount() < 4)
             tableWidget_weapons_preview->setColumnCount(4);
+        QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
+        __qtablewidgetitem21->setFont(font2);
+        tableWidget_weapons_preview->setHorizontalHeaderItem(0, __qtablewidgetitem21);
+        QTableWidgetItem *__qtablewidgetitem22 = new QTableWidgetItem();
+        __qtablewidgetitem22->setFont(font2);
+        tableWidget_weapons_preview->setHorizontalHeaderItem(1, __qtablewidgetitem22);
+        QTableWidgetItem *__qtablewidgetitem23 = new QTableWidgetItem();
+        __qtablewidgetitem23->setFont(font2);
+        tableWidget_weapons_preview->setHorizontalHeaderItem(2, __qtablewidgetitem23);
         QTableWidgetItem *__qtablewidgetitem24 = new QTableWidgetItem();
         __qtablewidgetitem24->setFont(font2);
-        tableWidget_weapons_preview->setHorizontalHeaderItem(0, __qtablewidgetitem24);
-        QTableWidgetItem *__qtablewidgetitem25 = new QTableWidgetItem();
-        __qtablewidgetitem25->setFont(font2);
-        tableWidget_weapons_preview->setHorizontalHeaderItem(1, __qtablewidgetitem25);
-        QTableWidgetItem *__qtablewidgetitem26 = new QTableWidgetItem();
-        __qtablewidgetitem26->setFont(font2);
-        tableWidget_weapons_preview->setHorizontalHeaderItem(2, __qtablewidgetitem26);
-        QTableWidgetItem *__qtablewidgetitem27 = new QTableWidgetItem();
-        __qtablewidgetitem27->setFont(font2);
-        tableWidget_weapons_preview->setHorizontalHeaderItem(3, __qtablewidgetitem27);
+        tableWidget_weapons_preview->setHorizontalHeaderItem(3, __qtablewidgetitem24);
         tableWidget_weapons_preview->setObjectName(QString::fromUtf8("tableWidget_weapons_preview"));
         tableWidget_weapons_preview->setGeometry(QRect(20, 20, 491, 101));
         tableWidget_weapons_preview->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -1327,21 +1346,49 @@ public:
         pushButton_mod_armor_add->setObjectName(QString::fromUtf8("pushButton_mod_armor_add"));
         pushButton_mod_armor_add->setGeometry(QRect(320, 170, 91, 23));
         pushButton_mod_armor_add->setFont(font1);
+        listWidget_armors_list_preview = new QListWidget(groupBox_3);
+        listWidget_armors_list_preview->setObjectName(QString::fromUtf8("listWidget_armors_list_preview"));
+        listWidget_armors_list_preview->setGeometry(QRect(20, 30, 249, 101));
+        listWidget_armors_list_preview->setTextElideMode(Qt::ElideMiddle);
+        listWidget_armormods_list_preview = new QListWidget(groupBox_3);
+        listWidget_armormods_list_preview->setObjectName(QString::fromUtf8("listWidget_armormods_list_preview"));
+        listWidget_armormods_list_preview->setGeometry(QRect(290, 30, 251, 101));
         groupBox_4 = new QGroupBox(tab_2);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        groupBox_4->setGeometry(QRect(20, 460, 531, 161));
+        groupBox_4->setGeometry(QRect(20, 460, 531, 211));
         pushButton_generator_remove = new QPushButton(groupBox_4);
         pushButton_generator_remove->setObjectName(QString::fromUtf8("pushButton_generator_remove"));
-        pushButton_generator_remove->setGeometry(QRect(270, 120, 91, 23));
+        pushButton_generator_remove->setGeometry(QRect(270, 150, 91, 23));
         pushButton_generator_remove->setFont(font1);
         comboBox_generator_name = new QComboBox(groupBox_4);
         comboBox_generator_name->setObjectName(QString::fromUtf8("comboBox_generator_name"));
-        comboBox_generator_name->setGeometry(QRect(130, 90, 249, 20));
+        comboBox_generator_name->setGeometry(QRect(130, 120, 249, 20));
         comboBox_generator_name->setFont(font);
         pushButton_generator_add = new QPushButton(groupBox_4);
         pushButton_generator_add->setObjectName(QString::fromUtf8("pushButton_generator_add"));
-        pushButton_generator_add->setGeometry(QRect(150, 120, 91, 23));
+        pushButton_generator_add->setGeometry(QRect(150, 150, 91, 23));
         pushButton_generator_add->setFont(font1);
+        tableWidget_generators_preview = new QTableWidget(groupBox_4);
+        if (tableWidget_generators_preview->columnCount() < 4)
+            tableWidget_generators_preview->setColumnCount(4);
+        QTableWidgetItem *__qtablewidgetitem25 = new QTableWidgetItem();
+        __qtablewidgetitem25->setFont(font2);
+        tableWidget_generators_preview->setHorizontalHeaderItem(0, __qtablewidgetitem25);
+        QTableWidgetItem *__qtablewidgetitem26 = new QTableWidgetItem();
+        __qtablewidgetitem26->setFont(font2);
+        tableWidget_generators_preview->setHorizontalHeaderItem(1, __qtablewidgetitem26);
+        QTableWidgetItem *__qtablewidgetitem27 = new QTableWidgetItem();
+        __qtablewidgetitem27->setFont(font2);
+        tableWidget_generators_preview->setHorizontalHeaderItem(2, __qtablewidgetitem27);
+        QTableWidgetItem *__qtablewidgetitem28 = new QTableWidgetItem();
+        __qtablewidgetitem28->setFont(font2);
+        tableWidget_generators_preview->setHorizontalHeaderItem(3, __qtablewidgetitem28);
+        tableWidget_generators_preview->setObjectName(QString::fromUtf8("tableWidget_generators_preview"));
+        tableWidget_generators_preview->setGeometry(QRect(70, 30, 379, 71));
+        tableWidget_generators_preview->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidget_generators_preview->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidget_generators_preview->setShowGrid(false);
+        tableWidget_generators_preview->horizontalHeader()->setDefaultSectionSize(175);
         tabWidget->addTab(tab_2, QString());
         verticalLayoutWidget_6 = new QWidget(centralWidget);
         verticalLayoutWidget_6->setObjectName(QString::fromUtf8("verticalLayoutWidget_6"));
@@ -1462,13 +1509,11 @@ public:
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget_weapons->horizontalHeaderItem(4);
         ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "Koszt PA", nullptr));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget_weapons->horizontalHeaderItem(5);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "Ammo (Clip)", nullptr));
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "Typ", nullptr));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidget_weapons->horizontalHeaderItem(6);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "Typ", nullptr));
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "Mod 1", nullptr));
         QTableWidgetItem *___qtablewidgetitem11 = tableWidget_weapons->horizontalHeaderItem(7);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "Mod 1", nullptr));
-        QTableWidgetItem *___qtablewidgetitem12 = tableWidget_weapons->horizontalHeaderItem(8);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "Mod 2", nullptr));
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "Mod 2", nullptr));
         groupBox_8->setTitle(QApplication::translate("MainWindow", "Sprz\304\231t", nullptr));
         label_omnikey->setText(QApplication::translate("MainWindow", "Omni-klucz:", nullptr));
         label_omnikey_submod->setText(QApplication::translate("MainWindow", "Sub-mod omni-klucza:", nullptr));
@@ -1477,21 +1522,22 @@ public:
         label_mod_armor->setText(QApplication::translate("MainWindow", "Mody", nullptr));
         label_armor_list->setText(QApplication::translate("MainWindow", "Opancerzenie", nullptr));
         label_armor_list_2->setText(QApplication::translate("MainWindow", "Generator Tarcz", nullptr));
-        QTableWidgetItem *___qtablewidgetitem13 = tableWidget_generators->horizontalHeaderItem(0);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
-        QTableWidgetItem *___qtablewidgetitem14 = tableWidget_generators->horizontalHeaderItem(1);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "Si\305\202a tarcz", nullptr));
-        QTableWidgetItem *___qtablewidgetitem15 = tableWidget_generators->horizontalHeaderItem(2);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "\305\201adunki (Max)", nullptr));
-        QTableWidgetItem *___qtablewidgetitem16 = tableWidget_generators->horizontalHeaderItem(3);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "Czas regeneracji", nullptr));
-        QTableWidgetItem *___qtablewidgetitem17 = tableWidget_generators->horizontalHeaderItem(4);
-        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "Dodatkowa zdolno\305\233\304\207", nullptr));
-        pushButton_reloadAll->setText(QApplication::translate("MainWindow", "Prze\305\202aduj wszystko", nullptr));
-        QTableWidgetItem *___qtablewidgetitem18 = tableWidget_wpn_ammo->horizontalHeaderItem(0);
-        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
-        QTableWidgetItem *___qtablewidgetitem19 = tableWidget_wpn_ammo->horizontalHeaderItem(1);
-        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "Pozosta\305\202o amunicji", nullptr));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidget_generators->horizontalHeaderItem(0);
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
+        QTableWidgetItem *___qtablewidgetitem13 = tableWidget_generators->horizontalHeaderItem(1);
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "Si\305\202a tarcz", nullptr));
+        QTableWidgetItem *___qtablewidgetitem14 = tableWidget_generators->horizontalHeaderItem(2);
+        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "Koszt PA", nullptr));
+        QTableWidgetItem *___qtablewidgetitem15 = tableWidget_generators->horizontalHeaderItem(3);
+        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "Dodatkowa zdolno\305\233\304\207", nullptr));
+        label_armor_list_3->setText(QApplication::translate("MainWindow", "Notatki", nullptr));
+        pushButton_reloadAll->setText(QApplication::translate("MainWindow", "Prze\305\202aduj", nullptr));
+        QTableWidgetItem *___qtablewidgetitem16 = tableWidget_wpn_ammo->horizontalHeaderItem(0);
+        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
+        QTableWidgetItem *___qtablewidgetitem17 = tableWidget_wpn_ammo->horizontalHeaderItem(1);
+        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "Amunicja (aktualna)", nullptr));
+        QTableWidgetItem *___qtablewidgetitem18 = tableWidget_wpn_ammo->horizontalHeaderItem(2);
+        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "Amunicja (magazynek)", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_1), QApplication::translate("MainWindow", "Podgl\304\205d", nullptr));
         label_class_player_2->setText(QApplication::translate("MainWindow", "Typ:", nullptr));
         label_race_player->setText(QApplication::translate("MainWindow", "Rasa:", nullptr));
@@ -1536,14 +1582,10 @@ public:
         ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "Klasowe", nullptr));
         treeWidget_skill_list->setSortingEnabled(__sortingEnabled);
 
-        QTableWidgetItem *___qtablewidgetitem20 = tableWidget_skills_preview->horizontalHeaderItem(0);
-        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
-        QTableWidgetItem *___qtablewidgetitem21 = tableWidget_skills_preview->horizontalHeaderItem(1);
-        ___qtablewidgetitem21->setText(QApplication::translate("MainWindow", "Poziom", nullptr));
-        QTableWidgetItem *___qtablewidgetitem22 = tableWidget_skills_preview->horizontalHeaderItem(2);
-        ___qtablewidgetitem22->setText(QApplication::translate("MainWindow", "Koszt", nullptr));
-        QTableWidgetItem *___qtablewidgetitem23 = tableWidget_skills_preview->horizontalHeaderItem(3);
-        ___qtablewidgetitem23->setText(QApplication::translate("MainWindow", "Typ", nullptr));
+        QTableWidgetItem *___qtablewidgetitem19 = tableWidget_skills_preview->horizontalHeaderItem(0);
+        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
+        QTableWidgetItem *___qtablewidgetitem20 = tableWidget_skills_preview->horizontalHeaderItem(1);
+        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "Poziom", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Dodawanie uzbrojenia", nullptr));
         pushButton_mod_remove->setText(QApplication::translate("MainWindow", "Usu\305\204", nullptr));
         pushButton_weapon_remove->setText(QApplication::translate("MainWindow", "Usu\305\204", nullptr));
@@ -1583,14 +1625,14 @@ public:
         treeWidget_wpnmod_list->setSortingEnabled(__sortingEnabled2);
 
         pushButton_mod_add->setText(QApplication::translate("MainWindow", "Dodaj", nullptr));
-        QTableWidgetItem *___qtablewidgetitem24 = tableWidget_weapons_preview->horizontalHeaderItem(0);
-        ___qtablewidgetitem24->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
-        QTableWidgetItem *___qtablewidgetitem25 = tableWidget_weapons_preview->horizontalHeaderItem(1);
-        ___qtablewidgetitem25->setText(QApplication::translate("MainWindow", "Typ", nullptr));
-        QTableWidgetItem *___qtablewidgetitem26 = tableWidget_weapons_preview->horizontalHeaderItem(2);
-        ___qtablewidgetitem26->setText(QApplication::translate("MainWindow", "Mod 1", nullptr));
-        QTableWidgetItem *___qtablewidgetitem27 = tableWidget_weapons_preview->horizontalHeaderItem(3);
-        ___qtablewidgetitem27->setText(QApplication::translate("MainWindow", "Mod 2", nullptr));
+        QTableWidgetItem *___qtablewidgetitem21 = tableWidget_weapons_preview->horizontalHeaderItem(0);
+        ___qtablewidgetitem21->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
+        QTableWidgetItem *___qtablewidgetitem22 = tableWidget_weapons_preview->horizontalHeaderItem(1);
+        ___qtablewidgetitem22->setText(QApplication::translate("MainWindow", "Typ", nullptr));
+        QTableWidgetItem *___qtablewidgetitem23 = tableWidget_weapons_preview->horizontalHeaderItem(2);
+        ___qtablewidgetitem23->setText(QApplication::translate("MainWindow", "Mod 1", nullptr));
+        QTableWidgetItem *___qtablewidgetitem24 = tableWidget_weapons_preview->horizontalHeaderItem(3);
+        ___qtablewidgetitem24->setText(QApplication::translate("MainWindow", "Mod 2", nullptr));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "Dodawanie opancerzenia", nullptr));
         pushButton_armor_remove->setText(QApplication::translate("MainWindow", "Usu\305\204", nullptr));
         QTreeWidgetItem *___qtreewidgetitem17 = treeWidget_armor_list->headerItem();
@@ -1618,6 +1660,14 @@ public:
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Dodawanie generatora", nullptr));
         pushButton_generator_remove->setText(QApplication::translate("MainWindow", "Usu\305\204", nullptr));
         pushButton_generator_add->setText(QApplication::translate("MainWindow", "Dodaj", nullptr));
+        QTableWidgetItem *___qtablewidgetitem25 = tableWidget_generators_preview->horizontalHeaderItem(0);
+        ___qtablewidgetitem25->setText(QApplication::translate("MainWindow", "Nazwa", nullptr));
+        QTableWidgetItem *___qtablewidgetitem26 = tableWidget_generators_preview->horizontalHeaderItem(1);
+        ___qtablewidgetitem26->setText(QApplication::translate("MainWindow", "Si\305\202a tarcz", nullptr));
+        QTableWidgetItem *___qtablewidgetitem27 = tableWidget_generators_preview->horizontalHeaderItem(2);
+        ___qtablewidgetitem27->setText(QApplication::translate("MainWindow", "Koszt PA", nullptr));
+        QTableWidgetItem *___qtablewidgetitem28 = tableWidget_generators_preview->horizontalHeaderItem(3);
+        ___qtablewidgetitem28->setText(QApplication::translate("MainWindow", "Dodatkowa zdolno\305\233\304\207", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Konfiguracja", nullptr));
         label_title->setText(QApplication::translate("MainWindow", "Omni-MG 3.0", nullptr));
         label_subtitle->setText(QApplication::translate("MainWindow", "created by Vex", nullptr));

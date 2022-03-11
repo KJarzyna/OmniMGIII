@@ -26,6 +26,8 @@ void MainWindow::LoadPlayerGeneralTab(int playerID)
         if(PlayerActiveEffects.at(i).PlayerID == playerID)
             ui->listWidget_player_conditions->addItem(GetEffectNameFromEffectID(PlayerActiveEffects.at(i).EffectID));
 
+    ui->plainTextEdit->setPlainText(Players.at(playerIndex).Notes);
+
 }
 
 //Skill related
@@ -82,11 +84,25 @@ void MainWindow::LoadPlayerSkillsIntoTable(int playerID)
 
             if (PlayerSkills.at(i).PlayerID == playerID && Skills.at(j).SkillID == PlayerSkills.at(i).SkillID)
             {
-                ui->tableWidget_skills->insertRow(ui->tableWidget_skills->rowCount());
-                ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,0,new QTableWidgetItem(Skills.at(j).SkillName));
-                ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,1,new QTableWidgetItem(Skills.at(j).SkillLevel));
-                ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,2,new QTableWidgetItem(QString::number(Skills.at(j).Cost))); //QString::number because Cost is an integer
-                ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,3,new QTableWidgetItem(Skills.at(j).SkillType));
+                int new_row = ui->tableWidget_skills->rowCount();
+                ui->tableWidget_skills->insertRow(new_row);
+                ui->tableWidget_skills->setItem(new_row,0,new QTableWidgetItem(Skills.at(j).SkillName));
+                ui->tableWidget_skills->setItem(new_row,1,new QTableWidgetItem(Skills.at(j).SkillLevel));
+                ui->tableWidget_skills->setItem(new_row,2,new QTableWidgetItem(QString::number(Skills.at(j).Cost))); //QString::number because Cost is an integer
+                ui->tableWidget_skills->setItem(new_row,3,new QTableWidgetItem(Skills.at(j).SkillType));
+
+                ui->tableWidget_skills->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+                ui->tableWidget_skills->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_skills->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_skills->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
+
+                ui->tableWidget_skills_preview->insertRow(new_row);
+                ui->tableWidget_skills_preview->setItem(new_row,0,new QTableWidgetItem(Skills.at(j).SkillName));
+                ui->tableWidget_skills_preview->setItem(new_row,1,new QTableWidgetItem(Skills.at(j).SkillLevel));
+
+                ui->tableWidget_skills_preview->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+                ui->tableWidget_skills_preview->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+
             }
         }
     }
@@ -111,12 +127,11 @@ void MainWindow::LoadPlayerWeaponsIntoTable(int playerID)
                 ui->tableWidget_weapons->setItem(new_row,2,new QTableWidgetItem(QString::number(Weapons.at(j).Acc)));
                 ui->tableWidget_weapons->setItem(new_row,3,new QTableWidgetItem(QString::number(Weapons.at(j).Recoil)));
                 ui->tableWidget_weapons->setItem(new_row,4,new QTableWidgetItem(GetActionCostFromCost(Weapons.at(j).Cost)));
-                ui->tableWidget_weapons->setItem(new_row,5,new QTableWidgetItem(QString::number(Weapons.at(j).AmmoMaxInClip)));
-                ui->tableWidget_weapons->setItem(new_row,6,new QTableWidgetItem(Weapons.at(j).WeaponType));
+                ui->tableWidget_weapons->setItem(new_row,5,new QTableWidgetItem(Weapons.at(j).WeaponType));
                 QString modName1 = GetWpnModNameFromWpnModID(PlayerWeapons.at(i).ModID);
-                ui->tableWidget_weapons->setItem(new_row,7,new QTableWidgetItem(modName1));
+                ui->tableWidget_weapons->setItem(new_row,6,new QTableWidgetItem(modName1));
                 QString modName2 = "Brak";
-                ui->tableWidget_weapons->setItem(new_row,8,new QTableWidgetItem(modName2));
+                ui->tableWidget_weapons->setItem(new_row,7,new QTableWidgetItem(modName2));
 
                 ui->tableWidget_weapons->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
                 ui->tableWidget_weapons->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
@@ -126,7 +141,6 @@ void MainWindow::LoadPlayerWeaponsIntoTable(int playerID)
                 ui->tableWidget_weapons->item(new_row,5)->setTextAlignment(Qt::AlignCenter);
                 ui->tableWidget_weapons->item(new_row,6)->setTextAlignment(Qt::AlignCenter);
                 ui->tableWidget_weapons->item(new_row,7)->setTextAlignment(Qt::AlignCenter);
-                ui->tableWidget_weapons->item(new_row,8)->setTextAlignment(Qt::AlignCenter);
 
                 ui->tableWidget_weapons_preview->insertRow(new_row);
                 ui->tableWidget_weapons_preview->setItem(new_row,0,new QTableWidgetItem(Weapons.at(j).WeaponName));
@@ -161,20 +175,19 @@ void MainWindow::LoadPlayerAmmoIntoTable(int playerID)
             if (PlayerWeapons.at(i).PlayerID == playerID && Weapons.at(j).WeaponID == PlayerWeapons.at(i).WeaponID)
             {
                 int AmmoLeft = GetCurrentAmmoInPlayerWeaponFromWeaponID(Weapons.at(j).WeaponID,playerID);
-                ui->tableWidget_wpn_ammo->insertRow(ui->tableWidget_wpn_ammo->rowCount());
-                ui->tableWidget_wpn_ammo->setItem(ui->tableWidget_wpn_ammo->rowCount()-1,0,new QTableWidgetItem(Weapons.at(j).WeaponName));
-                ui->tableWidget_wpn_ammo->setItem(ui->tableWidget_wpn_ammo->rowCount()-1,1,new QTableWidgetItem(QString::number(AmmoLeft)));
+                int new_row = ui->tableWidget_wpn_ammo->rowCount();
+                ui->tableWidget_wpn_ammo->insertRow(new_row);
+                ui->tableWidget_wpn_ammo->setItem(new_row,0,new QTableWidgetItem(Weapons.at(j).WeaponName));
+                ui->tableWidget_wpn_ammo->setItem(new_row,1,new QTableWidgetItem(QString::number(AmmoLeft)));
+                ui->tableWidget_wpn_ammo->setItem(new_row,2,new QTableWidgetItem(QString::number(Weapons.at(j).AmmoMaxInClip)));
 
+                ui->tableWidget_wpn_ammo->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+                ui->tableWidget_wpn_ammo->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_wpn_ammo->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_wpn_ammo->item(new_row,0)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+                ui->tableWidget_wpn_ammo->item(new_row,2)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
             }
         }
-    }
-
-
-    for(int i=0; i<ui->tableWidget_wpn_ammo->rowCount();i++)
-    {
-        ui->tableWidget_wpn_ammo->setRowHeight(i,20);
-        ui->tableWidget_wpn_ammo->item(i,1)->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget_wpn_ammo->item(i,0)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     }
 }
 
@@ -190,12 +203,28 @@ void MainWindow::LoadPlayerGeneratorIntoTable(int playerID)
 
             if (PlayerGenerators.at(i).PlayerID == playerID && Generators.at(j).GeneratorID == PlayerGenerators.at(i).GeneratorID)
             {
-                ui->tableWidget_generators->insertRow(ui->tableWidget_generators->rowCount());
-                ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,0,new QTableWidgetItem(Generators.at(j).GeneratorName));
-                ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,1,new QTableWidgetItem(QString::number(Generators.at(j).ShieldPower)));
-                ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,2,new QTableWidgetItem(QString::number(Generators.at(j).Charges)));
-                ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,3,new QTableWidgetItem(QString::number(Generators.at(j).Recharge)));
-                ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,4,new QTableWidgetItem(Generators.at(j).HasAbility));
+                int new_row = ui->tableWidget_generators->rowCount();
+                ui->tableWidget_generators->insertRow(new_row);
+                ui->tableWidget_generators->setItem(new_row,0,new QTableWidgetItem(Generators.at(j).GeneratorName));
+                ui->tableWidget_generators->setItem(new_row,1,new QTableWidgetItem(QString::number(Generators.at(j).ShieldPower)));
+                ui->tableWidget_generators->setItem(new_row,2,new QTableWidgetItem(QString::number(Generators.at(j).Recharge)));
+                ui->tableWidget_generators->setItem(new_row,3,new QTableWidgetItem(Generators.at(j).HasAbility));
+
+                ui->tableWidget_generators_preview->insertRow(new_row);
+                ui->tableWidget_generators_preview->setItem(new_row,0,new QTableWidgetItem(Generators.at(j).GeneratorName));
+                ui->tableWidget_generators_preview->setItem(new_row,1,new QTableWidgetItem(QString::number(Generators.at(j).ShieldPower)));
+                ui->tableWidget_generators_preview->setItem(new_row,2,new QTableWidgetItem(QString::number(Generators.at(j).Recharge)));
+                ui->tableWidget_generators_preview->setItem(new_row,3,new QTableWidgetItem(Generators.at(j).HasAbility));
+
+                ui->tableWidget_generators->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+                ui->tableWidget_generators->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_generators->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_generators->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
+
+                ui->tableWidget_generators_preview->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+                ui->tableWidget_generators_preview->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_generators_preview->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_generators_preview->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
             }
         }
     }
@@ -266,6 +295,7 @@ void MainWindow::LoadPlayerArmorsList(int playerID)
         {
             QString armorName = GetArmorNameFromArmorID(PlayerArmors.at(i).ArmorID);
             ui->listWidget_armors_list->addItem(armorName);
+            ui->listWidget_armors_list_preview->addItem(armorName);
         }
     }
 }
@@ -278,6 +308,7 @@ void MainWindow::LoadPlayerArmorModsList(int playerID)
         {
             QString armorName = GetArmorModNameFromArmorModID(PlayerArmorMods.at(i).ArmorModID);
             ui->listWidget_armormods_list->addItem(armorName);
+            ui->listWidget_armormods_list_preview->addItem(armorName);
         }
     }
 }
@@ -297,6 +328,14 @@ LoadPlayerWeaponsTab(id);
 LoadPlayerArmorsTab(id);
 LoadPlayerEquipementTab(id);
 ui->tabWidget->setCurrentIndex(0);
+currentlySelectedPlayerID = GetActivePlayerID();
+}
+
+void MainWindow::SavePlayerNotesToVector(int playerID)
+{
+    for(int i=0;i<Players.size();i++)
+        if(Players.at(i).PlayerID == playerID)
+            Players[i].Notes = ui->plainTextEdit->toPlainText();
 }
 
 void MainWindow::LoadGeneratorCharges(int playerID)

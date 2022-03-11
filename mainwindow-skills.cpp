@@ -13,11 +13,24 @@ void MainWindow::AddSkillToTable()
     {
         if (Skills.at(i).SkillName == selected_skillname && Skills.at(i).SkillLevel == selected_skilllevel)
         {
-            ui->tableWidget_skills->insertRow(ui->tableWidget_skills->rowCount());
-            ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,0,new QTableWidgetItem(Skills.at(i).SkillName));
-            ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,1,new QTableWidgetItem(Skills.at(i).SkillLevel));
-            ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,2,new QTableWidgetItem(QString::number(Skills.at(i).Cost))); //QString::number because Cost is an integer
-            ui->tableWidget_skills->setItem(ui->tableWidget_skills->rowCount()-1,3,new QTableWidgetItem(Skills.at(i).SkillType));
+            int new_row = ui->tableWidget_skills->rowCount();
+            ui->tableWidget_skills->insertRow(new_row);
+            ui->tableWidget_skills->setItem(new_row,0,new QTableWidgetItem(Skills.at(i).SkillName));
+            ui->tableWidget_skills->setItem(new_row,1,new QTableWidgetItem(Skills.at(i).SkillLevel));
+            ui->tableWidget_skills->setItem(new_row,2,new QTableWidgetItem(QString::number(Skills.at(i).Cost))); //QString::number because Cost is an integer
+            ui->tableWidget_skills->setItem(new_row,3,new QTableWidgetItem(Skills.at(i).SkillType));
+
+            ui->tableWidget_skills_preview->insertRow(new_row);
+            ui->tableWidget_skills_preview->setItem(new_row,0,new QTableWidgetItem(Skills.at(i).SkillName));
+            ui->tableWidget_skills_preview->setItem(new_row,1,new QTableWidgetItem(Skills.at(i).SkillLevel));
+
+            ui->tableWidget_skills->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+            ui->tableWidget_skills->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_skills->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_skills->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
+
+            ui->tableWidget_skills_preview->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+            ui->tableWidget_skills_preview->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
         }
     }
 }
@@ -33,13 +46,9 @@ void MainWindow::AddSkillToPlayer(int skillID, int playerID)
 void MainWindow::RemoveSkillFromTable()
 {
     int playerID = GetActivePlayerID();
-    int selected_row = ui->tableWidget_skills->currentRow();
+    int selected_row = ui->tableWidget_skills_preview->currentRow();
 
-    if(ui->tableWidget_skills->item(selected_row,0)->text() == Players.at(playerID).SpecializationSkill)
-    {
-        //RemoveSpecializationFromPlayer(playerID);
-    }
-
+    ui->tableWidget_skills_preview->removeRow(selected_row);
     ui->tableWidget_skills->removeRow(selected_row);
 }
 

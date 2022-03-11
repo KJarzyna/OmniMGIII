@@ -490,7 +490,7 @@ QTableView QTableCornerButton::section {
       <x>20</x>
       <y>60</y>
       <width>1211</width>
-      <height>751</height>
+      <height>761</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -1096,17 +1096,6 @@ color: orange;</string>
        </column>
        <column>
         <property name="text">
-         <string>Ammo (Clip)</string>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-       </column>
-       <column>
-        <property name="text">
          <string>Typ</string>
         </property>
         <property name="font">
@@ -1146,7 +1135,7 @@ color: orange;</string>
         <x>10</x>
         <y>450</y>
         <width>1191</width>
-        <height>251</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="title">
@@ -1158,7 +1147,7 @@ color: orange;</string>
          <x>930</x>
          <y>20</y>
          <width>241</width>
-         <height>212</height>
+         <height>231</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1301,7 +1290,7 @@ color: orange;</string>
          <x>410</x>
          <y>20</y>
          <width>251</width>
-         <height>181</height>
+         <height>231</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1336,7 +1325,7 @@ color: orange;</string>
          <x>10</x>
          <y>19</y>
          <width>381</width>
-         <height>91</height>
+         <height>101</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1394,18 +1383,7 @@ color: orange;</string>
           </column>
           <column>
            <property name="text">
-            <string>Ładunki (Max)</string>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Czas regeneracji</string>
+            <string>Koszt PA</string>
            </property>
            <property name="font">
             <font>
@@ -1429,6 +1407,37 @@ color: orange;</string>
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="verticalLayoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>381</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QLabel" name="label_armor_list_3">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Notatki</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPlainTextEdit" name="plainTextEdit"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
      <widget class="QPushButton" name="pushButton_reloadAll">
       <property name="geometry">
@@ -1445,15 +1454,15 @@ color: orange;</string>
        </font>
       </property>
       <property name="text">
-       <string>Przeładuj wszystko</string>
+       <string>Przeładuj</string>
       </property>
      </widget>
      <widget class="QTableWidget" name="tableWidget_wpn_ammo">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>20</x>
         <y>310</y>
-        <width>211</width>
+        <width>351</width>
         <height>81</height>
        </rect>
       </property>
@@ -1476,7 +1485,18 @@ color: orange;</string>
       </column>
       <column>
        <property name="text">
-        <string>Pozostało amunicji</string>
+        <string>Amunicja (aktualna)</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Amunicja (magazynek)</string>
        </property>
        <property name="font">
         <font>
@@ -1865,28 +1885,6 @@ color: orange;</string>
        <column>
         <property name="text">
          <string>Poziom</string>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Koszt</string>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Typ</string>
         </property>
         <property name="font">
          <font>
@@ -2428,6 +2426,29 @@ color: orange;</string>
         <string>Dodaj</string>
        </property>
       </widget>
+      <widget class="QListWidget" name="listWidget_armors_list_preview">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>249</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::ElideMiddle</enum>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="listWidget_armormods_list_preview">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>30</y>
+         <width>251</width>
+         <height>101</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_4">
       <property name="geometry">
@@ -2435,7 +2456,7 @@ color: orange;</string>
         <x>20</x>
         <y>460</y>
         <width>531</width>
-        <height>161</height>
+        <height>211</height>
        </rect>
       </property>
       <property name="title">
@@ -2445,7 +2466,7 @@ color: orange;</string>
        <property name="geometry">
         <rect>
          <x>270</x>
-         <y>120</y>
+         <y>150</y>
          <width>91</width>
          <height>23</height>
         </rect>
@@ -2463,7 +2484,7 @@ color: orange;</string>
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>90</y>
+         <y>120</y>
          <width>249</width>
          <height>20</height>
         </rect>
@@ -2478,7 +2499,7 @@ color: orange;</string>
        <property name="geometry">
         <rect>
          <x>150</x>
-         <y>120</y>
+         <y>150</y>
          <width>91</width>
          <height>23</height>
         </rect>
@@ -2491,6 +2512,72 @@ color: orange;</string>
        <property name="text">
         <string>Dodaj</string>
        </property>
+      </widget>
+      <widget class="QTableWidget" name="tableWidget_generators_preview">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>30</y>
+         <width>379</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="showGrid">
+        <bool>false</bool>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>175</number>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Nazwa</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Siła tarcz</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Koszt PA</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Dodatkowa zdolność</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+       </column>
       </widget>
      </widget>
     </widget>

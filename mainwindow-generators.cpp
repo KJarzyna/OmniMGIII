@@ -18,22 +18,39 @@ void MainWindow::AddGeneratorToTable()
     {
         if (Generators.at(i).GeneratorName == selected_generatorname)
         {
-            ui->tableWidget_generators->insertRow(ui->tableWidget_generators->rowCount());
-            ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,0,new QTableWidgetItem(Generators.at(i).GeneratorName));
-            ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,1,new QTableWidgetItem(QString::number(Generators.at(i).ShieldPower)));
-            ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,2,new QTableWidgetItem(QString::number(Generators.at(i).Charges)));
-            ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,3,new QTableWidgetItem(QString::number(Generators.at(i).Recharge)));
-            ui->tableWidget_generators->setItem(ui->tableWidget_generators->rowCount()-1,4,new QTableWidgetItem(Generators.at(i).HasAbility));
+            int new_row = ui->tableWidget_generators->rowCount();
+            ui->tableWidget_generators->insertRow(new_row);
+            ui->tableWidget_generators->setItem(new_row,0,new QTableWidgetItem(Generators.at(i).GeneratorName));
+            ui->tableWidget_generators->setItem(new_row,1,new QTableWidgetItem(QString::number(Generators.at(i).ShieldPower)));
+            ui->tableWidget_generators->setItem(new_row,2,new QTableWidgetItem(QString::number(Generators.at(i).Recharge)));
+            ui->tableWidget_generators->setItem(new_row,3,new QTableWidgetItem(Generators.at(i).HasAbility));
+
+            ui->tableWidget_generators_preview->insertRow(new_row);
+            ui->tableWidget_generators_preview->setItem(new_row,0,new QTableWidgetItem(Generators.at(i).GeneratorName));
+            ui->tableWidget_generators_preview->setItem(new_row,1,new QTableWidgetItem(QString::number(Generators.at(i).ShieldPower)));
+            ui->tableWidget_generators_preview->setItem(new_row,2,new QTableWidgetItem(QString::number(Generators.at(i).Recharge)));
+            ui->tableWidget_generators_preview->setItem(new_row,3,new QTableWidgetItem(Generators.at(i).HasAbility));
+
+            ui->tableWidget_generators->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+            ui->tableWidget_generators->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_generators->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_generators->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
+
+            ui->tableWidget_generators_preview->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+            ui->tableWidget_generators_preview->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_generators_preview->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget_generators_preview->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
         }
     }
 }
 
 void MainWindow::RemoveGeneratorFromTable()
 {
-    if(ui->tableWidget_generators->rowCount() >0)
+    if(ui->tableWidget_generators_preview->rowCount() >0)
     {
-        int selected_row = ui->tableWidget_generators->currentRow();
+        int selected_row = ui->tableWidget_generators_preview->currentRow();
         ui->tableWidget_generators->removeRow(selected_row);
+        ui->tableWidget_generators_preview->removeRow(selected_row);
     }
 }
 

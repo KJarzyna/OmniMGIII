@@ -8,16 +8,15 @@ void MainWindow::InitializeWeaponTableSize()
     ui->tableWidget_weapons->setColumnWidth(1,80);
     ui->tableWidget_weapons->setColumnWidth(2,60);
     ui->tableWidget_weapons->setColumnWidth(3,60);
-    ui->tableWidget_weapons->setColumnWidth(4,60);
-    ui->tableWidget_weapons->setColumnWidth(5,90);
-    ui->tableWidget_weapons->setColumnWidth(6,50);
-    ui->tableWidget_weapons->setColumnWidth(7,100);
-    ui->tableWidget_weapons->setColumnWidth(8,90);
+    ui->tableWidget_weapons->setColumnWidth(4,70);
+    ui->tableWidget_weapons->setColumnWidth(5,50);
+    ui->tableWidget_weapons->setColumnWidth(6,145);
+    ui->tableWidget_weapons->setColumnWidth(7,90);
     ui->tableWidget_weapons->horizontalHeader()->setStretchLastSection(true);
 
     ui->tableWidget_weapons_preview->setColumnWidth(0,150);
     ui->tableWidget_weapons_preview->setColumnWidth(1,50);
-    ui->tableWidget_weapons_preview->setColumnWidth(2,140);
+    ui->tableWidget_weapons_preview->setColumnWidth(2,135);
     ui->tableWidget_weapons_preview->setColumnWidth(3,130);
     ui->tableWidget_weapons_preview->horizontalHeader()->setStretchLastSection(true);
 
@@ -35,17 +34,29 @@ void MainWindow::InitializeSkillTableSize()
     ui->tableWidget_skills->setColumnWidth(3,120);
     ui->tableWidget_skills->horizontalHeader()->setStretchLastSection(true);
 
+    ui->tableWidget_skills_preview->setColumnWidth(0,200);
+    ui->tableWidget_skills_preview->setColumnWidth(1,80);
+    ui->tableWidget_skills_preview->horizontalHeader()->setStretchLastSection(true);
+
 }
 
 void MainWindow::InitializeGeneratorTableSize()
 {
-    ui->tableWidget_generators->setColumnWidth(0,200);
-    ui->tableWidget_generators->setColumnWidth(1,80);
-    ui->tableWidget_generators->setColumnWidth(2,120);
-    ui->tableWidget_generators->setColumnWidth(3,140);
-    ui->tableWidget_generators->setColumnWidth(4,160);
+    ui->tableWidget_generators->setColumnWidth(0,130);
+    ui->tableWidget_generators->setColumnWidth(1,70);
+    ui->tableWidget_generators->setColumnWidth(2,70);
+    ui->tableWidget_generators->setColumnWidth(3,80);
     ui->tableWidget_generators->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget_generators->verticalHeader()->setStretchLastSection(true);
+    ui->tableWidget_generators->horizontalHeaderItem(3)->setText("Dodatkowa\ncecha");
+
+    ui->tableWidget_generators_preview->setColumnWidth(0,130);
+    ui->tableWidget_generators_preview->setColumnWidth(1,70);
+    ui->tableWidget_generators_preview->setColumnWidth(2,70);
+    ui->tableWidget_generators_preview->setColumnWidth(3,80);
+    ui->tableWidget_generators_preview->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_generators_preview->verticalHeader()->setStretchLastSection(true);
+    ui->tableWidget_generators_preview->horizontalHeaderItem(3)->setText("Dodatkowa\ncecha");
 }
 
 void MainWindow::InitializeSkillListTreeWidget()
@@ -315,10 +326,13 @@ void MainWindow::InitializeOmnibladeModsList()
 
 void MainWindow::InitializeAmmoLeftList()
 {
-    ui->tableWidget_wpn_ammo->setColumnWidth(0,180);
+    ui->tableWidget_wpn_ammo->setColumnWidth(0,130);
     ui->tableWidget_wpn_ammo->setColumnWidth(1,80);
-    ui->tableWidget_wpn_ammo->horizontalHeaderItem(1)->setText("Pozostało \n amunicji");
+    ui->tableWidget_wpn_ammo->setColumnWidth(1,75);
+    ui->tableWidget_wpn_ammo->horizontalHeaderItem(1)->setText("Amunicja\n(aktualna)");
+    ui->tableWidget_wpn_ammo->horizontalHeaderItem(2)->setText("Amunicja\n(max)");
     ui->tableWidget_wpn_ammo->horizontalHeader()->setStretchLastSection(true);
+
 }
 
 void MainWindow::InitializePlayerList()

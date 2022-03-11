@@ -39,6 +39,7 @@ bool ReadWriteData::ReadPlayersFromFileAndLoadToVector(QString filename, QVector
                 player.MasteryBiotic = cells.at(13).toInt();
                 player.MasteryTechno = cells.at(14).toInt();
                 player.MasterySpec = cells.at(15).toInt();
+                player.Notes = cells.at(16);
                 vector.append(player);
             }
 
@@ -1238,7 +1239,8 @@ bool ReadWriteData::WritePlayersFromVectorToFile(QVector<C_Player> &vector, QStr
         QTextStream out(&outputFile);
         out.setCodec(QTextCodec::codecForName("UTF-8"));
         out.setGenerateByteOrderMark(true);
-        line = "PlayerID;PlayerName;PlayerRace;PlayerClass;PlayerType;ArmorCurrent;ArmorMax;ShieldCurrent;ShieldMax;BarrierCurrent;ActiveEffects;SpecializationSkill;MasteryBattle;MasteryBiotic;MasteryTechno;MasterySpec";
+        line = "PlayerID;PlayerName;PlayerRace;PlayerClass;PlayerType;ArmorCurrent;ArmorMax;ShieldCurrent;ShieldMax;BarrierCurrent;"
+               "ActiveEffects;SpecializationSkill;MasteryBattle;MasteryBiotic;MasteryTechno;MasterySpec;Notes";
         out << line << endl;
 
         for (int i=0; i<vector.size();i++)
@@ -1275,6 +1277,8 @@ bool ReadWriteData::WritePlayersFromVectorToFile(QVector<C_Player> &vector, QStr
             line.append(QString::number(vector.at(i).MasteryTechno));
             line.append(";");
             line.append(QString::number(vector.at(i).MasterySpec));
+            line.append(";");
+            line.append(vector.at(i).Notes);
             out << line << endl;
         }
 
