@@ -212,6 +212,7 @@ Makefile: OmniMGIII.pro D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/win32-g++/qm
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/qt_config.prf \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/win32-g++/qmake.conf \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/exclusive_builds.prf \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/toolchain.prf \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/default_pre.prf \
@@ -389,6 +390,7 @@ D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/qt_functions.prf:
 D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/qt_config.prf:
 D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/win32-g++/qmake.conf:
 D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/spec_post.prf:
+.qmake.stash:
 D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/exclusive_builds.prf:
 D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/toolchain.prf:
 D:/Programy/Qt/Qt/5.12.3/mingw73_32/mkspecs/features/default_pre.prf:

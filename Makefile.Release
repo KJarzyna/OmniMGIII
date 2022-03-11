@@ -2762,6 +2762,52 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		dialogbox_warning_generic.h \
 		dialogbox_postcalculation.h \
 		ui_mainwindow.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QAction \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qaction.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qactiongroup.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QCheckBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcheckbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QComboBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcombobox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QFormLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qformlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qboxlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QGridLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHeaderView \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qheaderview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLineEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlineedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QListWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QMenu \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qmenu.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QMenuBar \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qmenubar.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QSpacerItem \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QStatusBar \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qstatusbar.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTabWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTableWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtablewidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtableview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QToolBar \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtoolbar.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTreeWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QVBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QWidget \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QMessageBox \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qmessagebox.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdialog.h \
@@ -3612,7 +3658,37 @@ release/dialogbox_activeeffect.o: dialogbox_activeeffect.cpp dialogbox_activeeff
 		Headers/ActiveEffects/activeeffect.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QString \
 		Headers/Player/playeractiveeffect.h \
-		ui_dialogbox_activeeffect.h
+		ui_dialogbox_activeeffect.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qcoreapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qeventloop.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qguiapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qinputmethod.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QListWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlistwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlistview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractitemview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qabstractitemmodel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qitemselectionmodel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qstyleoption.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractspinbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvalidator.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qregularexpression.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qicon.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qslider.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractslider.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qstyle.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtabbar.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtabwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qrubberband.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogbox_activeeffect.o dialogbox_activeeffect.cpp
 
 release/activeeffect.o: Sources/ClassDefinitions/activeeffect.cpp Headers/ActiveEffects/activeeffect.h \
@@ -4055,6 +4131,37 @@ release/calculator.o: calculator.cpp calculator.h \
 		dialogbox_warning_generic.h \
 		dialogbox_postcalculation.h \
 		ui_calculator.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QCheckBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcheckbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QComboBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcombobox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qboxlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHeaderView \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qheaderview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLineEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlineedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QListWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTabWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTableWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtablewidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtableview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTextEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtextedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QVBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QWidget \
 		calculator-initialization.cpp \
 		calculator-actions.cpp \
 		calculator-weapons.cpp \
@@ -4174,7 +4281,27 @@ release/dialogbox_difficultyreason.o: dialogbox_difficultyreason.cpp dialogbox_d
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvector2d.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtouchdevice.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QString \
-		ui_dialogbox_difficultyreason.h
+		ui_dialogbox_difficultyreason.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qcoreapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qeventloop.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qguiapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qinputmethod.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLineEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlineedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtextcursor.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtextformat.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qpen.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtextoption.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogbox_difficultyreason.o dialogbox_difficultyreason.cpp
 
 release/dialogbox_action.o: dialogbox_action.cpp dialogbox_action.h \
@@ -4289,6 +4416,32 @@ release/dialogbox_action.o: dialogbox_action.cpp dialogbox_action.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qicon.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/QMouseEvent \
 		ui_dialogbox_action.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qcoreapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qeventloop.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qguiapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qinputmethod.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QComboBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcombobox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qstyleoption.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractspinbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvalidator.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qregularexpression.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qslider.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractslider.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qstyle.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtabbar.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtabwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qrubberband.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
 		dialogbox_details.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogbox_action.o dialogbox_action.cpp
@@ -4398,7 +4551,21 @@ release/dialogbox_warning_generic.o: dialogbox_warning_generic.cpp dialogbox_war
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qfiledevice.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvector2d.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtouchdevice.h \
-		ui_dialogbox_warning_generic.h
+		ui_dialogbox_warning_generic.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qcoreapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qeventloop.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qguiapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qinputmethod.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogbox_warning_generic.o dialogbox_warning_generic.cpp
 
 release/dialogbox_postcalculation.o: dialogbox_postcalculation.cpp dialogbox_postcalculation.h \
@@ -4506,7 +4673,33 @@ release/dialogbox_postcalculation.o: dialogbox_postcalculation.cpp dialogbox_pos
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qfiledevice.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvector2d.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtouchdevice.h \
-		ui_dialogbox_postcalculation.h
+		ui_dialogbox_postcalculation.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qcoreapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qeventloop.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qguiapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qinputmethod.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qboxlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qicon.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QSpinBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qspinbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractspinbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvalidator.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qregularexpression.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QVBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogbox_postcalculation.o dialogbox_postcalculation.cpp
 
 release/calculator-text.o: calculator-text.cpp calculator.h \
@@ -4910,7 +5103,38 @@ release/calculator-text.o: calculator-text.cpp calculator.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/QMouseEvent \
 		dialogbox_warning_generic.h \
 		dialogbox_postcalculation.h \
-		ui_calculator.h
+		ui_calculator.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QCheckBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcheckbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QComboBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcombobox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qboxlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHeaderView \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qheaderview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLineEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlineedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QListWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTabWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTableWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtablewidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtableview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTextEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtextedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QVBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\calculator-text.o calculator-text.cpp
 
 release/calculator-calculationfirst.o: calculator-calculationfirst.cpp calculator.h \
@@ -5314,7 +5538,38 @@ release/calculator-calculationfirst.o: calculator-calculationfirst.cpp calculato
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/QMouseEvent \
 		dialogbox_warning_generic.h \
 		dialogbox_postcalculation.h \
-		ui_calculator.h
+		ui_calculator.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QCheckBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcheckbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QComboBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcombobox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qboxlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHeaderView \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qheaderview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLineEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlineedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QListWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTabWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTableWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtablewidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtableview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTextEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtextedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QVBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\calculator-calculationfirst.o calculator-calculationfirst.cpp
 
 release/calculator-calculationsecond.o: calculator-calculationsecond.cpp calculator.h \
@@ -5718,7 +5973,38 @@ release/calculator-calculationsecond.o: calculator-calculationsecond.cpp calcula
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/QMouseEvent \
 		dialogbox_warning_generic.h \
 		dialogbox_postcalculation.h \
-		ui_calculator.h
+		ui_calculator.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QCheckBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcheckbox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QComboBox \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qcombobox.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qboxlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHeaderView \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qheaderview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLineEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlineedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QListWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTabWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTableWidget \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtablewidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtableview.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QTextEdit \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qtextedit.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QVBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\calculator-calculationsecond.o calculator-calculationsecond.cpp
 
 release/dialogbox_yesno_generic.o: dialogbox_yesno_generic.cpp dialogbox_yesno_generic.h \
@@ -5827,7 +6113,27 @@ release/dialogbox_yesno_generic.o: dialogbox_yesno_generic.cpp dialogbox_yesno_g
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvector2d.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtouchdevice.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QString \
-		ui_dialogbox_yesno_generic.h
+		ui_dialogbox_yesno_generic.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qcoreapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qeventloop.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qguiapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qinputmethod.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QHBoxLayout \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qboxlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qicon.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogbox_yesno_generic.o dialogbox_yesno_generic.cpp
 
 release/skillactiveeffects.o: Sources/ClassDefinitions/skillactiveeffects.cpp Headers/ActiveEffects/skillactiveeffects.h
@@ -5938,7 +6244,21 @@ release/dialogbox_details.o: dialogbox_details.cpp dialogbox_details.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qfiledevice.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qvector2d.h \
 		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qtouchdevice.h \
-		ui_dialogbox_details.h
+		ui_dialogbox_details.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/QVariant \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QApplication \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qcoreapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtCore/qeventloop.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qguiapplication.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qinputmethod.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QLabel \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qlabel.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/QPushButton \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qpushbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		D:/Programy/Qt/Qt/5.12.3/mingw73_32/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogbox_details.o dialogbox_details.cpp
 
 release/skilldescription.o: skilldescription.cpp skilldescription.h \

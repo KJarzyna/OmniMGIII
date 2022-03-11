@@ -99,7 +99,6 @@ private slots:
     void on_pushButton_skill_add_clicked();
     void on_pushButton_skill_remove_clicked();
     void on_pushButton_calculate_skills_clicked();
-    void on_comboBox_specialization_activated(const QString selectedItem);
     void on_actionZapisz_triggered();
     void on_pushButton_weapon_add_clicked();
     void on_pushButton_weapon_remove_clicked();
@@ -115,7 +114,7 @@ private slots:
     void on_comboBox_omnikey_submod_name_activated(const QString &arg1);
     void on_comboBox_omniblade_type_activated(const QString &arg1);
     void on_comboBox_omniblade_mod_name_activated(const QString &arg1);
-    void on_lineEdit_gen_charges_left_textEdited(const QString &arg1);
+    //void on_lineEdit_gen_charges_left_textEdited(const QString &arg1);
     void on_pushButton_reloadAll_clicked();
     void on_treeWidget_weapon_list_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_pushButton_add_activeEffect_clicked();
@@ -133,7 +132,6 @@ private slots:
     void on_lineEdit_shield_full_textEdited(const QString &arg1);
     void on_lineEdit_armor_current_textEdited(const QString &arg1);
     void on_lineEdit_armor_full_textEdited(const QString &arg1);
-    void on_lineEdit_barrier_current_textEdited(const QString &arg1);
     void on_listWidget_armors_list_itemDoubleClicked(QListWidgetItem *item);
     void RefreshMainModule();
     void on_tableWidget_weapons_cellDoubleClicked(int row, int column);
@@ -197,7 +195,7 @@ private:
     void LoadPlayerWeaponsIntoTable(int playerID);
 
     //WEAPON MOD RELATED
-    void AddWpnModToTable();
+    void AddWpnModToTable(int selected_col);
     void RemoveWpnModFromTable();
     void AddWpnModToPlayer(int wpnModID, int weaponID, int playerID);
     void RemoveWpnModFromPlayer(int weaponID, int playerID);

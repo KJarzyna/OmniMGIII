@@ -28,7 +28,7 @@ void MainWindow::SaveSkillsTabToVector(int playerID)
     int playerIndex = GetPlayerIndex(playerID);
 
     CalculatePlayerMasteries(playerID);
-    Players[playerIndex].SpecializationSkill = ui->comboBox_specialization->currentText();
+    //Players[playerIndex].SpecializationSkill = ui->comboBox_specialization->currentText();
 
     RemoveAllPlayerSkillsFromVector(playerID);
     AddAllPlayerSkillsToVector(playerID);

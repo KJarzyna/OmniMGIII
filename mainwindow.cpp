@@ -44,8 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     CalculatePlayerMasteries(0);
 
-    ui->label_skill_specialization->setVisible(false);
-    ui->lineEdit_skill_calcvalue_specialization->setVisible(false);
+    //ui->label_skill_specialization->setVisible(false);
+    //ui->lineEdit_skill_calcvalue_specialization->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -126,7 +126,7 @@ void MainWindow::ClearAllTabs()
     ClearArmorList();
     ClearArmorModList();
     ClearGeneratorTable();
-    SetGeneratorChargesToZero();
+    //SetGeneratorChargesToZero();
     SetOmnikeyToDefault();
     SetOmnikeyModToDefault();
     SetOmnibladeToDefault();
@@ -352,23 +352,7 @@ void MainWindow::on_pushButton_calculate_skills_clicked()
     SaveSkillsTabToVector(GetActivePlayerID());
     CalculatePlayerMasteries(GetActivePlayerID());
     LoadPlayerMasteries(GetActivePlayerID());
-    LoadPlayerSpecialization(GetActivePlayerID());
-}
-
-void MainWindow::on_comboBox_specialization_activated(const QString selectedItem)
-{
-    int playerIndex = GetPlayerIndex(GetActivePlayerID());
-
-    if(PlayerHasSkill(playerIndex,selectedItem))
-        Players[playerIndex].SpecializationSkill = selectedItem;
-    else
-    {
-        ui->comboBox_specialization->setCurrentIndex(0);
-        QMessageBox msgbox;
-        msgbox.setText("Nie posiadasz tej zdolności!");
-        msgbox.exec();
-    }
-
+    //LoadPlayerSpecialization(GetActivePlayerID());
 }
 
 void MainWindow::on_actionZapisz_triggered()
@@ -390,11 +374,11 @@ void MainWindow::on_pushButton_weapon_add_clicked()
 
 void MainWindow::on_pushButton_weapon_remove_clicked()
 {
-    if(!ui->tableWidget_weapons->selectedItems().isEmpty())
+    if(!ui->tableWidget_weapons_preview->selectedItems().isEmpty())
     {
         int playerID = GetActivePlayerID();;
         int weaponID;
-        QString weaponName = ui->tableWidget_weapons->item(ui->tableWidget_weapons->currentRow(),0)->text();
+        QString weaponName = ui->tableWidget_weapons_preview->item(ui->tableWidget_weapons_preview->currentRow(),0)->text();
 
         weaponID = GetWeaponIDFromWeaponName(weaponName);
         RemoveWeaponFromAmmoTable();
@@ -405,18 +389,19 @@ void MainWindow::on_pushButton_weapon_remove_clicked()
 
 void MainWindow::on_pushButton_mod_add_clicked()
 {
-    if(!ui->treeWidget_wpnmod_list->selectedItems().isEmpty() && !ui->tableWidget_weapons->selectedItems().isEmpty())
+    if(!ui->treeWidget_wpnmod_list->selectedItems().isEmpty() && !ui->tableWidget_weapons_preview->selectedItems().isEmpty())
     {
         int playerID = GetActivePlayerID();;
-        int selected_row = ui->tableWidget_weapons->currentRow();
-        QString selected_weapon_name = ui->tableWidget_weapons->item(selected_row,0)->text();
+        int selected_row = ui->tableWidget_weapons_preview->currentRow();
+        int selected_col = ui->tableWidget_weapons_preview->currentColumn();
+        QString selected_weapon_name = ui->tableWidget_weapons_preview->item(selected_row,0)->text();
         QString selected_mod_name = ui->treeWidget_wpnmod_list->currentItem()->text(0);
         int weaponID = GetWeaponIDFromWeaponName(selected_weapon_name);
         int weaponModID = GetWpnModIDFromWpnModName(selected_mod_name);
 
         if(isModTypeGoodWithWpnType(weaponModID,weaponID))
         {
-            AddWpnModToTable();
+            AddWpnModToTable(selected_col);
             AddWpnModToPlayer(weaponModID, weaponID, playerID);
             if(ui->checkBox_show_details->isChecked())
                 ShowItemDetails(weaponModID,weaponmod_desc,"weaponmod");
@@ -432,7 +417,7 @@ void MainWindow::on_pushButton_mod_add_clicked()
 
 void MainWindow::on_pushButton_mod_remove_clicked()
 {
-    if(!ui->tableWidget_weapons->selectedItems().isEmpty())
+    if(!ui->tableWidget_weapons_preview->selectedItems().isEmpty())
         RemoveWpnModFromTable();
 }
 
@@ -527,7 +512,7 @@ void MainWindow::on_pushButton_generator_add_clicked()
         {
             AddGeneratorToTable();
             AddGeneratorToPlayer(generatorID,playerID);
-            ui->lineEdit_gen_charges_left->setText(ui->tableWidget_generators->item(0,2)->text());
+            //ui->lineEdit_gen_charges_left->setText(ui->tableWidget_generators->item(0,2)->text());
             if(ui->checkBox_show_details->isChecked())
                 ShowItemDetails(generatorID,generator_desc,"generator");
         }
@@ -594,16 +579,16 @@ void MainWindow::on_comboBox_omniblade_mod_name_activated(const QString &arg1)
 
 }
 
-void MainWindow::on_lineEdit_gen_charges_left_textEdited(const QString &arg1)
-{
-    int playerID = GetActivePlayerID();;
-    int charges = arg1.toInt();
-    for(int i=0;i<PlayerGenerators.size();i++)
-    {
-        if(PlayerGenerators.at(i).PlayerID == playerID)
-            PlayerGenerators[i].ChargesLeft = charges;
-    }
-}
+//void MainWindow::on_lineEdit_gen_charges_left_textEdited(const QString &arg1)
+//{
+//    int playerID = GetActivePlayerID();;
+//    int charges = arg1.toInt();
+//    for(int i=0;i<PlayerGenerators.size();i++)
+//    {
+//        if(PlayerGenerators.at(i).PlayerID == playerID)
+//            PlayerGenerators[i].ChargesLeft = charges;
+//    }
+//}
 
 void MainWindow::on_pushButton_reloadAll_clicked()
 {
@@ -768,14 +753,6 @@ void MainWindow::on_lineEdit_armor_full_textEdited(const QString &arg1)
     for(int i=0;i<Players.size();i++)
         if(Players.at(i).PlayerID == playerID)
             Players[i].ArmorMax = arg1.toInt();
-}
-
-void MainWindow::on_lineEdit_barrier_current_textEdited(const QString &arg1)
-{
-    int playerID = GetActivePlayerID();
-    for(int i=0;i<Players.size();i++)
-        if(Players.at(i).PlayerID == playerID)
-            Players[i].BarrierCurrent = arg1.toInt();
 }
 
 void MainWindow::on_listWidget_armors_list_itemDoubleClicked(QListWidgetItem *item)

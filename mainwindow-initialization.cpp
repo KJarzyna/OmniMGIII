@@ -4,15 +4,26 @@
 
 void MainWindow::InitializeWeaponTableSize()
 {
-    ui->tableWidget_weapons->setColumnWidth(0,200);
+    ui->tableWidget_weapons->setColumnWidth(0,150);
     ui->tableWidget_weapons->setColumnWidth(1,80);
-    ui->tableWidget_weapons->setColumnWidth(2,80);
-    ui->tableWidget_weapons->setColumnWidth(3,100);
+    ui->tableWidget_weapons->setColumnWidth(2,60);
+    ui->tableWidget_weapons->setColumnWidth(3,60);
     ui->tableWidget_weapons->setColumnWidth(4,60);
     ui->tableWidget_weapons->setColumnWidth(5,90);
-    ui->tableWidget_weapons->setColumnWidth(6,70);
-    ui->tableWidget_weapons->setColumnWidth(7,160);
+    ui->tableWidget_weapons->setColumnWidth(6,50);
+    ui->tableWidget_weapons->setColumnWidth(7,100);
+    ui->tableWidget_weapons->setColumnWidth(8,90);
     ui->tableWidget_weapons->horizontalHeader()->setStretchLastSection(true);
+
+    ui->tableWidget_weapons_preview->setColumnWidth(0,150);
+    ui->tableWidget_weapons_preview->setColumnWidth(1,50);
+    ui->tableWidget_weapons_preview->setColumnWidth(2,140);
+    ui->tableWidget_weapons_preview->setColumnWidth(3,130);
+    ui->tableWidget_weapons_preview->horizontalHeader()->setStretchLastSection(true);
+
+//    QFont header_font = ui->tableWidget_weapons->font();
+//    header_font.setPointSize(8);
+//    ui->tableWidget_weapons->setFont(header_font);
 
 }
 
@@ -77,14 +88,6 @@ void MainWindow::InitializeSkillListTreeWidget()
             topLevel->addChild(item);
             tree->addTopLevelItem(topLevel);
         }
-        else if (SkillList.at(i).SkillType == "Amunicja")
-        {
-            QTreeWidgetItem *topLevel = ui->treeWidget_skill_list->topLevelItem(4);
-            QTreeWidgetItem *item = new QTreeWidgetItem();
-            item->setText(0,SkillList.at(i).SkillName);
-            topLevel->addChild(item);
-            tree->addTopLevelItem(topLevel);
-        }
 
     }
 
@@ -92,7 +95,7 @@ void MainWindow::InitializeSkillListTreeWidget()
 
 void MainWindow::InitializeSkillListSpecialization()
 {
-    ui->comboBox_specialization->addItem("Brak");
+//    ui->comboBox_specialization->addItem("Brak");
 //    for (int i=0; i<SkillList.size(); i++)
 //    {
 //        ui->comboBox_specialization->addItem(SkillList.at(i).SkillName);

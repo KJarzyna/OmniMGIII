@@ -37,7 +37,7 @@ void MainWindow::RemoveSkillFromTable()
 
     if(ui->tableWidget_skills->item(selected_row,0)->text() == Players.at(playerID).SpecializationSkill)
     {
-        RemoveSpecializationFromPlayer(playerID);
+        //RemoveSpecializationFromPlayer(playerID);
     }
 
     ui->tableWidget_skills->removeRow(selected_row);
@@ -52,11 +52,11 @@ void MainWindow::RemoveSkillFromPlayer(int skillID, int playerID)
     }
 }
 
-void MainWindow::RemoveSpecializationFromPlayer(int playerID)
-{
-    Players.value(playerID).SpecializationSkill = "NoSpecialization";
-    ui->comboBox_specialization->setCurrentIndex(0);
-}
+//void MainWindow::RemoveSpecializationFromPlayer(int playerID)
+//{
+//    Players.value(playerID).SpecializationSkill = "NoSpecialization";
+//    ui->comboBox_specialization->setCurrentIndex(0);
+//}
 
 void MainWindow::ClearSkillTable()
 {
@@ -69,12 +69,12 @@ void MainWindow::SetMasteriesToZero()
     ui->lineEdit_skill_calcvalue_biotyczne->setText("0%");
     ui->lineEdit_skill_calcvalue_bojowe->setText("0%");
     ui->lineEdit_skill_calcvalue_technologiczne->setText("0%");
-    ui->lineEdit_skill_calcvalue_specialization->setText("0%");
+    //ui->lineEdit_skill_calcvalue_specialization->setText("0%");
 }
 
 void MainWindow::SetSpecializationToDefault()
 {
-    ui->comboBox_specialization->setCurrentIndex(0);
+    //ui->comboBox_specialization->setCurrentIndex(0);
 }
 
 void MainWindow::CalculatePlayerMasteries(int playerID)

@@ -10,6 +10,11 @@ void MainWindow::ClearWeaponTable()
     {
         ui->tableWidget_weapons->removeRow(ui->tableWidget_weapons->rowCount()-1);
     }
+
+    while (ui->tableWidget_weapons_preview->rowCount() > 0)
+    {
+        ui->tableWidget_weapons_preview->removeRow(ui->tableWidget_weapons_preview->rowCount()-1);
+    }
 }
 
 void MainWindow::AddWeaponToTable()
@@ -21,24 +26,35 @@ void MainWindow::AddWeaponToTable()
     {
         if (Weapons.at(i).WeaponName == selected_weaponname)
         {
-            ui->tableWidget_weapons->insertRow(ui->tableWidget_weapons->rowCount());
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,0,new QTableWidgetItem(Weapons.at(i).WeaponName));
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,1,new QTableWidgetItem(QString::number(Weapons.at(i).Acc)));
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,2,new QTableWidgetItem(QString::number(Weapons.at(i).DmgBase)));
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,3,new QTableWidgetItem(GetActionCostFromCost(Weapons.at(i).Cost)));
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,4,new QTableWidgetItem(QString::number(Weapons.at(i).AmmoPerShot)));
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,5,new QTableWidgetItem(QString::number(Weapons.at(i).AmmoMaxInClip)));
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,6,new QTableWidgetItem(Weapons.at(i).WeaponType));
-            ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,7,new QTableWidgetItem("Brak"));
+            int new_row = ui->tableWidget_weapons->rowCount();
+            ui->tableWidget_weapons->insertRow(new_row);
+            ui->tableWidget_weapons->setItem(new_row,0,new QTableWidgetItem(Weapons.at(i).WeaponName));
+            ui->tableWidget_weapons->setItem(new_row,1,new QTableWidgetItem(QString::number(Weapons.at(i).DmgBase)));
+            ui->tableWidget_weapons->setItem(new_row,2,new QTableWidgetItem(QString::number(Weapons.at(i).Acc)));
+            ui->tableWidget_weapons->setItem(new_row,3,new QTableWidgetItem(QString::number(Weapons.at(i).Recoil)));
+            ui->tableWidget_weapons->setItem(new_row,4,new QTableWidgetItem(GetActionCostFromCost(Weapons.at(i).Cost)));
+            ui->tableWidget_weapons->setItem(new_row,5,new QTableWidgetItem(QString::number(Weapons.at(i).AmmoMaxInClip)));
+            ui->tableWidget_weapons->setItem(new_row,6,new QTableWidgetItem(Weapons.at(i).WeaponType));
+            ui->tableWidget_weapons->setItem(new_row,7,new QTableWidgetItem("Brak"));
+            ui->tableWidget_weapons->setItem(new_row,8,new QTableWidgetItem("Brak"));
+
+            ui->tableWidget_weapons_preview->insertRow(new_row);
+            ui->tableWidget_weapons_preview->setItem(new_row,0,new QTableWidgetItem(Weapons.at(i).WeaponName));
+            ui->tableWidget_weapons_preview->setItem(new_row,1,new QTableWidgetItem(Weapons.at(i).WeaponType));
+            ui->tableWidget_weapons_preview->setItem(new_row,2,new QTableWidgetItem("Brak"));
+            ui->tableWidget_weapons_preview->setItem(new_row,3,new QTableWidgetItem("Brak"));
         }
     }
 }
 
+
 void MainWindow::RemoveWeaponFromTable()
 {
-    int selected_row = ui->tableWidget_weapons->currentRow();
+    int selected_row = ui->tableWidget_weapons_preview->currentRow();
     ui->tableWidget_weapons->removeRow(selected_row);
+    ui->tableWidget_weapons_preview->removeRow(selected_row);
 }
+
 
 void MainWindow::RemoveWeaponFromPlayer(int weaponID, int playerID)
 {
@@ -101,7 +117,7 @@ int MainWindow::GetCurrentAmmoInPlayerWeaponFromWeaponID(int weaponID, int playe
 }
 
 // WEAPON MODS REALTED FUNCTIONS
-void MainWindow::AddWpnModToTable()
+void MainWindow::AddWpnModToTable(int selected_col)
 {
     QString selected_modname;
     selected_modname = ui->treeWidget_wpnmod_list->currentItem()->text(0);
@@ -110,18 +126,43 @@ void MainWindow::AddWpnModToTable()
     {
         if (WpnModList.at(i).ModName == selected_modname)
         {
-            int selectedWeaponInTable = ui->tableWidget_weapons->currentRow();
-            ui->tableWidget_weapons->setItem(selectedWeaponInTable,7,new QTableWidgetItem(WpnModList.at(i).ModName));
+            int selectedWeaponInTable = ui->tableWidget_weapons_preview->currentRow();
+            if(selected_col == 2)
+            {
+                ui->tableWidget_weapons->setItem(selectedWeaponInTable,7,new QTableWidgetItem(WpnModList.at(i).ModName));
+                ui->tableWidget_weapons_preview->setItem(selectedWeaponInTable,2,new QTableWidgetItem(WpnModList.at(i).ModName));
+                ui->tableWidget_weapons->item(selectedWeaponInTable,7)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons_preview->item(selectedWeaponInTable,2)->setTextAlignment(Qt::AlignCenter);
+            }
+            else if(selected_col == 3)
+            {
+                ui->tableWidget_weapons->setItem(selectedWeaponInTable,8,new QTableWidgetItem(WpnModList.at(i).ModName));
+                ui->tableWidget_weapons_preview->setItem(selectedWeaponInTable,3,new QTableWidgetItem(WpnModList.at(i).ModName));
+                ui->tableWidget_weapons->item(selectedWeaponInTable,8)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons_preview->item(selectedWeaponInTable,3)->setTextAlignment(Qt::AlignCenter);
+            }
+            else;
         }
     }
 }
 
 void MainWindow::RemoveWpnModFromTable()
 {
-    if(ui->tableWidget_weapons->rowCount()>0)
+    if(ui->tableWidget_weapons_preview->rowCount()>0)
     {
-        int selected_row = ui->tableWidget_weapons->currentRow();
-        ui->tableWidget_weapons->item(selected_row,7)->setText("Brak");
+        int selected_row = ui->tableWidget_weapons_preview->currentRow();
+        int selected_col = ui->tableWidget_weapons_preview->currentColumn();
+        if(selected_col == 2)
+        {
+            ui->tableWidget_weapons->item(selected_row,7)->setText("Brak");
+            ui->tableWidget_weapons_preview->item(selected_row,2)->setText("Brak");
+        }
+        else if(selected_col == 3)
+        {
+            ui->tableWidget_weapons->item(selected_row,8)->setText("Brak");
+            ui->tableWidget_weapons_preview->item(selected_row,3)->setText("Brak");
+        }
+        else;
     }
 }
 

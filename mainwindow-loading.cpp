@@ -20,7 +20,7 @@ void MainWindow::LoadPlayerGeneralTab(int playerID)
     ui->lineEdit_armor_full->setText(QString::number(Players.at(playerIndex).ArmorMax));
     ui->lineEdit_shield_current->setText(QString::number(Players.at(playerIndex).ShieldCurrent));
     ui->lineEdit_shield_full->setText(QString::number(Players.at(playerIndex).ShieldMax));
-    ui->lineEdit_barrier_current->setText(QString::number(Players.at(playerIndex).BarrierCurrent));
+    //ui->lineEdit_barrier_current->setText(QString::number(Players.at(playerIndex).BarrierCurrent));
 
     for(int i=0;i<PlayerActiveEffects.size();i++)
         if(PlayerActiveEffects.at(i).PlayerID == playerID)
@@ -29,28 +29,28 @@ void MainWindow::LoadPlayerGeneralTab(int playerID)
 }
 
 //Skill related
-void MainWindow::LoadPlayerSpecialization(int playerID)
-{
-    //Loads selected player's specialization into the "Zdolności Tab"
+//void MainWindow::LoadPlayerSpecialization(int playerID)
+//{
+//    //Loads selected player's specialization into the "Zdolności Tab"
 
-    int playerIndex = GetPlayerIndex(playerID);
+//    int playerIndex = GetPlayerIndex(playerID);
 
-    ui->comboBox_specialization->setCurrentText("Brak");
-    ui->label_skill_specialization->setText("Umiejętność specjalizacji:");
+//    ui->comboBox_specialization->setCurrentText("Brak");
+//    ui->label_skill_specialization->setText("Umiejętność specjalizacji:");
 
-    if(Players.at(playerIndex).SpecializationSkill != "NoSpecialization")
-    {
-        for (int j=0; j<Skills.size(); j++)
-        {
-            if(Skills.at(j).SkillName == Players.at(playerIndex).SpecializationSkill)
-            {
-                ui->comboBox_specialization->setCurrentText(Players.at(playerIndex).SpecializationSkill);
-                QString specialization_label = Players.at(playerIndex).SpecializationSkill + ":";
-                ui->label_skill_specialization->setText(specialization_label);
-            }
-        }
-    }
-}
+//    if(Players.at(playerIndex).SpecializationSkill != "NoSpecialization")
+//    {
+//        for (int j=0; j<Skills.size(); j++)
+//        {
+//            if(Skills.at(j).SkillName == Players.at(playerIndex).SpecializationSkill)
+//            {
+//                ui->comboBox_specialization->setCurrentText(Players.at(playerIndex).SpecializationSkill);
+//                QString specialization_label = Players.at(playerIndex).SpecializationSkill + ":";
+//                ui->label_skill_specialization->setText(specialization_label);
+//            }
+//        }
+//    }
+//}
 
 void MainWindow::LoadPlayerMasteries(int playerID)
 {
@@ -59,13 +59,13 @@ void MainWindow::LoadPlayerMasteries(int playerID)
     ui->lineEdit_skill_calcvalue_bojowe->setText(QString::number(Players.at(playerIndex).MasteryBattle)+"%");
     ui->lineEdit_skill_calcvalue_biotyczne->setText(QString::number(Players.at(playerIndex).MasteryBiotic)+"%");
     ui->lineEdit_skill_calcvalue_technologiczne->setText(QString::number(Players.at(playerIndex).MasteryTechno)+"%");
-    ui->lineEdit_skill_calcvalue_specialization->setText(QString::number(Players.at(playerIndex).MasterySpec)+"%");
+    //ui->lineEdit_skill_calcvalue_specialization->setText(QString::number(Players.at(playerIndex).MasterySpec)+"%");
 }
 
 void MainWindow::LoadPlayerSkillsTab(int playerID)
 {
     //Loads selected player's data into the "Zdolności" Tab
-    LoadPlayerSpecialization(playerID);
+    //LoadPlayerSpecialization(playerID);
     LoadPlayerMasteries(playerID);
     LoadPlayerSkillsIntoTable(playerID);
 
@@ -104,21 +104,45 @@ void MainWindow::LoadPlayerWeaponsIntoTable(int playerID)
 
             if (PlayerWeapons.at(i).PlayerID == playerID && Weapons.at(j).WeaponID == PlayerWeapons.at(i).WeaponID)
             {
-                ui->tableWidget_weapons->insertRow(ui->tableWidget_weapons->rowCount());
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,0,new QTableWidgetItem(Weapons.at(j).WeaponName));
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,1,new QTableWidgetItem(QString::number(Weapons.at(j).Acc)));
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,2,new QTableWidgetItem(QString::number(Weapons.at(j).DmgBase)));
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,3,new QTableWidgetItem(GetActionCostFromCost(Weapons.at(j).Cost)));
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,4,new QTableWidgetItem(QString::number(Weapons.at(j).AmmoPerShot)));
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,5,new QTableWidgetItem(QString::number(Weapons.at(j).AmmoMaxInClip)));
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,6,new QTableWidgetItem(Weapons.at(j).WeaponType));
-                QString modName = GetWpnModNameFromWpnModID(PlayerWeapons.at(i).ModID);
+                int new_row = ui->tableWidget_weapons->rowCount();
+                ui->tableWidget_weapons->insertRow(new_row);
+                ui->tableWidget_weapons->setItem(new_row,0,new QTableWidgetItem(Weapons.at(j).WeaponName));
+                ui->tableWidget_weapons->setItem(new_row,1,new QTableWidgetItem(QString::number(Weapons.at(j).DmgBase)));
+                ui->tableWidget_weapons->setItem(new_row,2,new QTableWidgetItem(QString::number(Weapons.at(j).Acc)));
+                ui->tableWidget_weapons->setItem(new_row,3,new QTableWidgetItem(QString::number(Weapons.at(j).Recoil)));
+                ui->tableWidget_weapons->setItem(new_row,4,new QTableWidgetItem(GetActionCostFromCost(Weapons.at(j).Cost)));
+                ui->tableWidget_weapons->setItem(new_row,5,new QTableWidgetItem(QString::number(Weapons.at(j).AmmoMaxInClip)));
+                ui->tableWidget_weapons->setItem(new_row,6,new QTableWidgetItem(Weapons.at(j).WeaponType));
+                QString modName1 = GetWpnModNameFromWpnModID(PlayerWeapons.at(i).ModID);
+                ui->tableWidget_weapons->setItem(new_row,7,new QTableWidgetItem(modName1));
+                QString modName2 = "Brak";
+                ui->tableWidget_weapons->setItem(new_row,8,new QTableWidgetItem(modName2));
 
-                ui->tableWidget_weapons->setItem(ui->tableWidget_weapons->rowCount()-1,7,new QTableWidgetItem(modName));
+                ui->tableWidget_weapons->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+                ui->tableWidget_weapons->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons->item(new_row,4)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons->item(new_row,5)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons->item(new_row,6)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons->item(new_row,7)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons->item(new_row,8)->setTextAlignment(Qt::AlignCenter);
+
+                ui->tableWidget_weapons_preview->insertRow(new_row);
+                ui->tableWidget_weapons_preview->setItem(new_row,0,new QTableWidgetItem(Weapons.at(j).WeaponName));
+                ui->tableWidget_weapons_preview->setItem(new_row,1,new QTableWidgetItem(Weapons.at(j).WeaponType));
+                ui->tableWidget_weapons_preview->setItem(new_row,2,new QTableWidgetItem(modName1));
+                ui->tableWidget_weapons_preview->setItem(new_row,3,new QTableWidgetItem(modName2));
+
+                ui->tableWidget_weapons_preview->item(new_row,0)->setTextAlignment(Qt::AlignVCenter);
+                ui->tableWidget_weapons_preview->item(new_row,1)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons_preview->item(new_row,2)->setTextAlignment(Qt::AlignCenter);
+                ui->tableWidget_weapons_preview->item(new_row,3)->setTextAlignment(Qt::AlignCenter);
             }
         }
     }
 }
+
 
 void MainWindow::LoadPlayerWeaponsTab(int playerID)
 {
@@ -284,5 +308,5 @@ void MainWindow::LoadGeneratorCharges(int playerID)
             chargesLeft = QString::number(PlayerGenerators.at(i).ChargesLeft);
     }
 
-    ui->lineEdit_gen_charges_left->setText(chargesLeft);
+    //ui->lineEdit_gen_charges_left->setText(chargesLeft);
 }

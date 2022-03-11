@@ -81,7 +81,7 @@ QString MainWindow::GetGeneratorNameFromGeneratorID(int generatorID)
     return generatorName;
 }
 
-void MainWindow::SetGeneratorChargesToZero()
-{
-    ui->lineEdit_gen_charges_left->setText("0");
-}
+//void MainWindow::SetGeneratorChargesToZero()
+//{
+//    ui->lineEdit_gen_charges_left->setText("0");
+//}
